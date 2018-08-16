@@ -2,6 +2,7 @@
 
 const gulp = require('gulp');
 const minimist = require('minimist');
+const sourcemaps = require('gulp-sourcemaps');
 
 const options = minimist(
   process.argv, {
