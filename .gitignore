@@ -3,5 +3,6 @@ export/*
 public/*
 source/styleguide/*
 source/css/*.css
+!source/css/pattern-scaffolding.css
 source/css/*.map
 vendor/*

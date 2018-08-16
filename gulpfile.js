@@ -35,7 +35,7 @@ gulp.task('css:generate', ['css:clean'], () => {
 });
 
 gulp.task('css:clean', () => {
-  del(['./source/css/*.css', './source/css/*.map']);
+  del(['./source/css/*.css', './source/css/*.map', '!./source/css/pattern-scaffolding.css']);
 });
 
 
