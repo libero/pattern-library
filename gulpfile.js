@@ -8,7 +8,7 @@ const sass = require('gulp-sass');
 const sassGlob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
 
-const options = minimist(
+const invocationOptions = minimist(
   process.argv, {
     default: {
       environment: 'production',
@@ -18,20 +18,20 @@ const options = minimist(
   }
 );
 
-const environment = options.environment;
+const environment = invocationOptions.environment;
 
 gulp.task('echo', [], () => {
   console.log("Echo back options");
-  console.log(options);
+  console.log(invocationOptions);
 });
 
 gulp.task('css:generate', ['css:clean'], () => {
   const sassOptions = environment === 'production' ? {outputStyle: 'compressed'} : null;
-  return gulp.src(`source/css/sass/${options.sassEntryPoint}`)
+  return gulp.src(`source/css/sass/${invocationOptions.sassEntryPoint}`)
              .pipe(sourcemaps.init())
              .pipe(sassGlob())
              .pipe(sass(sassOptions).on('error', sass.logError))
-             .pipe(rename(options.sassOutFilename))
+             .pipe(rename(invocationOptions.sassOutFilename))
              .pipe(sourcemaps.write('./'))
              .pipe(gulp.dest('source/css'));
 });
