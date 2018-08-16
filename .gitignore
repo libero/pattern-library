@@ -2,4 +2,6 @@
 export/*
 public/*
 source/styleguide/*
+source/css/*.css
+source/css/*.map
 vendor/*
