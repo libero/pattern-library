@@ -17,12 +17,17 @@
   },
   "homepage": "https://github.com/libero/libero-patterns-core#readme",
   "devDependencies": {
+    "ajv": "^6.5.2",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
+    "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.1",
     "gulp-sass-glob": "^1.0.9",
     "gulp-sourcemaps": "^2.6.4",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "postcss-reporter": "^5.0.0",
+    "postcss-scss": "^2.0.0",
+    "stylelint": "^9.4.0"
   }
 }
