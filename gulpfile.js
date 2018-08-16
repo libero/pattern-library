@@ -12,6 +12,8 @@ const options = minimist(
   process.argv, {
     default: {
       environment: 'production',
+      sassEntryPoint: 'build.scss',
+      sassOutFilename: 'all.css',
     },
   }
 );
@@ -24,12 +26,12 @@ gulp.task('echo', [], () => {
 });
 
 gulp.task('css:generate', ['css:clean'], () => {
-  const options = environment === 'production' ? {outputStyle: 'compressed'} : null;
-  return gulp.src('source/css/sass/build.scss')
+  const sassOptions = environment === 'production' ? {outputStyle: 'compressed'} : null;
+  return gulp.src(`source/css/sass/${options.sassEntryPoint}`)
              .pipe(sourcemaps.init())
              .pipe(sassGlob())
-             .pipe(sass(options).on('error', sass.logError))
-             .pipe(rename('all.css'))
+             .pipe(sass(sassOptions).on('error', sass.logError))
+             .pipe(rename(options.sassOutFilename))
              .pipe(sourcemaps.write('./'))
              .pipe(gulp.dest('source/css'));
 });
@@ -37,6 +39,5 @@ gulp.task('css:generate', ['css:clean'], () => {
 gulp.task('css:clean', () => {
   del(['./source/css/*.css', './source/css/*.map', '!./source/css/pattern-scaffolding.css']);
 });
-
 
 gulp.task('default', () => {});
