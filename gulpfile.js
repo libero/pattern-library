@@ -12,22 +12,22 @@ const sourcemaps = require('gulp-sourcemaps');
 const stylelint = require('stylelint');
 const syntaxScss = require('postcss-scss');
 
-const invocationOptions = minimist(
-  process.argv, {
-    default: {
-      environment: 'production',
-      sassEntryPoint: 'build.scss',
-      sassOutFilename: 'all.css',
-      'sass-lint': true
-    },
-  }
-);
+function buildConfig(invocationArgs, sourceRoot, exportRoot) {
 
-const environment = invocationOptions.environment;
-const sassLint = invocationOptions['sass-lint'] !== 'false';
+  const invocationOptions = minimist(
+    invocationArgs, {
+      default: {
+        environment: 'production',
+        sassEntryPoint: 'build.scss',
+        cssOutFilename: 'all.css',
+        'sass-lint': true
+      },
+    }
+  );
 
-const config = (function (sourceRoot, exportRoot) {
   const config = {};
+  config.environment = invocationOptions.environment;
+  config.sassLint = invocationOptions['sass-lint'] !== 'false';
   config.sourceRoot = sourceRoot;
   config.exportRoot = exportRoot;
 
@@ -37,40 +37,42 @@ const config = (function (sourceRoot, exportRoot) {
   };
   config.dir.src.css = `${config.sourceRoot}css/`;
   config.dir.src.sass = `${config.dir.src.css}sass/`;
-
-  config.dir.out.css = `${config.sourceRoot}css/`;
+  config.dir.out.css = `${config.exportRoot}css/`;
 
   config.files = {
     src: {},
     out: {}
   };
-  config.files.src.css = `${config.dir.src.css}/**/*.css`;
+  config.files.src.css = [
+    `${config.dir.src.css}/**/*.css`,
+    `${config.dir.src.css}/**/*.map`,
+    `!${config.dir.src.css}pattern-scaffolding.css`
+  ];
   config.files.src.map = `${config.dir.src.css}/**/*.map`;
   config.files.src.sass = `${config.dir.src.sass}/**/*.scss`;
+  config.files.src.sasEntryPoint = config.dir.src.sass + invocationOptions.sassEntryPoint;
+
+  config.files.out.cssFilename = invocationOptions.cssOutFilename;
 
   return config;
 
-}('source/', 'patternsExport/'));
+}
 
-
-gulp.task('echo', [], () => {
-  console.log("Echo back options");
-  console.log(invocationOptions);
-});
+const config = buildConfig(process.argv, 'source/', 'patternsExport/');
 
 gulp.task('css:generate', ['sass:lint'], () => {
-  const sassOptions = environment === 'production' ? {outputStyle: 'compressed'} : null;
-  return gulp.src(`${config.dir.src.sass}${invocationOptions.sassEntryPoint}`)
+  const sassOptions = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
+  return gulp.src(config.files.src.sasEntryPoint)
              .pipe(sourcemaps.init())
              .pipe(sassGlob())
              .pipe(sass(sassOptions).on('error', sass.logError))
-             .pipe(rename(invocationOptions.sassOutFilename))
+             .pipe(rename(config.files.out.cssFilename))
              .pipe(sourcemaps.write('./'))
-             .pipe(gulp.dest(config.dir.out.css));
+             .pipe(gulp.dest(config.dir.src.css));
 });
 
 gulp.task('sass:lint', ['css:clean'], () => {
-  if (!sassLint) {
+  if (!config.sassLint) {
     console.info("Skipping sass:lint");
     return;
   }
@@ -90,7 +92,7 @@ gulp.task('sass:lint', ['css:clean'], () => {
 });
 
 gulp.task('css:clean', () => {
-  del([config.files.src.css, config.files.src.map, `!${config.dir.src.css}pattern-scaffolding.css`]);
+  del(config.files.src.css);
 });
 
 gulp.task('default', () => {});
