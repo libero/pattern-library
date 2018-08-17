@@ -95,4 +95,15 @@ gulp.task('css:clean', () => {
   del(config.files.src.css);
 });
 
-gulp.task('default', () => {});
+gulp.task('build', ['css:generate']);
+
+gulp.task('patternsExport:clean', () => {
+  del([`${config.exportRoot}*`]);
+});
+
+gulp.task('exportPatterns', ['build'], () => {
+  return gulp.src(config.files.src.css)
+             .pipe(gulp.dest(config.dir.out.css));
+});
+
+gulp.task('default', ['exportPatterns']);
