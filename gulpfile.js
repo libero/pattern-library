@@ -2,7 +2,6 @@
 
 const del = require('del');
 const gulp = require('gulp');
-const imagemin = require('gulp-imagemin');
 const minimist = require('minimist');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
@@ -99,26 +98,22 @@ gulp.task('css:clean', () => {
   del(config.files.src.css);
 });
 
-gulp.task('images', ['css:generate'], () => {
-  gulp.src(config.files.src.images).pipe(imagemin({
-                                                    progressive: true,
-                                                    svgoPlugins: [
-                                                      { removeViewBox: false },
-                                                      { removeUselessStrokeAndFill: false }
-                                                    ],
-                                                  }))
-                                    .pipe(gulp.dest(config.dir.out.images));
+gulp.task('build', ['css:generate', 'patternsExport:clean'], () => {
 });
 
-gulp.task('build', ['images']);
-
-gulp.task('patternsExport:clean', () => {
-  del([`${config.exportRoot}*`]);
+gulp.task('patternsExport:clean', (cb) => {
+  del([`${config.exportRoot}**/*`]);
+  cb();
 });
 
 gulp.task('exportPatterns', ['build'], () => {
-  return gulp.src(config.files.src.css)
-             .pipe(gulp.dest(config.dir.out.css));
+
+  gulp.src(config.files.src.css)
+      .pipe(gulp.dest(config.dir.out.css));
+
+  gulp.src(config.files.src.images)
+      .pipe(gulp.dest(config.dir.out.images));
+
 });
 
 gulp.task('default', ['exportPatterns']);
