@@ -26,6 +26,33 @@ const invocationOptions = minimist(
 const environment = invocationOptions.environment;
 const sassLint = invocationOptions['sass-lint'] !== 'false';
 
+const config = (function (sourceRoot, exportRoot) {
+  const config = {};
+  config.sourceRoot = sourceRoot;
+  config.exportRoot = exportRoot;
+
+  config.dir = {
+    src: {},
+    out: {}
+  };
+  config.dir.src.css = `${config.sourceRoot}css/`;
+  config.dir.src.sass = `${config.dir.src.css}sass/`;
+
+  config.dir.out.css = `${config.sourceRoot}css/`;
+
+  config.files = {
+    src: {},
+    out: {}
+  };
+  config.files.src.css = `${config.dir.src.css}/**/*.css`;
+  config.files.src.map = `${config.dir.src.css}/**/*.map`;
+  config.files.src.sass = `${config.dir.src.sass}/**/*.scss`;
+
+  return config;
+
+}('source/', 'patternsExport/'));
+
+
 gulp.task('echo', [], () => {
   console.log("Echo back options");
   console.log(invocationOptions);
@@ -33,13 +60,13 @@ gulp.task('echo', [], () => {
 
 gulp.task('css:generate', ['sass:lint'], () => {
   const sassOptions = environment === 'production' ? {outputStyle: 'compressed'} : null;
-  return gulp.src(`source/css/sass/${invocationOptions.sassEntryPoint}`)
+  return gulp.src(`${config.dir.src.sass}${invocationOptions.sassEntryPoint}`)
              .pipe(sourcemaps.init())
              .pipe(sassGlob())
              .pipe(sass(sassOptions).on('error', sass.logError))
              .pipe(rename(invocationOptions.sassOutFilename))
              .pipe(sourcemaps.write('./'))
-             .pipe(gulp.dest('source/css'));
+             .pipe(gulp.dest(config.dir.out.css));
 });
 
 gulp.task('sass:lint', ['css:clean'], () => {
@@ -58,12 +85,12 @@ gulp.task('sass:lint', ['css:clean'], () => {
     )
   ];
 
-  return gulp.src(['source/css/sass/**/*.scss'])
+  return gulp.src([config.files.src.sass])
              .pipe(postcss(processors, {syntax: syntaxScss}));
 });
 
 gulp.task('css:clean', () => {
-  del(['./source/css/*.css', './source/css/*.map', '!./source/css/pattern-scaffolding.css']);
+  del([config.files.src.css, config.files.src.map, `!${config.dir.src.css}pattern-scaffolding.css`]);
 });
 
 gulp.task('default', () => {});
