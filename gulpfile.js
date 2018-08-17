@@ -48,7 +48,6 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
     `${config.dir.src.css}/**/*.map`,
     `!${config.dir.src.css}pattern-scaffolding.css`
   ];
-  config.files.src.map = `${config.dir.src.css}/**/*.map`;
   config.files.src.sass = `${config.dir.src.sass}/**/*.scss`;
   config.files.src.sasEntryPoint = config.dir.src.sass + invocationOptions.sassEntryPoint;
 
