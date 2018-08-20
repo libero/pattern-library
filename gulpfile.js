@@ -1,6 +1,7 @@
 'use strict';
 
 const del = require('del');
+const flatten = require('gulp-flatten');
 const gulp = require('gulp');
 const minimist = require('minimist');
 const postcss = require('gulp-postcss');
@@ -39,10 +40,12 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
   config.dir.src.sass = `${config.dir.src.css}sass/`;
   config.dir.src.images = `${config.sourceRoot}images/`;
   config.dir.src.fonts = `${config.sourceRoot}fonts/`;
+  config.dir.src.templates = `${config.sourceRoot}_patterns/`;
 
   config.dir.out.css = `${config.exportRoot}css/`;
   config.dir.out.images = `${config.exportRoot}images/`;
   config.dir.out.fonts = `${config.exportRoot}fonts/`;
+  config.dir.out.templates = `${config.exportRoot}templates/`;
 
   config.files = {
     src: {},
@@ -57,6 +60,7 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
   config.files.src.sasEntryPoint = config.dir.src.sass + invocationOptions.sassEntryPoint;
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
+  config.files.src.templates = [`${config.dir.src.templates}/*.twig`, `${config.dir.src.templates}/**/*.twig`];
 
   config.files.out.cssFilename = invocationOptions.cssOutFilename;
 
@@ -119,6 +123,10 @@ gulp.task('exportPatterns', ['build'], () => {
 
   gulp.src(config.files.src.fonts)
       .pipe(gulp.dest(config.dir.out.fonts));
+
+  gulp.src(config.files.src.templates)
+      .pipe(flatten({ includeParents: false }))
+      .pipe(gulp.dest(config.dir.out.templates));
 
 });
 
