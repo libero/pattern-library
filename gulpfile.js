@@ -122,6 +122,7 @@ gulp.task('exportPatterns', ['build', 'patternsExport:clean'], () => {
   gulp.src(config.files.src.fonts)
       .pipe(gulp.dest(config.dir.out.fonts));
 
+  // Template files don't need their authoring hierarchy for downstream use
   gulp.src(config.files.src.templates)
       .pipe(flatten({ includeParents: false }))
       .pipe(gulp.dest(config.dir.out.templates));
