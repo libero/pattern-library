@@ -57,7 +57,7 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
     `!${config.dir.src.css}pattern-scaffolding.css`
   ];
   config.files.src.sass = `${config.dir.src.sass}/**/*.scss`;
-  config.files.src.sasEntryPoint = config.dir.src.sass + invocationOptions.sassEntryPoint;
+  config.files.src.sassEntryPoint = config.dir.src.sass + invocationOptions.sassEntryPoint;
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
   config.files.src.templates = [`${config.dir.src.templates}/*.twig`, `${config.dir.src.templates}/**/*.twig`];
@@ -72,7 +72,7 @@ const config = buildConfig(process.argv, 'source/', 'patternsExport/');
 
 gulp.task('css:generate', ['sass:lint'], () => {
   const sassOptions = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
-  return gulp.src(config.files.src.sasEntryPoint)
+  return gulp.src(config.files.src.sassEntryPoint)
              .pipe(sourcemaps.init())
              .pipe(sassGlob())
              .pipe(sass(sassOptions).on('error', sass.logError))
