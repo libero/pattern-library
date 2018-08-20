@@ -38,9 +38,11 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
   config.dir.src.css = `${config.sourceRoot}css/`;
   config.dir.src.sass = `${config.dir.src.css}sass/`;
   config.dir.src.images = `${config.sourceRoot}images/`;
+  config.dir.src.fonts = `${config.sourceRoot}fonts/`;
 
   config.dir.out.css = `${config.exportRoot}css/`;
   config.dir.out.images = `${config.exportRoot}images/`;
+  config.dir.out.fonts = `${config.exportRoot}fonts/`;
 
   config.files = {
     src: {},
@@ -54,6 +56,7 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
   config.files.src.sass = `${config.dir.src.sass}/**/*.scss`;
   config.files.src.sasEntryPoint = config.dir.src.sass + invocationOptions.sassEntryPoint;
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
+  config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
 
   config.files.out.cssFilename = invocationOptions.cssOutFilename;
 
@@ -113,6 +116,9 @@ gulp.task('exportPatterns', ['build'], () => {
 
   gulp.src(config.files.src.images)
       .pipe(gulp.dest(config.dir.out.images));
+
+  gulp.src(config.files.src.fonts)
+      .pipe(gulp.dest(config.dir.out.fonts));
 
 });
 
