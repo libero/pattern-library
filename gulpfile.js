@@ -68,7 +68,7 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
 
 }
 
-const config = buildConfig(process.argv, 'source/', 'patternsExport/');
+const config = buildConfig(process.argv, 'source/', 'export/');
 
 gulp.task('css:generate', ['sass:lint'], () => {
   const sassOptions = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
