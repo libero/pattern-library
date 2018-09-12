@@ -72,7 +72,7 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
 
 const config = buildConfig(process.argv, 'source/', 'export/');
 
-gulp.task('css:generate', ['sass:test'], () => {
+gulp.task('css:generate', [/*'sass:test'*/], () => {
   const sassOptions = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
   return gulp.src(config.files.src.sassEntryPoint)
              .pipe(sourcemaps.init())
