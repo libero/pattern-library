@@ -3,6 +3,14 @@
 @import "variables--breakpoints";
 
 @mixin padding($size_in_px, $dimension: "") {
+  @if $dimension == "" {
+    @if $size_in_px == 0 {
+      padding: 0;
+    }
+  }
+}
+
+@mixin padding-old($size_in_px, $dimension: "") {
   @if $dimension == top or $dimension == right or $dimension == bottom or $dimension == left {
     @if $size_in_px == 0 {
       padding-#{$dimension}: 0;
