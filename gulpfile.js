@@ -147,8 +147,8 @@ gulp.task('exportPatterns', ['build', 'patternsExport:clean'], () => {
 
 });
 
-gulp.task('sass:watch', () => {
-  gulp.watch([config.files.src.sass, config.files.test.sass], ['css:generate'] );
+gulp.task('sass:watch', ['css:generate'], () => {
+  gulp.watch([config.files.src.sass, config.files.test.sass], ['css:generate']);
 });
 
 gulp.task('default', ['exportPatterns']);
