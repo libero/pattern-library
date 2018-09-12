@@ -1,0 +1,146 @@
+@import "../../node_modules/sass-true/sass/true";
+@import "../../source/css/sass/_mixins--spacing.scss";
+
+@include describe("padding [Mixin]") {
+
+  @include it("generates correct fallbacks with a single value and no dimension") {
+    @include assert() {
+
+      @include output {
+        @include padding(16);
+      }
+
+      @include expect {
+        padding: 16px;
+        padding: 1rem;
+      }
+
+    }
+  }
+
+  @include it("generates correct fallbacks with a single value for dimension 'inline'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16, "inline");
+      }
+
+      @include expect {
+        padding-left: 16px;
+        padding-left: 1rem;
+        padding-right: 16px;
+        padding-right: 1rem;
+        padding-inline: 1rem;
+      }
+
+    }
+  }
+
+  @include it("generates correct fallbacks with a pair of values for dimension 'inline'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16 32, "inline");
+      }
+
+      @include expect {
+        &[dir="ltr"] {
+          padding-left: 16px;
+          padding-left: 1rem;
+          padding-right: 32px;
+          padding-right: 2rem;
+        }
+        &[dir="rtl"] {
+          padding-left: 32px;
+          padding-left: 2rem;
+          padding-right: 16px;
+          padding-right: 1rem;
+        }
+        padding-inline: 1rem 2rem;
+      }
+
+    }
+  }
+
+  @include it("generates correct fallbacks with a single value for the dimension 'inline-start'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16, "inline-start");
+      }
+
+      @include expect {
+        &[dir="ltr"] {
+          padding-left: 16px;
+          padding-left: 1rem;
+        }
+        &[dir="rtl"] {
+          padding-right: 16px;
+          padding-right: 1rem;
+        }
+        padding-inline-start: 1rem;
+      }
+
+    }
+  }
+
+  @include it("generates correct fallbacks with a single value for the dimension 'inline-end'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16, "inline-end");
+      }
+
+      @include expect {
+        &[dir="ltr"] {
+          padding-right: 16px;
+          padding-right: 1rem;
+        }
+        &[dir="rtl"] {
+          padding-left: 16px;
+          padding-left: 1rem;
+        }
+        padding-inline-end: 1rem;
+      }
+
+    }
+  }
+
+  @include it("generates correct fallbacks with a single value for dimension 'block'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16, "block")
+      }
+
+      @include expect {
+        padding-top: 16px;
+        padding-top: 1rem;
+        padding-bottom: 16px;
+        padding-bottom: 1rem;
+        padding-block: 1rem;
+      }
+
+    }
+  }
+
+  @include it("generates correct fallbacks with a pair of values for dimension 'block'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16 32, "block")
+      }
+
+      @include expect {
+        padding-top: 16px;
+        padding-top: 1rem;
+        padding-bottom: 32px;
+        padding-bottom: 2rem;
+
+        padding-block: 1rem 2rem;
+      }
+
+    }
+  }
+
+}
