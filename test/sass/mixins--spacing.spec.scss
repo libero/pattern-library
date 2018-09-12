@@ -17,20 +17,20 @@
     }
   }
 
-  //@include it("generates correct fallbacks with a single non-zero value and no dimension") {
-  //  @include assert() {
-  //
-  //    @include output {
-  //      @include padding(16);
-  //    }
-  //
-  //    @include expect {
-  //      padding: 16px;
-  //      padding: 1rem;
-  //    }
-  //
-  //  }
-  //}
+  @include it("generates correct fallbacks with a single non-zero value and no dimension") {
+    @include assert() {
+
+      @include output {
+        @include padding(16);
+      }
+
+      @include expect {
+        padding: 16px;
+        padding: 1rem;
+      }
+
+    }
+  }
 
   //@include it("generates correct fallbacks with a single value for dimension 'inline'") {
   //  @include assert() {

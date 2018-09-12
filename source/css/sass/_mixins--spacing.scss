@@ -6,6 +6,9 @@
   @if $dimension == "" {
     @if $size_in_px == 0 {
       padding: 0;
+    } @else {
+      padding: #{$size_in_px}px;
+      padding: #{get-rem-from-px($size_in_px)}rem;
     }
   }
 }
