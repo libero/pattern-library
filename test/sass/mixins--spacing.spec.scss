@@ -32,23 +32,23 @@
     }
   }
 
-  //@include it("generates correct fallbacks with a single value for dimension 'inline'") {
-  //  @include assert() {
-  //
-  //    @include output {
-  //      @include padding(16, "inline");
-  //    }
-  //
-  //    @include expect {
-  //      padding-left: 16px;
-  //      padding-left: 1rem;
-  //      padding-right: 16px;
-  //      padding-right: 1rem;
-  //      padding-inline: 1rem;
-  //    }
-  //
-  //  }
-  //}
+  @include it("generates correct fallbacks with a single non-zero value for dimension 'inline'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16, "inline");
+      }
+
+      @include expect {
+        padding-left: 16px;
+        padding-left: 1rem;
+        padding-right: 16px;
+        padding-right: 1rem;
+        padding-inline: 1rem;
+      }
+
+    }
+  }
 
   //@include it("generates correct fallbacks with a pair of values for dimension 'inline'") {
   //  @include assert() {
