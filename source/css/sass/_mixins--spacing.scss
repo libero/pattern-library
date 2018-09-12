@@ -12,11 +12,17 @@
     }
   }
   @if $dimension == "inline" {
-    padding-left: #{$size_in_px}px;
-    padding-left: #{get-rem-from-px($size_in_px)}rem;
-    padding-right: #{$size_in_px}px;
-    padding-right: #{get-rem-from-px($size_in_px)}rem;
-    padding-inline: #{get-rem-from-px($size_in_px)}rem;
+    @if $size_in_px == 0 {
+      padding-left: 0;
+      padding-right: 0;
+      padding-inline: 0;
+    } @else {
+      padding-left: #{$size_in_px}px;
+      padding-left: #{get-rem-from-px($size_in_px)}rem;
+      padding-right: #{$size_in_px}px;
+      padding-right: #{get-rem-from-px($size_in_px)}rem;
+      padding-inline: #{get-rem-from-px($size_in_px)}rem;
+    }
   }
 }
 
