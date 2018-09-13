@@ -1,6 +1,5 @@
 @import "utility-functions";
-@import "variables--baseline-grid";
-@import "variables--breakpoints";
+@import "variables";
 
 @mixin padding($size_in_px, $dimension: "") {
   @if $dimension == "" {
@@ -16,6 +15,26 @@
       padding-left: 0;
       padding-right: 0;
       padding-inline: 0;
+    } @else if type_of($size_in_px) == list and length($size_in_px) == 2 {
+
+      &[dir="ltr"] {
+        padding-left: #{nth($size_in_px, 1)}px;
+        padding-left: #{get-rem-from-px(nth($size_in_px, 1))}rem;
+        padding-right: #{nth($size_in_px, 2)}px;
+        padding-right: #{get-rem-from-px(nth($size_in_px, 2))}rem;
+      }
+
+      &[dir="rtl"] {
+        padding-right: #{nth($size_in_px, 1)}px;
+        padding-right: #{get-rem-from-px(nth($size_in_px, 1))}rem;
+        padding-left: #{nth($size_in_px, 2)}px;
+        padding-left: #{get-rem-from-px(nth($size_in_px, 2))}rem;
+      }
+
+      &#{$libero-selector-to-force-sass-output-order} {
+        padding-inline: #{get-rem-from-px(nth($size_in_px, 1))}rem #{get-rem-from-px(nth($size_in_px, 2))}rem;
+      }
+
     } @else {
       padding-left: #{$size_in_px}px;
       padding-left: #{get-rem-from-px($size_in_px)}rem;
