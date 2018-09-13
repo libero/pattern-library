@@ -18,6 +18,23 @@
   }
 }
 
+@include describe('_padding-right [Mixin]') {
+  @include it('generates expected padding-right declaration with appropriate fallbacks') {
+    @include assert() {
+
+      @include output {
+        @include _padding-right(16);
+      }
+
+      @include expect {
+        padding-right: 16px;
+        padding-right: 1rem;
+      }
+
+    }
+  }
+}
+
 @include describe("padding [Mixin]") {
 
   @include it("generates correct fallbacks with a single zero value and no dimension") {
