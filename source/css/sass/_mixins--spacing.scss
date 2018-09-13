@@ -11,8 +11,12 @@
 }
 
 @mixin _padding-right($size-in-px) {
-  padding-right: #{$size_in_px}px;
-  padding-right: #{get-rem-from-px($size_in_px)}rem;
+  @if $size-in-px == 0 {
+    padding-right: 0;
+  } @else {
+    padding-right: #{$size_in_px}px;
+    padding-right: #{get-rem-from-px($size_in_px)}rem;
+  }
 }
 
 @mixin padding($size_in_px, $dimension: "") {

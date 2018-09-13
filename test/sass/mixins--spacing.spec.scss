@@ -45,6 +45,19 @@
       }
 
     }
+
+    @include assert() {
+
+      @include output {
+        @include _padding-right(0);
+      }
+
+      @include expect {
+        padding-right: 0;
+      }
+
+    }
+
   }
 }
 
