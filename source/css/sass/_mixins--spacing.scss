@@ -95,6 +95,15 @@
       }
     }
   }
+
+  @if $dimension == "block" {
+    @if $size_in_px == 0 {
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-block: 0;
+    }
+  }
+
 }
 
 @mixin padding-old($size_in_px, $dimension: "") {

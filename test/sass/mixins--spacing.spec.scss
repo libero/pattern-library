@@ -219,6 +219,22 @@
    }
 }
 
+  @include it("generates correct fallbacks with a single zero value for dimension 'block'") {
+    @include assert() {
+
+      @include output {
+        @include padding(0, "block")
+      }
+
+      @include expect {
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-block: 0;
+      }
+
+    }
+  }
+
   //@include it("generates correct fallbacks with a single value for dimension 'block'") {
   //  @include assert() {
   //
