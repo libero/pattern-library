@@ -15,7 +15,20 @@
       }
 
     }
+
+    @include assert() {
+
+      @include output {
+        @include _padding-left(0);
+      }
+
+      @include expect {
+        padding-left: 0;
+      }
+
+    }
   }
+
 }
 
 @include describe('_padding-right [Mixin]') {

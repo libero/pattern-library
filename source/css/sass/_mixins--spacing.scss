@@ -2,8 +2,12 @@
 @import "variables";
 
 @mixin _padding-left($size-in-px) {
-  padding-left: #{$size_in_px}px;
-  padding-left: #{get-rem-from-px($size_in_px)}rem;
+  @if $size-in-px == 0 {
+    padding-left: 0;
+  } @else {
+    padding-left: #{$size_in_px}px;
+    padding-left: #{get-rem-from-px($size_in_px)}rem;
+  }
 }
 
 @mixin _padding-right($size-in-px) {
