@@ -1,6 +1,23 @@
 @import "../../node_modules/sass-true/sass/true";
 @import "../../source/css/sass/_mixins--spacing.scss";
 
+@include describe('_padding-left [Mixin]') {
+  @include it('generates expected padding-left declaration with appropriate fallbacks') {
+    @include assert() {
+
+      @include output {
+        @include _padding-left(16);
+      }
+
+      @include expect {
+        padding-left: 16px;
+        padding-left: 1rem;
+      }
+
+    }
+  }
+}
+
 @include describe("padding [Mixin]") {
 
   @include it("generates correct fallbacks with a single zero value and no dimension") {
