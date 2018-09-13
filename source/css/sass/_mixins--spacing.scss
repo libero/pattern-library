@@ -101,6 +101,12 @@
       padding-top: 0;
       padding-bottom: 0;
       padding-block: 0;
+    } @else {
+      padding-top: #{$size_in_px}px;
+      padding-top: #{get-rem-from-px($size_in_px)}rem;
+      padding-bottom: #{$size_in_px}px;
+      padding-bottom: #{get-rem-from-px($size_in_px)}rem;
+      padding-block: #{get-rem-from-px($size_in_px)}rem;
     }
   }
 

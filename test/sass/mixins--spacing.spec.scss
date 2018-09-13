@@ -235,24 +235,24 @@
     }
   }
 
-  //@include it("generates correct fallbacks with a single value for dimension 'block'") {
-  //  @include assert() {
-  //
-  //    @include output {
-  //      @include padding(16, "block")
-  //    }
-  //
-  //    @include expect {
-  //      padding-top: 16px;
-  //      padding-top: 1rem;
-  //      padding-bottom: 16px;
-  //      padding-bottom: 1rem;
-  //      padding-block: 1rem;
-  //    }
-  //
-  //  }
-  //}
-  //
+  @include it("generates correct fallbacks with a single non-zero value for dimension 'block'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16, "block")
+      }
+
+      @include expect {
+        padding-top: 16px;
+        padding-top: 1rem;
+        padding-bottom: 16px;
+        padding-bottom: 1rem;
+        padding-block: 1rem;
+      }
+
+    }
+  }
+
   //@include it("generates correct fallbacks with a pair of values for dimension 'block'") {
   //  @include assert() {
   //
