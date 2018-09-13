@@ -69,6 +69,20 @@
       }
     }
   }
+
+  @if $dimension == "inline-end" {
+    @if $size_in_px == 0 {
+      &[dir="ltr"] {
+        padding-right: 0;
+      }
+      &[dir="rtl"] {
+        padding-left: 0;
+      }
+      &#{$libero-selector-to-force-sass-output-order} {
+        padding-inline-end: 0;
+      }
+    }
+  }
 }
 
 @mixin padding-old($size_in_px, $dimension: "") {
