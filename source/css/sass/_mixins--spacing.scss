@@ -28,17 +28,13 @@
     } @else if type_of($size_in_px) == list and length($size_in_px) == 2 {
 
       &[dir="ltr"] {
-        padding-left: #{nth($size_in_px, 1)}px;
-        padding-left: #{get-rem-from-px(nth($size_in_px, 1))}rem;
-        padding-right: #{nth($size_in_px, 2)}px;
-        padding-right: #{get-rem-from-px(nth($size_in_px, 2))}rem;
+        @include _padding-left(nth($size_in_px, 1));
+        @include _padding-right(nth($size_in_px, 2));
       }
 
       &[dir="rtl"] {
-        padding-right: #{nth($size_in_px, 1)}px;
-        padding-right: #{get-rem-from-px(nth($size_in_px, 1))}rem;
-        padding-left: #{nth($size_in_px, 2)}px;
-        padding-left: #{get-rem-from-px(nth($size_in_px, 2))}rem;
+        @include _padding-right(nth($size_in_px, 1));
+        @include _padding-left(nth($size_in_px, 2));
       }
 
       &#{$libero-selector-to-force-sass-output-order} {
@@ -46,10 +42,8 @@
       }
 
     } @else {
-      padding-left: #{$size_in_px}px;
-      padding-left: #{get-rem-from-px($size_in_px)}rem;
-      padding-right: #{$size_in_px}px;
-      padding-right: #{get-rem-from-px($size_in_px)}rem;
+      @include _padding-left($size_in_px);
+      @include _padding-right($size_in_px);
       padding-inline: #{get-rem-from-px($size_in_px)}rem;
     }
   }
@@ -67,12 +61,10 @@
       }
     } @else {
       &[dir="ltr"] {
-        padding-left: #{$size_in_px}px;
-        padding-left: #{get-rem-from-px($size_in_px)}rem;
+        @include _padding-left($size_in_px);
       }
       &[dir="rtl"] {
-        padding-right: #{$size_in_px}px;
-        padding-right: #{get-rem-from-px($size_in_px)}rem;
+        @include _padding-right($size_in_px);
       }
       &#{$libero-selector-to-force-sass-output-order} {
         padding-inline-start: #{get-rem-from-px($size_in_px)}rem;
@@ -93,12 +85,10 @@
       }
     } @else {
       &[dir="ltr"] {
-        padding-right: #{$size_in_px}px;
-        padding-right: #{get-rem-from-px($size_in_px)}rem;
+        @include _padding-right($size_in_px);
       }
       &[dir="rtl"] {
-        padding-left: #{$size_in_px}px;
-        padding-left: #{get-rem-from-px($size_in_px)}rem;
+        @include _padding-left($size_in_px);
       }
       &#{$libero-selector-to-force-sass-output-order} {
         padding-inline-end: #{get-rem-from-px($size_in_px)}rem;
