@@ -253,23 +253,24 @@
     }
   }
 
-  //@include it("generates correct fallbacks with a pair of values for dimension 'block'") {
-  //  @include assert() {
-  //
-  //    @include output {
-  //      @include padding(16 32, "block")
-  //    }
-  //
-  //    @include expect {
-  //      padding-top: 16px;
-  //      padding-top: 1rem;
-  //      padding-bottom: 32px;
-  //      padding-bottom: 2rem;
-  //
-  //      padding-block: 1rem 2rem;
-  //    }
-  //
-  //  }
-  //}
+  // Vertical writing modes not yet supported
+  @include it("generates correct fallbacks with a pair of non-zero values for dimension 'block'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16 32, "block")
+      }
+
+      @include expect {
+        padding-top: 16px;
+        padding-top: 1rem;
+        padding-bottom: 32px;
+        padding-bottom: 2rem;
+
+        padding-block: 1rem 2rem;
+      }
+
+    }
+  }
 
 }
