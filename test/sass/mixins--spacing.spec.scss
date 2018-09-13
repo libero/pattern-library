@@ -126,7 +126,7 @@
     }
   }
 
-  @include it("generates correct fallbacks with a pair of different values for dimension 'inline'") {
+  @include it("generates correct fallbacks with a pair of values for dimension 'inline'") {
     @include assert() {
 
       @include output {
@@ -153,7 +153,92 @@
       }
 
     }
+
+    @include assert() {
+
+      @include output {
+        @include padding(16 16, "inline");
+      }
+
+      @include expect {
+        padding-left: 16px;
+        padding-left: 1rem;
+        padding-right: 16px;
+        padding-right: 1rem;
+
+        // TODO: "padding-inline: 1rem;" is better here:
+        padding-inline: 1rem 1rem;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include padding(0 32, "inline");
+      }
+
+      @include expect {
+        &[dir="ltr"] {
+          padding-left: 0;
+          padding-right: 32px;
+          padding-right: 2rem;
+        }
+        &[dir="rtl"] {
+          padding-right: 0;
+          padding-left: 32px;
+          padding-left: 2rem;
+        }
+
+        &:not([data-never-use-this-data-attribute-name-in-html]) {
+          padding-inline: 0 2rem;
+        }
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include padding(16 0, "inline");
+      }
+
+      @include expect {
+        &[dir="ltr"] {
+          padding-left: 16px;
+          padding-left: 1rem;
+          padding-right: 0;
+        }
+        &[dir="rtl"] {
+          padding-right: 16px;
+          padding-right: 1rem;
+          padding-left: 0;
+        }
+
+        &:not([data-never-use-this-data-attribute-name-in-html]) {
+          padding-inline: 1rem 0;
+        }
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include padding(0 0, "inline");
+      }
+
+      @include expect {
+        padding-left: 0;
+        padding-right: 0;
+        // TODO: "padding-inline: 0 0;" is better here:
+        padding-inline: 0 0;
+        }
+
+    }
   }
+
+  // TODO: what happens when passed "inline" but a list of > 2 values?
 
   @include it("generates correct fallbacks with a single zero value for the dimension 'inline-start'") {
    @include assert() {

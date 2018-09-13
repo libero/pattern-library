@@ -35,18 +35,42 @@
       padding-inline: 0;
     } @else if type_of($size_in_px) == list and length($size_in_px) == 2 {
 
-      &[dir="ltr"] {
-        @include _padding-left(nth($size_in_px, 1));
-        @include _padding-right(nth($size_in_px, 2));
+      $firstValue: nth($size_in_px, 1);
+      $secondValue: nth($size_in_px, 2);
+
+      @if $firstValue == $secondValue {
+
+        @include _padding-left($firstValue);
+        @include _padding-right($secondValue);
+
+      } @else {
+
+        &[dir="ltr"] {
+          @include _padding-left($firstValue);
+          @include _padding-right($secondValue);
+        }
+
+        &[dir="rtl"] {
+          @include _padding-right($firstValue);
+          @include _padding-left($secondValue);
+        }
+
       }
 
-      &[dir="rtl"] {
-        @include _padding-right(nth($size_in_px, 1));
-        @include _padding-left(nth($size_in_px, 2));
+      $derivedFirstValue: 0;
+      $derivedSecondValue: 0;
+      @if $firstValue != 0 {
+        $derivedFirstValue: #{get-rem-from-px($firstValue)}rem;
       }
-
-      &#{$libero-selector-to-force-sass-output-order} {
-        padding-inline: #{get-rem-from-px(nth($size_in_px, 1))}rem #{get-rem-from-px(nth($size_in_px, 2))}rem;
+      @if $secondValue != 0 {
+        $derivedSecondValue: #{get-rem-from-px($secondValue)}rem;
+      }
+      @if $firstValue != $secondValue {
+        &#{$libero-selector-to-force-sass-output-order} {
+          padding-inline: $derivedFirstValue $derivedSecondValue;
+        }
+      } @else {
+        padding-inline: $derivedFirstValue $derivedSecondValue;
       }
 
     } @else {
