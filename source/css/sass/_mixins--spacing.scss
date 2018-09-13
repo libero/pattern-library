@@ -43,6 +43,20 @@
       padding-inline: #{get-rem-from-px($size_in_px)}rem;
     }
   }
+
+  @if $dimension == "inline-start" {
+    @if $size_in_px == 0 {
+      &[dir="ltr"] {
+        padding-left: 0;
+      }
+      &[dir="rtl"] {
+        padding-right: 0;
+      }
+      &#{$libero-selector-to-force-sass-output-order} {
+        padding-inline-start: 0;
+      }
+    }
+  }
 }
 
 @mixin padding-old($size_in_px, $dimension: "") {

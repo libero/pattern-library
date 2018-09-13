@@ -94,14 +94,36 @@
 
     }
   }
-  //
-  //@include it("generates correct fallbacks with a single value for the dimension 'inline-start'") {
+  
+  @include it("generates correct fallbacks with a single zero value for the dimension 'inline-start'") {
+   @include assert() {
+  
+     @include output {
+       @include padding(0, "inline-start");
+     }
+  
+     @include expect {
+       &[dir="ltr"] {
+         padding-left: 0;
+       }
+       &[dir="rtl"] {
+         padding-right: 0;
+       }
+       &:not([data-never-use-this-data-attribute-name-in-html]) {
+        padding-inline-start: 0;
+       }
+  
+   }
+  }
+}
+
+  // @include it("generates correct fallbacks with a single value for the dimension 'inline-start'") {
   //  @include assert() {
-  //
+  
   //    @include output {
   //      @include padding(16, "inline-start");
   //    }
-  //
+  
   //    @include expect {
   //      &[dir="ltr"] {
   //        padding-left: 16px;
@@ -111,12 +133,13 @@
   //        padding-right: 16px;
   //        padding-right: 1rem;
   //      }
-  //      padding-inline-start: 1rem;
-  //    }
-  //
+  //      &:not([data-never-use-this-data-attribute-name-in-html]) {
+  //       padding-inline-start: 1rem;
+  //      }
+  
   //  }
-  //}
-  //
+  // }
+  
   //@include it("generates correct fallbacks with a single value for the dimension 'inline-end'") {
   //  @include assert() {
   //
