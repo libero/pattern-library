@@ -235,7 +235,33 @@
     }
   }
 
-  // TODO: what happens when passed "inline" but a list of > 2 values?
+  @include it("Ignores more than two values in the sizes list for the dimension 'inline'") {
+      @include assert() {
+
+        @include output {
+          @include padding(16 32 48, "inline");
+        }
+
+        @include expect {
+          &[dir="ltr"] {
+            padding-left: 16px;
+            padding-left: 1rem;
+            padding-right: 32px;
+            padding-right: 2rem;
+          }
+          &[dir="rtl"] {
+            padding-right: 16px;
+            padding-right: 1rem;
+            padding-left: 32px;
+            padding-left: 2rem;
+          }
+
+          &:not([data-never-use-this-data-attribute-name-in-html]) {
+            padding-inline: 1rem 2rem;
+          }
+        }
+      }
+    }
 
   @include it("generates correct fallbacks with a single zero value for the dimension 'inline-start'") {
    @include assert() {

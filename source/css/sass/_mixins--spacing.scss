@@ -33,7 +33,7 @@
       padding-left: 0;
       padding-right: 0;
       padding-inline: 0;
-    } @else if type_of($size_in_px) == list and length($size_in_px) == 2 {
+    } @else if type_of($size_in_px) == list and length($size_in_px) >= 2 {
 
       $firstValue: nth($size_in_px, 1);
       $secondValue: nth($size_in_px, 2);
