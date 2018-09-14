@@ -407,4 +407,21 @@
     }
   }
 
+  @include it("Ignores more than two values in the sizes list for the dimension 'block'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16 32 48, "block");
+      }
+
+      @include expect {
+          padding-top: 16px;
+          padding-top: 1rem;
+          padding-bottom: 32px;
+          padding-bottom: 2rem;
+          padding-block: 1rem 2rem;
+      }
+    }
+  }
+
 }
