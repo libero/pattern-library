@@ -165,9 +165,7 @@
         padding-left: 1rem;
         padding-right: 16px;
         padding-right: 1rem;
-
-        // TODO: "padding-inline: 1rem;" is better here:
-        padding-inline: 1rem 1rem;
+        padding-inline: 1rem;
       }
 
     }
@@ -231,8 +229,7 @@
       @include expect {
         padding-left: 0;
         padding-right: 0;
-        // TODO: "padding-inline: 0 0;" is better here:
-        padding-inline: 0 0;
+        padding-inline: 0;
         }
 
     }
