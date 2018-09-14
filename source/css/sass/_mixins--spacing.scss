@@ -65,12 +65,12 @@
       @if $secondValue != 0 {
         $derivedSecondValue: #{get-rem-from-px($secondValue)}rem;
       }
-      @if $firstValue != $secondValue {
+      @if $firstValue == $secondValue {
+        padding-inline: $derivedFirstValue;
+      } @else {
         &#{$libero-selector-to-force-sass-output-order} {
           padding-inline: $derivedFirstValue $derivedSecondValue;
         }
-      } @else {
-        padding-inline: $derivedFirstValue;
       }
 
     } @else {
