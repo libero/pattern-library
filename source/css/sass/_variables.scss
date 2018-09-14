@@ -10,6 +10,6 @@ $libero-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
  providing fallback for (e.g. when using the dir attribute selector to fallback from padding-inline in the padding mixin).
  Sass will put these higher specificity selectors after the code they are providing fallbacks for, which is not what we
  want. Introducing this selector on the non-fallback increases the specificity of the authored code so it occurs after
- the fallbacks. The minor increase in specificity in unavoidable, but this seems an acceptable trade off.
+ the fallbacks. The minor increase in specificity is unavoidable, but this seems an acceptable trade off.
 */
 $libero-selector-to-force-sass-output-order: ":not([data-never-use-this-data-attribute-name-in-html])";
