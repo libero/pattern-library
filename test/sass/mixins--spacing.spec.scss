@@ -317,6 +317,31 @@
    }
 }
 
+
+  @include it("Ignores more than one value in the sizes list for the dimension 'inline-end'") {
+    @include assert() {
+
+      @include output {
+        @include padding(16 32, "inline-end");
+      }
+
+      @include expect {
+        &[dir="ltr"] {
+          padding-right: 16px;
+          padding-right: 1rem;
+        }
+        &[dir="rtl"] {
+          padding-left: 16px;
+          padding-left: 1rem;
+        }
+        &:not([data-never-use-this-data-attribute-name-in-html]) {
+          padding-inline-end: 1rem;
+        }
+      }
+
+    }
+  }
+
   @include it("generates correct fallbacks with a single zero value for dimension 'block'") {
     @include assert() {
 
