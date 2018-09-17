@@ -75,13 +75,13 @@
       }
     } @else {
       &[dir="ltr"] {
-        @include _padding-left($size_in_px);
+        @include _padding-left(nth($size_in_px, 1));
       }
       &[dir="rtl"] {
-        @include _padding-right($size_in_px);
+        @include _padding-right(nth($size_in_px, 1));
       }
       &#{$libero-selector-to-force-sass-output-order} {
-        padding-inline-start: #{get-rem-from-px($size_in_px)}rem;
+        padding-inline-start: #{get-rem-from-px(nth($size_in_px, 1))}rem;
       }
     }
   }
