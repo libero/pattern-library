@@ -1,6 +1,8 @@
 @import "utility-functions";
 @import "variables";
 
+// NOTE: mixins beginning with underscore "_" are internal to this file only: they MUST NOT be used externally.
+
 @mixin _padding-left($size-in-px) {
   @if $size-in-px == 0 {
     padding-left: 0;
