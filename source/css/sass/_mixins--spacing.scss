@@ -357,8 +357,8 @@
 
 @mixin h2-spacing() {
   margin: 0;
-  @include padding(21, "bottom");
-  @include padding(21, "top");
+  @include padding(21, "block-end");
+  @include padding(21, "block-start");
 }
 
 @mixin h3-spacing() {
@@ -381,8 +381,8 @@
 
 @mixin h6-spacing() {
   margin: 0;
-  @include padding(10, "top");
-  @include padding(14, "bottom");
+  @include padding(10, "block-start");
+  @include padding(14, "block-end");
 }
 
 @mixin body-spacing() {
