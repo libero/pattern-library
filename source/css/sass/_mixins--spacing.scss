@@ -92,7 +92,7 @@
       @if $firstValue == $secondValue {
         padding-inline: $derivedFirstValue;
       } @else {
-        &#{$libero-selector-to-force-sass-output-order} {
+        html[dir] & {
           padding-inline: $derivedFirstValue $derivedSecondValue;
         }
       }
@@ -114,7 +114,7 @@
       &[dir="rtl"] {
         padding-right: 0;
       }
-      &#{$libero-selector-to-force-sass-output-order} {
+      html[dir] & {
         padding-inline-start: 0;
       }
     } @else {
@@ -126,7 +126,7 @@
       &[dir="rtl"] {
         @include _padding-right(nth($size_in_px, 1));
       }
-      &#{$libero-selector-to-force-sass-output-order} {
+      html[dir] & {
         padding-inline-start: #{get-rem-from-px(nth($size_in_px, 1))}rem;
       }
     }
@@ -142,7 +142,7 @@
       &[dir="rtl"] {
         padding-left: 0;
       }
-      &#{$libero-selector-to-force-sass-output-order} {
+      html[dir] & {
         padding-inline-end: 0;
       }
     } @else {
@@ -154,7 +154,7 @@
       &[dir="rtl"] {
         @include _padding-left(nth($size_in_px, 1));
       }
-      &#{$libero-selector-to-force-sass-output-order} {
+      html[dir] & {
         padding-inline-end: #{get-rem-from-px(nth($size_in_px, 1))}rem;
       }
     }

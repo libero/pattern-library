@@ -89,7 +89,7 @@
           padding-left: 2rem;
         }
 
-        &:not([data-never-use-this-data-attribute-name-in-html]) {
+        html[dir] & {
           padding-inline: 1rem 2rem;
         }
       }
@@ -132,7 +132,7 @@
           padding-left: 2rem;
         }
 
-        &:not([data-never-use-this-data-attribute-name-in-html]) {
+        html[dir] & {
           padding-inline: 0 2rem;
         }
       }
@@ -159,7 +159,7 @@
           padding-left: 0;
         }
 
-        &:not([data-never-use-this-data-attribute-name-in-html]) {
+        html[dir] & {
           padding-inline: 1rem 0;
         }
       }
@@ -204,7 +204,7 @@
             padding-left: 2rem;
           }
 
-          &:not([data-never-use-this-data-attribute-name-in-html]) {
+          html[dir] & {
             padding-inline: 1rem 2rem;
           }
         }
@@ -227,7 +227,7 @@
        &[dir="rtl"] {
          padding-right: 0;
        }
-       &:not([data-never-use-this-data-attribute-name-in-html]) {
+       html[dir] & {
         padding-inline-start: 0;
        }
 
@@ -253,7 +253,7 @@
          padding-right: 16px;
          padding-right: 1rem;
        }
-       &:not([data-never-use-this-data-attribute-name-in-html]) {
+       html[dir] & {
         padding-inline-start: 1rem;
        }
      }
@@ -278,7 +278,7 @@
           padding-right: 16px;
           padding-right: 1rem;
         }
-        &:not([data-never-use-this-data-attribute-name-in-html]) {
+        html[dir] & {
           padding-inline-start: 1rem;
         }
       }
@@ -302,7 +302,7 @@
         &[dir="rtl"] {
          padding-left: 0;
         }
-        &:not([data-never-use-this-data-attribute-name-in-html]) {
+        html[dir] & {
           padding-inline-end: 0;
         }
 
@@ -328,7 +328,7 @@
          padding-left: 16px;
          padding-left: 1rem;
        }
-       &:not([data-never-use-this-data-attribute-name-in-html]) {
+       html[dir] & {
         padding-inline-end: 1rem;
        }
      }
@@ -354,7 +354,7 @@
           padding-left: 16px;
           padding-left: 1rem;
         }
-        &:not([data-never-use-this-data-attribute-name-in-html]) {
+        html[dir] & {
           padding-inline-end: 1rem;
         }
       }
