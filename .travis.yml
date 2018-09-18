@@ -14,4 +14,5 @@ script:
 
 after_success:
     - docker run --name patterns-core liberoadmin/patterns-core node_modules/.bin/gulp exportPatterns
+    # TODO: empty out committed export/ folder
     - docker cp patterns-core:/patterns-core/export/. export/
