@@ -21,6 +21,26 @@
   }
 }
 
+// Fallbacks for CSS logical properties contained within this mixin require the following treatment of HTML dir attributes:
+//  - document level: always specified, via the HTML element
+//  - block level: specified on every element within a block describing a direction switch.
+//
+// For example:
+// <html lang="..." dir="ltr">
+// ...
+// <div>
+//   Doesn't need a dir attribute. Most cases will be like this.
+// </div>
+//
+//<div class="test" dir="rtl">
+//
+//  This block changes the text direction. Every descendant element must have its own dir attribute....
+//
+//  <div class="test" dir="rtl">... even if the direction doesn't change.</div>
+//
+//  <div class="test" dir="ltr">But obviously also when it does.</div>
+//
+//</div>
 @mixin padding($size_in_px, $dimension: "") {
   @if $dimension == "" {
     @if $size_in_px == 0 {
@@ -47,11 +67,13 @@
 
       } @else {
 
+        html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
           @include _padding-left($firstValue);
           @include _padding-right($secondValue);
         }
 
+        html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
           @include _padding-right($firstValue);
           @include _padding-left($secondValue);
@@ -84,9 +106,11 @@
 
   @if $dimension == "inline-start" {
     @if $size_in_px == 0 {
+      html[dir="ltr"] &:not([dir]),
       &[dir="ltr"] {
         padding-left: 0;
       }
+      html[dir="rtl"] &:not([dir]),
       &[dir="rtl"] {
         padding-right: 0;
       }
@@ -94,9 +118,11 @@
         padding-inline-start: 0;
       }
     } @else {
+      html[dir="ltr"] &:not([dir]),
       &[dir="ltr"] {
         @include _padding-left(nth($size_in_px, 1));
       }
+      html[dir="rtl"] &:not([dir]),
       &[dir="rtl"] {
         @include _padding-right(nth($size_in_px, 1));
       }
@@ -108,9 +134,11 @@
 
   @if $dimension == "inline-end" {
     @if $size_in_px == 0 {
+      html[dir="ltr"] &:not([dir]),
       &[dir="ltr"] {
         padding-right: 0;
       }
+      html[dir="rtl"] &:not([dir]),
       &[dir="rtl"] {
         padding-left: 0;
       }
@@ -118,9 +146,11 @@
         padding-inline-end: 0;
       }
     } @else {
+      html[dir="ltr"] &:not([dir]),
       &[dir="ltr"] {
         @include _padding-right(nth($size_in_px, 1));
       }
+      html[dir="rtl"] &:not([dir]),
       &[dir="rtl"] {
         @include _padding-left(nth($size_in_px, 1));
       }
