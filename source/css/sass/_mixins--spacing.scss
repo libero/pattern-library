@@ -21,6 +21,20 @@
   }
 }
 
+@mixin _when-left-to-right {
+  html[dir="ltr"] &:not([dir]),
+  &[dir="ltr"] {
+    @content;
+  }
+}
+
+@mixin _when-right-to-left {
+  html[dir="rtl"] &:not([dir]),
+  &[dir="rtl"] {
+    @content;
+  }
+}
+
 // Fallbacks for CSS logical properties contained within this mixin require the following treatment of HTML dir attributes:
 //  - document level: always specified, via the HTML element
 //  - block level: specified on every element within a block describing a direction switch.
@@ -67,14 +81,12 @@
 
       } @else {
 
-        html[dir="ltr"] &:not([dir]),
-        &[dir="ltr"] {
+        @include _when-left-to-right {
           @include _padding-left($firstValue);
           @include _padding-right($secondValue);
         }
 
-        html[dir="rtl"] &:not([dir]),
-        &[dir="rtl"] {
+        @include _when-right-to-left {
           @include _padding-right($firstValue);
           @include _padding-left($secondValue);
         }
@@ -106,24 +118,20 @@
 
   @if $dimension == "inline-start" {
     @if $size_in_px == 0 {
-      html[dir="ltr"] &:not([dir]),
-      &[dir="ltr"] {
+      @include _when-left-to-right {
         padding-left: 0;
       }
-      html[dir="rtl"] &:not([dir]),
-      &[dir="rtl"] {
+      @include _when-right-to-left {
         padding-right: 0;
       }
       html[dir] & {
         padding-inline-start: 0;
       }
     } @else {
-      html[dir="ltr"] &:not([dir]),
-      &[dir="ltr"] {
+      @include _when-left-to-right {
         @include _padding-left(nth($size_in_px, 1));
       }
-      html[dir="rtl"] &:not([dir]),
-      &[dir="rtl"] {
+      @include _when-right-to-left {
         @include _padding-right(nth($size_in_px, 1));
       }
       html[dir] & {
@@ -134,24 +142,20 @@
 
   @if $dimension == "inline-end" {
     @if $size_in_px == 0 {
-      html[dir="ltr"] &:not([dir]),
-      &[dir="ltr"] {
+      @include _when-left-to-right {
         padding-right: 0;
       }
-      html[dir="rtl"] &:not([dir]),
-      &[dir="rtl"] {
+      @include _when-right-to-left {
         padding-left: 0;
       }
       html[dir] & {
         padding-inline-end: 0;
       }
     } @else {
-      html[dir="ltr"] &:not([dir]),
-      &[dir="ltr"] {
+      @include _when-left-to-right {
         @include _padding-right(nth($size_in_px, 1));
       }
-      html[dir="rtl"] &:not([dir]),
-      &[dir="rtl"] {
+      @include _when-right-to-left {
         @include _padding-left(nth($size_in_px, 1));
       }
       html[dir] & {
