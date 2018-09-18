@@ -5,4 +5,4 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 COPY . ./
-RUN node_modules/.bin/gulp
+RUN node_modules/.bin/gulp build

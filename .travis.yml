@@ -11,3 +11,7 @@ branches:
 script:
     # conventional image name, but no intention to push it so far
     - docker build -t liberoadmin/patterns-core .
+
+after_success:
+    - docker run --name patterns-core liberoadmin/patterns-core node_modules/.bin/gulp exportPatterns
+    - docker cp patterns-core:/patterns-core/export/. export/
