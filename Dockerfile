@@ -1,4 +1,4 @@
-FROM node:8.12.0-jessie
+FROM node:8.12.0-slim
 WORKDIR /patterns-core
 
 COPY package.json package-lock.json ./
