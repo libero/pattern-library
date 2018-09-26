@@ -205,7 +205,7 @@
 }
 
 @mixin nospace($dimension: "all") {
-  $allowed-dimensions: "inline";
+  $allowed-dimensions: "inline", "inline-start";
   @if index($allowed-dimensions, $dimension) != null {
     @include margin(0, $dimension);
     @include padding(0, $dimension);

@@ -892,4 +892,40 @@
     }
 
   }
+
+  @include it("generates correct zeroing for the dimension 'inline-start'") {
+    @include assert {
+
+      @include output {
+        @include nospace("inline-start");
+      }
+
+      @include expect {
+
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          margin-left: 0;
+        }
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          margin-right: 0;
+        }
+        html[dir] & {
+          margin-inline-start: 0;
+        }
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          padding-left: 0;
+        }
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          padding-right: 0;
+        }
+        html[dir] & {
+          padding-inline-start: 0;
+        }
+      }
+
+    }
+  }
 }
