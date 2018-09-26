@@ -1000,7 +1000,24 @@
 
     }
   }
-  //@include it("generates correct zeroing for the dimension 'block-end'");
+
+  @include it("generates correct zeroing for the dimension 'block-end'") {
+    @include assert() {
+
+      @include output {
+        @include nospace("block-end")
+      }
+
+      @include expect {
+        margin-bottom: 0;
+        margin-block-end: 0;
+        padding-bottom: 0;
+        padding-block-end: 0;
+      }
+
+    }
+  }
+
   //@include it("generates correct zeroing for the dimension 'all'");
   //@include it("generates correct zeroing for all dimensions when not supplied with any dimension");
 }

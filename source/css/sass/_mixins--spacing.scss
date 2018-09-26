@@ -215,6 +215,12 @@
     margin-block-start: 0;
     padding-top: 0;
     padding-block-start: 0;
+  } @else if $dimension == "block-end" {
+    //vertical writing modes not yet supported
+    margin-bottom: 0;
+    margin-block-end: 0;
+    padding-bottom: 0;
+    padding-block-end: 0;
   }
 }
 
