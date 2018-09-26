@@ -56,7 +56,7 @@
 //
 //</div>
 @mixin _spacing($size_in_px, $space_type, $dimension: "") {
-  @if $space_type != padding {
+  @if $space_type != padding and $space_type != margin {
     // This is for padding only
   } @else {
     @if $dimension == "" {
@@ -201,42 +201,7 @@
 }
 
 @mixin margin($size_in_px, $dimension: "") {
-  @if $dimension == top or $dimension == right or $dimension == bottom or $dimension == left {
-    @if $size_in_px == 0 {
-      margin-#{$dimension}: 0;
-    } @else {
-      margin-#{$dimension}: #{$size_in_px}px;
-      margin-#{$dimension}: #{get-rem-from-px($size_in_px)}rem;
-    }
-  }
-  @else if $dimension == "" and type_of($size_in_px) == list {
-    $parts-px: ();
-    $parts-rem: ();
-    @each $size in $size_in_px {
-      @if $size == 0 {
-        $parts-px: append($parts-px, 0, "space");
-      } @else {
-        $parts-px: append($parts-px, #{$size}px, "space");
-      }
-    }
-    @each $size in $size_in_px {
-      @if $size == 0 {
-        $parts-rem: append($parts-rem, 0, "space");
-      } @else {
-        $parts-rem: append($parts-rem, #{get-rem-from-px($size)}rem, "space");
-      }
-    }
-    margin: $parts-px;
-    margin: $parts-rem;
-  }
-  @else {
-    @if $size_in_px == 0 {
-      margin: 0;
-    } @else {
-      margin: #{$size_in_px}px;
-      margin: #{get-rem-from-px($size_in_px)}rem;
-    }
-  }
+  @include _spacing($size_in_px, margin, $dimension);
 }
 
 @mixin nospace($dimension: "all") {
