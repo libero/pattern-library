@@ -3,21 +3,21 @@
 
 // NOTE: mixins beginning with underscore "_" are internal to this file only: they MUST NOT be used externally.
 
-@mixin _padding-left($size-in-px) {
+@mixin _spacing-left($size-in-px, $space-type) {
   @if $size-in-px == 0 {
-    padding-left: 0;
+    #{$space-type}-left: 0;
   } @else {
-    padding-left: #{$size_in_px}px;
-    padding-left: #{get-rem-from-px($size_in_px)}rem;
+    #{$space-type}-left: #{$size_in_px}px;
+    #{$space-type}-left: #{get-rem-from-px($size_in_px)}rem;
   }
 }
 
-@mixin _padding-right($size-in-px) {
+@mixin _spacing-right($size-in-px, $space-type) {
   @if $size-in-px == 0 {
-    padding-right: 0;
+    #{$space-type}-right: 0;
   } @else {
-    padding-right: #{$size_in_px}px;
-    padding-right: #{get-rem-from-px($size_in_px)}rem;
+    #{$space-type}-right: #{$size_in_px}px;
+    #{$space-type}-right: #{get-rem-from-px($size_in_px)}rem;
   }
 }
 
@@ -77,25 +77,23 @@
         $firstValue: nth($size_in_px, 1);
         $secondValue: nth($size_in_px, 2);
 
-        @if $space_type == padding {
-          @if $firstValue == $secondValue {
+        @if $firstValue == $secondValue {
 
-            @include _padding-left($firstValue);
-            @include _padding-right($secondValue);
+          @include _spacing-left($firstValue, $space_type);
+          @include _spacing-right($secondValue, $space_type);
 
-          } @else {
+        } @else {
 
-            @include _when-left-to-right {
-              @include _padding-left($firstValue);
-              @include _padding-right($secondValue);
-            }
-
-            @include _when-right-to-left {
-              @include _padding-right($firstValue);
-              @include _padding-left($secondValue);
-            }
-
+          @include _when-left-to-right {
+            @include _spacing-left($firstValue, $space_type);
+            @include _spacing-right($secondValue, $space_type);
           }
+
+          @include _when-right-to-left {
+            @include _spacing-right($firstValue, $space_type);
+            @include _spacing-left($secondValue, $space_type);
+          }
+
         }
 
         $derivedFirstValue: 0;
@@ -116,10 +114,9 @@
         }
 
       } @else {
-        @if $space_type == padding {
-          @include _padding-left($size_in_px);
-          @include _padding-right($size_in_px);
-        }
+
+        @include _spacing-left($size_in_px, $space_type);
+        @include _spacing-right($size_in_px, $space_type);
         #{$space_type}-inline: #{get-rem-from-px($size_in_px)}rem;
 
       }
@@ -138,14 +135,10 @@
         }
       } @else {
         @include _when-left-to-right {
-          @if $space_type == padding {
-            @include _padding-left(nth($size_in_px, 1));
-          }
+          @include _spacing-left(nth($size_in_px, 1), $space_type);
         }
         @include _when-right-to-left {
-          @if $space_type == padding {
-            @include _padding-right(nth($size_in_px, 1));
-          }
+          @include _spacing-right(nth($size_in_px, 1), $space_type);
         }
         html[dir] & {
           #{$space_type}-inline-start: #{get-rem-from-px(nth($size_in_px, 1))}rem;
@@ -166,14 +159,10 @@
         }
       } @else {
         @include _when-left-to-right {
-          @if $space_type == padding {
-            @include _padding-right(nth($size_in_px, 1));
-          }
+          @include _spacing-right(nth($size_in_px, 1), $space_type);
         }
         @include _when-right-to-left {
-          @if $space_type == padding {
-            @include _padding-left(nth($size_in_px, 1));
-          }
+          @include _spacing-left(nth($size_in_px, 1), $space_type);
         }
         html[dir] & {
           #{$space_type}-inline-end: #{get-rem-from-px(nth($size_in_px, 1))}rem;
