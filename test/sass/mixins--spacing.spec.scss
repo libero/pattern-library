@@ -983,7 +983,23 @@
     }
   }
 
-  //@include it("generates correct zeroing for the dimension 'block-start'");
+  // vertical writing modes not supported, so block-start always maps to top at the moment.
+  @include it("generates correct zeroing for the dimension 'block-start'") {
+    @include assert() {
+
+      @include output {
+        @include nospace("block-start")
+      }
+
+      @include expect {
+        margin-top: 0;
+        margin-block-start: 0;
+        padding-top: 0;
+        padding-block-start: 0;
+      }
+
+    }
+  }
   //@include it("generates correct zeroing for the dimension 'block-end'");
   //@include it("generates correct zeroing for the dimension 'all'");
   //@include it("generates correct zeroing for all dimensions when not supplied with any dimension");

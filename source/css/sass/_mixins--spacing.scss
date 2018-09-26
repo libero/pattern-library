@@ -209,6 +209,12 @@
   @if index($allowed-dimensions, $dimension) != null {
     @include margin(0, $dimension);
     @include padding(0, $dimension);
+  } @else if $dimension == "block-start" {
+    //vertical writing modes not yet supported
+    margin-top: 0;
+    margin-block-start: 0;
+    padding-top: 0;
+    padding-block-start: 0;
   }
 }
 
