@@ -205,21 +205,10 @@
 }
 
 @mixin nospace($dimension: "all") {
-  @if $dimension == "all" {
-    margin: 0;
-    padding: 0;
-  } @else if $dimension == "top" {
-    margin-top: 0;
-    padding-top: 0;
-  } @else if $dimension == "right" {
-    margin-right: 0;
-    padding-right: 0;
-  } @else if $dimension == "bottom" {
-    margin-bottom: 0;
-    padding-bottom: 0;
-  } @else if $dimension == "left" {
-    margin-left: 0;
-    padding-left: 0;
+  $allowed-dimensions: "inline";
+  @if index($allowed-dimensions, $dimension) != null {
+    @include margin(0, $dimension);
+    @include padding(0, $dimension);
   }
 }
 

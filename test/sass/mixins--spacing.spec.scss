@@ -869,3 +869,27 @@
   }
 
 }
+
+@include describe("nospace [Mixin]") {
+
+  @include it("generates correct zeroing for the dimension 'inline'") {
+    @include assert() {
+
+      @include output {
+        @include nospace("inline");
+      }
+
+      @include expect {
+        margin-left: 0;
+        margin-right: 0;
+        margin-inline: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-inline: 0;
+
+      }
+
+    }
+
+  }
+}
