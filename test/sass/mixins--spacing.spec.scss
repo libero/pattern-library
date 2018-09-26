@@ -1018,6 +1018,18 @@
     }
   }
 
-  //@include it("generates correct zeroing for the dimension 'all'");
-  //@include it("generates correct zeroing for all dimensions when not supplied with any dimension");
+  @include it("generates correct zeroing for all dimensions when not supplied with any dimension") {
+    @include assert() {
+
+      @include output {
+        @include nospace()
+      }
+
+      @include expect {
+        margin: 0;
+        padding: 0;
+      }
+
+    }
+  }
 }

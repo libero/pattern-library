@@ -204,8 +204,8 @@
   @include _spacing($size_in_px, margin, $dimension);
 }
 
-@mixin nospace($dimension: "all") {
-  $allowed-dimensions: "inline", "inline-start", "inline-end", "block";
+@mixin nospace($dimension: "") {
+  $allowed-dimensions: "inline", "inline-start", "inline-end", "block", "";
   @if index($allowed-dimensions, $dimension) != null {
     @include margin(0, $dimension);
     @include padding(0, $dimension);
