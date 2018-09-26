@@ -963,4 +963,28 @@
       }
     }
   }
+
+  @include it("generates correct zeroing for the dimension 'block'") {
+    @include assert() {
+
+      @include output {
+        @include nospace("block")
+      }
+
+      @include expect {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-block: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-block: 0;
+      }
+
+    }
+  }
+
+  //@include it("generates correct zeroing for the dimension 'block-start'");
+  //@include it("generates correct zeroing for the dimension 'block-end'");
+  //@include it("generates correct zeroing for the dimension 'all'");
+  //@include it("generates correct zeroing for all dimensions when not supplied with any dimension");
 }
