@@ -57,7 +57,7 @@
 //</div>
 @mixin _spacing($size-in-px, $space-type, $dimension: "") {
   @if $space-type != padding and $space-type != margin {
-    // This is for padding only
+    @error "_spacing mixin $space-type argument must be exactly one of 'padding' or 'margin'";
   } @else {
     @if $dimension == "" {
       @if $size-in-px == 0 {
