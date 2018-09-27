@@ -35,6 +35,25 @@
   }
 }
 
+@mixin _construct-dimensionless-space($sizes-in-px, $space-type) {
+  $parts-px: ();
+  $parts-rem: ();
+  @each $size in $sizes-in-px {
+    @if $size == 0 {
+      $parts-px: append($parts-px, #{$size}, "space");
+      $parts-rem: append($parts-rem, #{$size}, "space");
+    } @else {
+      $parts-px: append($parts-px, #{$size}px, "space");
+      $parts-rem: append($parts-rem, #{get-rem-from-px($size)}rem, "space");
+    }
+  }
+
+  #{$space-type}: $parts-px;
+  @if $parts-rem != $parts-px {
+    #{$space-type}: $parts-rem;
+  }
+}
+
 // Fallbacks for CSS logical properties contained within this mixin require the following treatment of HTML dir attributes:
 //  - document level: always specified, via the HTML element
 //  - block level: specified on every element within a block describing a direction switch.
@@ -59,17 +78,14 @@
   @if $space-type != padding and $space-type != margin {
     @error "_spacing mixin $space-type argument must be exactly one of 'padding' or 'margin'";
   } @else {
+
     @if $dimension == "" {
       @if length($sizes-in-px) > 4 {
-        @error "More than four lengths supplied as $size-in-px argument to _spacing mixin";
+        @error "More than four lengths supplied as $sizes-in-px argument to _spacing mixin";
       }
-      @if $sizes-in-px == 0 {
-        #{$space-type}: 0;
-      } @else {
-        #{$space-type}: #{$sizes-in-px}px;
-        #{$space-type}: #{get-rem-from-px($sizes-in-px)}rem;
-      }
+      @include _construct-dimensionless-space($sizes-in-px, $space-type);
     }
+
     @if $dimension == "inline" {
       @if $sizes-in-px == 0 {
         #{$space-type}-left: 0;
