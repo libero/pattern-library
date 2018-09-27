@@ -60,6 +60,9 @@
     @error "_spacing mixin $space-type argument must be exactly one of 'padding' or 'margin'";
   } @else {
     @if $dimension == "" {
+      @if length($sizes-in-px) > 4 {
+        @error "More than four lengths supplied as $size-in-px argument to _spacing mixin";
+      }
       @if $sizes-in-px == 0 {
         #{$space-type}: 0;
       } @else {
