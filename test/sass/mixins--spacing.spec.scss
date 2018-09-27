@@ -421,32 +421,6 @@
     }
   }
 
-  @include it("Ignores more than one value in the sizes list for the dimension 'inline-end'") {
-    @include assert() {
-
-      @include output {
-        @include padding(16 32, "inline-end");
-      }
-
-      @include expect {
-        html[dir="ltr"] &:not([dir]),
-        &[dir="ltr"] {
-          padding-right: 16px;
-          padding-right: 1rem;
-        }
-        html[dir="rtl"] &:not([dir]),
-        &[dir="rtl"] {
-          padding-left: 16px;
-          padding-left: 1rem;
-        }
-        html[dir] & {
-          padding-inline-end: 1rem;
-        }
-      }
-
-    }
-  }
-
   @include it("generates correct fallbacks with a single zero value for dimension 'block'") {
     @include assert() {
 
@@ -911,32 +885,6 @@
    }
 }
 
-
-  @include it("Ignores more than one value in the sizes list for the dimension 'inline-end'") {
-    @include assert() {
-
-      @include output {
-        @include margin(16 32, "inline-end");
-      }
-
-      @include expect {
-        html[dir="ltr"] &:not([dir]),
-        &[dir="ltr"] {
-          margin-right: 16px;
-          margin-right: 1rem;
-        }
-        html[dir="rtl"] &:not([dir]),
-        &[dir="rtl"] {
-          margin-left: 16px;
-          margin-left: 1rem;
-        }
-        html[dir] & {
-          margin-inline-end: 1rem;
-        }
-      }
-
-    }
-  }
 
   @include it("generates correct fallbacks with a single zero value for dimension 'block'") {
     @include assert() {
