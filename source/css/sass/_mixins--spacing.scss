@@ -232,7 +232,6 @@
 
 @mixin padding($sizes-in-px, $dimension: "") {
   @include _spacing($sizes-in-px, padding, $dimension);
-
 }
 
 @mixin margin($sizes-in-px, $dimension: "") {
