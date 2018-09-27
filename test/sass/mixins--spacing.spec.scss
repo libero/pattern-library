@@ -322,35 +322,6 @@
     }
   }
 
-  @include it("Ignores more than two values in the sizes list for the dimension 'inline'") {
-    @include assert() {
-
-      @include output {
-        @include padding(16 32 48, "inline");
-      }
-
-      @include expect {
-        html[dir="ltr"] &:not([dir]),
-        &[dir="ltr"] {
-          padding-left: 16px;
-          padding-left: 1rem;
-          padding-right: 32px;
-          padding-right: 2rem;
-        }
-        html[dir="rtl"] &:not([dir]),
-        &[dir="rtl"] {
-          padding-right: 16px;
-          padding-right: 1rem;
-          padding-left: 32px;
-          padding-left: 2rem;
-        }
-
-        html[dir] & {
-          padding-inline: 1rem 2rem;
-        }
-      }
-    }
-  }
 
   @include it("generates correct fallbacks with a single zero value for the dimension 'inline-start'") {
     @include assert() {
@@ -867,36 +838,6 @@
 
     }
   }
-
-  @include it("Ignores more than two values in the sizes list for the dimension 'inline'") {
-      @include assert() {
-
-        @include output {
-          @include margin(16 32 48, "inline");
-        }
-
-        @include expect {
-          html[dir="ltr"] &:not([dir]),
-          &[dir="ltr"] {
-            margin-left: 16px;
-            margin-left: 1rem;
-            margin-right: 32px;
-            margin-right: 2rem;
-          }
-          html[dir="rtl"] &:not([dir]),
-          &[dir="rtl"] {
-            margin-right: 16px;
-            margin-right: 1rem;
-            margin-left: 32px;
-            margin-left: 2rem;
-          }
-
-          html[dir] & {
-            margin-inline: 1rem 2rem;
-          }
-        }
-      }
-    }
 
   @include it("generates correct fallbacks with a single zero value for the dimension 'inline-start'") {
    @include assert() {

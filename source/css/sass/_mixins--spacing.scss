@@ -87,11 +87,21 @@
     }
 
     @if $dimension == "inline" {
+      @if length($sizes-in-px) > 2 {
+        @error "More than two lengths supplied as $sizes-in-px argument to _spacing mixin with dimension 'inline'";
+      }
       @if $sizes-in-px == 0 {
         #{$space-type}-left: 0;
         #{$space-type}-right: 0;
         #{$space-type}-inline: 0;
-      } @else if type_of($sizes-in-px) == list and length($sizes-in-px) >= 2 {
+
+      } @else if length($sizes-in-px) == 1 {
+
+        @include _spacing-left($sizes-in-px, $space-type);
+        @include _spacing-right($sizes-in-px, $space-type);
+        #{$space-type}-inline: #{get-rem-from-px($sizes-in-px)}rem;
+
+      } @else {
 
         $firstValue: nth($sizes-in-px, 1);
         $secondValue: nth($sizes-in-px, 2);
@@ -131,12 +141,6 @@
             #{$space-type}-inline: $derivedFirstValue $derivedSecondValue;
           }
         }
-
-      } @else {
-
-        @include _spacing-left($sizes-in-px, $space-type);
-        @include _spacing-right($sizes-in-px, $space-type);
-        #{$space-type}-inline: #{get-rem-from-px($sizes-in-px)}rem;
 
       }
     }
