@@ -203,6 +203,10 @@
 
     // Vertical writing modes not yet supported
     @if $dimension == "block" {
+      @if length($sizes-in-px) > 2 {
+        @error "More than two lengths supplied as $sizes-in-px argument to _spacing mixin with dimension 'block'";
+      }
+
       @if $sizes-in-px == 0 {
         #{$space-type}-top: 0;
         #{$space-type}-bottom: 0;
