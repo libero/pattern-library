@@ -7,8 +7,8 @@
   @if $size-in-px == 0 {
     #{$space-type}-left: 0;
   } @else {
-    #{$space-type}-left: #{$size_in_px}px;
-    #{$space-type}-left: #{get-rem-from-px($size_in_px)}rem;
+    #{$space-type}-left: #{$size-in-px}px;
+    #{$space-type}-left: #{get-rem-from-px($size-in-px)}rem;
   }
 }
 
@@ -16,8 +16,8 @@
   @if $size-in-px == 0 {
     #{$space-type}-right: 0;
   } @else {
-    #{$space-type}-right: #{$size_in_px}px;
-    #{$space-type}-right: #{get-rem-from-px($size_in_px)}rem;
+    #{$space-type}-right: #{$size-in-px}px;
+    #{$space-type}-right: #{get-rem-from-px($size-in-px)}rem;
   }
 }
 
@@ -55,43 +55,43 @@
 //  <div class="test" dir="ltr">But obviously also when it does.</div>
 //
 //</div>
-@mixin _spacing($size_in_px, $space_type, $dimension: "") {
-  @if $space_type != padding and $space_type != margin {
+@mixin _spacing($size-in-px, $space-type, $dimension: "") {
+  @if $space-type != padding and $space-type != margin {
     // This is for padding only
   } @else {
     @if $dimension == "" {
-      @if $size_in_px == 0 {
-        #{$space_type}: 0;
+      @if $size-in-px == 0 {
+        #{$space-type}: 0;
       } @else {
-        #{$space_type}: #{$size_in_px}px;
-        #{$space_type}: #{get-rem-from-px($size_in_px)}rem;
+        #{$space-type}: #{$size-in-px}px;
+        #{$space-type}: #{get-rem-from-px($size-in-px)}rem;
       }
     }
     @if $dimension == "inline" {
-      @if $size_in_px == 0 {
-        #{$space_type}-left: 0;
-        #{$space_type}-right: 0;
-        #{$space_type}-inline: 0;
-      } @else if type_of($size_in_px) == list and length($size_in_px) >= 2 {
+      @if $size-in-px == 0 {
+        #{$space-type}-left: 0;
+        #{$space-type}-right: 0;
+        #{$space-type}-inline: 0;
+      } @else if type_of($size-in-px) == list and length($size-in-px) >= 2 {
 
-        $firstValue: nth($size_in_px, 1);
-        $secondValue: nth($size_in_px, 2);
+        $firstValue: nth($size-in-px, 1);
+        $secondValue: nth($size-in-px, 2);
 
         @if $firstValue == $secondValue {
 
-          @include _spacing-left($firstValue, $space_type);
-          @include _spacing-right($secondValue, $space_type);
+          @include _spacing-left($firstValue, $space-type);
+          @include _spacing-right($secondValue, $space-type);
 
         } @else {
 
           @include _when-left-to-right {
-            @include _spacing-left($firstValue, $space_type);
-            @include _spacing-right($secondValue, $space_type);
+            @include _spacing-left($firstValue, $space-type);
+            @include _spacing-right($secondValue, $space-type);
           }
 
           @include _when-right-to-left {
-            @include _spacing-right($firstValue, $space_type);
-            @include _spacing-left($secondValue, $space_type);
+            @include _spacing-right($firstValue, $space-type);
+            @include _spacing-left($secondValue, $space-type);
           }
 
         }
@@ -106,102 +106,102 @@
         }
 
         @if $firstValue == $secondValue {
-          #{$space_type}-inline: $derivedFirstValue;
+          #{$space-type}-inline: $derivedFirstValue;
         } @else {
           html[dir] & {
-            #{$space_type}-inline: $derivedFirstValue $derivedSecondValue;
+            #{$space-type}-inline: $derivedFirstValue $derivedSecondValue;
           }
         }
 
       } @else {
 
-        @include _spacing-left($size_in_px, $space_type);
-        @include _spacing-right($size_in_px, $space_type);
-        #{$space_type}-inline: #{get-rem-from-px($size_in_px)}rem;
+        @include _spacing-left($size-in-px, $space-type);
+        @include _spacing-right($size-in-px, $space-type);
+        #{$space-type}-inline: #{get-rem-from-px($size-in-px)}rem;
 
       }
     }
 
     @if $dimension == "inline-start" {
-      @if $size_in_px == 0 {
+      @if $size-in-px == 0 {
         @include _when-left-to-right {
-          #{$space_type}-left: 0;
+          #{$space-type}-left: 0;
         }
         @include _when-right-to-left {
-          #{$space_type}-right: 0;
+          #{$space-type}-right: 0;
         }
         html[dir] & {
-          #{$space_type}-inline-start: 0;
+          #{$space-type}-inline-start: 0;
         }
       } @else {
         @include _when-left-to-right {
-          @include _spacing-left(nth($size_in_px, 1), $space_type);
+          @include _spacing-left(nth($size-in-px, 1), $space-type);
         }
         @include _when-right-to-left {
-          @include _spacing-right(nth($size_in_px, 1), $space_type);
+          @include _spacing-right(nth($size-in-px, 1), $space-type);
         }
         html[dir] & {
-          #{$space_type}-inline-start: #{get-rem-from-px(nth($size_in_px, 1))}rem;
+          #{$space-type}-inline-start: #{get-rem-from-px(nth($size-in-px, 1))}rem;
         }
       }
     }
 
     @if $dimension == "inline-end" {
-      @if $size_in_px == 0 {
+      @if $size-in-px == 0 {
         @include _when-left-to-right {
-          #{$space_type}-right: 0;
+          #{$space-type}-right: 0;
         }
         @include _when-right-to-left {
-          #{$space_type}-left: 0;
+          #{$space-type}-left: 0;
         }
         html[dir] & {
-          #{$space_type}-inline-end: 0;
+          #{$space-type}-inline-end: 0;
         }
       } @else {
         @include _when-left-to-right {
-          @include _spacing-right(nth($size_in_px, 1), $space_type);
+          @include _spacing-right(nth($size-in-px, 1), $space-type);
         }
         @include _when-right-to-left {
-          @include _spacing-left(nth($size_in_px, 1), $space_type);
+          @include _spacing-left(nth($size-in-px, 1), $space-type);
         }
         html[dir] & {
-          #{$space_type}-inline-end: #{get-rem-from-px(nth($size_in_px, 1))}rem;
+          #{$space-type}-inline-end: #{get-rem-from-px(nth($size-in-px, 1))}rem;
         }
       }
     }
 
     // Vertical writing modes not yet supported
     @if $dimension == "block" {
-      @if $size_in_px == 0 {
-        #{$space_type}-top: 0;
-        #{$space_type}-bottom: 0;
-        #{$space_type}-block: 0;
+      @if $size-in-px == 0 {
+        #{$space-type}-top: 0;
+        #{$space-type}-bottom: 0;
+        #{$space-type}-block: 0;
 
-      } @else if type_of($size_in_px) == list and length($size_in_px) >= 2 {
-        #{$space_type}-top: #{nth($size_in_px, 1)}px;
-        #{$space_type}-top: #{get-rem-from-px(nth($size_in_px, 1))}rem;
-        #{$space_type}-bottom: #{nth($size_in_px, 2)}px;
-        #{$space_type}-bottom: #{get-rem-from-px(nth($size_in_px, 2))}rem;
-        #{$space_type}-block: #{get-rem-from-px(nth($size_in_px, 1))}rem #{get-rem-from-px(nth($size_in_px, 2))}rem;;
+      } @else if type_of($size-in-px) == list and length($size-in-px) >= 2 {
+        #{$space-type}-top: #{nth($size-in-px, 1)}px;
+        #{$space-type}-top: #{get-rem-from-px(nth($size-in-px, 1))}rem;
+        #{$space-type}-bottom: #{nth($size-in-px, 2)}px;
+        #{$space-type}-bottom: #{get-rem-from-px(nth($size-in-px, 2))}rem;
+        #{$space-type}-block: #{get-rem-from-px(nth($size-in-px, 1))}rem #{get-rem-from-px(nth($size-in-px, 2))}rem;;
 
       } @else {
-        #{$space_type}-top: #{$size_in_px}px;
-        #{$space_type}-top: #{get-rem-from-px($size_in_px)}rem;
-        #{$space_type}-bottom: #{$size_in_px}px;
-        #{$space_type}-bottom: #{get-rem-from-px($size_in_px)}rem;
-        #{$space_type}-block: #{get-rem-from-px($size_in_px)}rem;
+        #{$space-type}-top: #{$size-in-px}px;
+        #{$space-type}-top: #{get-rem-from-px($size-in-px)}rem;
+        #{$space-type}-bottom: #{$size-in-px}px;
+        #{$space-type}-bottom: #{get-rem-from-px($size-in-px)}rem;
+        #{$space-type}-block: #{get-rem-from-px($size-in-px)}rem;
       }
     }
   }
 }
 
-@mixin padding($size_in_px, $dimension: "") {
-  @include _spacing($size_in_px, padding, $dimension);
+@mixin padding($size-in-px, $dimension: "") {
+  @include _spacing($size-in-px, padding, $dimension);
 
 }
 
-@mixin margin($size_in_px, $dimension: "") {
-  @include _spacing($size_in_px, margin, $dimension);
+@mixin margin($size-in-px, $dimension: "") {
+  @include _spacing($size-in-px, margin, $dimension);
 }
 
 @mixin nospace($dimension: "") {
