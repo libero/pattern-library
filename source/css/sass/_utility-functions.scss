@@ -20,6 +20,10 @@
     @return _error("More than two sizes supplied (with 'inline' dimension)", $capture-errors);
   }
 
+  @if $dimension == "inline-start" and length($sizes-in-px) > 1 {
+    @return _error("More than one size supplied (with 'inline-start' dimension)", $capture-errors);
+  }
+
   @return "OK";
 
 }
