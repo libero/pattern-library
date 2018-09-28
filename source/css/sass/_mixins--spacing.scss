@@ -296,40 +296,40 @@
 
 @mixin blg-pad-top--small-to-medium {
 
-  @include blg-spacing("top", "small");
+  @include blg-spacing("block-start", "small");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("top", "medium");
+    @include blg-spacing("block-start", "medium");
   }
 
 }
 
 @mixin blg-pad-bottom--small-to-medium {
 
-  @include blg-spacing("bottom", "small");
+  @include blg-spacing("block-end", "small");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("bottom", "medium");
+    @include blg-spacing("block-end", "medium");
   }
 
 }
 
 @mixin blg-pad-top--large-to-extra-large {
 
-  @include blg-spacing("top", "large");
+  @include blg-spacing("block-start", "large");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("top", "extra-large");
+    @include blg-spacing("block-start", "extra-large");
   }
 
 }
 
 @mixin blg-pad-bottom--large-to-extra-large {
 
-  @include blg-spacing("bottom", "large");
+  @include blg-spacing("block-end", "large");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("bottom", "extra-large");
+    @include blg-spacing("block-end", "extra-large");
   }
 
 }
@@ -346,20 +346,20 @@
 
 @mixin blg-margin-bottom--medium-to-large {
 
-  @include blg-spacing("bottom", "medium", "margin");
+  @include blg-spacing("block-end", "medium", "margin");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("bottom", "large", "margin");
+    @include blg-spacing("block-end", "large", "margin");
   }
 
 }
 
 @mixin blg-margin-bottom--small-to-medium {
 
-  @include blg-spacing("bottom", "small", "margin");
+  @include blg-spacing("block-end", "small", "margin");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("bottom", "medium", "margin");
+    @include blg-spacing("block-end", "medium", "margin");
   }
 
 }
@@ -380,20 +380,20 @@
 
 @mixin h3-spacing() {
   margin: 0;
-  @include blg-spacing("top", "extra-small");
-  @include blg-spacing("bottom", "extra-small");
+  @include blg-spacing("block-start", "extra-small");
+  @include blg-spacing("block-end", "extra-small");
 }
 
 @mixin h4-spacing() {
   margin: 0;
-  @include blg-spacing("top", "extra-small");
-  @include blg-spacing("bottom", "extra-small");
+  @include blg-spacing("block-start", "extra-small");
+  @include blg-spacing("block-end", "extra-small");
 }
 
 @mixin h5-spacing() {
   margin: 0;
-  @include blg-spacing("top", "extra-small");
-  @include blg-spacing("bottom", "extra-small");
+  @include blg-spacing("block-start", "extra-small");
+  @include blg-spacing("block-end", "extra-small");
 }
 
 @mixin h6-spacing() {
@@ -404,9 +404,9 @@
 
 @mixin body-spacing() {
   margin: 0;
-  @include blg-spacing("bottom", "small", "margin");
+  @include blg-spacing("block-end", "small", "margin");
 }
 
 @mixin small-spacing() {
-  @include blg-spacing("bottom", "small");
+  @include blg-spacing("block-end", "small");
 }
