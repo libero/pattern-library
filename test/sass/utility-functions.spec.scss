@@ -23,31 +23,52 @@
 
 @include test-module("validate-spacing-arguments [Function]") {
 
+  @include test("errors when the space-type is neither margin nor padding") {
+    @include assert-equal(
+            validate-spacing-arguments((1), "not-margin-nor-padding", "", $_is_test-environment),
+            "ERROR: Incorrect space-type supplied (must be either 'margin' or 'padding'"
+    );
+  }
+
+  @include test("does not error when the space-type is padding") {
+    @include assert-equal(
+            validate-spacing-arguments((1), "padding", "", $_is_test-environment),
+            "OK"
+    );
+  }
+
+  @include test("does not error when the space-type is margin") {
+    @include assert-equal(
+            validate-spacing-arguments((1), "margin", "", $_is_test-environment),
+            "OK"
+    );
+  }
+
   @include test("errors when 5 sizes values passed and no dimension") {
     @include assert-equal(
-            validate-spacing-arguments((1 2 3 4 5), "", $_is_test-environment),
+            validate-spacing-arguments((1 2 3 4 5), "margin", "", $_is_test-environment),
             "ERROR: More than four sizes supplied (with no dimension)"
     );
   }
 
   @include test("does not error when < 5 sizes values passed and no dimension") {
     @include assert-equal(
-            validate-spacing-arguments((1 2 3 4), "", $_is_test-environment),
+            validate-spacing-arguments((1 2 3 4), "margin", "", $_is_test-environment),
             "OK"
     );
 
     @include assert-equal(
-            validate-spacing-arguments((1 2 3), "", $_is_test-environment),
+            validate-spacing-arguments((1 2 3), "margin", "", $_is_test-environment),
             "OK"
     );
 
     @include assert-equal(
-            validate-spacing-arguments((1 2), "", $_is_test-environment),
+            validate-spacing-arguments((1 2), "margin", "", $_is_test-environment),
             "OK"
     );
 
     @include assert-equal(
-            validate-spacing-arguments((1), "", $_is_test-environment),
+            validate-spacing-arguments((1), "margin", "", $_is_test-environment),
             "OK"
     );
 
@@ -55,66 +76,66 @@
 
   @include test("errors when 3 sizes values passed with dimension 'inline'") {
     @include assert-equal(
-            validate-spacing-arguments((1 2 3), "inline", $_is_test-environment),
+            validate-spacing-arguments((1 2 3), "margin", "inline", $_is_test-environment),
             "ERROR: More than two sizes supplied (with 'inline' dimension)"
     );
   }
 
   @include test("does not error when < 3 sizes values passed with dimension 'inline'") {
     @include assert-equal(
-            validate-spacing-arguments((1 2), "inline", $_is_test-environment),
+            validate-spacing-arguments((1 2), "margin", "inline", $_is_test-environment),
             "OK"
     );
 
     @include assert-equal(
-            validate-spacing-arguments((1), "inline", $_is_test-environment),
+            validate-spacing-arguments((1), "margin", "inline", $_is_test-environment),
             "OK"
     );
   }
 
   @include test("errors when 2 sizes values passed with dimension 'inline-start'") {
     @include assert-equal(
-            validate-spacing-arguments((1 2), "inline-start", $_is_test-environment),
+            validate-spacing-arguments((1 2), "margin", "inline-start", $_is_test-environment),
             "ERROR: More than one size supplied (with 'inline-start' dimension)"
     );
   }
 
   @include test("does not error when 1 size value passed with dimension 'inline-start'") {
     @include assert-equal(
-            validate-spacing-arguments((1), "inline-start", $_is_test-environment),
+            validate-spacing-arguments((1), "margin", "inline-start", $_is_test-environment),
             "OK"
     );
   }
 
   @include test("errors when 2 sizes values passed with dimension 'inline-end'") {
     @include assert-equal(
-            validate-spacing-arguments((1 2), "inline-end", $_is_test-environment),
+            validate-spacing-arguments((1 2), "margin", "inline-end", $_is_test-environment),
             "ERROR: More than one size supplied (with 'inline-end' dimension)"
     );
   }
 
   @include test("does not error when 1 size value passed with dimension 'inline-end'") {
     @include assert-equal(
-            validate-spacing-arguments((1), "inline-start", $_is_test-environment),
+            validate-spacing-arguments((1), "margin", "inline-start", $_is_test-environment),
             "OK"
     );
   }
 
   @include test("errors when 3 sizes values passed with dimension 'block'") {
     @include assert-equal(
-            validate-spacing-arguments((1 2 3), "block", $_is_test-environment),
+            validate-spacing-arguments((1 2 3), "margin", "block", $_is_test-environment),
             "ERROR: More than two sizes supplied (with 'block' dimension)"
     );
   }
 
   @include test("does not errors when < 3 sizes values passed with dimension 'inline'") {
     @include assert-equal(
-            validate-spacing-arguments((1 2), "block", $_is_test-environment),
+            validate-spacing-arguments((1 2), "margin", "block", $_is_test-environment),
             "OK"
     );
 
     @include assert-equal(
-            validate-spacing-arguments((1), "block", $_is_test-environment),
+            validate-spacing-arguments((1), "margin", "block", $_is_test-environment),
             "OK"
     );
 

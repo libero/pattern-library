@@ -75,144 +75,141 @@
 //
 //</div>
 @mixin _spacing($sizes-in-px, $space-type, $dimension: "") {
-  @if $space-type != padding and $space-type != margin {
-    @error "_spacing mixin $space-type argument must be exactly one of 'padding' or 'margin'";
-  } @else {
 
-    $validation-status: validate-spacing-arguments($sizes-in-px, $dimension);
+  // $validation-status is throw away, it's only used to enable validate-spacing-arguments() function to be invoked
+  $validation-status: validate-spacing-arguments($sizes-in-px, $space-type, $dimension);
 
-    @if $dimension == "" {
-      @include _construct-dimensionless-space($sizes-in-px, $space-type);
-    }
+  @if $dimension == "" {
+    @include _construct-dimensionless-space($sizes-in-px, $space-type);
+  }
 
-    @if $dimension == "inline" {
-      @if $sizes-in-px == 0 {
-        #{$space-type}-left: 0;
-        #{$space-type}-right: 0;
-        #{$space-type}-inline: 0;
+  @if $dimension == "inline" {
+    @if $sizes-in-px == 0 {
+      #{$space-type}-left: 0;
+      #{$space-type}-right: 0;
+      #{$space-type}-inline: 0;
 
-      } @else if length($sizes-in-px) == 1 {
+    } @else if length($sizes-in-px) == 1 {
 
-        @include _spacing-left($sizes-in-px, $space-type);
-        @include _spacing-right($sizes-in-px, $space-type);
-        #{$space-type}-inline: #{get-rem-from-px($sizes-in-px)}rem;
+      @include _spacing-left($sizes-in-px, $space-type);
+      @include _spacing-right($sizes-in-px, $space-type);
+      #{$space-type}-inline: #{get-rem-from-px($sizes-in-px)}rem;
+
+    } @else {
+
+      $firstValue: nth($sizes-in-px, 1);
+      $secondValue: nth($sizes-in-px, 2);
+
+      @if $firstValue == $secondValue {
+
+        @include _spacing-left($firstValue, $space-type);
+        @include _spacing-right($secondValue, $space-type);
 
       } @else {
 
-        $firstValue: nth($sizes-in-px, 1);
-        $secondValue: nth($sizes-in-px, 2);
-
-        @if $firstValue == $secondValue {
-
+        @include _when-left-to-right {
           @include _spacing-left($firstValue, $space-type);
           @include _spacing-right($secondValue, $space-type);
-
-        } @else {
-
-          @include _when-left-to-right {
-            @include _spacing-left($firstValue, $space-type);
-            @include _spacing-right($secondValue, $space-type);
-          }
-
-          @include _when-right-to-left {
-            @include _spacing-right($firstValue, $space-type);
-            @include _spacing-left($secondValue, $space-type);
-          }
-
         }
 
-        $derivedFirstValue: 0;
-        $derivedSecondValue: 0;
-        @if $firstValue != 0 {
-          $derivedFirstValue: #{get-rem-from-px($firstValue)}rem;
-        }
-        @if $secondValue != 0 {
-          $derivedSecondValue: #{get-rem-from-px($secondValue)}rem;
+        @include _when-right-to-left {
+          @include _spacing-right($firstValue, $space-type);
+          @include _spacing-left($secondValue, $space-type);
         }
 
-        @if $firstValue == $secondValue {
-          #{$space-type}-inline: $derivedFirstValue;
-        } @else {
-          html[dir] & {
-            #{$space-type}-inline: $derivedFirstValue $derivedSecondValue;
-          }
-        }
+      }
 
+      $derivedFirstValue: 0;
+      $derivedSecondValue: 0;
+      @if $firstValue != 0 {
+        $derivedFirstValue: #{get-rem-from-px($firstValue)}rem;
+      }
+      @if $secondValue != 0 {
+        $derivedSecondValue: #{get-rem-from-px($secondValue)}rem;
+      }
+
+      @if $firstValue == $secondValue {
+        #{$space-type}-inline: $derivedFirstValue;
+      } @else {
+        html[dir] & {
+          #{$space-type}-inline: $derivedFirstValue $derivedSecondValue;
+        }
+      }
+
+    }
+  }
+
+  @if $dimension == "inline-start" {
+
+    @if $sizes-in-px == 0 {
+      @include _when-left-to-right {
+        #{$space-type}-left: 0;
+      }
+      @include _when-right-to-left {
+        #{$space-type}-right: 0;
+      }
+      html[dir] & {
+        #{$space-type}-inline-start: 0;
+      }
+    } @else {
+      @include _when-left-to-right {
+        @include _spacing-left(nth($sizes-in-px, 1), $space-type);
+      }
+      @include _when-right-to-left {
+        @include _spacing-right(nth($sizes-in-px, 1), $space-type);
+      }
+      html[dir] & {
+        #{$space-type}-inline-start: #{get-rem-from-px(nth($sizes-in-px, 1))}rem;
       }
     }
+  }
 
-    @if $dimension == "inline-start" {
+  @if $dimension == "inline-end" {
 
-      @if $sizes-in-px == 0 {
-        @include _when-left-to-right {
-          #{$space-type}-left: 0;
-        }
-        @include _when-right-to-left {
-          #{$space-type}-right: 0;
-        }
-        html[dir] & {
-          #{$space-type}-inline-start: 0;
-        }
-      } @else {
-        @include _when-left-to-right {
-          @include _spacing-left(nth($sizes-in-px, 1), $space-type);
-        }
-        @include _when-right-to-left {
-          @include _spacing-right(nth($sizes-in-px, 1), $space-type);
-        }
-        html[dir] & {
-          #{$space-type}-inline-start: #{get-rem-from-px(nth($sizes-in-px, 1))}rem;
-        }
+    @if $sizes-in-px == 0 {
+      @include _when-left-to-right {
+        #{$space-type}-right: 0;
+      }
+      @include _when-right-to-left {
+        #{$space-type}-left: 0;
+      }
+      html[dir] & {
+        #{$space-type}-inline-end: 0;
+      }
+    } @else {
+      @include _when-left-to-right {
+        @include _spacing-right(nth($sizes-in-px, 1), $space-type);
+      }
+      @include _when-right-to-left {
+        @include _spacing-left(nth($sizes-in-px, 1), $space-type);
+      }
+      html[dir] & {
+        #{$space-type}-inline-end: #{get-rem-from-px(nth($sizes-in-px, 1))}rem;
       }
     }
+  }
 
-    @if $dimension == "inline-end" {
+  // Vertical writing modes not yet supported
+  @if $dimension == "block" {
 
-      @if $sizes-in-px == 0 {
-        @include _when-left-to-right {
-          #{$space-type}-right: 0;
-        }
-        @include _when-right-to-left {
-          #{$space-type}-left: 0;
-        }
-        html[dir] & {
-          #{$space-type}-inline-end: 0;
-        }
-      } @else {
-        @include _when-left-to-right {
-          @include _spacing-right(nth($sizes-in-px, 1), $space-type);
-        }
-        @include _when-right-to-left {
-          @include _spacing-left(nth($sizes-in-px, 1), $space-type);
-        }
-        html[dir] & {
-          #{$space-type}-inline-end: #{get-rem-from-px(nth($sizes-in-px, 1))}rem;
-        }
-      }
-    }
+    @if $sizes-in-px == 0 {
+      #{$space-type}-top: 0;
+      #{$space-type}-bottom: 0;
+      #{$space-type}-block: 0;
 
-    // Vertical writing modes not yet supported
-    @if $dimension == "block" {
+    } @else if type_of($sizes-in-px) == list and length($sizes-in-px) >= 2 {
+      #{$space-type}-top: #{nth($sizes-in-px, 1)}px;
+      #{$space-type}-top: #{get-rem-from-px(nth($sizes-in-px, 1))}rem;
+      #{$space-type}-bottom: #{nth($sizes-in-px, 2)}px;
+      #{$space-type}-bottom: #{get-rem-from-px(nth($sizes-in-px, 2))}rem;
+      #{$space-type}-block: #{get-rem-from-px(nth($sizes-in-px, 1))}rem #{get-rem-from-px(nth($sizes-in-px, 2))}rem;;
 
-      @if $sizes-in-px == 0 {
-        #{$space-type}-top: 0;
-        #{$space-type}-bottom: 0;
-        #{$space-type}-block: 0;
-
-      } @else if type_of($sizes-in-px) == list and length($sizes-in-px) >= 2 {
-        #{$space-type}-top: #{nth($sizes-in-px, 1)}px;
-        #{$space-type}-top: #{get-rem-from-px(nth($sizes-in-px, 1))}rem;
-        #{$space-type}-bottom: #{nth($sizes-in-px, 2)}px;
-        #{$space-type}-bottom: #{get-rem-from-px(nth($sizes-in-px, 2))}rem;
-        #{$space-type}-block: #{get-rem-from-px(nth($sizes-in-px, 1))}rem #{get-rem-from-px(nth($sizes-in-px, 2))}rem;;
-
-      } @else {
-        #{$space-type}-top: #{$sizes-in-px}px;
-        #{$space-type}-top: #{get-rem-from-px($sizes-in-px)}rem;
-        #{$space-type}-bottom: #{$sizes-in-px}px;
-        #{$space-type}-bottom: #{get-rem-from-px($sizes-in-px)}rem;
-        #{$space-type}-block: #{get-rem-from-px($sizes-in-px)}rem;
-      }
+    } @else {
+      #{$space-type}-top: #{$sizes-in-px}px;
+      #{$space-type}-top: #{get-rem-from-px($sizes-in-px)}rem;
+      #{$space-type}-bottom: #{$sizes-in-px}px;
+      #{$space-type}-bottom: #{get-rem-from-px($sizes-in-px)}rem;
+      #{$space-type}-block: #{get-rem-from-px($sizes-in-px)}rem;
     }
   }
 }

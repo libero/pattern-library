@@ -10,7 +10,11 @@
   @error "#{$message}";
 }
 
-@function validate-spacing-arguments($sizes-in-px, $dimension: "", $capture-errors: false) {
+@function validate-spacing-arguments($sizes-in-px, $space-type, $dimension: "", $capture-errors: false) {
+
+  @if $space-type != "padding" and $space-type != "margin" {
+    @return _error("Incorrect space-type supplied (must be either 'margin' or 'padding'", $capture-errors);
+  }
 
   @if $dimension == "" and length($sizes-in-px) > 4 {
     @return _error("More than four sizes supplied (with no dimension)", $capture-errors);
