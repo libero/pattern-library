@@ -36,6 +36,8 @@
 }
 
 @mixin _construct-dimensionless-space($sizes-in-px, $space-type) {
+  $validation-status: validate-spacing-arguments($sizes-in-px);
+
   $parts-px: ();
   $parts-rem: ();
   @each $size in $sizes-in-px {

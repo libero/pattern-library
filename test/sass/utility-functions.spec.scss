@@ -1,6 +1,8 @@
 @import "../../node_modules/sass-true/sass/true";
 @import "../../source/css/sass/_utility-functions.scss";
 
+@import "variables_test";
+
 @include test-module("the function get-rem-from-px [Function]") {
 
   @include test("returns 2 when supplied with 32") {
@@ -15,6 +17,41 @@
             get-rem-from-px(40),
             2.5
     );
+  }
+
+}
+
+@include test-module("validate-spacing-arguments [Function]") {
+
+  @include test("errors when 5 sizes values passed and no dimension") {
+    @include assert-equal(
+            validate-spacing-arguments((1 2 3 4 5), "", $_is_test-environment),
+            "ERROR: More than four sizes supplied (with no dimension)"
+    );
+  }
+
+  @include test("does not error when < 5 sizes values passed and no dimension") {
+    @include assert-equal(
+            validate-spacing-arguments((1 2 3 4), "", $_is_test-environment),
+            "OK"
+    );
+
+    @include assert-equal(
+            validate-spacing-arguments((1 2 3), "", $_is_test-environment),
+            "OK"
+    );
+
+    @include assert-equal(
+            validate-spacing-arguments((1 2), "", $_is_test-environment),
+            "OK"
+    );
+
+    @include assert-equal(
+            validate-spacing-arguments((1), "", $_is_test-environment),
+            "OK"
+    );
+
+
   }
 
 }

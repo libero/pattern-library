@@ -2,7 +2,24 @@
 
 @import "variables--typography";
 
+@function _error($message, $capture: false) {
+  @if $capture {
+    @return "ERROR: #{$message}";
+  }
+
+  @error "#{$message}";
+}
+
+@function validate-spacing-arguments($sizes-in-px, $dimension: "", $capture-errors: false) {
+
+  @if $dimension == "" and  length($sizes-in-px) > 4 {
+    @return _error("More than four sizes supplied (with no dimension)", $capture-errors);
+  }
+
+  @return "OK";
+
+}
+
 @function get-rem-from-px($size_in_px) {
   @return $size_in_px/$libero-font-size-base-in-px;
 }
-
