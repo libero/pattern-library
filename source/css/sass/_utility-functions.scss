@@ -28,6 +28,10 @@
     @return _error("More than one size supplied (with 'inline-end' dimension)", $capture-errors);
   }
 
+  @if $dimension == "block" and length($sizes-in-px) > 2 {
+    @return _error("More than two sizes supplied (with 'block' dimension)", $capture-errors);
+  }
+
   @return "OK";
 
 }

@@ -74,4 +74,11 @@
     );
   }
 
+  @include test("errors when 3 sizes values passed with dimension 'block'") {
+    @include assert-equal(
+            validate-spacing-arguments((1 2 3), "block", $_is_test-environment),
+            "ERROR: More than two sizes supplied (with 'block' dimension)"
+    );
+  }
+
 }
