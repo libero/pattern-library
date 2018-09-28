@@ -17,7 +17,7 @@
   }
 
   @if $dimension == "inline" and length($sizes-in-px) > 2 {
-    @return _error("More than three sizes supplied (with 'inline' dimension)", $capture-errors);
+    @return _error("More than two sizes supplied (with 'inline' dimension)", $capture-errors);
   }
 
   @return "OK";
