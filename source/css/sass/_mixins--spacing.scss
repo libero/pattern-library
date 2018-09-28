@@ -86,9 +86,7 @@
     }
 
     @if $dimension == "inline" {
-      @if length($sizes-in-px) > 2 {
-        @error "More than two lengths supplied as $sizes-in-px argument to _spacing mixin with dimension 'inline'";
-      }
+      $validation-status: validate-spacing-arguments($sizes-in-px, "inline");
       @if $sizes-in-px == 0 {
         #{$space-type}-left: 0;
         #{$space-type}-right: 0;

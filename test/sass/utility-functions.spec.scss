@@ -51,7 +51,14 @@
             "OK"
     );
 
-
   }
+
+  @include test("errors when 3 sizes values passed with dimension 'inline'") {
+    @include assert-equal(
+            validate-spacing-arguments((1 2 3), "inline", $_is_test-environment),
+            "ERROR: More than three sizes supplied (with 'inline' dimension)"
+    );
+  }
+
 
 }

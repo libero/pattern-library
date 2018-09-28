@@ -12,8 +12,12 @@
 
 @function validate-spacing-arguments($sizes-in-px, $dimension: "", $capture-errors: false) {
 
-  @if $dimension == "" and  length($sizes-in-px) > 4 {
+  @if $dimension == "" and length($sizes-in-px) > 4 {
     @return _error("More than four sizes supplied (with no dimension)", $capture-errors);
+  }
+
+  @if $dimension == "inline" and length($sizes-in-px) > 2 {
+    @return _error("More than three sizes supplied (with 'inline' dimension)", $capture-errors);
   }
 
   @return "OK";
