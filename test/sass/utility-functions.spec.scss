@@ -141,6 +141,18 @@
 
   }
 
+  @include test("errors when 2 sizes values passed with dimension 'block-start'") {
+    @include assert-equal(
+            validate-spacing-arguments((1 2), "margin", "block-start", $_is_test-environment),
+            "ERROR: More than one size supplied (with 'block-start' dimension)"
+    );
+  }
 
+  @include test("does not error when 1 size value passed with dimension 'block-start'") {
+    @include assert-equal(
+            validate-spacing-arguments((1), "margin", "block-start", $_is_test-environment),
+            "OK"
+    );
+  }
 
 }

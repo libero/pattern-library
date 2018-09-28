@@ -36,6 +36,10 @@
     @return _error("More than two sizes supplied (with 'block' dimension)", $capture-errors);
   }
 
+  @if $dimension == "block-start" and length($sizes-in-px) > 1 {
+    @return _error("More than one size supplied (with 'block-start' dimension)", $capture-errors);
+  }
+
   @return "OK";
 
 }
