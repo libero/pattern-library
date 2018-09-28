@@ -155,4 +155,18 @@
     );
   }
 
+  @include test("errors when 2 sizes values passed with dimension 'block-end'") {
+    @include assert-equal(
+            validate-spacing-arguments((1 2), "margin", "block-end", $_is_test-environment),
+            "ERROR: More than one size supplied (with 'block-end' dimension)"
+    );
+  }
+
+  @include test("does not error when 1 size value passed with dimension 'block-end'") {
+    @include assert-equal(
+            validate-spacing-arguments((1), "margin", "block-end", $_is_test-environment),
+            "OK"
+    );
+  }
+
 }

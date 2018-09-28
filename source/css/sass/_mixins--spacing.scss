@@ -223,6 +223,17 @@
       #{$space-type}-block-start: #{get-rem-from-px($sizes-in-px)}rem;
     }
   }
+
+  @if $dimension == "block-end" {
+    @if $sizes-in-px == 0 {
+      #{$space-type}-bottom: #{$sizes-in-px};
+      #{$space-type}-block-end: #{$sizes-in-px};
+    } @else {
+      #{$space-type}-bottom: #{$sizes-in-px}px;
+      #{$space-type}-bottom: #{get-rem-from-px($sizes-in-px)}rem;
+      #{$space-type}-block-end: #{get-rem-from-px($sizes-in-px)}rem;
+    }
+  }
 }
 
 @mixin padding($sizes-in-px, $dimension: "") {
