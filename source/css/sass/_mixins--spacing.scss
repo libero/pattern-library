@@ -36,8 +36,6 @@
 }
 
 @mixin _construct-dimensionless-space($sizes-in-px, $space-type) {
-  $validation-status: validate-spacing-arguments($sizes-in-px);
-
   $parts-px: ();
   $parts-rem: ();
   @each $size in $sizes-in-px {
@@ -81,12 +79,13 @@
     @error "_spacing mixin $space-type argument must be exactly one of 'padding' or 'margin'";
   } @else {
 
+    $validation-status: validate-spacing-arguments($sizes-in-px, $dimension);
+
     @if $dimension == "" {
       @include _construct-dimensionless-space($sizes-in-px, $space-type);
     }
 
     @if $dimension == "inline" {
-      $validation-status: validate-spacing-arguments($sizes-in-px, "inline");
       @if $sizes-in-px == 0 {
         #{$space-type}-left: 0;
         #{$space-type}-right: 0;
