@@ -82,9 +82,6 @@
   } @else {
 
     @if $dimension == "" {
-      @if length($sizes-in-px) > 4 {
-        @error "More than four lengths supplied as $sizes-in-px argument to _spacing mixin";
-      }
       @include _construct-dimensionless-space($sizes-in-px, $space-type);
     }
 
