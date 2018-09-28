@@ -67,5 +67,11 @@
     );
   }
 
+  @include test("errors when 2 sizes values passed with dimension 'inline-end'") {
+    @include assert-equal(
+            validate-spacing-arguments((1 2), "inline-end", $_is_test-environment),
+            "ERROR: More than one size supplied (with 'inline-end' dimension)"
+    );
+  }
 
 }
