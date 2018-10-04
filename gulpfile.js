@@ -4,6 +4,7 @@ const del = require('del');
 const flatten = require('gulp-flatten');
 const gulp = require('gulp');
 const minimist = require('minimist');
+const mocha = require('gulp-mocha');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const reporter = require('postcss-reporter');
@@ -13,7 +14,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const stylelint = require('stylelint');
 const syntaxScss = require('postcss-scss');
 
-function buildConfig(invocationArgs, sourceRoot, exportRoot) {
+function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
 
   const invocationOptions = minimist(
     invocationArgs, {
@@ -30,10 +31,12 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
   config.environment = invocationOptions.environment;
   config.sassLinting = invocationOptions['sass-lint'] !== 'false';
   config.sourceRoot = sourceRoot;
+  config.testRoot = testRoot;
   config.exportRoot = exportRoot;
 
   config.dir = {
     src: {},
+    test: {},
     out: {}
   };
   config.dir.src.css = `${config.sourceRoot}css/`;
@@ -41,6 +44,8 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
   config.dir.src.images = `${config.sourceRoot}images/`;
   config.dir.src.fonts = `${config.sourceRoot}fonts/`;
   config.dir.src.templates = `${config.sourceRoot}_patterns/`;
+
+  config.dir.test.sass = `${config.testRoot}sass/`;
 
   config.dir.out.css = `${config.exportRoot}css/`;
   config.dir.out.sass = `${config.dir.out.css}sass/`;
@@ -50,6 +55,7 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
 
   config.files = {
     src: {},
+    test: {},
     out: {}
   };
   config.files.src.css = [
@@ -63,15 +69,18 @@ function buildConfig(invocationArgs, sourceRoot, exportRoot) {
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
   config.files.src.templates = [`${config.dir.src.templates}/*.twig`, `${config.dir.src.templates}/**/*.twig`];
 
+  config.files.test.sass = `${config.dir.test.sass}**/*.spec.scss`;
+  config.files.test.sassTestsEntryPoint = `${config.dir.test.sass}test_sass.js`;
+
   config.files.out.cssFilename = invocationOptions.cssOutFilename;
 
   return config;
 
 }
 
-const config = buildConfig(process.argv, 'source/', 'export/');
+const config = buildConfig(process.argv, 'source/', 'test/', 'export/');
 
-gulp.task('css:generate', ['sass:lint'], () => {
+gulp.task('css:generate', ['sass:test'], () => {
   const sassOptions = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
   return gulp.src(config.files.src.sassEntryPoint)
              .pipe(sourcemaps.init())
@@ -102,6 +111,11 @@ gulp.task('sass:lint', ['css:clean'], () => {
              .pipe(postcss(processors, {syntax: syntaxScss}));
 });
 
+gulp.task('sass:test', ['sass:lint'], () => {
+  return gulp.src(config.files.test.sassTestsEntryPoint)
+             .pipe(mocha({ reporter: 'spec' }));
+});
+
 gulp.task('css:clean', () => {
   del(config.files.src.css);
 });
@@ -112,7 +126,7 @@ gulp.task('patternsExport:clean', () => {
   del([`${config.exportRoot}**/*`]);
 });
 
-gulp.task('exportPatterns', ['build', 'patternsExport:clean'], () => {
+gulp.task('exportPatterns', ['patternsExport:clean'], () => {
 
   gulp.src(config.files.src.css)
       .pipe(gulp.dest(config.dir.out.css));
@@ -133,4 +147,8 @@ gulp.task('exportPatterns', ['build', 'patternsExport:clean'], () => {
 
 });
 
-gulp.task('default', ['exportPatterns']);
+gulp.task('sass:watch', ['css:generate'], () => {
+  gulp.watch([config.files.src.sass, config.files.test.sass], ['css:generate']);
+});
+
+gulp.task('default', ['build', 'exportPatterns']);

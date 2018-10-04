@@ -1,101 +1,266 @@
 @import "utility-functions";
-@import "variables--baseline-grid";
-@import "variables--breakpoints";
+@import "variables";
 
-@mixin padding($size_in_px, $dimension: "") {
-  @if $dimension == top or $dimension == right or $dimension == bottom or $dimension == left {
-    @if $size_in_px == 0 {
-      padding-#{$dimension}: 0;
+// NOTE: mixins beginning with underscore "_" are internal to this file only: they MUST NOT be used externally.
+
+@mixin _spacing-left($size-in-px, $space-type) {
+  @if $size-in-px == 0 {
+    #{$space-type}-left: 0;
+  } @else {
+    #{$space-type}-left: #{$size-in-px}px;
+    #{$space-type}-left: #{get-rem-from-px($size-in-px)}rem;
+  }
+}
+
+@mixin _spacing-right($size-in-px, $space-type) {
+  @if $size-in-px == 0 {
+    #{$space-type}-right: 0;
+  } @else {
+    #{$space-type}-right: #{$size-in-px}px;
+    #{$space-type}-right: #{get-rem-from-px($size-in-px)}rem;
+  }
+}
+
+@mixin _when-left-to-right {
+  html[dir="ltr"] &:not([dir]),
+  &[dir="ltr"] {
+    @content;
+  }
+}
+
+@mixin _when-right-to-left {
+  html[dir="rtl"] &:not([dir]),
+  &[dir="rtl"] {
+    @content;
+  }
+}
+
+@mixin _construct-dimensionless-space($sizes-in-px, $space-type) {
+  $parts-px: ();
+  $parts-rem: ();
+  @each $size in $sizes-in-px {
+    @if $size == 0 {
+      $parts-px: append($parts-px, #{$size}, "space");
+      $parts-rem: append($parts-rem, #{$size}, "space");
     } @else {
-      padding-#{$dimension}: #{$size_in_px}px;
-      padding-#{$dimension}: #{get-rem-from-px($size_in_px)}rem;
+      $parts-px: append($parts-px, #{$size}px, "space");
+      $parts-rem: append($parts-rem, #{get-rem-from-px($size)}rem, "space");
     }
   }
-  @else if $dimension == "" and type_of($size_in_px) == list {
-    $parts-px: ();
-    $parts-rem: ();
-    @each $size in $size_in_px {
-      @if $size == 0 {
-        $parts-px: append($parts-px, 0, "space");
-      } @else {
-        $parts-px: append($parts-px, #{$size}px, "space");
-      }
-    }
-    @each $size in $size_in_px {
-      @if $size == 0 {
-        $parts-rem: append($parts-rem, 0, "space");
-      } @else {
-        $parts-rem: append($parts-rem, #{get-rem-from-px($size)}rem, "space");
-      }
-    }
-    padding: $parts-px;
-    padding: $parts-rem;
+
+  #{$space-type}: $parts-px;
+  @if $parts-rem != $parts-px {
+    #{$space-type}: $parts-rem;
   }
-  @else {
-    @if $size_in_px == 0 {
-      padding: 0;
+}
+
+// Fallbacks for CSS logical properties contained within this mixin require the following treatment of HTML dir attributes:
+//  - document level: always specified, via the HTML element
+//  - block level: specified on every element within a block describing a direction switch.
+//
+// For example:
+// <html lang="..." dir="ltr">
+// ...
+// <div>
+//   Doesn't need a dir attribute. Most cases will be like this.
+// </div>
+//
+//<div class="test" dir="rtl">
+//
+//  This block changes the text direction. Every descendant element must have its own dir attribute....
+//
+//  <div class="test" dir="rtl">... even if the direction doesn't change.</div>
+//
+//  <div class="test" dir="ltr">But obviously also when it does.</div>
+//
+//</div>
+@mixin _spacing($sizes-in-px, $space-type, $dimension: "") {
+
+  // $validation-status is throw away, it's only used to enable validate-spacing-arguments() function to be invoked
+  $validation-status: validate-spacing-arguments($sizes-in-px, $space-type, $dimension);
+
+  @if $dimension == "" {
+    @include _construct-dimensionless-space($sizes-in-px, $space-type);
+  }
+
+  @if $dimension == "inline" {
+    @if $sizes-in-px == 0 {
+      #{$space-type}-left: 0;
+      #{$space-type}-right: 0;
+      #{$space-type}-inline: 0;
+
+    } @else if length($sizes-in-px) == 1 {
+
+      @include _spacing-left($sizes-in-px, $space-type);
+      @include _spacing-right($sizes-in-px, $space-type);
+      #{$space-type}-inline: #{get-rem-from-px($sizes-in-px)}rem;
+
     } @else {
-      padding: #{$size_in_px}px;
-      padding: #{get-rem-from-px($size_in_px)}rem;
+
+      $firstValue: nth($sizes-in-px, 1);
+      $secondValue: nth($sizes-in-px, 2);
+
+      @if $firstValue == $secondValue {
+
+        @include _spacing-left($firstValue, $space-type);
+        @include _spacing-right($secondValue, $space-type);
+
+      } @else {
+
+        @include _when-left-to-right {
+          @include _spacing-left($firstValue, $space-type);
+          @include _spacing-right($secondValue, $space-type);
+        }
+
+        @include _when-right-to-left {
+          @include _spacing-right($firstValue, $space-type);
+          @include _spacing-left($secondValue, $space-type);
+        }
+
+      }
+
+      $derivedFirstValue: 0;
+      $derivedSecondValue: 0;
+      @if $firstValue != 0 {
+        $derivedFirstValue: #{get-rem-from-px($firstValue)}rem;
+      }
+      @if $secondValue != 0 {
+        $derivedSecondValue: #{get-rem-from-px($secondValue)}rem;
+      }
+
+      @if $firstValue == $secondValue {
+        #{$space-type}-inline: $derivedFirstValue;
+      } @else {
+        html[dir] & {
+          #{$space-type}-inline: $derivedFirstValue $derivedSecondValue;
+        }
+      }
+
+    }
+  }
+
+  @if $dimension == "inline-start" {
+
+    @if $sizes-in-px == 0 {
+      @include _when-left-to-right {
+        #{$space-type}-left: 0;
+      }
+      @include _when-right-to-left {
+        #{$space-type}-right: 0;
+      }
+      html[dir] & {
+        #{$space-type}-inline-start: 0;
+      }
+    } @else {
+      @include _when-left-to-right {
+        @include _spacing-left(nth($sizes-in-px, 1), $space-type);
+      }
+      @include _when-right-to-left {
+        @include _spacing-right(nth($sizes-in-px, 1), $space-type);
+      }
+      html[dir] & {
+        #{$space-type}-inline-start: #{get-rem-from-px(nth($sizes-in-px, 1))}rem;
+      }
+    }
+  }
+
+  @if $dimension == "inline-end" {
+
+    @if $sizes-in-px == 0 {
+      @include _when-left-to-right {
+        #{$space-type}-right: 0;
+      }
+      @include _when-right-to-left {
+        #{$space-type}-left: 0;
+      }
+      html[dir] & {
+        #{$space-type}-inline-end: 0;
+      }
+    } @else {
+      @include _when-left-to-right {
+        @include _spacing-right(nth($sizes-in-px, 1), $space-type);
+      }
+      @include _when-right-to-left {
+        @include _spacing-left(nth($sizes-in-px, 1), $space-type);
+      }
+      html[dir] & {
+        #{$space-type}-inline-end: #{get-rem-from-px(nth($sizes-in-px, 1))}rem;
+      }
+    }
+  }
+
+  // Vertical writing modes not yet supported
+  @if $dimension == "block" {
+
+    @if $sizes-in-px == 0 {
+      #{$space-type}-top: 0;
+      #{$space-type}-bottom: 0;
+      #{$space-type}-block: 0;
+
+    } @else if type_of($sizes-in-px) == list and length($sizes-in-px) >= 2 {
+      #{$space-type}-top: #{nth($sizes-in-px, 1)}px;
+      #{$space-type}-top: #{get-rem-from-px(nth($sizes-in-px, 1))}rem;
+      #{$space-type}-bottom: #{nth($sizes-in-px, 2)}px;
+      #{$space-type}-bottom: #{get-rem-from-px(nth($sizes-in-px, 2))}rem;
+      #{$space-type}-block: #{get-rem-from-px(nth($sizes-in-px, 1))}rem #{get-rem-from-px(nth($sizes-in-px, 2))}rem;;
+
+    } @else {
+      #{$space-type}-top: #{$sizes-in-px}px;
+      #{$space-type}-top: #{get-rem-from-px($sizes-in-px)}rem;
+      #{$space-type}-bottom: #{$sizes-in-px}px;
+      #{$space-type}-bottom: #{get-rem-from-px($sizes-in-px)}rem;
+      #{$space-type}-block: #{get-rem-from-px($sizes-in-px)}rem;
+    }
+  }
+
+  @if $dimension == "block-start" {
+    @if $sizes-in-px == 0 {
+      #{$space-type}-top: #{$sizes-in-px};
+      #{$space-type}-block-start: #{$sizes-in-px};
+    } @else {
+      #{$space-type}-top: #{$sizes-in-px}px;
+      #{$space-type}-top: #{get-rem-from-px($sizes-in-px)}rem;
+      #{$space-type}-block-start: #{get-rem-from-px($sizes-in-px)}rem;
+    }
+  }
+
+  @if $dimension == "block-end" {
+    @if $sizes-in-px == 0 {
+      #{$space-type}-bottom: #{$sizes-in-px};
+      #{$space-type}-block-end: #{$sizes-in-px};
+    } @else {
+      #{$space-type}-bottom: #{$sizes-in-px}px;
+      #{$space-type}-bottom: #{get-rem-from-px($sizes-in-px)}rem;
+      #{$space-type}-block-end: #{get-rem-from-px($sizes-in-px)}rem;
     }
   }
 }
 
-@mixin margin($size_in_px, $dimension: "") {
-  @if $dimension == top or $dimension == right or $dimension == bottom or $dimension == left {
-    @if $size_in_px == 0 {
-      margin-#{$dimension}: 0;
-    } @else {
-      margin-#{$dimension}: #{$size_in_px}px;
-      margin-#{$dimension}: #{get-rem-from-px($size_in_px)}rem;
-    }
-  }
-  @else if $dimension == "" and type_of($size_in_px) == list {
-    $parts-px: ();
-    $parts-rem: ();
-    @each $size in $size_in_px {
-      @if $size == 0 {
-        $parts-px: append($parts-px, 0, "space");
-      } @else {
-        $parts-px: append($parts-px, #{$size}px, "space");
-      }
-    }
-    @each $size in $size_in_px {
-      @if $size == 0 {
-        $parts-rem: append($parts-rem, 0, "space");
-      } @else {
-        $parts-rem: append($parts-rem, #{get-rem-from-px($size)}rem, "space");
-      }
-    }
-    margin: $parts-px;
-    margin: $parts-rem;
-  }
-  @else {
-    @if $size_in_px == 0 {
-      margin: 0;
-    } @else {
-      margin: #{$size_in_px}px;
-      margin: #{get-rem-from-px($size_in_px)}rem;
-    }
-  }
+@mixin padding($sizes-in-px, $dimension: "") {
+  @include _spacing($sizes-in-px, padding, $dimension);
 }
 
-@mixin nospace($dimension: "all") {
-  @if $dimension == "all" {
-    margin: 0;
-    padding: 0;
-  } @else if $dimension == "top" {
+@mixin margin($sizes-in-px, $dimension: "") {
+  @include _spacing($sizes-in-px, margin, $dimension);
+}
+
+@mixin nospace($dimension: "") {
+  $allowed-dimensions: "inline", "inline-start", "inline-end", "block", "";
+  @if index($allowed-dimensions, $dimension) != null {
+    @include margin(0, $dimension);
+    @include padding(0, $dimension);
+  } @else if $dimension == "block-start" {
+    //vertical writing modes not yet supported
     margin-top: 0;
+    margin-block-start: 0;
     padding-top: 0;
-  } @else if $dimension == "right" {
-    margin-right: 0;
-    padding-right: 0;
-  } @else if $dimension == "bottom" {
+    padding-block-start: 0;
+  } @else if $dimension == "block-end" {
+    //vertical writing modes not yet supported
     margin-bottom: 0;
+    margin-block-end: 0;
     padding-bottom: 0;
-  } @else if $dimension == "left" {
-    margin-left: 0;
-    padding-left: 0;
+    padding-block-end: 0;
   }
 }
 
@@ -131,40 +296,40 @@
 
 @mixin blg-pad-top--small-to-medium {
 
-  @include blg-spacing("top", "small");
+  @include blg-spacing("block-start", "small");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("top", "medium");
+    @include blg-spacing("block-start", "medium");
   }
 
 }
 
 @mixin blg-pad-bottom--small-to-medium {
 
-  @include blg-spacing("bottom", "small");
+  @include blg-spacing("block-end", "small");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("bottom", "medium");
+    @include blg-spacing("block-end", "medium");
   }
 
 }
 
 @mixin blg-pad-top--large-to-extra-large {
 
-  @include blg-spacing("top", "large");
+  @include blg-spacing("block-start", "large");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("top", "extra-large");
+    @include blg-spacing("block-start", "extra-large");
   }
 
 }
 
 @mixin blg-pad-bottom--large-to-extra-large {
 
-  @include blg-spacing("bottom", "large");
+  @include blg-spacing("block-end", "large");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("bottom", "extra-large");
+    @include blg-spacing("block-end", "extra-large");
   }
 
 }
@@ -181,20 +346,20 @@
 
 @mixin blg-margin-bottom--medium-to-large {
 
-  @include blg-spacing("bottom", "medium", "margin");
+  @include blg-spacing("block-end", "medium", "margin");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("bottom", "large", "margin");
+    @include blg-spacing("block-end", "large", "margin");
   }
 
 }
 
 @mixin blg-margin-bottom--small-to-medium {
 
-  @include blg-spacing("bottom", "small", "margin");
+  @include blg-spacing("block-end", "small", "margin");
 
   @media only all and (min-width: #{get-rem-from-px($bkpt-site--medium)}em) {
-    @include blg-spacing("bottom", "medium", "margin");
+    @include blg-spacing("block-end", "medium", "margin");
   }
 
 }
@@ -209,39 +374,39 @@
 
 @mixin h2-spacing() {
   margin: 0;
-  @include padding(21, "bottom");
-  @include padding(21, "top");
+  @include padding(21, "block-end");
+  @include padding(21, "block-start");
 }
 
 @mixin h3-spacing() {
   margin: 0;
-  @include blg-spacing("top", "extra-small");
-  @include blg-spacing("bottom", "extra-small");
+  @include blg-spacing("block-start", "extra-small");
+  @include blg-spacing("block-end", "extra-small");
 }
 
 @mixin h4-spacing() {
   margin: 0;
-  @include blg-spacing("top", "extra-small");
-  @include blg-spacing("bottom", "extra-small");
+  @include blg-spacing("block-start", "extra-small");
+  @include blg-spacing("block-end", "extra-small");
 }
 
 @mixin h5-spacing() {
   margin: 0;
-  @include blg-spacing("top", "extra-small");
-  @include blg-spacing("bottom", "extra-small");
+  @include blg-spacing("block-start", "extra-small");
+  @include blg-spacing("block-end", "extra-small");
 }
 
 @mixin h6-spacing() {
   margin: 0;
-  @include padding(10, "top");
-  @include padding(14, "bottom");
+  @include padding(10, "block-start");
+  @include padding(14, "block-end");
 }
 
 @mixin body-spacing() {
   margin: 0;
-  @include blg-spacing("bottom", "small", "margin");
+  @include blg-spacing("block-end", "small", "margin");
 }
 
 @mixin small-spacing() {
-  @include blg-spacing("bottom", "small");
+  @include blg-spacing("block-end", "small");
 }
