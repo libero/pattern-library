@@ -26,7 +26,6 @@ function processBreakpointsForSass(breakpointData) {
 
 function writeSassBreakpoints(breakpointData) {
   const sassBreakpoints = processBreakpointsForSass(breakpointData);
-  console.log('processBreakpointsForSass', sassBreakpoints);
 
   fs.writeFile(path.join(__dirname, paths.out.sass), sassBreakpoints, (err) => {
     if (err) {
