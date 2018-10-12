@@ -2,6 +2,7 @@ const fs = require('fs');
 const minimist = require('minimist');
 const path = require('path');
 
+
 // Needs node 8+
 const {promisify} = require('util');
 
@@ -56,9 +57,11 @@ const paths = {
   }
 };
 
+function distribute() {
+  getConfigData(paths.sharedConfig).then((data) => {
+    const breakpointData = getBreakpoints(data);
+    writeSassBreakpoints(breakpointData);
+  });
+}
 
-getConfigData(paths.sharedConfig).then((data) => {
-  const breakpointData = getBreakpoints(data);
-  writeSassBreakpoints(breakpointData);
-});
-
+module.exports = distribute;
