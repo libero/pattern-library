@@ -21,7 +21,7 @@ function processBreakpointsForSass(breakpointData) {
   const processed = breakpointData.map((breakpoint) => {
     return `$${breakpoint.name}: ${breakpoint.threshold};`;
   });
-  return processed.join('\n');
+  return `${processed.join('\n')}\n`;
 }
 
 function writeSassBreakpoints(breakpointData) {
