@@ -1,6 +1,7 @@
 'use strict';
 
 const del = require('del');
+const {exec} = require('child_process');
 const flatten = require('gulp-flatten');
 const gulp = require('gulp');
 const minimist = require('minimist');
@@ -13,6 +14,8 @@ const sassGlob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
 const stylelint = require('stylelint');
 const syntaxScss = require('postcss-scss');
+
+const distributeSharedConfig = require('./bin/distribute-shared-config');
 
 function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
 
@@ -145,6 +148,13 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
       .pipe(flatten({ includeParents: false }))
       .pipe(gulp.dest(config.dir.out.templates));
 
+});
+
+gulp.task('incorporateSharedConfig', (cb) => {
+  exec('distribute shared config', () => {
+    distributeSharedConfig();
+  });
+  cb();
 });
 
 gulp.task('sass:watch', ['css:generate'], () => {
