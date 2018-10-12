@@ -1,12 +1,4 @@
 {
-  "breakpoints_old-style": {
-    "bkpt-site--x-small": 320,
-    "bkpt-site--small": 480,
-    "bkpt-site--medium": 730,
-    "bkpt-site--wide": 900,
-    "bkpt-site--x-wide": 1200
-  },
-
   "breakpoints": [
     {
       "name": "bkpt-site--x-narrow",
