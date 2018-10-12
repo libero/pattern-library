@@ -1,0 +1,32 @@
+{
+  "breakpoints_old-style": {
+    "bkpt-site--x-small": 320,
+    "bkpt-site--small": 480,
+    "bkpt-site--medium": 730,
+    "bkpt-site--wide": 900,
+    "bkpt-site--x-wide": 1200
+  },
+
+  "breakpoints": [
+    {
+      "name": "bkpt-site--x-narrow",
+      "threshold": 320
+    },
+    {
+      "name": "bkpt-site--narrow",
+      "threshold": 480
+    },
+    {
+      "name": "bkpt-site--medium",
+      "threshold": 730
+    },
+    {
+      "name": "bkpt-site--wide",
+      "threshold": 900
+    },
+    {
+      "name": "bkpt-site--x-wide",
+      "threshold": 1200
+    }
+  ]
+}
