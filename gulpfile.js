@@ -94,7 +94,7 @@ gulp.task('css:generate', ['sass:test'], () => {
              .pipe(gulp.dest(config.dir.src.css));
 });
 
-gulp.task('sass:lint', ['css:clean'], () => {
+gulp.task('sass:lint', ['incorporateSharedConfig'], () => {
   if (!config.sassLinting) {
     console.info("Skipping sass:lint");
     return;
@@ -150,7 +150,7 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
 
 });
 
-gulp.task('incorporateSharedConfig', (cb) => {
+gulp.task('incorporateSharedConfig', ['css:clean'], (cb) => {
   exec('distribute shared config', () => {
     distributeSharedConfig();
   });
