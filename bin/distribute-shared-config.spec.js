@@ -6,9 +6,11 @@ const expect = chai.expect;
 
 describe('distribute-shared-config', () => {
 
-  describe('processBreakpointsForSass() function', () => {
+
+  describe('processing the breakpoint data', () => {
 
     let breakpointData;
+
     beforeEach(() => {
       breakpointData = [
         {
@@ -22,10 +24,34 @@ describe('distribute-shared-config', () => {
       ]
     });
 
-    it('processes the breakpoint data as Sass variables', () => {
-      const observed = distribute.processBreakpointsForSass(breakpointData);
-      const expected = "$bkpt-site--x-narrow: 320;\n$bkpt-site--narrow: 480;\n";
-      expect(observed).to.equal(expected);
+    describe('processBreakpointsForSass() function', () => {
+
+      it('processes the breakpoint data as Sass variables', () => {
+        const observed = distribute.processBreakpointsForSass(breakpointData);
+        const expected = ""
+                         + "$bkpt-site--x-narrow: 320;\n"
+                         + "$bkpt-site--narrow: 480;"
+                         + "\n";
+        expect(observed).to.equal(expected);
+      });
+
+    });
+
+    describe('processBreakpointsForJs function', () => {
+
+      it('processes the breakpoint data as js-friendly json', () => {
+        const observed = distribute.processBreakpointsForJs(breakpointData);
+        const expected = JSON.stringify(
+          {
+            "breakpoints": {
+              "xNarrow": 320,
+              "narrow": 480
+            }
+          }
+        );
+        expect(observed).to.equal(expected);
+      });
+
     });
 
   });

@@ -24,6 +24,25 @@ function processBreakpointsForSass(breakpointData) {
   return `${processed.join('\n')}\n`;
 }
 
+function processBreakpointsForJs(breakpointData) {
+
+  const formatName = function formatName(name) {
+    return (name.replace(/^bkpt-site--/, '')).replace( /-[a-z]/g,(match) => {
+      return match.toUpperCase().substring(1);
+    } );
+  };
+
+  const wrapper = {
+    breakpoints: {}
+  };
+
+  breakpointData.forEach((breakpoint) => {
+    wrapper.breakpoints[formatName(breakpoint.name)] = breakpoint.threshold;
+  });
+
+  return JSON.stringify(wrapper);
+}
+
 function writeSassBreakpoints(breakpointData) {
   const sassBreakpoints = processBreakpointsForSass(breakpointData);
 
@@ -66,5 +85,6 @@ function distribute() {
 module.exports = {
   distribute,
   getConfigPath,
+  processBreakpointsForJs,
   processBreakpointsForSass
 };
