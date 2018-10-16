@@ -2,8 +2,6 @@ const fs = require('fs');
 const minimist = require('minimist');
 const path = require('path');
 
-
-// Needs node 8+
 const {promisify} = require('util');
 
 const readFileAsync = promisify(fs.readFile);
@@ -32,9 +30,7 @@ function processBreakpointsForJs(breakpointData) {
     } );
   };
 
-  const wrapper = {
-    breakpoints: {}
-  };
+  const wrapper = { breakpoints: {} };
 
   breakpointData.forEach((breakpoint) => {
     wrapper.breakpoints[formatName(breakpoint.name)] = breakpoint.threshold;
@@ -52,31 +48,6 @@ function writeFile(data, outPath) {
     // Normalise the reported path to be from the project root
     const outPathReported = outPath.replace(/(\.\.\/)*([^./])/, '\/$2');
     console.log(`written config to ${outPathReported}`);
-  });
-}
-
-
-function writeSassBreakpoints(breakpointData) {
-  const sassBreakpoints = processBreakpointsForSass(breakpointData);
-
-  fs.writeFile(path.join(__dirname, paths.out.sass), sassBreakpoints, (err) => {
-    if (err) {
-      throw err;
-    }
-
-    console.log(`sass breakpoints written to ${ paths.out.sass}`);
-  });
-}
-
-function writeJsBreakpoints(breakpointData) {
-  const jsBreakpoints = processBreakpointsForJs(breakpointData);
-
-  fs.writeFile(path.join(__dirname, paths.out.js), jsBreakpoints, (err) => {
-    if (err) {
-      throw err;
-    }
-
-    console.log(`js breakpoints written to ${ paths.out.js}`);
   });
 }
 
