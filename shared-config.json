@@ -1,11 +1,11 @@
 {
   "breakpoints": [
     {
-      "name": "bkpt-site--x-narrow",
+      "name": "bkpt-site--x-small",
       "threshold": 320
     },
     {
-      "name": "bkpt-site--narrow",
+      "name": "bkpt-site--small",
       "threshold": 480
     },
     {
