@@ -63,4 +63,8 @@ function distribute() {
   });
 }
 
-module.exports = distribute;
+module.exports = {
+  distribute,
+  getConfigPath,
+  processBreakpointsForSass
+};
