@@ -1,7 +1,6 @@
 const fs = require('fs');
 const minimist = require('minimist');
 const path = require('path');
-
 const {promisify} = require('util');
 
 const readFileAsync = promisify(fs.readFile);

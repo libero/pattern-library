@@ -1,11 +1,9 @@
 const chai = require('chai');
-
 const distribute = require('./distribute-shared-config');
 
 const expect = chai.expect;
 
 describe('distribute-shared-config', () => {
-
 
   describe('processing the breakpoint data', () => {
 
