@@ -72,11 +72,22 @@ const paths = {
   }
 };
 
+function distributeBreakpointsToSass(breakpointData) {
+  writeFile(processBreakpointsForSass(breakpointData), paths.out.sass);
+}
+
+function distributeBreakpointsToJs(breakpointData) {
+  writeFile(processBreakpointsForJs(breakpointData), paths.out.js);
+}
+
+function distributeBreakpoints(breakpointData) {
+  distributeBreakpointsToSass(breakpointData);
+  distributeBreakpointsToJs(breakpointData);
+}
+
 function distribute() {
   getConfigData(paths.sharedConfig).then((data) => {
-    const breakpointData = getBreakpoints(data);
-    writeFile(processBreakpointsForSass(breakpointData), paths.out.sass);
-    writeFile(processBreakpointsForJs(breakpointData), paths.out.js);
+    distributeBreakpoints(getBreakpoints(data));
   });
 }
 
