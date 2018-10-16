@@ -43,6 +43,19 @@ function processBreakpointsForJs(breakpointData) {
   return JSON.stringify(wrapper);
 }
 
+function writeFile(data, outPath) {
+  fs.writeFile(path.join(__dirname, outPath), data, (err) => {
+    if (err) {
+      throw err;
+    }
+
+    // Normalise the reported path to be from the project root
+    const outPathReported = outPath.replace(/(\.\.\/)*([^./])/, '\/$2');
+    console.log(`written config to ${outPathReported}`);
+  });
+}
+
+
 function writeSassBreakpoints(breakpointData) {
   const sassBreakpoints = processBreakpointsForSass(breakpointData);
 
@@ -91,8 +104,8 @@ const paths = {
 function distribute() {
   getConfigData(paths.sharedConfig).then((data) => {
     const breakpointData = getBreakpoints(data);
-    writeSassBreakpoints(breakpointData);
-    writeJsBreakpoints(breakpointData);
+    writeFile(processBreakpointsForSass(breakpointData), paths.out.sass);
+    writeFile(processBreakpointsForJs(breakpointData), paths.out.js);
   });
 }
 
