@@ -41,14 +41,14 @@ describe('distribute-shared-config', () => {
 
       it('processes the breakpoint data as js-friendly json', () => {
         const observed = distribute.processBreakpointsForJs(breakpointData);
-        const expected = JSON.stringify(
+        const expected = `${JSON.stringify(
           {
             "breakpoints": {
               "xNarrow": 320,
               "narrow": 480
             }
-          }
-        );
+          })
+          }\n`;
         expect(observed).to.equal(expected);
       });
 

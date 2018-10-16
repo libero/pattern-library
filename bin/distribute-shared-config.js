@@ -36,7 +36,7 @@ function processBreakpointsForJs(breakpointData) {
     wrapper.breakpoints[formatName(breakpoint.name)] = breakpoint.threshold;
   });
 
-  return JSON.stringify(wrapper);
+  return `${JSON.stringify(wrapper)}\n`;
 }
 
 function writeFile(data, outPath) {
