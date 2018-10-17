@@ -7,7 +7,7 @@ const readFileAsync = promisify(fs.readFile);
 
 async function getConfigData(filePath) {
   const rawFileData = await readFileAsync(filePath, {encoding: 'utf8'});
-  return JSON.parse(rawFileData);
+  return Promise.resolve(JSON.parse(rawFileData));
 }
 
 function getBreakpoints(data) {
