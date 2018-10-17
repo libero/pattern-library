@@ -4,6 +4,7 @@ const path = require('path');
 const {promisify} = require('util');
 
 const readFileAsync = promisify(fs.readFile);
+const writeFileAsync = promisify(fs.writeFile);
 
 async function getConfigData(filePath) {
   const rawFileData = await readFileAsync(filePath, {encoding: 'utf8'});
@@ -38,16 +39,20 @@ function processBreakpointsForJs(breakpointData) {
   return `${JSON.stringify(wrapper)}\n`;
 }
 
-function writeFile(data, outPath) {
-  fs.writeFile(path.join(__dirname, outPath), data, (err) => {
-    if (err) {
-      throw err;
-    }
+// Normalise the reported path to be from the project root
+function reportFileWrite(path) {
+  const reportedPath = path.replace(/(\.\.\/)*([^./])/, '\/$2');
+  console.log(`written config to ${reportedPath}`);
+}
 
-    // Normalise the reported path to be from the project root
-    const outPathReported = outPath.replace(/(\.\.\/)*([^./])/, '\/$2');
-    console.log(`written config to ${outPathReported}`);
-  });
+function writeFile(data, outPath) {
+  return writeFileAsync(path.join(__dirname, outPath), data)
+    .then(() => {
+      reportFileWrite(outPath);
+    })
+    .catch((err) => {
+      throw err;
+    });
 }
 
 function getConfigPath(invocationArgs) {
@@ -84,10 +89,20 @@ function distributeBreakpoints(breakpointData) {
   distributeBreakpointsToJs(breakpointData);
 }
 
-function distribute() {
-  getConfigData(paths.sharedConfig).then((data) => {
-    distributeBreakpoints(getBreakpoints(data));
-  });
+// callback useful when running via Gulp
+function distribute(callback) {
+  getConfigData(paths.sharedConfig)
+    .then((data) => {
+      distributeBreakpoints(getBreakpoints(data));
+    })
+    .then(() => {
+      if (typeof callback === 'function')  {
+        callback();
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
 }
 
 module.exports = {
