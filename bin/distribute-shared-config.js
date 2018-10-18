@@ -43,7 +43,7 @@ function processBreakpointsForJs(breakpointData) {
 // Normalise the reported path to be from the project root
 function reportFileWrite(path) {
   const reportedPath = path.replace(/(\.\.\/)*([^./])/, '\/$2');
-  console.log(`written config to ${reportedPath}`);
+  console.log(`Written config to ${reportedPath}`);
 }
 
 function writeFile(data, outPath) {
