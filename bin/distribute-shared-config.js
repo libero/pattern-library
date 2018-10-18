@@ -102,6 +102,7 @@ function distribute() {
 
 module.exports = {
   distribute,
+  getConfigData,
   getConfigPath,
   processBreakpointsForJs,
   processBreakpointsForSass

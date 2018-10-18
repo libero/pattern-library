@@ -1,6 +1,11 @@
 const chai = require('chai');
+const chaiAsPromised = require("chai-as-promised");
+const fs = require('fs');
+const tmp = require('tmp');
+
 const distribute = require('./distribute-shared-config');
 
+chai.use(chaiAsPromised);
 const expect = chai.expect;
 
 describe('distribute-shared-config', () => {
@@ -63,6 +68,20 @@ describe('distribute-shared-config', () => {
     it('can be overridden to return a different filename component', () => {
       const customFilenameArgs = ['--sharedConfig=some-non-default-file.json'];
       expect(distribute.getConfigPath(customFilenameArgs)).to.match(/^.*[^\/]*some-non-default-file.json$/);
+    });
+
+  });
+
+  describe('getConfigData() function', () => {
+
+    it('Rejects the Promise if the config file does not exist', () => {
+      return expect(distribute.getConfigData('./path/to/nowhere.json')).to.be.rejected;
+    });
+
+    it('Rejects the Promise if the config file contains invalid JSON', () => {
+      const tmpFile = tmp.fileSync();
+      fs.writeFileSync(tmpFile.name, 'This is not JSON data.');
+      return expect(distribute.getConfigData(tmpFile.name)).to.be.rejectedWith('Unexpected token T in JSON at position 0');
     });
 
   });
