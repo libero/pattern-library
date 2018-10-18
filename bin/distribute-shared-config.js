@@ -96,7 +96,10 @@ function distribute() {
 
   return getConfigData(paths.sharedConfig)
     .then(data => { distributeBreakpoints(getBreakpoints(data)) })
-    .catch(err => { console.error(err) });
+    .catch(err => {
+      console.error(err);
+      throw err;
+    });
 
 }
 
