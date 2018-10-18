@@ -77,16 +77,20 @@ const paths = {
 };
 
 function distributeBreakpointsToSass(breakpointData) {
-  writeFile(processBreakpointsForSass(breakpointData), paths.out.sass);
+  return writeFile(processBreakpointsForSass(breakpointData), paths.out.sass);
 }
 
 function distributeBreakpointsToJs(breakpointData) {
-  writeFile(processBreakpointsForJs(breakpointData), paths.out.js);
+  return writeFile(processBreakpointsForJs(breakpointData), paths.out.js);
 }
 
 function distributeBreakpoints(breakpointData) {
-  distributeBreakpointsToSass(breakpointData);
-  distributeBreakpointsToJs(breakpointData);
+  return Promise.all(
+    [
+      distributeBreakpointsToSass(breakpointData),
+      distributeBreakpointsToJs(breakpointData)
+    ]
+  );
 }
 
 // callback useful when running via Gulp
