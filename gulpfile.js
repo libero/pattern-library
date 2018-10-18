@@ -156,9 +156,8 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
 
 gulp.task('distributeSharedConfig', ['css:clean'], (cb) => {
   exec('distribute shared config', () => {
-    distributeSharedConfig.distribute();
+    distributeSharedConfig.distribute().then(cb);
   });
-  cb();
 });
 
 gulp.task('sass:watch', () => {

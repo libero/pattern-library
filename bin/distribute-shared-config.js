@@ -94,15 +94,10 @@ function distributeBreakpoints(breakpointData) {
 }
 
 // callback useful when running via Gulp
-function distribute(callback) {
-  getConfigData(paths.sharedConfig)
+function distribute() {
+  return getConfigData(paths.sharedConfig)
     .then((data) => {
       distributeBreakpoints(getBreakpoints(data));
-    })
-    .then(() => {
-      if (typeof callback === 'function')  {
-        callback();
-      }
     })
     .catch((err) => {
       console.error(err);
