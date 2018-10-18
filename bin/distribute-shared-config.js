@@ -48,12 +48,8 @@ function reportFileWrite(path) {
 
 function writeFile(data, outPath) {
   return writeFileAsync(path.join(__dirname, outPath), data)
-    .then(() => {
-      reportFileWrite(outPath);
-    })
-    .catch((err) => {
-      throw err;
-    });
+    .then(() => { reportFileWrite(outPath) })
+    .catch(err => { throw err });
 }
 
 function getConfigPath(invocationArgs) {
@@ -86,23 +82,22 @@ function distributeBreakpointsToJs(breakpointData) {
 }
 
 function distributeBreakpoints(breakpointData) {
+
   return Promise.all(
     [
       distributeBreakpointsToSass(breakpointData),
       distributeBreakpointsToJs(breakpointData)
     ]
   );
+
 }
 
-// callback useful when running via Gulp
 function distribute() {
+
   return getConfigData(paths.sharedConfig)
-    .then((data) => {
-      distributeBreakpoints(getBreakpoints(data));
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+    .then(data => { distributeBreakpoints(getBreakpoints(data)) })
+    .catch(err => { console.error(err) });
+
 }
 
 module.exports = {
