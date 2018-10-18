@@ -105,7 +105,7 @@ function distribute(callback) {
       }
     })
     .catch((err) => {
-      throw err;
+      console.error(err);
     });
 }
 
