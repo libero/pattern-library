@@ -14,7 +14,6 @@
     "gulp-sass": "^4.0.1",
     "gulp-sass-glob": "^1.0.9",
     "gulp-sourcemaps": "^2.6.4",
-    "js-yaml": "^3.12.0",
     "merge-stream": "^1.0.1",
     "minimist": "^1.2.0",
     "postcss-reporter": "^5.0.0",
