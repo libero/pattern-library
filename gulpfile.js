@@ -158,7 +158,6 @@ gulp.task('distributeSharedConfig', ['css:clean'], (cb) => {
     distributeSharedConfig.distribute()
                           .then(cb)
                           .catch((err) => {
-                            process.exit(1);
                           });
 });
 

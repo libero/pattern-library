@@ -15,16 +15,38 @@ describe('distribute-shared-config', () => {
     let breakpointData;
 
     beforeEach(() => {
-      breakpointData = [
-        {
-          "name": "bkpt-site--x-narrow",
-          "threshold": 320
+      breakpointData = {
+        'category-a': {
+          'a-1': 400,
+          'a2': 500
         },
-        {
-          "name": "bkpt-site--narrow",
-          "threshold": 480
+        'category-b': {
+          'b-1': 900,
+          'b2': 1200
         }
-      ]
+      };
+    });
+
+    describe('getBreakpoints() function', () => {
+
+      context('when there is no breakpoint data', () => {
+
+        it('errors with the message: "No breakpoint data found"', () => {
+          const failingValues = [
+            null,
+            { breakpoints: null },
+            { breakpoints: {} },
+          ];
+
+          failingValues.forEach((value) => {
+            expect(() => {
+              distribute.getBreakpoints(value);
+            }).to.throw('No breakpoint data found');
+          });
+        });
+
+      });
+
     });
 
     describe('processBreakpointsForSass() function', () => {
@@ -32,9 +54,10 @@ describe('distribute-shared-config', () => {
       it('processes the breakpoint data as Sass variables', () => {
         const observed = distribute.processBreakpointsForSass(breakpointData);
         const expected = ""
-                         + "$bkpt-site--x-narrow: 320;\n"
-                         + "$bkpt-site--narrow: 480;"
-                         + "\n";
+                         + "$bkpt-category-a--a-1: 400;\n"
+                         + "$bkpt-category-a--a2: 500;\n"
+                         + "$bkpt-category-b--b-1: 900;\n"
+                         + "$bkpt-category-b--b2: 1200;\n";
         expect(observed).to.equal(expected);
       });
 
@@ -46,9 +69,13 @@ describe('distribute-shared-config', () => {
         const observed = distribute.processBreakpointsForJs(breakpointData);
         const expected = `${JSON.stringify(
           {
-            "breakpoints": {
-              "xNarrow": 320,
-              "narrow": 480
+            "category-a": {
+              "a-1": 400,
+              "a2": 500
+            },
+            "category-b": {
+              "b-1": 900,
+              "b2": 1200
             }
           })
           }\n`;
@@ -61,13 +88,13 @@ describe('distribute-shared-config', () => {
 
   describe('getConfigPath() function', () => {
 
-    it('by default returns a file path with the filename component of "shared-config.json"', () => {
-      expect(distribute.getConfigPath([])).to.match(/^.*[^\/]*shared-config.json$/);
+    it('by default returns a file path with the filename component of "shared-config.yaml"', () => {
+      expect(distribute.getConfigPath([])).to.match(/^.*[^\/]*shared-config.yaml$/);
     });
 
     it('can be overridden to return a different filename component', () => {
-      const customFilenameArgs = ['--sharedConfig=some-non-default-file.json'];
-      expect(distribute.getConfigPath(customFilenameArgs)).to.match(/^.*[^\/]*some-non-default-file.json$/);
+      const customFilenameArgs = ['--sharedConfig=some-non-default-file.yaml'];
+      expect(distribute.getConfigPath(customFilenameArgs)).to.match(/^.*[^\/]*some-non-default-file.yaml$/);
     });
 
   });
@@ -76,12 +103,6 @@ describe('distribute-shared-config', () => {
 
     it('Rejects the Promise if the config file does not exist', () => {
       return expect(distribute.getConfigData('./path/to/nowhere.json')).to.be.rejected;
-    });
-
-    it('Rejects the Promise if the config file contains invalid JSON', () => {
-      const tmpFile = tmp.fileSync();
-      fs.writeFileSync(tmpFile.name, 'This is not JSON data.');
-      return expect(distribute.getConfigData(tmpFile.name)).to.be.rejectedWith('Unexpected token T in JSON at position 0');
     });
 
   });

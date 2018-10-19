@@ -1,0 +1,7 @@
+breakpoints:
+  site:
+    x-small: 320
+    small: 480
+    medium: 730
+    wide: 900
+    x-wide: 1200

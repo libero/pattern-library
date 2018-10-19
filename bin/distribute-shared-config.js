@@ -2,41 +2,47 @@ const fs = require('fs');
 const minimist = require('minimist');
 const path = require('path');
 const {promisify} = require('util');
+const YAML = require('yamljs');
 
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
 async function getConfigData(filePath) {
   const rawFileData = await readFileAsync(filePath, {encoding: 'utf8'});
-  return JSON.parse(rawFileData);
+  return YAML.parse(rawFileData);
 }
 
 function getBreakpoints(data) {
+  if (!data || !data.breakpoints || !Object.keys(data.breakpoints).length) {
+    throw Error('No breakpoint data found');
+  }
+
   return data.breakpoints;
 }
 
 function processBreakpointsForSass(breakpointData) {
-  const processed = breakpointData.map((breakpoint) => {
-    return `$${breakpoint.name}: ${breakpoint.threshold};`;
+
+  const processed = [];
+
+  function formatBreakpoint(category, name, breakpointData) {
+    return `$bkpt-${category}--${name}: ${breakpointData[category][name]};`;
+  }
+
+  function processCategory(category, breakpointData) {
+    Object.keys(breakpointData[category]).forEach((name) => {
+      processed.push(formatBreakpoint(category, name, breakpointData));
+    });
+  }
+
+  Object.keys(breakpointData).forEach((category) => {
+    processCategory(category, breakpointData);
   });
+
   return `${processed.join('\n')}\n`;
 }
 
 function processBreakpointsForJs(breakpointData) {
-
-  const formatName = function formatName(name) {
-    return (name.replace(/^bkpt-site--/, '')).replace( /-[a-z]/g,(match) => {
-      return match.toUpperCase().substring(1);
-    } );
-  };
-
-  const wrapper = { breakpoints: {} };
-
-  breakpointData.forEach((breakpoint) => {
-    wrapper.breakpoints[formatName(breakpoint.name)] = breakpoint.threshold;
-  });
-
-  return `${JSON.stringify(wrapper)}\n`;
+  return `${JSON.stringify(breakpointData)}\n`;
 }
 
 // Normalise the reported path to be from the project root
@@ -55,7 +61,7 @@ function getConfigPath(invocationArgs) {
   const sharedConfigLocalPath = minimist(
     invocationArgs, {
       default: {
-        sharedConfig: './shared-config.json'
+        sharedConfig: './shared-config.yaml'
       }
     }
   )['sharedConfig'];
@@ -85,7 +91,7 @@ function distributeBreakpoints(breakpointData) {
   return Promise.all(
     [
       distributeBreakpointsToSass(breakpointData),
-      distributeBreakpointsToJs(breakpointData)
+      distributeBreakpointsToJs(breakpointData),
     ]
   );
 
@@ -97,15 +103,18 @@ function distribute() {
     .then(data => { distributeBreakpoints(getBreakpoints(data)) })
     .catch(err => {
       console.error(err);
-      throw err;
+      process.exit(1);
     });
 
 }
 
 module.exports = {
   distribute,
+  getBreakpoints,
   getConfigData,
   getConfigPath,
   processBreakpointsForJs,
   processBreakpointsForSass
 };
+
+// distribute();
