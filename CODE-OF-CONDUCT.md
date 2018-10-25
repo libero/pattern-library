@@ -1,3 +1,4 @@
-# Libero Community Code of Conduct
+Code of Conduct
+===============
 
-Libero follows the [Libero Community Code of Conduct](https://libero.pub/governance/code-of-conduct.html). 
+Libero follows the [Libero Community Code of Conduct](https://libero.pub/code-of-conduct). 
