@@ -8,7 +8,6 @@ config.allocator.allocateToTwig(['deep']);
 
 // Any config.data property not allocated to a layer is still available as config, but not included
 // in any layer-specific generated artefact
-
 config.data.customThing = 'custom thing';
 
 
