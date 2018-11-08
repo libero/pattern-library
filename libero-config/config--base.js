@@ -1,25 +1,31 @@
 const Color = require('color');
+const PropertyLayerAllocator = require('./PropertyLayerAllocator');
 
-const config = {};
+const config = { data: {} };
 
-config.baselinegrid = {space: {}};
-config.baselinegrid.space.extra_small_in_px = 12;
-config.baselinegrid.space.small_in_px = config.baselinegrid.space.extra_small_in_px * 2;
-config.baselinegrid.space.smallish_in_px = config.baselinegrid.space.small_in_px * 1.5;
-config.baselinegrid.space.medium_in_px = config.baselinegrid.space.small_in_px * 2;
-config.baselinegrid.space.large_in_px = config.baselinegrid.space.small_in_px * 3;
-config.baselinegrid.space.extra_large_in_px = config.baselinegrid.space.small_in_px * 5;
+config.data.baselinegrid = {space: {}};
+config.data.baselinegrid.space.extra_small_in_px = 12;
+config.data.baselinegrid.space.small_in_px = config.data.baselinegrid.space.extra_small_in_px * 2;
+config.data.baselinegrid.space.smallish_in_px = config.data.baselinegrid.space.small_in_px * 1.5;
+config.data.baselinegrid.space.medium_in_px = config.data.baselinegrid.space.small_in_px * 2;
+config.data.baselinegrid.space.large_in_px = config.data.baselinegrid.space.small_in_px * 3;
+config.data.baselinegrid.space.extra_large_in_px = config.data.baselinegrid.space.small_in_px * 5;
 
-config.breakpoints = {site: {}};
-config.breakpoints.site.x_small = 320;
-config.breakpoints.site.small = 480;
-config.breakpoints.site.medium = 730;
-config.breakpoints.site.wide = 900;
-config.breakpoints.site.x_wide = 1200;
+config.data.breakpoints = {site: {}};
+config.data.breakpoints.site.x_small = 320;
+config.data.breakpoints.site.small = 480;
+config.data.breakpoints.site.medium = 730;
+config.data.breakpoints.site.wide = 900;
+config.data.breakpoints.site.x_wide = 1200;
 
-config.color = {primary: {}};
-config.color.primary.normal = Color('#0288D1');
-config.color.primary.light = config.color.primary.normal.lighten(0.1);
+config.data.color = { primary: {} };
+config.data.color.primary.normal = Color('#0288D1');
+config.data.color.primary.light = config.data.color.primary.normal.lighten(0.1);
+
+config.allocator = new PropertyLayerAllocator(config.data);
+
+config.allocator.allocateToSass(['baselinegrid', 'breakpoints', 'color']);
+config.allocator.allocateToJs(['baselinegrid', 'breakpoints']);
 
 /*libero:
     color:
