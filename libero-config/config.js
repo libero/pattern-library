@@ -1,14 +1,15 @@
-const coreConfig = require('./config--core');
+let config;
 
-let customConfig;
 try {
-  customConfig = require('./config--custom');
+  config = require('./config--custom');
+  console.info('Using custom config.');
 } catch(e) {
-  customConfig = null;
+  config = require('./config--base');
+  console.warn('No valid custom config available, using base config.');
 }
 
 function generateConfig() {
-  return customConfig || coreConfig;
+  return config;
 }
 
 module.exports = generateConfig();
