@@ -1,11 +1,15 @@
+const baseConfigModule = './config--base';
+const customConfigModule = './config--custom';
+
 let config;
 
 try {
-  config = require('./config--custom');
-  console.info('Using custom config.');
+  config = require(customConfigModule);
+  console.info(`Using custom config from ${require.resolve(customConfigModule)}`);
 } catch(e) {
-  config = require('./config--base');
-  console.warn('No valid custom config available, using base config.');
+  config = require(baseConfigModule);
+  console.warn(`No valid custom config available, using base config from ${require.resolve(baseConfigModule)}`);
+  console.error(e);
 }
 
 function generateConfig() {
