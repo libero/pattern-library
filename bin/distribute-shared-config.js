@@ -100,6 +100,7 @@ function distributeToSass(data) {
   return Promise.all(fileWritePromises).catch(err => { throw err; } );
 
 }
+
 function distribute() {
 
   // TODO: Changes to make / account for here:

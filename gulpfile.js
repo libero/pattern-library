@@ -154,12 +154,18 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
 
 });
 
-gulp.task('distributeSharedConfig', ['css:clean'], (cb) => {
-    distributeSharedConfig.distribute()
-                          .then(cb)
-                          .catch((err) => {
-                            console.error(err);
-                          });
+gulp.task('distributeSharedConfig', ['css:clean'], (done) => {
+  exec('node ./bin/distribute-shared-config.js', (err, stdout, stderr) => {
+    console.log(stdout);
+    console.log(stderr);
+    done(err);
+  });
+    // return distributeSharedConfig.distribute()
+    //                       .then(done)
+    //                       .catch((err) => {
+    //                         console.error(err);
+    //                       });
+
 });
 
 gulp.task('sass:watch', () => {
