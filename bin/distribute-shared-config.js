@@ -1,3 +1,7 @@
+const Color = require('color');
+const config = require('../libero-config/config');
+const deepIterator = require('deep-iterator').default;
+const flatten = require('flat');
 const fs = require('fs');
 const minimist = require('minimist');
 const path = require('path');
@@ -97,15 +101,52 @@ function distributeBreakpoints(breakpointData) {
 
 }
 
+function processForSass(data) {
+
+  data.forEach((item) => {
+    for (let {parent, key, value} of deepIterator(item)) {
+      if (value instanceof Color) {
+        parent[key] = value.rgb().string();
+      }
+    }
+
+  });
+
+  let flattened = {};
+  data.forEach((item) => {
+    Object.assign(flattened, flatten(item, {delimiter: '-'}));
+  });
+
+  return Object.entries(flattened)
+               .reduce((carry, pair) => {
+                 const [key, value] = pair;
+                 return `${carry}$${key}: ${value};\n`;
+               }, '');
+}
+
+async function distributeToSass(data) {
+  const processed = processForSass(data);
+  return writeFile(processed, paths.out.sass);
+
+}
 function distribute() {
 
-  return getConfigData(paths.sharedConfig)
-    .then(data => { distributeBreakpoints(getBreakpoints(data)) })
-    .catch(err => {
-      console.error(err);
-      process.exit(1);
-    });
+  // TODO: Changes to make / account for here:
+  //  - config is now loaded as a dependency
+  //  - run processForSass and generate appropriate files
+  //  - do the same for js
+  //  - do the same for twig
 
+  return Promise.all(
+    [
+      distributeToSass(config.allocator.getAllocatedToSass()),
+      // processForJs(config.allocator.getAllocatedToJs()),
+      // processForTwig(config.allocator.getAllocatedToTwig())
+    ]
+  ).catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
 }
 
 module.exports = {
