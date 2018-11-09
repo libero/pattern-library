@@ -16,35 +16,6 @@ async function getConfigData(filePath) {
   return YAML.parse(rawFileData);
 }
 
-function getBreakpoints(data) {
-  if (!data || !data.breakpoints || !Object.keys(data.breakpoints).length) {
-    throw Error('No breakpoint data found');
-  }
-
-  return data.breakpoints;
-}
-
-function processBreakpointsForSass(breakpointData) {
-
-  const processed = [];
-
-  function formatBreakpoint(category, name, breakpointData) {
-    return `$bkpt-${category}--${name}: ${breakpointData[category][name]};`;
-  }
-
-  function processCategory(category, breakpointData) {
-    Object.keys(breakpointData[category]).forEach((name) => {
-      processed.push(formatBreakpoint(category, name, breakpointData));
-    });
-  }
-
-  Object.keys(breakpointData).forEach((category) => {
-    processCategory(category, breakpointData);
-  });
-
-  return `${processed.join('\n')}\n`;
-}
-
 function processBreakpointsForJs(breakpointData) {
   return `${JSON.stringify(breakpointData)}\n`;
 }
@@ -78,13 +49,9 @@ const paths = {
   sharedConfig: getConfigPath(process.argv),
   out: {
     js: '../source/js/config--breakpoints.json',
-    sass: '../source/css/sass/_variables--breakpoints.scss'
+    sassVariablesFileNameRoot: '../source/css/sass/_variables--',
   }
 };
-
-function distributeBreakpointsToSass(breakpointData) {
-  return writeFile(processBreakpointsForSass(breakpointData), paths.out.sass);
-}
 
 function distributeBreakpointsToJs(breakpointData) {
   return writeFile(processBreakpointsForJs(breakpointData), paths.out.js);
@@ -103,30 +70,34 @@ function distributeBreakpoints(breakpointData) {
 
 function processForSass(data) {
 
-  data.forEach((item) => {
-    for (let {parent, key, value} of deepIterator(item)) {
-      if (value instanceof Color) {
-        parent[key] = value.rgb().string();
-      }
+  for (let {parent, key, value} of deepIterator(data)) {
+    if (value instanceof Color) {
+      parent[key] = value.rgb().string();
     }
+  }
 
-  });
-
-  let flattened = {};
-  data.forEach((item) => {
-    Object.assign(flattened, flatten(item, {delimiter: '-'}));
-  });
-
-  return Object.entries(flattened)
+  return Object.entries(flatten(data, {delimiter: '-'}))
                .reduce((carry, pair) => {
                  const [key, value] = pair;
                  return `${carry}$${key}: ${value};\n`;
                }, '');
 }
 
-async function distributeToSass(data) {
-  const processed = processForSass(data);
-  return writeFile(processed, paths.out.sass);
+function distributeToSass(data) {
+  console.log('Distributing config to sass...');
+  let fileWritePromises = [];
+  // The top level property of each object in data defines a separate file
+  data.forEach((item) => {
+    const processedItemData = processForSass(item);
+    const outFileName = `${paths.out.sassVariablesFileNameRoot}${Object.keys(item)[0]}.scss`;
+    fileWritePromises.push(
+      new Promise((resolve) => {
+        resolve(writeFile(processedItemData, outFileName));
+      })
+    );
+  });
+
+  return Promise.all(fileWritePromises).catch(err => { throw err; } );
 
 }
 function distribute() {
@@ -151,11 +122,6 @@ function distribute() {
 
 module.exports = {
   distribute,
-  getBreakpoints,
-  getConfigData,
-  getConfigPath,
-  processBreakpointsForJs,
-  processBreakpointsForSass
 };
 
 distribute();
