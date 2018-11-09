@@ -1,1 +1,21 @@
-{"site":{"x-small":320,"small":480,"medium":730,"wide":900,"x-wide":1200}}
+{
+    "breakpoints": {
+        "site": {
+            "x-small": 320,
+            "small": 480,
+            "medium": 730,
+            "wide": 900,
+            "x-wide": 1200
+        }
+    },
+    "blg": {
+        "space": {
+            "extra-small-in-px": 12,
+            "small-in-px": "blg.space.extra-small-in-px * 2",
+            "smallish-in-px": "blg.space.small-in-px * 1.5",
+            "medium-in-px": "blg.space.small-in-px * 2",
+            "large-in-px": "blg.space.small-in-px * 3",
+            "extra-large-in-px": "blg.space.small-in-px * 5"
+        }
+    }
+}
