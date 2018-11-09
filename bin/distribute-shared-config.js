@@ -124,4 +124,6 @@ module.exports = {
   distribute,
 };
 
-distribute();
+if (require.main === module) {
+  distribute();
+}
