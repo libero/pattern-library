@@ -17,8 +17,6 @@ const sourcemaps = require('gulp-sourcemaps');
 const stylelint = require('stylelint');
 const syntaxScss = require('postcss-scss');
 
-const distributeSharedConfig = require('./bin/distribute-shared-config');
-
 function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
 
   const invocationOptions = minimist(
@@ -155,17 +153,12 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
 });
 
 gulp.task('distributeSharedConfig', ['css:clean'], (done) => {
+  // exec is deprecated. Might need to find another way to do this.
   exec('node ./bin/distribute-shared-config.js', (err, stdout, stderr) => {
     console.log(stdout);
     console.log(stderr);
     done(err);
   });
-    // return distributeSharedConfig.distribute()
-    //                       .then(done)
-    //                       .catch((err) => {
-    //                         console.error(err);
-    //                       });
-
 });
 
 gulp.task('sass:watch', () => {
