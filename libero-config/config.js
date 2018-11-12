@@ -1,19 +1,39 @@
-const baseConfigModule = './config--base';
-const customConfigModule = './config--custom';
+const deepMerge = require('deepmerge');
 
-let config;
+// Load any number of configs in order
+const allConfigs = [
+  require('./config--base'),
+  require('./config--custom')
+];
 
-try {
-  config = require(customConfigModule);
-  console.info(`Using custom config from ${require.resolve(customConfigModule)}`);
-} catch(e) {
-  config = require(baseConfigModule);
-  console.warn(`No valid custom config available, using base config from ${require.resolve(baseConfigModule)}`);
-  console.error(e);
+function getPropertyFromAllConfigs(property, allConfigs) {
+  return allConfigs.map((config) => {
+    return config[property] || {};
+  });
+}
+
+function getDataFromAllConfigs(allConfigs) {
+  return getPropertyFromAllConfigs('data', allConfigs);
+}
+
+function getAllocationsFromAllConfigs(allConfigs) {
+  return getPropertyFromAllConfigs('layerAllocations', allConfigs);}
+
+function allocateToLayers() {
+  const accumulatedAllocations = deepMerge.all(getAllocationsFromAllConfigs(allConfigs));
+  Object.keys(accumulatedAllocations).forEach((key) => {
+    accumulatedAllocations[key] = Array.from(new Set(accumulatedAllocations[key]));
+  });
+  return accumulatedAllocations;
 }
 
 function generateConfig() {
-  return config;
+  return {
+    data: deepMerge.all(getDataFromAllConfigs(allConfigs)),
+    layerAllocations: allocateToLayers()
+  }
 }
+
+console.log('generateConfig() returns', generateConfig());
 
 module.exports = generateConfig();

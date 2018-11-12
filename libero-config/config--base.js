@@ -1,5 +1,4 @@
 const Color = require('color');
-const PropertyLayerAllocator = require('./PropertyLayerAllocator');
 
 const config = { data: {} };
 
@@ -22,10 +21,12 @@ config.data.color = { primary: {} };
 config.data.color.primary.normal = Color('#0288D1');
 config.data.color.primary.light = config.data.color.primary.normal.lighten(0.1);
 
-config.allocator = new PropertyLayerAllocator(config.data);
-
-config.allocator.allocateToSass(['baselinegrid', 'breakpoints', 'color']);
-config.allocator.allocateToJs(['baselinegrid', 'breakpoints']);
+// Specify the top level properties to be distributed to layers (sass, js & templates)
+config.layerAllocations = {
+  sass: ['baselinegrid', 'breakpoints', 'color'],
+  js: ['color', 'breakpoints'],
+  template: ['breakpoints']
+};
 
 /*libero:
     color:
