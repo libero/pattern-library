@@ -4,7 +4,7 @@ const deepMerge = require('deepmerge');
 // Load any number of configs in order.
 const allConfigs = [
   require('./config--libero'),
-  // require('./config--custom')
+  require('./config--custom')
 ];
 
 function getPropertyFromAllConfigs(property, allConfigs) {
@@ -29,6 +29,8 @@ function allocateToLayers(allConfigs) {
 }
 
 function isMergeableObject(value) {
+
+  // isNonNullObject and isNonNullObject copied from private deepmerge functions
 
   function isNonNullObject(value) {
     return !!value && typeof value === 'object'
