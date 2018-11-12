@@ -28,7 +28,6 @@
     "sass-true": "^4.0.0",
     "stylelint": "^9.4.0",
     "tmp": "0.0.33",
-    "tree-crawl": "^1.0.5",
-    "yamljs": "^0.3.0"
+    "tree-crawl": "^1.0.5"
   }
 }
