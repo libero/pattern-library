@@ -1,8 +1,9 @@
 const Color = require('color');
 const deepMerge = require('deepmerge');
-// Load any number of configs in order
+
+// Load any number of configs in order.
 const allConfigs = [
-  require('./config--base'),
+  require('./config--libero'),
   // require('./config--custom')
 ];
 
