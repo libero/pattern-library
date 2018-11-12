@@ -34,6 +34,4 @@ function generateConfig() {
   }
 }
 
-console.log('generateConfig() returns', generateConfig());
-
 module.exports = generateConfig();

@@ -10,8 +10,8 @@ config.data.customThing = 'custom thing';
 config.data.deep = { custom: { thing: ['deep', 'custom', 'thing'] } };
 config.data.breakpoints = {
   site: {
-    'x_wide': 'overridden',
-    'xxxx_wide': 'ginormous!'
+    'x_wide': 1400,
+    'xx_wide': 1600
   }
 };
 
