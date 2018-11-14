@@ -24,6 +24,7 @@ function writeFile(data, outPath) {
 const paths = {
   out: {
     sassVariablesFileNameRoot: '../source/css/sass/_variables--',
+    jsonFileName: '../source/js/configForJs.json'
   }
 };
 
@@ -43,7 +44,6 @@ function processForSass(data) {
 }
 
 function distributeToSass(allocations, data) {
-  console.log('Distributing config to sass...');
   let fileWritePromises = [];
   // Each allocation is written to a separate file
   allocations.forEach((allocation) => {
@@ -62,11 +62,24 @@ function distributeToSass(allocations, data) {
 
 }
 
-function distribute() {
+function processForJs(allocations, data) {
+  const processed = {};
+  allocations.forEach((allocation) => {
+    processed[allocation] = data[allocation];
+  });
+  return JSON.stringify(processed);
+}
 
+function distributeToJs(allocations, data) {
+  return writeFile(processForJs(allocations, data), paths.out.jsonFileName);
+}
+
+function distribute() {
+  console.log('Distributing config...');
   return Promise.all(
     [
       distributeToSass(config.layerAllocations.sass, config.data),
+      distributeToJs(config.layerAllocations.js, config.data),
     ]
   ).catch(err => {
     console.error(err);
