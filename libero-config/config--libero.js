@@ -4,11 +4,11 @@ const config = { data: {} };
 
 config.data.baselinegrid = {space: {}};
 config.data.baselinegrid.space.extra_small_in_px = 12;
-config.data.baselinegrid.space.small_in_px = config.data.baselinegrid.space.extra_small_in_px * 2;
-config.data.baselinegrid.space.smallish_in_px = config.data.baselinegrid.space.small_in_px * 1.5;
-config.data.baselinegrid.space.medium_in_px = config.data.baselinegrid.space.small_in_px * 2;
-config.data.baselinegrid.space.large_in_px = config.data.baselinegrid.space.small_in_px * 3;
-config.data.baselinegrid.space.extra_large_in_px = config.data.baselinegrid.space.small_in_px * 5;
+config.data.baselinegrid.space.small_in_px = '!expression baselinegrid.space.extra_small_in_px * 2';
+config.data.baselinegrid.space.smallish_in_px = '!expression baselinegrid.space.small_in_px * 1.5';
+config.data.baselinegrid.space.medium_in_px = '!expression baselinegrid.space.small_in_px * 2';
+config.data.baselinegrid.space.large_in_px = '!expression baselinegrid.space.small_in_px * 3';
+config.data.baselinegrid.space.extra_large_in_px = '!expression baselinegrid.space.small_in_px * 5';
 
 config.data.breakpoints = {site: {}};
 config.data.breakpoints.site.x_small = 320;
@@ -39,6 +39,7 @@ config.data.color.success_dark = Color('#569037');
 config.data.color.attention = Color('#cf0c4e');
 config.data.color.warning = Color('#e65100');
 
+// TODO: Extract?
 // Specify the top level properties to be distributed to layers (sass, js & templates)
 config.layerAllocations = {
   sass: ['baselinegrid', 'breakpoints', 'color'],

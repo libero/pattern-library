@@ -1,5 +1,5 @@
 const Color = require('color');
-const config = require('../libero-config/config');
+const configGenerator = require('../libero-config/config');
 const deepIterator = require('deep-iterator').default;
 const flatten = require('flat');
 const fs = require('fs');
@@ -74,8 +74,9 @@ function distributeToJs(allocations, data) {
   return writeFile(processForJs(allocations, data), paths.out.jsonFileName);
 }
 
-function distribute() {
+async function distribute() {
   console.log('Distributing config...');
+  const config = await configGenerator.generateConfig();
   return Promise.all(
     [
       distributeToSass(config.layerAllocations.sass, config.data),
