@@ -41,7 +41,6 @@ async function processDeferredConfig(configWithDeferreds) {
   for (let {parent, key, value} of deepData) {
     if (typeof value === 'string' && value.indexOf('!expression ') > -1) {
       parent[key] = await processExpression(value, configWithDeferreds);
-      console.log(`parent[key] "${parent}[${key}]" set to: ${parent[key]}`);
     }
   }
 
