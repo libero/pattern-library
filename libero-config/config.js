@@ -1,6 +1,6 @@
-const Color = require('color');
 const deepIterator = require('deep-iterator').default;
 const deepMerge = require('deepmerge');
+const isMergeableObject = require('./isMergeableObject');
 const jexl = require('jexl');
 
 // Load any number of configs in order.
@@ -28,26 +28,6 @@ function allocateToLayers(allConfigs) {
     accumulatedAllocations[key] = Array.from(new Set(accumulatedAllocations[key]));
   });
   return accumulatedAllocations;
-}
-
-function isMergeableObject(value) {
-
-  // isNonNullObject and isNonNullObject copied from private deepmerge functions
-
-  function isNonNullObject(value) {
-    return !!value && typeof value === 'object'
-  }
-
-  function isSpecial(value) {
-    const stringValue = Object.prototype.toString.call(value);
-
-    return stringValue === '[object RegExp]'
-           || stringValue === '[object Date]';
-  }
-
-  return isNonNullObject(value) &&
-         !isSpecial(value) &&
-         !(value instanceof Color);
 }
 
 async function processExpression(expression, context) {
