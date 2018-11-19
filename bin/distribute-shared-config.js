@@ -1,5 +1,5 @@
 const Color = require('color');
-const configGenerator = require('../libero-config/config');
+const configGenerator = require('../libero-config/configGenerator');
 const deepIterator = require('deep-iterator').default;
 const flatten = require('flat');
 const fs = require('fs');
