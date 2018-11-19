@@ -47,7 +47,7 @@ async function processDeferredConfig(configWithDeferreds) {
   return config;
 }
 
-async function generateConfig() {
+async function generateConfig(allConfigs) {
   const mergedConfig = deepMerge.all(getDataFromAllConfigs(allConfigs), { isMergeableObject });
   const data = await processDeferredConfig(mergedConfig);
 
@@ -58,5 +58,7 @@ async function generateConfig() {
 }
 
 module.exports = {
-  generateConfig
+  generateConfig: async function() {
+    return generateConfig(allConfigs);
+  }
 };
