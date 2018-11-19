@@ -15,7 +15,7 @@ function getPropertyFromAllConfigs(property, allConfigs) {
   });
 }
 
-function getDataFromAllConfigs(allConfigs) {
+function getDataFromConfigs(allConfigs) {
   return getPropertyFromAllConfigs('data', allConfigs);
 }
 
@@ -35,12 +35,11 @@ async function processExpression(expression, context) {
   return await jexl.eval(normalised, context);
 }
 
-async function processDeferredConfig(configWithDeferreds) {
-  const config = configWithDeferreds;
+async function processDeferredConfig(config) {
   const deepData = deepIterator(config);
   for (let {parent, key, value} of deepData) {
     if (typeof value === 'string' && value.indexOf('!expression ') > -1) {
-      parent[key] = await processExpression(value, configWithDeferreds);
+      parent[key] = await processExpression(value, config);
     }
   }
 
@@ -48,7 +47,7 @@ async function processDeferredConfig(configWithDeferreds) {
 }
 
 async function generateConfig(allConfigs) {
-  const mergedConfig = deepMerge.all(getDataFromAllConfigs(allConfigs), { isMergeableObject });
+  const mergedConfig = deepMerge.all(getDataFromConfigs(allConfigs), { isMergeableObject });
   const data = await processDeferredConfig(mergedConfig);
 
   return {
