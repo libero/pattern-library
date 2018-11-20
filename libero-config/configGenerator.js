@@ -68,7 +68,3 @@ module.exports = {
   mergeConfig,
   processDeferredConfig
 };
-
-if (require.main === module) {
-  generateConfig(allConfigs);
-}
