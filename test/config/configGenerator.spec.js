@@ -8,52 +8,56 @@ chai.use(chaiAsPromised);
 const Color = require('color');
 const configGenerator = require('../../libero-config/configGenerator');
 
-describe('the processDeferredConfig function', () => {
+describe('A configGenerator module', () => {
 
-  let configWithNoDeferrals;
-  let configWithDeferrals;
+  describe('processDeferredConfig function', () => {
 
-  beforeEach(() => {
+    let configWithNoDeferrals;
+    let configWithDeferrals;
 
-    configWithNoDeferrals = {
-      stringProperty: 'string property',
-      nestedStringProperty: {
-        nested: {
-          string: {
-            property: 'nested string property value'
+    beforeEach(() => {
+
+      configWithNoDeferrals = {
+        stringProperty: 'string property',
+        nestedStringProperty: {
+          nested: {
+            string: {
+              property: 'nested string property value'
+            }
           }
         }
-      }
-    };
+      };
 
-    configWithDeferrals = {
-      rootValue: 10,
-      derivedValue: '!expression rootValue * 30'
-    };
+      configWithDeferrals = {
+        rootValue: 10,
+        derivedValue: '!expression rootValue * 30'
+      };
 
-  });
-
-  context('when passed config containing a value not beginning "!expression"', () => {
-
-    it('passes that value through unchanged', () => {
-      expect(
-        configGenerator.processDeferredConfig(configWithNoDeferrals)
-      ).to.eventually.deep.equal(configWithNoDeferrals)
     });
 
-    expect(configGenerator.processDeferredConfig(configWithDeferrals)).to.eventually.have.own.property('rootValue', 10);
+    context('when passed config containing a value beginning "!expression"', () => {
 
-  });
+      it('evaluates that expression within the context of config', () => {
+        expect(configGenerator.processDeferredConfig(configWithDeferrals)).to.eventually.have.own.property('derivedValue', 300);
+      });
 
-  context('when passed config containing a value beginning "!expression"', () => {
+    });
 
-    it('evaluates that expression within the context of config', () => {
-      expect(configGenerator.processDeferredConfig(configWithDeferrals)).to.eventually.have.own.property('derivedValue', 300);
+    context('when passed config containing a value not beginning "!expression"', () => {
+
+      it('passes that value through unchanged', () => {
+        expect(
+          configGenerator.processDeferredConfig(configWithNoDeferrals)
+        ).to.eventually.deep.equal(configWithNoDeferrals)
+      });
+
+      expect(configGenerator.processDeferredConfig(configWithDeferrals)).to.eventually.have.own.property('rootValue', 10);
+
     });
 
   });
 
-  describe('the mergeConfig function', () => {
+  describe('mergeConfig function', () => {
 
     let firstConfig;
     let secondConfig;
@@ -120,7 +124,7 @@ describe('the processDeferredConfig function', () => {
       expect(merged.color).to.be.an.instanceOf(Color);
     });
 
-    context('when passed objects that would cause a merge conflict', () => {
+    context('when passed object properties that would cause a merge conflict', () => {
 
       it('the one passed last wins', () => {
         expect(merged.clash).to.equal(secondConfig.data.clash);
@@ -130,45 +134,45 @@ describe('the processDeferredConfig function', () => {
 
   });
 
-});
+  describe('allocateToLayers function', () => {
 
-describe('the allocateToLayers function', () => {
+    let allConfigsAllocations;
+    let mergedAllocations;
 
-  let allConfigsAllocations;
-  let mergedAllocations;
-
-  beforeEach(() => {
-    allConfigsAllocations = [
-      {
-        layerAllocations: {
-          sass: ['breakpoints', 'colors'],
-          js: ['breakpoints'],
-          template: ['grid']
+    beforeEach(() => {
+      allConfigsAllocations = [
+        {
+          layerAllocations: {
+            sass: ['breakpoints', 'colors'],
+            js: ['breakpoints'],
+            template: ['grid']
+          }
+        },
+        {
+          layerAllocations: {
+            sass: ['breakpoints', 'colors', 'grid'],
+            js: ['breakpoints', 'colors']
+          }
         }
-      },
-      {
-        layerAllocations: {
-          sass: ['breakpoints', 'colors', 'grid'],
-          js: ['breakpoints', 'colors']
-        }
-      }
-    ];
+      ];
 
-    mergedAllocations = configGenerator.allocateToLayers(allConfigsAllocations);
-  });
+      mergedAllocations = configGenerator.allocateToLayers(allConfigsAllocations);
+    });
 
-  it('correctly merges allocations from all configs', () => {
-    expect(mergedAllocations.sass).to.be.an('array').that.has.a.lengthOf(3);
-    expect(mergedAllocations.sass).to.include('breakpoints');
-    expect(mergedAllocations.sass).to.include('colors');
-    expect(mergedAllocations.sass).to.include('grid');
+    it('correctly merges allocations from all configs', () => {
+      expect(mergedAllocations.sass).to.be.an('array').that.has.a.lengthOf(3);
+      expect(mergedAllocations.sass).to.include('breakpoints');
+      expect(mergedAllocations.sass).to.include('colors');
+      expect(mergedAllocations.sass).to.include('grid');
 
-    expect(mergedAllocations.js).to.be.an('array').that.has.a.lengthOf(2);
-    expect(mergedAllocations.js).to.include('breakpoints');
-    expect(mergedAllocations.js).to.include('colors');
+      expect(mergedAllocations.js).to.be.an('array').that.has.a.lengthOf(2);
+      expect(mergedAllocations.js).to.include('breakpoints');
+      expect(mergedAllocations.js).to.include('colors');
 
-    expect(mergedAllocations.template).to.be.an('array').that.has.a.lengthOf(1);
-    expect(mergedAllocations.template).to.include('grid');
+      expect(mergedAllocations.template).to.be.an('array').that.has.a.lengthOf(1);
+      expect(mergedAllocations.template).to.include('grid');
+    });
+
   });
 
 });
