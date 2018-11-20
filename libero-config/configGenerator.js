@@ -57,7 +57,12 @@ async function generateConfig(allConfigs) {
 }
 
 module.exports = {
-  generateConfig: async function() {
+  generateConfig: function() {
     return generateConfig(allConfigs);
-  }
+  },
+  processDeferredConfig
 };
+
+if (require.main === module) {
+  generateConfig(allConfigs);
+}

@@ -26,6 +26,7 @@
     "postcss-scss": "^2.0.0",
     "run-sequence": "^2.2.1",
     "sass-true": "^4.0.0",
+    "sinon": "^7.1.1",
     "stylelint": "^9.4.0",
     "tmp": "0.0.33",
     "tree-crawl": "^1.0.5"
