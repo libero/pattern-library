@@ -38,20 +38,20 @@ describe('A configGenerator module', () => {
     context('when passed config containing a value beginning "!expression"', () => {
 
       it('evaluates that expression within the context of config', () => {
-        expect(configGenerator.processDeferredConfig(configWithDeferrals)).to.eventually.have.own.property('derivedValue', 300);
+        return expect(
+          configGenerator.processDeferredConfig(configWithDeferrals)
+        ).to.eventually.have.own.property('derivedValue', 300);
       });
 
     });
 
-    context('when passed config containing a value not beginning "!expression"', () => {
+    context('when passed config containing a value beginning "!expression"', () => {
 
       it('passes that value through unchanged', () => {
-        expect(
-          configGenerator.processDeferredConfig(configWithNoDeferrals)
-        ).to.eventually.deep.equal(configWithNoDeferrals)
+        return expect(
+          configGenerator.processDeferredConfig(configWithDeferrals)
+        ).to.eventually.have.own.property('rootValue', 10);
       });
-
-      expect(configGenerator.processDeferredConfig(configWithDeferrals)).to.eventually.have.own.property('rootValue', 10);
 
     });
 
