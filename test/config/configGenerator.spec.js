@@ -1,6 +1,5 @@
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
-const sinon = require('sinon');
 
 const expect = chai.expect;
 chai.use(chaiAsPromised);
