@@ -46,8 +46,12 @@ async function processDeferredConfig(config) {
   return config;
 }
 
+function mergeConfig(allConfigs) {
+  return deepMerge.all(getDataFromConfigs(allConfigs), { isMergeableObject });
+}
+
 async function generateConfig(allConfigs) {
-  const mergedConfig = deepMerge.all(getDataFromConfigs(allConfigs), { isMergeableObject });
+  const mergedConfig = mergeConfig(allConfigs);
   const data = await processDeferredConfig(mergedConfig);
 
   return {
@@ -57,9 +61,11 @@ async function generateConfig(allConfigs) {
 }
 
 module.exports = {
+  allocateToLayers,
   generateConfig: function() {
     return generateConfig(allConfigs);
   },
+  mergeConfig,
   processDeferredConfig
 };
 
