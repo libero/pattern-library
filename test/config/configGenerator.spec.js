@@ -5,7 +5,8 @@ const expect = chai.expect;
 chai.use(chaiAsPromised);
 
 const Color = require('color');
-const configGenerator = require('../../libero-config/configGenerator');
+const ConfigGenerator = require('../../libero-config/ConfigGenerator');
+const configGenerator = new ConfigGenerator();
 
 describe('A configGenerator module', () => {
 
@@ -38,7 +39,7 @@ describe('A configGenerator module', () => {
 
       it('evaluates that expression within the context of config', () => {
         return expect(
-          configGenerator.processDeferredConfig(configWithDeferrals)
+          ConfigGenerator.processDeferredConfig(configWithDeferrals)
         ).to.eventually.have.own.property('derivedValue', 300);
       });
 
@@ -48,7 +49,7 @@ describe('A configGenerator module', () => {
 
       it('passes that value through unchanged', () => {
         return expect(
-          configGenerator.processDeferredConfig(configWithDeferrals)
+          ConfigGenerator.processDeferredConfig(configWithDeferrals)
         ).to.eventually.have.own.property('rootValue', 10);
       });
 
@@ -56,7 +57,7 @@ describe('A configGenerator module', () => {
 
   });
 
-  describe('mergeConfig function', () => {
+  describe('mergeConfigs function', () => {
 
     let firstConfig;
     let secondConfig;
@@ -103,7 +104,7 @@ describe('A configGenerator module', () => {
         }
       };
 
-      merged = configGenerator.mergeConfig([firstConfig, secondConfig]);
+      merged = configGenerator.mergeConfigs([firstConfig, secondConfig]);
 
     });
 
