@@ -3,11 +3,17 @@ const configGenerator = require('../libero-config/configGenerator');
 const deepIterator = require('deep-iterator').default;
 const flatten = require('flat');
 const fs = require('fs');
-const minimist = require('minimist');
 const path = require('path');
 const {promisify} = require('util');
 
 const writeFileAsync = promisify(fs.writeFile);
+
+const paths = {
+  out: {
+    sassVariablesFileNameRoot: '../source/css/sass/_variables--',
+    jsonFileName: '../source/js/configForJs.json'
+  }
+};
 
 // Normalise the reported path to be from the project root
 function reportFileWrite(path) {
@@ -20,13 +26,6 @@ function writeFile(data, outPath) {
     .then(() => { reportFileWrite(outPath) })
     .catch(err => { throw err });
 }
-
-const paths = {
-  out: {
-    sassVariablesFileNameRoot: '../source/css/sass/_variables--',
-    jsonFileName: '../source/js/configForJs.json'
-  }
-};
 
 function processForSass(data) {
   const deepData = deepIterator(data);
@@ -44,12 +43,14 @@ function processForSass(data) {
 }
 
 function distributeToSass(allocations, data) {
-  let fileWritePromises = [];
+
+  const fileWritePromises = [];
+
   // Each allocation is written to a separate file
   allocations.forEach((allocation) => {
-    let normalisedData = {};
-    normalisedData[allocation] = data[allocation];
-    const processedItemData = processForSass(normalisedData);
+    const dataForAllocation = {};
+    dataForAllocation[allocation] = data[allocation];
+    const processedItemData = processForSass(dataForAllocation);
     const outFileName = `${paths.out.sassVariablesFileNameRoot}${allocation}.scss`;
     fileWritePromises.push(
       new Promise((resolve) => {
