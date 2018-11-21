@@ -1,5 +1,5 @@
 const Color = require('color');
-const configGenerator = require('../libero-config/configGenerator');
+const ConfigGenerator = require('./ConfigGenerator');
 const deepIterator = require('deep-iterator').default;
 const flatten = require('flat');
 const fs = require('fs');
@@ -8,10 +8,18 @@ const {promisify} = require('util');
 
 const writeFileAsync = promisify(fs.writeFile);
 
+// TODO: pass in configPaths
+const configPaths = [
+  './config--libero',
+  './config--custom'
+];
+
+const configGenerator = new ConfigGenerator(configPaths);
+
 const paths = {
   out: {
-    sassVariablesFileNameRoot: '../source/css/sass/_variables--',
-    jsonFileName: '../source/js/configForJs.json'
+    sassVariablesFileNameRoot: '../../source/css/sass/_variables--',
+    jsonFileName: '../../source/js/configForJs.json'
   }
 };
 
@@ -75,9 +83,9 @@ function distributeToJs(allocations, data) {
   return writeFile(processForJs(allocations, data), paths.out.jsonFileName);
 }
 
-async function distribute() {
+async function distribute(configPaths) {
   console.log('Distributing config...');
-  const config = await configGenerator.generateConfig();
+  const config = await configGenerator.generateConfig(configPaths);
   return Promise.all(
     [
       distributeToSass(config.layerAllocations.sass, config.data),
@@ -94,5 +102,5 @@ module.exports = {
 };
 
 if (require.main === module) {
-  distribute();
+  distribute(configPaths);
 }

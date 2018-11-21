@@ -5,8 +5,13 @@ const expect = chai.expect;
 chai.use(chaiAsPromised);
 
 const Color = require('color');
-const ConfigGenerator = require('../../libero-config/ConfigGenerator');
-const configGenerator = new ConfigGenerator();
+const ConfigGenerator = require('../../libero-config/bin/ConfigGenerator');
+
+const configPaths = [
+  './config--libero',
+  './config--custom'
+];
+const configGenerator = new ConfigGenerator(configPaths);
 
 describe('A configGenerator module', () => {
 

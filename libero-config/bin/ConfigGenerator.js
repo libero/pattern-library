@@ -1,22 +1,19 @@
 const deepIterator = require('deep-iterator').default;
 const deepMerge = require('deepmerge');
-const isMergeableObject = require('./isMergeableObject');
+const isMergeableObject = require('../isMergeableObject');
 const jexl = require('jexl');
 
 module.exports = class ConfigGenerator {
 
-  constructor(allConfigPaths) {
-    const defaultConfigPaths = [
-      './config--libero',
-      './config--custom'
-    ];
-    const configPaths = allConfigPaths || defaultConfigPaths;
+  constructor() {}
+
+  loadConfigs(configPaths) {
     const configs = [];
     configPaths.forEach((configPath) => {
-      configs.push(require(configPath));
+      configs.push(require(`../${configPath}`));
     });
 
-    this.allConfigs = configs;
+    return configs;
   }
 
   getPropertyFromAllConfigs(property, configs) {
@@ -33,10 +30,6 @@ module.exports = class ConfigGenerator {
     return this.getPropertyFromAllConfigs('layerAllocations', configs);
   }
 
-  getAllConfigs() {
-    return this.allConfigs;
-  }
-
   allocateToLayers(configs) {
     const accumulatedAllocations = deepMerge.all(this.getAllocationsFromAllConfigs(configs));
     Object.keys(accumulatedAllocations).forEach((key) => {
@@ -49,13 +42,14 @@ module.exports = class ConfigGenerator {
     return deepMerge.all(this.getDataFromConfigs(configs), { isMergeableObject });
   }
 
-  async generateConfig() {
-    const mergedConfig = this.mergeConfigs(this.getAllConfigs());
+  async generateConfig(configPaths) {
+    const configs = this.loadConfigs(configPaths);
+    const mergedConfig = this.mergeConfigs(configs);
     const data = await ConfigGenerator.processDeferredConfig(mergedConfig);
 
     return {
       data: data,
-      layerAllocations: this.allocateToLayers(this.getAllConfigs())
+      layerAllocations: this.allocateToLayers(configs)
     };
   }
 
