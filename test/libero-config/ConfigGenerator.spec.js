@@ -5,6 +5,8 @@ const expect = chai.expect;
 chai.use(chaiAsPromised);
 
 const Color = require('color');
+
+const fixtures = require('./fixtures/configFixtures');
 const ConfigGenerator = require('../../libero-config/bin/ConfigGenerator');
 
 const configPaths = [
@@ -21,23 +23,8 @@ describe('A configGenerator module', () => {
     let configWithDeferrals;
 
     beforeEach(() => {
-
-      configWithNoDeferrals = {
-        stringProperty: 'string property',
-        nestedStringProperty: {
-          nested: {
-            string: {
-              property: 'nested string property value'
-            }
-          }
-        }
-      };
-
-      configWithDeferrals = {
-        rootValue: 10,
-        derivedValue: '!expression rootValue * 30'
-      };
-
+      configWithNoDeferrals = fixtures.configWithNoDeferrals;
+      configWithDeferrals = fixtures.configWithDeferrals;
     });
 
     context('when passed config containing a value beginning "!expression"', () => {
@@ -66,49 +53,11 @@ describe('A configGenerator module', () => {
 
     let firstConfig;
     let secondConfig;
-    let colorIn;
     let merged;
 
     beforeEach(() => {
-
-      colorIn = Color('#663399');
-
-      firstConfig = {
-        data: {
-          clash: 'config 1 clashing value',
-          objects: [
-            {
-              id: 1
-            },
-            {
-              id: 2
-            },
-            {
-              id: 3
-            }
-          ],
-          color: colorIn
-        }
-      };
-
-      secondConfig = {
-        data: {
-          clash: 'config 2 clashing value',
-          additionalProperty: 'I am only in one of the configs',
-          objects: [
-            {
-              id: 4
-            },
-            {
-              id: 5
-            },
-            {
-              id: 6
-            }
-          ]
-        }
-      };
-
+      firstConfig = fixtures.configsToMerge.firstConfig;
+      secondConfig = fixtures.configsToMerge.secondConfig;
       merged = configGenerator.mergeConfigs([firstConfig, secondConfig]);
 
     });
@@ -145,22 +94,7 @@ describe('A configGenerator module', () => {
     let mergedAllocations;
 
     beforeEach(() => {
-      allConfigsAllocations = [
-        {
-          layerAllocations: {
-            sass: ['breakpoints', 'colors'],
-            js: ['breakpoints'],
-            template: ['grid']
-          }
-        },
-        {
-          layerAllocations: {
-            sass: ['breakpoints', 'colors', 'grid'],
-            js: ['breakpoints', 'colors']
-          }
-        }
-      ];
-
+      allConfigsAllocations = fixtures.allLayerAllocations;
       mergedAllocations = configGenerator.allocateToLayers(allConfigsAllocations);
     });
 
