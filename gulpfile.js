@@ -153,13 +153,13 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
 });
 
 gulp.task('distributeSharedConfig', ['css:clean'], (done) => {
-  // exec is deprecated. Might need to find another way to do this.
-  exec('node ./bin/distribute-shared-config.js', (err, stdout, stderr) => {
+  exec('node ./libero-config/bin/distributeConfig.js', (err, stdout, stderr) => {
     console.log(stdout);
     console.log(stderr);
     done(err);
   });
 });
+
 
 gulp.task('sass:watch', () => {
   return gulp.watch([config.files.src.sass, config.files.test.sass], ['css:generate']);

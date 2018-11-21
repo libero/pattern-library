@@ -1,6 +1,6 @@
 const deepIterator = require('deep-iterator').default;
 const deepMerge = require('deepmerge');
-const isMergeableObject = require('../isMergeableObject');
+const isMergeableObject = require('./isMergeableObject');
 const jexl = require('jexl');
 
 module.exports = class ConfigGenerator {
