@@ -1,6 +1,6 @@
 const Color = require('color');
 
-const config = { data: {} };
+const config = { data: {}, layerAllocations: {} };
 
 config.data.baselinegrid = {space: {}};
 config.data.baselinegrid.space.extra_small_in_px = 12;

@@ -1,7 +1,7 @@
 // Used when colour values are specified
 const Color = require('color');
 
-// Each config file will need a config object with a data property
+// Override / specify additional config properties on the config.data property
 const config = {
   data: {
     color: { primary: {} },
@@ -9,7 +9,6 @@ const config = {
   }
 };
 
-// Add your custom config.data properties
 config.data.color.primary.normal = Color('#F00CA1');
 config.data.customThing = 'custom thing';
 config.data.deep = { custom: { thing: ['deep', 'custom', 'thing'] } };
@@ -23,8 +22,11 @@ config.data.breakpoints = {
 config.data.baselinegrid.space.extra_large_in_px = '!expression baselinegrid.space.small_in_px * 500';
 
 
+// Define which top level config.data properties should be distributed to which layer (sass, js & template)
+// This augments those allocated from any prior-loaded config
 config.layerAllocations = {
   sass: ['color'],
+  // js: ['baselinegrid'],
   template: ['color']
 };
 
