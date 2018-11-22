@@ -1,3 +1,4 @@
+const ConfigGenerator = require('./ConfigGenerator');
 const configDistributor = require('./configDistributor');
 
 const configPaths = [
@@ -5,4 +6,7 @@ const configPaths = [
   './config--custom'
 ];
 
-configDistributor.distribute(configPaths).catch((err) => { throw err; });
+const configGenerator = new ConfigGenerator(configPaths);
+
+configDistributor.distribute(configPaths, configGenerator)
+                 .catch((err) => { throw err; });

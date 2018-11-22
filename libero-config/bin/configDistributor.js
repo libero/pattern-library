@@ -8,14 +8,6 @@ const {promisify} = require('util');
 
 const writeFileAsync = promisify(fs.writeFile);
 
-// TODO: pass in configPaths
-const configPaths = [
-  './config--libero',
-  './config--custom'
-];
-
-const configGenerator = new ConfigGenerator(configPaths);
-
 const paths = {
   out: {
     sassVariablesFileNameRoot: '../../source/css/sass/_variables--',
@@ -83,7 +75,7 @@ function distributeToJs(allocations, data) {
   return writeFile(processForJs(allocations, data), paths.out.jsonFileName);
 }
 
-async function distribute(configPaths) {
+async function distribute(configPaths, configGenerator) {
   console.log('Distributing config...');
   const config = await configGenerator.generateConfig(configPaths);
   return Promise.all(
@@ -100,7 +92,3 @@ async function distribute(configPaths) {
 module.exports = {
   distribute,
 };
-
-if (require.main === module) {
-  distribute(configPaths);
-}

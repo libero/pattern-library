@@ -94,7 +94,7 @@ describe('A configGenerator module', () => {
     let mergedAllocations;
 
     beforeEach(() => {
-      allConfigsAllocations = fixtures.allLayerAllocations;
+      allConfigsAllocations = fixtures.configLayerAllocations;
       mergedAllocations = configGenerator.allocateToLayers(allConfigsAllocations);
     });
 

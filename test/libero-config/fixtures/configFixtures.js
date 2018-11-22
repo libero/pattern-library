@@ -57,7 +57,7 @@ module.exports = {
     }
   },
 
-  allLayerAllocations: [
+  configLayerAllocations: [
     {
       layerAllocations: {
         sass: ['breakpoints', 'colors'],
