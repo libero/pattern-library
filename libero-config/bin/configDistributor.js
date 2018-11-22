@@ -1,5 +1,4 @@
 const Color = require('color');
-const ConfigGenerator = require('./ConfigGenerator');
 const deepIterator = require('deep-iterator').default;
 const flatten = require('flat');
 const fs = require('fs');
@@ -91,4 +90,6 @@ async function distribute(configPaths, configGenerator) {
 
 module.exports = {
   distribute,
+  processForJs,
+  processForSass
 };

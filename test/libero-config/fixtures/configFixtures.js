@@ -2,6 +2,11 @@ const Color = require('color');
 
 module.exports = {
 
+  configPaths: [
+    './config--libero',
+    './config--custom'
+  ],
+
   configWithNoDeferrals: {
     stringProperty: 'string property',
     nestedStringProperty: {
@@ -71,7 +76,44 @@ module.exports = {
         js: ['breakpoints', 'colors']
       }
     }
-  ]
+  ],
+
+  sassConfigToProcess: {
+    input: {
+      breakpoints: {
+        site: {
+          'x_small': 320,
+          small: 480,
+          medium: 730,
+          wide: 900,
+          'x_wide': 1400,
+          'xx_wide': 1600
+        }
+      }
+    },
+    expected: '$breakpoints-site-x_small: 320;\n'
+            + '$breakpoints-site-small: 480;\n'
+            + '$breakpoints-site-medium: 730;\n'
+            + '$breakpoints-site-wide: 900;\n'
+            + '$breakpoints-site-x_wide: 1400;\n'
+            + '$breakpoints-site-xx_wide: 1600;\n'
+  },
+
+  jsConfigToProcess: {
+    input: {
+      breakpoints: {
+        site: {
+          'x_small': 320,
+          small: 480,
+          medium: 730,
+          wide: 900,
+          'x_wide': 1400,
+          'xx_wide': 1600
+        }
+      }
+    }
+
+  }
 
 };
 

@@ -26,7 +26,7 @@ config.data.baselinegrid.space.extra_large_in_px = '!expression baselinegrid.spa
 // This augments those allocated from any prior-loaded config
 config.layerAllocations = {
   sass: ['color'],
-  // js: ['baselinegrid'],
+  // js: ['baselinegridgrid'],
   template: ['color']
 };
 
