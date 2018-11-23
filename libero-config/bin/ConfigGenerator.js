@@ -3,6 +3,10 @@ const deepMerge = require('deepmerge');
 const isMergeableObject = require('./isMergeableObject');
 const jexl = require('jexl');
 
+/**
+ * Generates one fully merged config file from multiple sources
+ * @type {module.ConfigGenerator}
+ */
 module.exports = class ConfigGenerator {
 
   constructor() {}

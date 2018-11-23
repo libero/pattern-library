@@ -7,6 +7,10 @@ const {promisify} = require('util');
 
 const writeFileAsync = promisify(fs.writeFile);
 
+/**
+ * Distributes specified config to appropriate layers (sass, js, templates)
+ * @type {module.ConfigDistributor}
+ */
 module.exports = class ConfigDistributor {
 
   constructor() {
