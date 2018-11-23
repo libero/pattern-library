@@ -7,10 +7,16 @@ module.exports = class ConfigGenerator {
 
   constructor() {}
 
-  loadConfigs(configPaths) {
+  loadConfigs(configPaths, pathPrefix) {
+    if (!Array.isArray(configPaths)) {
+      throw new Error('loadConfigs must he supplied with an array');
+    }
+
     const configs = [];
+    const prefix = pathPrefix || '../';
     configPaths.forEach((configPath) => {
-      configs.push(require(`../${configPath}`));
+      const path = `${prefix}${configPath}`;
+      configs.push(require(path));
     });
 
     return configs;

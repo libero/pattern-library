@@ -14,7 +14,7 @@ const expect = chai.expect;
 const standAloneConfigFixtureFilePath = './fixtures/configFixtureStandAlone';
 const standAloneConfigFixture = require(standAloneConfigFixtureFilePath);
 
-describe('A shared config distribution module', () => {
+describe('A distributeConfig module', () => {
 
   describe('distribute function', () => {
 
@@ -56,7 +56,7 @@ describe('A shared config distribution module', () => {
 
   });
 
-  describe('processForJs function function', () => {
+  describe('processForJs function', () => {
 
     context('when supplied with a JavaScript object defining data for the JavaScript layer', () => {
 

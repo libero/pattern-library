@@ -74,18 +74,23 @@ function distributeToJs(allocations, data) {
   return writeFile(processForJs(allocations, data), paths.out.jsonFileName);
 }
 
-async function distribute(configPaths, configGenerator) {
+function distribute(configPaths, configGenerator) {
   console.log('Distributing config...');
-  const config = await configGenerator.generateConfig(configPaths);
-  return Promise.all(
-    [
-      distributeToSass(config.layerAllocations.sass, config.data),
-      distributeToJs(config.layerAllocations.js, config.data),
-    ]
-  ).catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+  return configGenerator.generateConfig(configPaths)
+
+                 .then((config) => {
+                   return Promise.all(
+                     [
+                       distributeToSass(config.layerAllocations.sass, config.data),
+                       distributeToJs(config.layerAllocations.js, config.data),
+                     ]
+                   )
+                 })
+
+                 .catch(err => {
+                   console.error(err.message);
+                   process.exit(1);
+                 });
 }
 
 module.exports = {

@@ -1,5 +1,41 @@
 const Color = require('color');
 
+const firstGenericConfig = {
+  data: {
+    clash: 'config 1 clashing value',
+    objects: [
+      {
+        id: 1
+      },
+      {
+        id: 2
+      },
+      {
+        id: 3
+      }
+    ],
+    color: Color('#663399')
+  }
+};
+
+const secondGenericConfig = {
+  data: {
+    clash: 'config 2 clashing value',
+    additionalProperty: 'I am only in one of the configs',
+    objects: [
+      {
+        id: 4
+      },
+      {
+        id: 5
+      },
+      {
+        id: 6
+      }
+    ]
+  }
+};
+
 module.exports = {
 
   configPaths: [
@@ -24,42 +60,13 @@ module.exports = {
   },
 
   configsToMerge: {
+    firstConfig: firstGenericConfig,
+    secondConfig: secondGenericConfig
+  },
 
-    firstConfig: {
-      data: {
-        clash: 'config 1 clashing value',
-        objects: [
-          {
-            id: 1
-          },
-          {
-            id: 2
-          },
-          {
-            id: 3
-          }
-        ],
-        color: Color('#663399')
-      }
-    },
-
-    secondConfig: {
-      data: {
-        clash: 'config 2 clashing value',
-        additionalProperty: 'I am only in one of the configs',
-        objects: [
-          {
-            id: 4
-          },
-          {
-            id: 5
-          },
-          {
-            id: 6
-          }
-        ]
-      }
-    }
+  configsWithData: {
+    firstConfig: firstGenericConfig,
+    secondConfig: secondGenericConfig
   },
 
   configLayerAllocations: [
