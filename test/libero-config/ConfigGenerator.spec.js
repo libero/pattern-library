@@ -16,9 +16,9 @@ const configPaths = [
 
 describe('A ConfigGenerator class', () => {
 
-  let configGenerator;
-
   context('instansiated object', () => {
+
+    let configGenerator;
 
     beforeEach(() => {
       configGenerator = new ConfigGenerator();

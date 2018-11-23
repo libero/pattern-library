@@ -1,5 +1,5 @@
 const ConfigGenerator = require('./ConfigGenerator');
-const configDistributor = require('./configDistributor');
+const ConfigDistributor = require('./ConfigDistributor');
 
 const configPaths = [
   './config--libero',
@@ -10,5 +10,6 @@ const configPaths = [
 const configGenerator = new ConfigGenerator(configPaths);
 
 // Distribute defined parts of the config to specified technology layers
+const configDistributor = new ConfigDistributor();
 configDistributor.distribute(configPaths, configGenerator)
                  .catch((err) => { throw err; });
