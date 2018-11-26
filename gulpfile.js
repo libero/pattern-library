@@ -47,6 +47,7 @@ function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
   config.dir.src.images = `${config.sourceRoot}images/`;
   config.dir.src.fonts = `${config.sourceRoot}fonts/`;
   config.dir.src.templates = `${config.sourceRoot}_patterns/`;
+  config.dir.src.js = `${config.sourceRoot}js/`;
 
   config.dir.test.sass = `${config.testRoot}sass/`;
 
@@ -71,6 +72,10 @@ function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
   config.files.src.templates = [`${config.dir.src.templates}/*.twig`, `${config.dir.src.templates}/**/*.twig`];
+  config.files.src.derivedConfigs = [
+    `${config.dir.src.sass}derived-from-config/**/*`,
+    `${config.dir.src.js}derived-from-config/**/*`
+  ];
 
   config.files.test.sass = `${config.dir.test.sass}**/*.spec.scss`;
   config.files.test.sassTestsEntryPoint = `${config.dir.test.sass}test_sass.js`;
@@ -152,7 +157,11 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
 
 });
 
-gulp.task('distributeSharedConfig', ['css:clean'], (done) => {
+gulp.task('sharedConfig:clean', () => {
+  return del(config.files.src.derivedConfigs);
+});
+
+gulp.task('distributeSharedConfig', ['css:clean', 'sharedConfig:clean'], (done) => {
   exec('node ./libero-config/bin/distributeConfig.js', (err, stdout, stderr) => {
     console.log(stdout);
     console.log(stderr);
