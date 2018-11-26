@@ -107,12 +107,16 @@ module.exports = class ConfigDistributor {
   }
 
   static async writeFile(data, outPath) {
-    const projectRootPath = path.resolve(path.join(process.cwd(), '../..'));
+    let projectRootPath = process.cwd();
+    const matched = projectRootPath.match(/^.*\/libero-config\/bin.*$/);
+    if (matched) {
+      projectRootPath = path.resolve(path.join(process.cwd(), '../..'));
+    }
     const outPathDirectoryComponent = outPath.substring(0, outPath.lastIndexOf('/') + 1);
     const fullDirectoryPath = path.join(projectRootPath, outPathDirectoryComponent);
     await this.writeDirectory(fullDirectoryPath);
 
-    const filenameComponent = outPath.substring(outPath.lastIndexOf('/') + 2);
+    const filenameComponent = outPath.substring(outPath.lastIndexOf('/') + 1);
     return writeFileAsync(path.join(fullDirectoryPath, filenameComponent), data)
       .then(() => {
         console.log(`Written config to ${path.join(outPathDirectoryComponent, filenameComponent)}`);
