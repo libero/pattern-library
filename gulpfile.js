@@ -99,7 +99,7 @@ gulp.task('css:generate', ['sass:test'], () => {
              .pipe(gulp.dest(config.dir.src.css));
 });
 
-gulp.task('sass:lint', ['distributeSharedConfig'], () => {
+gulp.task('sass:lint', ['css:clean'], () => {
   if (!config.sassLinting) {
     console.info("Skipping sass:lint");
     return;
@@ -161,7 +161,7 @@ gulp.task('sharedConfig:clean', () => {
   return del(config.files.src.derivedConfigs);
 });
 
-gulp.task('distributeSharedConfig', ['css:clean', 'sharedConfig:clean'], (done) => {
+gulp.task('distributeSharedConfig', ['sharedConfig:clean'], (done) => {
   exec('node ./libero-config/bin/distributeConfig.js', (err, stdout, stderr) => {
     console.log(stdout);
     console.log(stderr);
@@ -169,15 +169,17 @@ gulp.task('distributeSharedConfig', ['css:clean', 'sharedConfig:clean'], (done) 
   });
 });
 
-
 gulp.task('sass:watch', () => {
   return gulp.watch([config.files.src.sass, config.files.test.sass], ['css:generate']);
 });
 
 gulp.task('default', done => {
   runSequence(
+    'distributeSharedConfig',
     'build',
     'exportPatterns',
     done,
   );
 });
+
+gulp.task('watch', ['sass:watch']);
