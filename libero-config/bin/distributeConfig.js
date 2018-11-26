@@ -3,7 +3,7 @@ const ConfigDistributor = require('./ConfigDistributor');
 
 const configPaths = [
   './config--libero',
-  './config--custom'
+  // './config--custom'
 ];
 
 // Combine all configs specified in configPaths into one config
