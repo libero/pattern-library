@@ -14,11 +14,10 @@ const writeFileAsync = promisify(fs.writeFile);
 module.exports = class ConfigDistributor {
 
   constructor() {
-    // Go full meta and extract into config?
     this.paths = {
       out: {
-        sassVariablesFileNameRoot: '../../source/css/sass/derived-from-config/_variables--',
-        jsonFileName: '../../source/js/derived-from-config/configForJs.json'
+        sassVariablesFileNameRoot: '/source/css/sass/derived-from-config/_variables--',
+        jsonFileName: '/source/js/derived-from-config/configForJs.json'
       }
     };
   }
@@ -96,16 +95,29 @@ module.exports = class ConfigDistributor {
                  }, '');
   }
 
-  static writeFile(data, outPath) {
-    return writeFileAsync(path.join(__dirname, outPath), data)
-      .then(() => { ConfigDistributor.reportFileWrite(outPath) })
-      .catch(err => { throw err });
+  static writeDirectory(path) {
+    return new Promise((resolve, reject) => {
+      fs.mkdir(path, { recursive: true}, (err) => {
+        if (err) {
+          reject(err);
+        }
+        resolve();
+      });
+    });
   }
 
-  // Normalise the reported path to be from the project root
-  static reportFileWrite(path) {
-    const reportedPath = path.replace(/(\.\.\/)*([^./])/, '\/$2');
-    console.log(`Written config to ${reportedPath}`);
+  static async writeFile(data, outPath) {
+    const projectRootPath = path.resolve(path.join(process.cwd(), '../..'));
+    const outPathDirectoryComponent = outPath.substring(0, outPath.lastIndexOf('/') + 1);
+    const fullDirectoryPath = path.join(projectRootPath, outPathDirectoryComponent);
+    await this.writeDirectory(fullDirectoryPath);
+
+    const filenameComponent = outPath.substring(outPath.lastIndexOf('/') + 2);
+    return writeFileAsync(path.join(fullDirectoryPath, filenameComponent), data)
+      .then(() => {
+        console.log(`Written config to ${path.join(outPathDirectoryComponent, filenameComponent)}`);
+      })
+      .catch(err => { throw err });
   }
 
 };

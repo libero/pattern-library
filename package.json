@@ -31,5 +31,8 @@
     "stylelint": "^9.4.0",
     "tmp": "0.0.33",
     "tree-crawl": "^1.0.5"
+  },
+  "engines": {
+    "node": ">=10.12"
   }
 }
