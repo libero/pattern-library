@@ -173,10 +173,17 @@ gulp.task('sass:watch', () => {
   return gulp.watch([config.files.src.sass, config.files.test.sass], ['css:generate']);
 });
 
-gulp.task('default', done => {
+gulp.task('assemble', done => {
   runSequence(
     'distributeSharedConfig',
     'build',
+    done,
+  );
+});
+
+gulp.task('default', done => {
+  runSequence(
+    'assemble',
     'exportPatterns',
     done,
   );
