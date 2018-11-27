@@ -17,7 +17,7 @@ module.exports = class ConfigDistributor {
     this.paths = {
       out: {
         sassVariablesFileNameRoot: '/source/css/sass/derived-from-config/_variables--',
-        jsonFileName: '/source/js/derived-from-config/configForJs.json'
+        jsonFileName: '/source/js/derivedConfigForJs.json'
       }
     };
   }
