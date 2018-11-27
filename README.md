@@ -58,7 +58,7 @@ The result is that `config.data.baselinegrid.space.small_in_px` will have the va
 
 #### Distributing configuration  
 ##### Distributing to SASS  
-Each property of `config.data` specified in `config.layerAllocations.sass` is eventually written as a SASS file to  `/source/css/sass/derived-from-config/_variables--[propertyname].sass`. Each of these files contains the SASS variables describing the config for that property. Looking at the `breakpoint` example again, this config  
+Each property of `config.data` specified in `config.layerAllocations.sass` is eventually written as a SASS file to  `/source/css/sass/variables/[propertyname].sass`. Each of these files contains the SASS variables describing the config for that property. Looking at the `breakpoint` example again, this config  
   
 ```  
 // specified in a config file  
@@ -71,12 +71,12 @@ config.layerAllocations.sass = ['breakpoint'];
   
 generates this file:  
 ```  
-// /source/css/sass/derived-from-config/_variables--breakpoint.sass  
+// /source/css/sass/variables/breakpoint.sass  
 $breakpoint-site-small: 480;  
 $breakpoint-site-medium: 730;  
 ```   
 ##### Distributing to JavaScript  
-Each property of `config.data` specified in `config.layerAllocations.jss` is eventually written to `/source/js/derived-from-config/configForJs.json`.  Looking at the `breakpoint` example again, this config:    
+Each property of `config.data` specified in `config.layerAllocations.jss` is eventually written to `/source/js/derivedConfig.json`.  Looking at the `breakpoint` example again, this config:    
   
 ```js  
 // specified in a config file  
@@ -88,7 +88,7 @@ config.layerAllocations.js = ['breakpoint'];
   
 adds this into `configForJs.json`:  
 ```  
-// /source/js/derived-from-config/configForJs.json  
+// /source/js/derivedConfig.json  
 ...  
 {"breakpoint":{"site":{"small":480,"medium":730}}}  
 ...  
