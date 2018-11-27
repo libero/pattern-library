@@ -27,20 +27,18 @@ module.exports = class ConfigDistributor {
     console.log('Distributing config...');
 
     return configGenerator.generateConfig(configPaths)
-
-                          .then((config) => {
-                            return Promise.all(
-                              [
-                                this.distributeToSass(config.layerAllocations.sass, config.data),
-                                this.distributeToJs(config.layerAllocations.js, config.data),
-                              ]
-                            )
-                          })
-
-                          .catch(err => {
-                            console.error(err.message);
-                            process.exit(1);
-                          });
+      .then((config) => {
+        return Promise.all(
+          [
+            this.distributeToSass(config.layerAllocations.sass, config.data),
+            this.distributeToJs(config.layerAllocations.js, config.data),
+          ]
+        )
+      })
+      .catch(err => {
+        console.error(err.message);
+        process.exit(1);
+      });
   }
 
   distributeToJs(allocations, data) {
@@ -89,10 +87,10 @@ module.exports = class ConfigDistributor {
     }
 
     return Object.entries(flatten(data, {delimiter: '-'}))
-                 .reduce((carry, pair) => {
-                   const [key, value] = pair;
-                   return `${carry}$${key}: ${value};\n`;
-                 }, '');
+      .reduce((carry, pair) => {
+        const [key, value] = pair;
+        return `${carry}$${key}: ${value};\n`;
+      }, '');
   }
 
   static writeDirectory(path) {
