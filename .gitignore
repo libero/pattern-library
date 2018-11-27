@@ -8,5 +8,5 @@
 /source/css/*.map
 /source/styleguide/
 /vendor/
-/source/js/derivedConfigForJs.json
 /source/css/sass/variables/
+/source/js/derivedConfig.json
