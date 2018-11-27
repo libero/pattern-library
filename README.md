@@ -101,10 +101,10 @@ Default configuration is supplied by `/libero-config/config--libero-default.js`.
 ##### Changing configuration  
 Do not change the contents of the default config file `/libero-config/config--libero-default.js` directly.  
   
-Any changes to the configuration should be effected by placing one or more custom configuration files into `/libero-config/`, and registering the file name(s) in `/libero-config/configsRegister.json`. Any files listed here are loaded as config files. The order of the files listed  defines their load order. This is important when namespace clashes occur: when this happens the clashing name that was loaded last wins. This is how specific configuration properties are overridden.  
+Any changes to the configuration should be effected by placing one or more custom configuration files into `/libero-config/`, and registering the file name(s) in `/libero-config/configRegister.json`. Any files listed here are loaded as config files. The order of the files listed  defines their load order. This is important when namespace clashes occur: when this happens the clashing name that was loaded last wins. This is how specific configuration properties are overridden.  
   
 ##### Swapping out configuration wholesale  
-Supply your own config file(s), add appropriate references to `/libero-config/configRegister.js`, and remove mention of `configs--libero.js` from `/libero-config/configRegister.js`.   
+Supply your own config file(s), add appropriate references to `/libero-config/configRegister.js`, and remove mention of `configs--libero-default.js` from `/libero-config/configRegister.js`.   
   
 ##### Keep default configuration but augment or override some of its properties  
 Supply your own config file(s), add appropriate references to `/libero-config/configRegister.js`.
