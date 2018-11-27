@@ -17,7 +17,7 @@ Configuration is used for two things:
 1. whilst enabling the single source of truth, configuration must also be able to be changed as required in a manageable way. The breakpoints, colors, baseline grid measures etc may not be the same between implementations, whilst enabling the ability to easily reuse most of the config and only tweak the odd value if a light touch is needed.  
   
 #### Anatomy of configuration  
-(All config file code examples are taken from `/libero-config/config--libero.js`.)  
+(All config file code examples are taken from `/libero-config/config--libero-default.js`.)  
 
 ##### Simple example
 `config.data` is where you define your configuration data.
@@ -96,10 +96,10 @@ adds this into `configForJs.json`:
   
 #### Modifying configuration
 ##### Default configuration  
-Default configuration is supplied by `/libero-config/config--libero.js`. If this is sufficient, the rest of this section may be safely ignored.  
+Default configuration is supplied by `/libero-config/config--libero-default.js`. If this is sufficient, the rest of this section may be safely ignored.  
   
 ##### Changing configuration  
-Do not change the contents of the default config file `/libero-config/config--libero.js` directly.  
+Do not change the contents of the default config file `/libero-config/config--libero-default.js` directly.  
   
 Any changes to the configuration should be effected by placing one or more custom configuration files into `/libero-config/`, and registering the file name(s) in `/libero-config/configs.json`. Any files listed here are loaded as config files. The order of the files listed  defines their load order. This is important when namespace clashes occur: when this happens the clashing name that was loaded last wins. This is how specific configuration properties are overridden.  
   

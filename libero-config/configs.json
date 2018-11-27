@@ -1,5 +1,5 @@
 {
   "configPaths": [
-    "config--libero.js"
+    "config--libero-default.js"
   ]
 }
