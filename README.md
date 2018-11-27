@@ -12,7 +12,7 @@ N.B. When configuration files are changed, the config needs to be regenerated, e
 #### Uses of configuration  
 Configuration is used for two things:  
   
-1. to be the single source of truth for knowledge that needs to be shared across across front end technology boundaries. For example, media query breakpoint values need to exist in the styling layer, but they are also often needed by JavaScript.  
+1. to be the single source of truth for knowledge that needs to be shared across across front end technology boundaries. For example, media query breakpoint values need to exist in the styling layer, but they are also often needed by JavaScript. Note that for flexibility all configuration could be maintained using this system in order to make it easier to later distribute configuration if it suddenly becomes necessary.  
   
 1. whilst enabling the single source of truth, configuration must also be able to be changed as required in a manageable way. The breakpoints, colors, baseline grid measures etc may not be the same between implementations, whilst enabling the ability to easily reuse most of the config and only tweak the odd value if a light touch is needed.  
   
