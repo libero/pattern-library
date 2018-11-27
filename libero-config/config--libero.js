@@ -39,7 +39,6 @@ config.data.color.success_dark = Color('#569037');
 config.data.color.attention = Color('#cf0c4e');
 config.data.color.warning = Color('#e65100');
 
-// TODO: Extract?
 // Specify the top level properties to be distributed to layers (sass, js & templates)
 config.layerAllocations = {
   sass: ['baselinegrid', 'breakpoint', 'color'],
