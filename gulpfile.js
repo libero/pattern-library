@@ -73,8 +73,8 @@ function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
   config.files.src.templates = [`${config.dir.src.templates}/*.twig`, `${config.dir.src.templates}/**/*.twig`];
   config.files.src.derivedConfigs = [
-    `${config.dir.src.sass}derived-from-config/**/*`,
-    `${config.dir.src.js}derived-from-config/**/*`
+    `${config.dir.src.sass}variables/**/*`,
+    `${config.dir.src.js}derivedConfig.json`
   ];
 
   config.files.test.sass = `${config.dir.test.sass}**/*.spec.scss`;
