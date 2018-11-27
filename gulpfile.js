@@ -1,7 +1,7 @@
 'use strict';
 
 const del = require('del');
-const {exec} = require('child_process');
+const distributeConfig = require('./libero-config/bin/distributeConfig');
 const flatten = require('gulp-flatten');
 const gulp = require('gulp');
 const mergeStreams = require('merge-stream');
@@ -162,11 +162,8 @@ gulp.task('sharedConfig:clean', () => {
 });
 
 gulp.task('distributeSharedConfig', ['sharedConfig:clean'], (done) => {
-  exec('node ./libero-config/bin/distributeConfig.js', (err, stdout, stderr) => {
-    console.log(stdout);
-    console.log(stderr);
-    done(err);
-  });
+  distributeConfig();
+  done();
 });
 
 gulp.task('sass:watch', () => {

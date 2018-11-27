@@ -21,9 +21,17 @@ function useConfigSpec(rawData) {
                    .catch((err) => { throw err; });
 }
 
-readFileAsync(configSpecFilepath)
-  .then(useConfigSpec)
-  .catch((err) => {
-    throw err;
-  });
+function distribute() {
+  return readFileAsync(configSpecFilepath)
+    .then(useConfigSpec)
+    .catch((err) => {
+      throw err;
+    });
+}
+
+module.exports = distribute;
+
+if (require.main === module) {
+  distribute();
+}
 
