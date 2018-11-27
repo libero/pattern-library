@@ -3,8 +3,10 @@ Libero pattern library
 ======================  
   
 ## Developing patterns with the pattern library  
-[This section is a work in progress. Likely to be updated to use Docker.]   
-To get things up and running for local development using default configuration, run `/bin/dev`.  
+[No patterns yet!
+
+This section is a work in progress.]   
+
   
 ### Configuration
 N.B. When configuration files are changed, the config needs to be regenerated, either by running `node ./libero-config/bin/distributeConfig.js` or the Gulp task `distributeConfig`.  
