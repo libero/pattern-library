@@ -1,6 +1,6 @@
 // Put all general purpose functions in here
 
-@import "derived-from-config/variables--font";
+@import "variables/font";
 
 @function _error($message, $capture: false) {
   @if $capture {

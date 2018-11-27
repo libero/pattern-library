@@ -16,7 +16,7 @@ module.exports = class ConfigDistributor {
   constructor() {
     this.paths = {
       out: {
-        sassVariablesFileNameRoot: '/source/css/sass/derived-from-config/_variables--',
+        sassVariablesPath: '/source/css/sass/variables',
         jsonFileName: '/source/js/derivedConfigForJs.json'
       }
     };
@@ -57,8 +57,7 @@ module.exports = class ConfigDistributor {
       const dataForAllocation = {};
       dataForAllocation[allocation] = data[allocation];
       const processedItemData = ConfigDistributor.processForSass(dataForAllocation);
-      const outFileName =
-        `${this.paths.out.sassVariablesFileNameRoot}${allocation}.scss`;
+      const outFileName = path.join(this.paths.out.sassVariablesPath, `${allocation}.scss`);
       fileWritePromises.push(
         new Promise((resolve) => {
           resolve(ConfigDistributor.writeFile(processedItemData, outFileName));
