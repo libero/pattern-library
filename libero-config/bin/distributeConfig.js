@@ -6,7 +6,7 @@ const {promisify} = require('util');
 
 const readFileAsync = promisify(fs.readFile);
 
-const configSpecFilepath = path.join(path.resolve(__dirname, '..'), 'configs.json');
+const configSpecFilepath = path.join(path.resolve(__dirname, '..'), 'configRegister.json');
 
 function useConfigSpec(rawData) {
   const data = JSON.parse((rawData));
