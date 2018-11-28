@@ -8,3 +8,6 @@ COPY core/ core/
 COPY --from=patterns /patterns-core/source/ source/
 COPY --from=composer /app/vendor/ vendor/
 RUN php core/console --generate
+# TODO: try relative paths
+CMD php -S 0.0.0.0:8080 -t /ui-builder/public /ui-builder/core/server/router.php
+EXPOSE 8080

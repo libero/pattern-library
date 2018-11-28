@@ -16,6 +16,8 @@ services:
             context: .
             dockerfile: Dockerfile.ui-builder
         image: liberoadmin/patterns-core_ui-builder
+        ports:
+            - "8889:8080"
         depends_on:
             - patterns
             - composer
