@@ -6,12 +6,12 @@ services: docker
 
 script:
     # conventional image name, but no intention to push it so far
-    - docker build -t liberoadmin/patterns-core .
+    - docker build -t liberoadmin/patterns-core_patterns -f Dockerfile.patterns .
 
 after_success:
-    - docker run --name patterns-core liberoadmin/patterns-core node_modules/.bin/gulp exportPatterns
+    - docker run --name patterns-core-patterns liberoadmin/patterns-core_patterns node_modules/.bin/gulp exportPatterns
     # TODO: empty out committed export/ folder
-    - docker cp patterns-core:/patterns-core/export/. export/
+    - docker cp patterns-core-patterns:/patterns-core/export/. export/
     - .travis/package.sh
 
 deploy:
