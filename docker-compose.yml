@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+    patterns:
+        build:
+            context: .
+            dockerfile: Dockerfile.patterns
+        image: liberoadmin/patterns-core_patterns
