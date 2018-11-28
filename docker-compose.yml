@@ -17,9 +17,15 @@ services:
             context: .
             dockerfile: Dockerfile.ui-builder
         image: liberoadmin/patterns-core_ui-builder
-        ports:
-            - "8889:8080"
         depends_on:
             - patterns
             - composer
+    ui-viewer:
+        # TODO: probably use its own Dockerfile and image
+        image: liberoadmin/patterns-core_ui-builder
+        command: php -S 0.0.0.0:8080 -t /ui-builder/public /ui-builder/core/server/router.php
+        ports:
+            - "8889:8080"
+        depends_on:
+            - ui-builder
 
