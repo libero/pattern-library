@@ -11,6 +11,7 @@ services:
             context: .
             dockerfile: Dockerfile.composer
         image: liberoadmin/patterns-core_composer
+        command: /bin/sh
     ui-builder:
         build:
             context: .
