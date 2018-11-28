@@ -6,3 +6,9 @@ services:
             context: .
             dockerfile: Dockerfile.patterns
         image: liberoadmin/patterns-core_patterns
+    composer:
+        build:
+            context: .
+            dockerfile: Dockerfile.composer
+        image: liberoadmin/patterns-core_composer
+
