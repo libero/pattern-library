@@ -11,7 +11,7 @@ echo "Building patterns..."
 npx gulp
 
 (while true; do
-  node_modules/.bin/gulp watch && sleep 5
+  npx gulp watch && sleep 5
 done) & pid=$!
 PID_LIST+=" $pid";
 
