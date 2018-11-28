@@ -6,6 +6,7 @@ services: docker
 
 script:
     # conventional image name, but no intention to push it so far
+    # TODO: add docker-compose build
     - docker build -t liberoadmin/patterns-core_patterns -f Dockerfile.patterns .
 
 after_success:

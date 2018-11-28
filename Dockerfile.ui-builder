@@ -1,0 +1,10 @@
+FROM liberoadmin/patterns-core_patterns AS patterns
+FROM liberoadmin/patterns-core_composer AS composer
+FROM php:7.2-cli-alpine
+WORKDIR /ui-builder
+
+COPY config/ config/
+COPY core/ core/
+COPY --from=patterns /patterns-core/source/ source/
+COPY --from=composer /app/vendor/ vendor/
+RUN php core/console --generate
