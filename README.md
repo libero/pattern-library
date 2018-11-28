@@ -1,6 +1,9 @@
 Libero pattern library
 ======================
 
+## Developing with the pattern library
+Developer quick start: running `./bin/dev` will set up the pattern environment, run gulp and start the pattern library web server.  
+
 ## Pipeline
 
 The build process uses a Node.js container image to build all assets, and copy them out of the container into `export/`.

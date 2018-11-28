@@ -155,6 +155,8 @@ gulp.task('sass:watch', () => {
   return gulp.watch([config.files.src.sass, config.files.test.sass], ['css:generate']);
 });
 
+gulp.task('watch', ['sass:watch']);
+
 gulp.task('default', done => {
   runSequence(
     'build',
