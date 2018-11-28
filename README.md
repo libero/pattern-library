@@ -12,11 +12,7 @@ This section is a work in progress.]
 N.B. When configuration files are changed, the config needs to be regenerated, either by running `node ./libero-config/bin/distributeConfig.js` or the Gulp task `distributeConfig`.  
   
 #### Uses of configuration  
-Configuration is used for two things:  
-  
-1. to be the single source of truth for knowledge that needs to be shared across across front end technology boundaries. For example, media query breakpoint values need to exist in the styling layer, but they are also often needed by JavaScript. Note that for flexibility all configuration could be maintained using this system in order to make it easier to later distribute configuration if it suddenly becomes necessary.  
-  
-1. whilst enabling the single source of truth, configuration must also be able to be changed as required in a manageable way. The breakpoints, colors, baseline grid measures etc may not be the same between implementations, whilst enabling the ability to easily reuse most of the config and only tweak the odd value if a light touch is needed.  
+Configuration is used to be the single source of truth for knowledge that needs to be shared across across front end technology boundaries. For example, media query breakpoint values need to exist in the styling layer, but they are also often needed by JavaScript. Note that for flexibility all configuration could be maintained using this system in order to make it easier to later distribute configuration if it suddenly becomes necessary.  
   
 #### Anatomy of configuration  
 (All config file code examples are taken from `/libero-config/config--libero-default.js`.)  
@@ -96,21 +92,6 @@ adds this into `configForJs.json`:
   ##### Distributing to templates
   [Not yet implemented]
   
-#### Modifying configuration
-##### Default configuration  
-Default configuration is supplied by `/libero-config/config--libero-default.js`. If this is sufficient, the rest of this section may be safely ignored.  
-  
-##### Changing configuration  
-Do not change the contents of the default config file `/libero-config/config--libero-default.js` directly.  
-  
-Any changes to the configuration should be effected by placing one or more custom configuration files into `/libero-config/`, and registering the file name(s) in `/libero-config/configRegister.json`. Any files listed here are loaded as config files. The order of the files listed  defines their load order. This is important when namespace clashes occur: when this happens the clashing name that was loaded last wins. This is how specific configuration properties are overridden.  
-  
-##### Swapping out configuration wholesale  
-Supply your own config file(s), add appropriate references to `/libero-config/configRegister.js`, and remove mention of `configs--libero-default.js` from `/libero-config/configRegister.js`.   
-  
-##### Keep default configuration but augment or override some of its properties  
-Supply your own config file(s), add appropriate references to `/libero-config/configRegister.js`.
-
 ## Pipeline  
   
 The build process uses a Node.js container image to build all assets, and copy them out of the container into `export/`.  
