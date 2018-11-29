@@ -1,7 +1,8 @@
 <div class="content-title"{% include 'atoms-attributes' %}>
 
-  {% with {text: contentTitle} only %}
+  {% with contentTitle only %}
 
+    {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-title__title']) }) %}
     {% set level = 1 %}
 
     {% include 'atoms-heading' %}

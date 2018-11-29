@@ -4,7 +4,11 @@
 
     {%- if value is same as(true) -%}
       {{- ' ' ~ name }}
-    {%- elseif value is not same as(false) -%}
+    {%- elseif value is same as(false) -%}
+      {# Do nothing #}
+    {%- elseif value is iterable -%}
+      {{- ' ' ~ name }}="{% for item in value %}{% if not loop.first %} {% endif %}{{ item }}{% endfor %}"
+    {%- else -%}
       {{- ' ' ~ name }}="{{ value }}"
     {%- endif -%}
 

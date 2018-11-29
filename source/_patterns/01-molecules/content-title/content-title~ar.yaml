@@ -2,4 +2,5 @@ attributes:
   dir: rtl
   lang: ar
 contentTitle:
-  - عنوان المحتوى
+  text:
+    - عنوان المحتوى
