@@ -1,9 +1,17 @@
-{% for node in nodes -%}
+{% if nodes is iterable %}
 
-  {% if node.template is defined %}
-    {%- include node.template with node.arguments only -%}
-  {% else %}
-    {{- node -}}
-  {% endif %}
+  {% for node in nodes -%}
 
-{%- endfor -%}
+    {% if node.template is defined %}
+      {%- include node.template with node.arguments only -%}
+    {% else %}
+      {{- node -}}
+    {% endif %}
+
+  {%- endfor -%}
+
+{% else %}
+
+  {{- nodes -}}
+
+{% endif %}
