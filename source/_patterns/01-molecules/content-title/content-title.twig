@@ -1,0 +1,11 @@
+<div class="content-title"{% include 'atoms-attributes' %}>
+
+  {% with {text: contentTitle} only %}
+
+    {% set level = 1 %}
+
+    {% include 'atoms-heading' %}
+
+  {% endwith %}
+
+</div>

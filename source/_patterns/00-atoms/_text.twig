@@ -1,0 +1,9 @@
+{% for node in nodes -%}
+
+  {% if node.template is defined %}
+    {%- include node.template with node.arguments only -%}
+  {% else %}
+    {{- node -}}
+  {% endif %}
+
+{%- endfor -%}
