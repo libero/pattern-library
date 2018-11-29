@@ -1,18 +1,29 @@
-version: '3'
+version: '3.4'
 
 services:
-    patterns:
-        command: bash -c "node libero-config/bin/distributeConfig.js && npx gulp watch"
-        volumes:
-            - ./source:/patterns-core/source
-    ui-builder:
-        command: php ./core/console --watch
-        volumes:
-            - ./source:/ui-builder/source
-            - public:/ui-builder/public
-    ui-viewer:
-        volumes:
-            - public:/ui-builder/public
+  watch-gulp:
+    build:
+      context: .
+      target: gulp
+    command: bash -c "npx gulp assemble && npx gulp watch"
+    volumes:
+      - ./libero-config:/app/libero-config
+      - ./source:/app/source
+  watch-source:
+    build:
+      context: .
+      target: build
+    command: php ./core/console --watch
+    volumes:
+      - public:/app/public
+      - ./source:/app/source:ro
+    depends_on:
+      - watch-gulp
+  ui:
+    volumes:
+      - public:/usr/share/nginx/html
+    depends_on:
+      - watch-source
 
 volumes:
-    public:
+  public:
