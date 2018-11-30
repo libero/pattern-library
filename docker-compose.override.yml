@@ -9,11 +9,11 @@ services:
     volumes:
       - ./libero-config:/app/libero-config
       - ./source:/app/source
-  watch-source:
+  watch-build:
     build:
       context: .
       target: build
-    command: php ./core/console --watch
+    command: core/console --watch
     volumes:
       - public:/app/public
       - ./source:/app/source:ro
@@ -23,7 +23,7 @@ services:
     volumes:
       - public:/usr/share/nginx/html
     depends_on:
-      - watch-source
+      - watch-build
 
 volumes:
   public:

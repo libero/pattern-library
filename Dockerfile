@@ -40,14 +40,14 @@ RUN npx gulp assemble
 #
 FROM composer:1.7.3 as composer
 
-RUN mkdir public source
 COPY core/ core/
 COPY config/ config/
 COPY composer.json \
     composer.lock \
     ./
 
-RUN composer --no-interaction install --ignore-platform-reqs --classmap-authoritative --no-suggest --prefer-dist
+RUN mkdir public source && \
+    composer --no-interaction install --ignore-platform-reqs --classmap-authoritative --no-suggest --prefer-dist
 
 
 
@@ -58,13 +58,13 @@ FROM php:7.2.12-cli-alpine AS build
 
 WORKDIR /app
 
-COPY config/ config/
 COPY core/ core/
+COPY config/ config/
 COPY --from=composer /app/public/ public/
 COPY --from=composer /app/vendor/ vendor/
 COPY --from=gulp /app/source/ source/
 
-RUN php core/console --generate
+RUN core/console --generate
 
 
 
