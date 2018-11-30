@@ -8,7 +8,7 @@ script:
     - docker-compose --file docker-compose.yml --file docker-compose.ci.yml build
 
 after_success:
-    - docker run --name patterns-core-patterns patterns-core_gulp npx gulp exportPatterns
+    - docker run --name patterns-core-patterns patternscore_gulp npx gulp exportPatterns
     - docker cp patterns-core-patterns:/app/export/. export/
     - .travis/package.sh
 
