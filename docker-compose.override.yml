@@ -21,7 +21,7 @@ services:
       - watch-gulp
   ui:
     volumes:
-      - public:/usr/share/nginx/html
+      - public:/usr/share/nginx/html:ro
     depends_on:
       - watch-build
 
