@@ -1,20 +1,4 @@
 #
-# Stage: Composer install
-#
-FROM composer:1.7.3 as composer
-
-RUN mkdir public source
-COPY core/ core/
-COPY config/ config/
-COPY composer.json \
-    composer.lock \
-    ./
-
-RUN composer --no-interaction install --ignore-platform-reqs --classmap-authoritative --no-suggest --prefer-dist
-
-
-
-#
 # Stage: Compile assets using Gulp
 #
 FROM node:10.12.0-slim AS gulp
@@ -36,6 +20,22 @@ COPY test/ test/
 COPY source/ source/
 
 RUN node_modules/.bin/gulp assemble
+
+
+
+#
+# Stage: Composer install
+#
+FROM composer:1.7.3 as composer
+
+RUN mkdir public source
+COPY core/ core/
+COPY config/ config/
+COPY composer.json \
+    composer.lock \
+    ./
+
+RUN composer --no-interaction install --ignore-platform-reqs --classmap-authoritative --no-suggest --prefer-dist
 
 
 
