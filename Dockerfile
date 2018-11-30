@@ -1,7 +1,9 @@
+FROM node:10.12.0-slim AS node
+
 #
-# Stage: Compile assets using Gulp
+# Stage: NPM install
 #
-FROM node:10.12.0-slim AS gulp
+FROM node AS npm
 
 WORKDIR /app
 
@@ -11,15 +13,25 @@ COPY package.json \
 
 RUN npm install
 
+
+
+#
+# Stage: Compile assets using Gulp
+#
+FROM node AS gulp
+
+WORKDIR /app
+
 COPY .stylelintignore \
     .stylelintrc \
     gulpfile.js \
     ./
 COPY libero-config/ libero-config/
+COPY --from=npm /app/node_modules/ node_modules/
 COPY test/ test/
 COPY source/ source/
 
-RUN node_modules/.bin/gulp assemble
+RUN npx gulp assemble
 
 
 
