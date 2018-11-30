@@ -1,3 +1,6 @@
+#
+# Stage: Composer install
+#
 FROM composer:1.7.3 as composer
 
 RUN mkdir public source
@@ -11,6 +14,9 @@ RUN composer --no-interaction install --ignore-platform-reqs --classmap-authorit
 
 
 
+#
+# Stage: Compile assets using Gulp
+#
 FROM node:10.12.0-slim AS gulp
 
 WORKDIR /app
@@ -33,6 +39,9 @@ RUN node_modules/.bin/gulp assemble
 
 
 
+#
+# Stage: Generate pattern library
+#
 FROM php:7.2.12-cli-alpine AS build
 
 WORKDIR /app
@@ -47,6 +56,9 @@ RUN php core/console --generate
 
 
 
+#
+# Stage: Serve pattern library
+#
 FROM nginx:1.15.7-alpine AS ui
 
 COPY --from=build /app/public/ /usr/share/nginx/html/
