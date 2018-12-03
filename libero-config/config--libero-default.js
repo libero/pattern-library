@@ -17,6 +17,9 @@ config.data.breakpoint.site.medium = 730;
 config.data.breakpoint.site.wide = 900;
 config.data.breakpoint.site.x_wide = 1200;
 
+config.data.grid = {};
+config.data.grid.max_width = 1114;
+
 config.data.color = { primary: {}, text: {} };
 config.data.color.primary.normal = Color('#0288D1');
 config.data.color.primary.light = config.data.color.primary.normal.lighten(0.1);
@@ -54,7 +57,7 @@ config.data.font.size.caption_in_px = 13;
 
 // Specify the top level properties to be distributed to layers (sass, js & templates)
 config.layerAllocations = {
-  sass: ['baselinegrid', 'breakpoint', 'color', 'font'],
+  sass: ['baselinegrid', 'breakpoint', 'color', 'font', 'grid'],
   js: ['breakpoint'],
   // template: ['breakpoint']
 };

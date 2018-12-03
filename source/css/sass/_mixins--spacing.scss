@@ -410,3 +410,10 @@
 @mixin small-spacing() {
   @include blg-spacing("block-end", "small");
 }
+
+@mixin wrapper() {
+  @include constrain-width($grid-max_width, "max");
+  margin: auto;
+  padding-left: 7%;
+  padding-right: 7%;
+}

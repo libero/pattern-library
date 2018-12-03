@@ -1,6 +1,17 @@
 @import "../../definitions";
 
 .content-header {
+  @include wrapper;
   color: $color-text-normal;
   text-align: center;
+}
+
+.content-header__body {
+  @include blg-spacing("block-start", "medium");
+  @include blg-spacing("block-end", "small");
+}
+
+.content-header__title {
+  @include margin(0, "top");
+  @include blg-spacing("block-end", "small");
 }

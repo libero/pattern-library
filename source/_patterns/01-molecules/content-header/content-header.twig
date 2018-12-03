@@ -1,12 +1,16 @@
 <div class="content-header"{% include 'atoms-attributes' %}>
 
-  {% with contentTitle only %}
+  <div class="content-header__body">
 
-    {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title']) }) %}
-    {% set level = 1 %}
+    {% with contentTitle only %}
 
-    {% include 'atoms-heading' %}
+      {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title']) }) %}
+      {% set level = 1 %}
 
-  {% endwith %}
+      {% include 'atoms-heading' %}
+
+    {% endwith %}
+
+  </div>
 
 </div>
