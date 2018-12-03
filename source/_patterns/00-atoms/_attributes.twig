@@ -1,17 +1,11 @@
-{% if attributes is defined %}
+{%- for name, value in attributes|default({}) if value is not same as(false) -%}
 
-  {%- for name, value in attributes -%}
+  {{- ' ' ~ name -}}
 
-    {%- if value is same as(true) -%}
-      {{- ' ' ~ name }}
-    {%- elseif value is same as(false) -%}
-      {# Do nothing #}
-    {%- elseif value is iterable -%}
-      {{- ' ' ~ name }}="{% for item in value %}{% if not loop.first %} {% endif %}{{ item }}{% endfor %}"
-    {%- else -%}
-      {{- ' ' ~ name }}="{{ value }}"
-    {%- endif -%}
+  {%- if value is iterable -%}
+    ="{{ value|join(' ') }}"
+  {%- elseif value is not same as(true) -%}
+    ="{{ value }}"
+  {%- endif -%}
 
-  {%- endfor -%}
-
-{% endif %}
+{%- endfor -%}
