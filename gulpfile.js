@@ -195,4 +195,3 @@ gulp.task('default', done => {
 });
 
 gulp.task('watch', ['sass:watch', 'sharedConfig:watch']);
-
