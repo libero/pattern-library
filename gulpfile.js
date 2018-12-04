@@ -87,7 +87,7 @@ function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
 
 }
 
-const config = buildConfig(process.argv, 'source/', 'test/', 'export/');
+const config = buildConfig(process.argv, 'source/', 'test/', 'export/LiberoPatternsBundle/');
 
 gulp.task('css:generate', ['sass:test'], () => {
   const sassOptions = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
