@@ -151,8 +151,10 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
     gulp.src(config.files.src.fonts)
         .pipe(gulp.dest(config.dir.out.fonts)),
 
-    // Template files don't need their authoring hierarchy for downstream use
     gulp.src(config.files.src.templates)
+        // Replace pattern-lab partial inclusion with generic twig syntax
+        .pipe(replace(/({%-?)([ \t]*)((include)|(embed)|(extends))([ \t]*)(['"])(atoms-)|(molecules-)|(organisms-)/g, '$1$2$3$7$8'))
+        // Template files don't need their authoring hierarchy for downstream use
         .pipe(flatten({ includeParents: false }))
         .pipe(gulp.dest(config.dir.out.templates)),
   );
@@ -193,3 +195,4 @@ gulp.task('default', done => {
 });
 
 gulp.task('watch', ['sass:watch', 'sharedConfig:watch']);
+
