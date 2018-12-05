@@ -72,7 +72,7 @@ function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
   config.files.src.sassEntryPoint = config.dir.src.sass + invocationOptions.sassEntryPoint;
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
-  config.files.src.templates = [`${config.dir.src.templates}/*.twig`, `${config.dir.src.templates}/**/*.twig`];
+  config.files.src.templates = [`${config.dir.src.templates}/*.twig`, `${config.dir.src.templates}/**/*.twig`, `!${config.dir.src.templates}/02-pages/**/*.twig`];
   config.files.src.derivedConfigs = [
     `${config.dir.src.sass}variables/**/*`,
     `${config.dir.src.js}derivedConfig.json`
