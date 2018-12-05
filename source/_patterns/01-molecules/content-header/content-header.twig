@@ -1,4 +1,6 @@
-<div class="content-header"{% include 'atoms-attributes' %}>
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) %}
+
+<div{% include 'atoms-attributes' %}>
 
   {% block body %}
 
