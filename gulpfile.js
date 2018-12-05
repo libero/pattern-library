@@ -152,8 +152,13 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
         .pipe(gulp.dest(config.dir.out.fonts)),
 
     gulp.src(config.files.src.templates)
-        // Replace pattern-lab partial inclusion with generic twig syntax
-        .pipe(replace(/({%-?)([ \t]*)((include)|(embed)|(extends))([ \t]*)(['"])(atoms-)|(molecules-)|(organisms-)/g, '$1$2$3$7$8'))
+        // Rename files to standard Twig usage
+        .pipe(rename(path => {
+            path.basename = path.basename.replace(/^_/, '');
+            path.extname = '.html.twig';
+        }))
+        // Replace pattern-lab partial inclusion with generic Twig syntax
+        .pipe(replace(/('|")(?:atoms|molecules|organisms)-(.+?)(\1)(?=[\s\S]*?(}}|%}))/g, '$1@LiberoPatterns/$2.html.twig$3'))
         // Template files don't need their authoring hierarchy for downstream use
         .pipe(flatten({ includeParents: false }))
         .pipe(gulp.dest(config.dir.out.templates)),
