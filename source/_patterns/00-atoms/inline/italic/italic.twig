@@ -1,5 +1,9 @@
-<i{% include 'atoms-attributes' %}>
+{% spaceless %}
 
-  {%- include 'atoms-text' with {nodes: text} only -%}
+  <i{% include 'atoms-attributes' %}>
 
-</i>
+    {%- include 'atoms-text' with {nodes: text} only -%}
+
+  </i>
+
+{% endspaceless %}
