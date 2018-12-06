@@ -4,9 +4,6 @@
   @include wrapper;
   color: $color-text-normal;
   text-align: center;
-}
-
-.content-header__body {
   @include blg-spacing("block-start", "medium");
   @include blg-spacing("block-end", "small");
 }
