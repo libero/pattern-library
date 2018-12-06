@@ -9,6 +9,6 @@
 }
 
 .content-header__title {
-  @include margin(0, "top");
+  @include margin(0, "block-start");
   @include blg-spacing("block-end", "small");
 }
