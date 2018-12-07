@@ -2,13 +2,13 @@ const Color = require('color');
 
 const config = { data: {}, layerAllocations: {} };
 
-config.data.baselinegrid = {space: {}};
-config.data.baselinegrid.space.extra_small_in_px = 12;
-config.data.baselinegrid.space.small_in_px = '!expression baselinegrid.space.extra_small_in_px * 2';
-config.data.baselinegrid.space.smallish_in_px = '!expression baselinegrid.space.small_in_px * 1.5';
-config.data.baselinegrid.space.medium_in_px = '!expression baselinegrid.space.small_in_px * 2';
-config.data.baselinegrid.space.large_in_px = '!expression baselinegrid.space.small_in_px * 3';
-config.data.baselinegrid.space.extra_large_in_px = '!expression baselinegrid.space.small_in_px * 5';
+config.data.baseline_grid = {space: {}};
+config.data.baseline_grid.space.extra_small_in_px = 12;
+config.data.baseline_grid.space.small_in_px = '!expression baseline_grid.space.extra_small_in_px * 2';
+config.data.baseline_grid.space.smallish_in_px = '!expression baseline_grid.space.small_in_px * 1.5';
+config.data.baseline_grid.space.medium_in_px = '!expression baseline_grid.space.small_in_px * 2';
+config.data.baseline_grid.space.large_in_px = '!expression baseline_grid.space.small_in_px * 3';
+config.data.baseline_grid.space.extra_large_in_px = '!expression baseline_grid.space.small_in_px * 5';
 
 config.data.breakpoint = {site: {}};
 config.data.breakpoint.site.x_small = 320;
@@ -18,8 +18,9 @@ config.data.breakpoint.site.wide = 900;
 config.data.breakpoint.site.x_wide = 1200;
 
 config.data.color = { primary: {}, text: {} };
+config.data.color.background = Color('#fff');
 config.data.color.primary.normal = Color('#0288D1');
-config.data.color.primary.light = config.data.color.primary.normal.lighten(0.1);
+config.data.color.primary.light = Color('#b3e5fc');
 config.data.color.primary.dark = Color('#0277bd');
 config.data.color.text.normal = Color('#212121');
 config.data.color.text.reverse = Color('#fff');
@@ -42,7 +43,7 @@ config.data.color.warning = Color('#e65100');
 config.data.font = { size: {} };
 config.data.font.primary = '"Noto Serif", serif';
 config.data.font.secondary = '"Noto Sans", Arial, Helvetica, sans_serif';
-config.data.font.monospace = '"Courier 10 Pitch", Courier, monospace;';
+config.data.font.monospace = '"Courier 10 Pitch", Courier, monospace';
 config.data.font.size.base_in_px = 16;
 config.data.font.size.h1_in_px = 36;
 config.data.font.size.h2_in_px = 26;
@@ -54,7 +55,7 @@ config.data.font.size.caption_in_px = 13;
 
 // Specify the top level properties to be distributed to layers (sass, js & templates)
 config.layerAllocations = {
-  sass: ['baselinegrid', 'breakpoint', 'color', 'font'],
+  sass: ['baseline_grid', 'breakpoint', 'color', 'font'],
   js: ['breakpoint'],
   // template: ['breakpoint']
 };

@@ -24,7 +24,7 @@ function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
     invocationArgs, {
       default: {
         environment: 'production',
-        sassEntryPoint: 'build.scss',
+        sassEntryPoint: 'base.scss',
         cssOutFilename: 'all.css',
         'sass-lint': true
       },
