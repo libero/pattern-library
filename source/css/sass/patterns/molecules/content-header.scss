@@ -1,7 +1,6 @@
 @import "../../definitions";
 
 .content-header {
-  @include wrapper;
   color: $color-text-normal;
   text-align: center;
   @include blg-spacing("block-start", "medium");
