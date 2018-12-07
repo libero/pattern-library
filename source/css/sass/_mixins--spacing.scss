@@ -412,8 +412,23 @@
 }
 
 @mixin wrapper() {
+  box-sizing: content-box;
   @include constrain-width($grid-max_width, "max");
   margin: auto;
+
   padding-left: 7%;
   padding-right: 7%;
+  padding-inline: 7%;
+
+  @media only screen and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+    padding-left: 14%;
+    padding-right: 14%;
+    padding-inline: 14%;
+  }
+
+  @media only screen and (min-width: #{get-rem-from-px($breakpoint-site-x_wide)}em) {
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-inline: 3%;
+  }
 }

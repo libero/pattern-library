@@ -6,9 +6,48 @@
   text-align: center;
   @include blg-spacing("block-start", "medium");
   @include blg-spacing("block-end", "small");
+
+  &:after {
+    border-bottom: 1px solid $color-text-dividers;
+    content: "";
+    display: block;
+    width: 100%;
+  }
 }
 
 .content-header__title {
   @include margin(0, "block-start");
-  @include blg-spacing("block-end", "small");
+  @include blg-spacing("block-end", "small", "margin");
+
+  &.content-header__title--xx-short {
+    @include header-title-size("xx-short");
+  }
+
+  &.content-header__title--x-short {
+    @include header-title-size("x-short");
+  }
+
+  &.content-header__title--short {
+    @include header-title-size("short");
+  }
+
+  &.content-header__title--medium {
+    @include header-title-size("medium");
+  }
+
+  &.content-header__title--long {
+    @include header-title-size("long");
+  }
+
+  &.content-header__title--x-long {
+    @include header-title-size("x-long");
+  }
+
+  &.content-header__title--xx-long {
+    @include header-title-size("xx-long");
+  }
+
+  &.content-header__title--xxx-long {
+    @include header-title-size("xxx-long");
+  }
 }
