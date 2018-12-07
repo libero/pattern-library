@@ -8,8 +8,10 @@
 
   &:after {
     border-bottom: 1px solid $color-text-dividers;
+    border-block-end: 1px solid $color-text-dividers;
     content: "";
     display: block;
+    @include padding($baselinegrid-space-small-in-px - 1, "block-start");
     width: 100%;
   }
 }
