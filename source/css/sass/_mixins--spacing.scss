@@ -1,3 +1,4 @@
+@import "mixins--media-query";
 @import "utility-functions";
 @import "variables";
 
@@ -298,7 +299,7 @@
 
   @include blg-spacing("block-start", "small");
 
-  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+  @include mq($from: medium) {
     @include blg-spacing("block-start", "medium");
   }
 
@@ -308,7 +309,7 @@
 
   @include blg-spacing("block-end", "small");
 
-  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+  @include mq($from: medium) {
     @include blg-spacing("block-end", "medium");
   }
 
@@ -318,7 +319,7 @@
 
   @include blg-spacing("block-start", "large");
 
-  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+  @include mq($from: medium) {
     @include blg-spacing("block-start", "extra-large");
   }
 
@@ -328,7 +329,7 @@
 
   @include blg-spacing("block-end", "large");
 
-  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+  @include mq($from: medium) {
     @include blg-spacing("block-end", "extra-large");
   }
 
@@ -348,7 +349,7 @@
 
   @include blg-spacing("block-end", "medium", "margin");
 
-  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+  @include mq($from: medium) {
     @include blg-spacing("block-end", "large", "margin");
   }
 
@@ -358,7 +359,7 @@
 
   @include blg-spacing("block-end", "small", "margin");
 
-  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+  @include mq($from: medium) {
     @include blg-spacing("block-end", "medium", "margin");
   }
 

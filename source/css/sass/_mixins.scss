@@ -1,27 +1,8 @@
 @import "variables";
 @import "utility-functions";
+@import "mixins--media-query";
 @import "mixins--typography";
 @import "mixins--spacing";
-
-/* stylelint-disable
-     declaration-block-trailing-semicolon,
-     block-closing-brace-newline-before,
-     comment-empty-line-before
-*/
-@function get-breakpoint($string) {
-  @if $string == "x-small" {
-    @return #{get-rem-from-px($breakpoint-site-x_small)}em
-  } @else if $string == "small" {
-    @return #{get-rem-from-px($breakpoint-site-small)}em
-  } @else if $string == "medium" {
-    @return #{get-rem-from-px($breakpoint-site-medium)}em
-  } @else if $string == "wide" {
-    @return #{get-rem-from-px($breakpoint-site-wide)}em
-  } @else if $string == "x-wide" {
-    @return #{get-rem-from-px($breakpoint-site-x_wide)}em
-  }
-}
-/* stylelint-enable */
 
 @mixin height($size_in_px) {
   height: #{$size_in_px}px;
@@ -186,19 +167,15 @@ $base-color: rgba(255, 255, 255, 0.2)) {
 }
 
 @mixin visually-hide-below-breakpoint($breakpoint-name, $height, $margin-shorthand) {
-  @if $breakpoint-name == "x-small" or $breakpoint-name == "small" or $breakpoint-name == "medium" or $breakpoint-name == "wide" or $breakpoint-name == "x-wide" {
+  @include visually-hidden();
 
-    @include visually-hidden();
+  @include mq($from: $breakpoint-name) {
+    @include visually-unhidden();
+    overflow: hidden;
 
-    @media only all and (min-width: get-breakpoint($breakpoint-name)) {
-      @include visually-unhidden();
-      overflow: hidden;
-
-      // After visually unhiding, height and margin need to be explicitly set again
-      @include height($height);
-      @include margin($margin-shorthand);
-    }
-
+    // After visually unhiding, height and margin need to be explicitly set again
+    @include height($height);
+    @include margin($margin-shorthand);
   }
 }
 
