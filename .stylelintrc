@@ -1,9 +1,9 @@
 {
   "ignoreFiles": [
-    "./export/",
-    "./public/",
+    "./**/!(*.scss)",
+    "./export/css/sass/**/*",
     "./source/css/sass/_normalize.scss",
-    "./source/css/sass/variables/"
+    "./source/css/sass/variables/**/*"
   ],
   "rules": {
     "block-closing-brace-newline-after": ["always", {"ignoreAtRules": ["if", "else"]}],
