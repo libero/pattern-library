@@ -17,6 +17,7 @@ const sassGlob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
 const stylelint = require('stylelint');
 const syntaxScss = require('postcss-scss');
+const vfs = require('vinyl-fs');
 
 function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
 
@@ -64,12 +65,22 @@ function buildConfig(invocationArgs, sourceRoot, testRoot, exportRoot) {
     out: {},
   };
   config.files.src.css = [
-    `${config.dir.src.css}/**/*.css`,
-    `${config.dir.src.css}/**/*.map`,
+    `${config.dir.src.css}**/*.css`,
+    `${config.dir.src.css}**/*.map`,
     `!${config.dir.src.css}pattern-scaffolding.css`,
+    `!${config.dir.src.css}sass/**/*`,
   ];
-  config.files.src.sass = `${config.dir.src.sass}/**/*.scss`;
+  config.files.src.sass = [
+    `${config.dir.src.sass}**/*.scss`,
+    `!${config.dir.src.sass}vendor/**/*`,
+  ];
   config.files.src.sassEntryPoint = config.dir.src.sass + invocationOptions.sassEntryPoint;
+  console.log(config.files.src.sassEntryPoint);
+  config.files.src.sassVendor = [
+    `${config.dir.src.sass}vendor/**/*.scss`,
+    `${config.dir.src.sass}vendor/**/*.css`,
+    `${config.dir.src.sass}vendor/**/LICENSE.*`,
+  ];
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
   config.files.src.templates = [`${config.dir.src.templates}/*.twig`, `${config.dir.src.templates}/**/*.twig`];
@@ -117,7 +128,7 @@ gulp.task('sass:lint', ['css:clean'], () => {
     ),
   ];
 
-  return gulp.src([config.files.src.sass])
+  return gulp.src(config.files.src.sass)
     .pipe(postcss(processors, {syntax: syntaxScss}));
 });
 
@@ -144,6 +155,9 @@ gulp.task('exportPatterns', ['patternsExport:clean'], () => {
 
     gulp.src(config.files.src.sass)
       .pipe(gulp.dest(config.dir.out.sass)),
+
+    vfs.src(config.files.src.sassVendor)
+      .pipe(vfs.dest(`${config.dir.out.sass}vendor/`)),
 
     gulp.src(config.files.src.images)
       .pipe(gulp.dest(config.dir.out.images)),
