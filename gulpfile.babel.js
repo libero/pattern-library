@@ -5,16 +5,16 @@ import distributeConfig from './libero-config/bin/distributeConfig';
 import flatten from 'gulp-flatten';
 import gulp from 'gulp';
 import minimist from 'minimist';
-import rename from 'gulp-rename';
 import mocha from 'gulp-mocha';
-import replace from 'gulp-replace';
 import postcss from 'gulp-postcss';
-import syntaxScss from 'postcss-scss';
+import rename from 'gulp-rename';
+import replace from 'gulp-replace';
+import reporter from 'postcss-reporter';
 import sass from 'gulp-sass';
 import sassGlob from 'gulp-sass-glob';
 import sourcemaps from 'gulp-sourcemaps';
 import stylelint from 'stylelint';
-import reporter from 'postcss-reporter';
+import syntaxScss from 'postcss-scss';
 
 const buildConfig = (invocationArgs, sourceRoot, testRoot, exportRoot) => {
 
