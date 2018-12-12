@@ -89,13 +89,13 @@ const config = buildConfig(process.argv, 'source', 'test', 'export');
 
 // Builders
 
-export const sharedConfigClean = () => del(config.files.src.derivedConfigs);
+const cleanSharedConfig = () => del(config.files.src.derivedConfigs);
 
-export const distributeSharedConfig = gulp.series(sharedConfigClean, distributeConfig);
+export const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeConfig);
 
-export const cssClean = () => del(config.files.src.css);
+const cleanCss = () => del(config.files.src.css);
 
-export const sassLint = () => {
+export const lintSass = () => {
   if (!config.sassLinting) {
     console.info('Skipping sass:lint');
     return Promise.resolve();
@@ -115,11 +115,11 @@ export const sassLint = () => {
     .pipe(postcss(processors, {syntax: syntaxScss}));
 };
 
-export const sassTest = () =>
+export const testSass = () =>
   gulp.src(config.files.test.sassTestsEntryPoint)
     .pipe(mocha({reporter: 'spec'}));
 
-export const cssGenerate = () => {
+export const generateCss = () => {
   const sassOptions = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
   return gulp.src(config.files.src.sassEntryPoint)
     .pipe(sourcemaps.init())
@@ -132,34 +132,34 @@ export const cssGenerate = () => {
 };
 
 export const build = gulp.parallel(
-  sassLint,
-  sassTest,
-  gulp.series(cssClean, cssGenerate),
+  lintSass,
+  testSass,
+  gulp.series(cleanCss, generateCss),
 );
 
 export const assemble = gulp.series(distributeSharedConfig, build);
 
 // Exporters
 
-export const exportClean = () => del(`${config.exportRoot}**/*`);
+const cleanExport = () => del(`${config.exportRoot}**/*`);
 
-export const exportCss = () =>
+const exportCss = () =>
   gulp.src(config.files.src.css)
     .pipe(gulp.dest(config.dir.out.css));
 
-export const exportSass = () =>
+const exportSass = () =>
   gulp.src(config.files.src.sass)
     .pipe(gulp.dest(config.dir.out.sass));
 
-export const exportImages = () =>
+const exportImages = () =>
   gulp.src(config.files.src.images)
     .pipe(gulp.dest(config.dir.out.images));
 
-export const exportFonts = () =>
+const exportFonts = () =>
   gulp.src(config.files.src.fonts)
     .pipe(gulp.dest(config.dir.out.fonts));
 
-export const exportTemplates = () =>
+const exportTemplates = () =>
   gulp.src(config.files.src.templates)
     // Rename files to standard Twig usage
     .pipe(rename(path => {
@@ -173,7 +173,7 @@ export const exportTemplates = () =>
     .pipe(gulp.dest(config.dir.out.templates));
 
 export const exportPatterns = gulp.series(
-  exportClean,
+  cleanExport,
   gulp.parallel(exportCss, exportSass, exportImages, exportFonts, exportTemplates),
 );
 
@@ -183,8 +183,8 @@ export default gulp.series(assemble, exportPatterns);
 
 // Watchers
 
-export const watchSass = () => gulp.watch([config.files.src.sass, config.files.test.sass], build);
+const watchSass = () => gulp.watch([config.files.src.sass, config.files.test.sass], build);
 
-export const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
+const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 
 export const watch = gulp.parallel(watchSass, watchSharedConfig);
