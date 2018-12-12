@@ -54,7 +54,7 @@ config.data.content_header.title.size.xxx_large = 52;
 
 config.data.font = { size: {} };
 config.data.font.primary = '"Noto Serif", serif';
-config.data.font.secondary = '"Noto Sans", Arial, Helvetica, sans_serif';
+config.data.font.secondary = '"Noto Sans", Arial, Helvetica, sans-serif';
 config.data.font.monospace = '"Courier 10 Pitch", Courier, monospace;';
 config.data.font.size.base_in_px = 16;
 config.data.font.size.h1_in_px = 36;
