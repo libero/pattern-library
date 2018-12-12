@@ -2,6 +2,9 @@
   "private": true,
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/register": "^7.0.0",
     "ajv": "^6.5.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
@@ -10,7 +13,7 @@
     "deepmerge": "^2.2.1",
     "del": "^3.0.0",
     "flat": "^4.1.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-flatten": "^0.4.0",
     "gulp-mocha": "^6.0.0",
     "gulp-postcss": "^8.0.0",
