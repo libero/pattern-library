@@ -1,7 +1,7 @@
 @import "../../../node_modules/sass-true/sass/true";
 @import "../../../source/css/sass/mixins/spacing";
 
-@include describe("padding [Mixin]") {
+@include describe("@mixin padding") {
 
   @include it("generates correct fallbacks with a single zero value and no dimension") {
     @include assert() {
@@ -540,7 +540,7 @@
 
 }
 
-@include describe("margin [Mixin]") {
+@include describe("@mixin margin") {
 
   @include it("generates correct fallbacks with a single zero value and no dimension") {
     @include assert() {
@@ -1051,7 +1051,7 @@
 
 }
 
-@include describe("nospace [Mixin]") {
+@include describe("@mixin nospace") {
 
   @include it("generates correct zeroing for the dimension 'inline'") {
     @include assert() {

@@ -2,7 +2,7 @@
 @import "../../../source/css/sass/functions/sizes";
 @import "../variables_test";
 
-@include test-module("the function get-rem-from-px [Function]") {
+@include test-module("@function get-rem-from-px") {
 
   @include test("returns 2 when supplied with 32") {
     @include assert-equal(

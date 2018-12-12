@@ -1,7 +1,7 @@
 @import "../../../node_modules/sass-true/sass/true";
 @import "../../../source/css/sass/mixins/sizes";
 
-@include describe("block-size [Mixin]") {
+@include describe("@mixin block-size") {
 
   @include it("generates correct fallbacks") {
     @include assert() {
@@ -21,7 +21,7 @@
 
 }
 
-@include describe("inline-size [Mixin]") {
+@include describe("@mixin inline-size") {
 
   @include it("generates correct fallbacks") {
     @include assert() {
@@ -41,7 +41,7 @@
 
 }
 
-@include describe("max-block-size [Mixin]") {
+@include describe("@mixin max-block-size") {
 
   @include it("generates correct fallbacks") {
     @include assert() {
@@ -61,7 +61,7 @@
 
 }
 
-@include describe("min-block-size [Mixin]") {
+@include describe("@mixin min-block-size") {
 
   @include it("generates correct fallbacks") {
     @include assert() {
@@ -81,7 +81,7 @@
 
 }
 
-@include describe("max-inline-size [Mixin]") {
+@include describe("@mixin max-inline-size") {
 
   @include it("generates correct fallbacks") {
     @include assert() {
@@ -101,7 +101,7 @@
 
 }
 
-@include describe("min-inline-size [Mixin]") {
+@include describe("@mixin min-inline-size") {
 
   @include it("generates correct fallbacks") {
     @include assert() {

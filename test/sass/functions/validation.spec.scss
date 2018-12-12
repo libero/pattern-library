@@ -2,7 +2,7 @@
 @import "../../../source/css/sass/functions/validation";
 @import "../variables_test";
 
-@include test-module("validate-spacing-arguments [Function]") {
+@include test-module("@function validate-spacing-arguments") {
 
   @include test("errors when the space-type is neither margin nor padding") {
     @include assert-equal(
