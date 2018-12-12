@@ -19,7 +19,7 @@ config.data.breakpoint.site.x_wide = 1200;
 
 config.data.color = { primary: {}, text: {} };
 config.data.color.background = Color('#fff');
-config.data.color.primary.normal = Color('#0288D1');
+config.data.color.primary.normal = Color('#0288d1');
 config.data.color.primary.light = Color('#b3e5fc');
 config.data.color.primary.dark = Color('#0277bd');
 config.data.color.text.normal = Color('#212121');
@@ -43,7 +43,7 @@ config.data.color.warning = Color('#e65100');
 config.data.font = { size: {} };
 config.data.font.primary = '"Noto Serif", serif';
 config.data.font.secondary = '"Noto Sans", Arial, Helvetica, sans-serif';
-config.data.font.monospace = '"Courier 10 Pitch", Courier, monospace;';
+config.data.font.monospace = '"Courier 10 Pitch", Courier, monospace';
 config.data.font.size.base_in_px = 16;
 config.data.font.size.h1_in_px = 36;
 config.data.font.size.h2_in_px = 26;
