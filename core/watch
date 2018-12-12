@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+
+use Lurker\ResourceWatcher;
+use Symfony\Component\Process\Process;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$watcher = new ResourceWatcher;
+$watcher->track('source', __DIR__ . '/../source');
+
+$process = new Process(['core/console', '--generate']);
+$process->setWorkingDirectory(__DIR__ . '/..');
+
+$watcher->addListener('source', function () use ($process) {
+    $process->run(function ($type, $buffer) {
+        if (Process::ERR === $type) {
+            echo "ERR > ${buffer}";
+        } else {
+            echo "OUT > ${$buffer}";
+        }
+    });
+});
+
+$watcher->start();
