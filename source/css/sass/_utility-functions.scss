@@ -2,7 +2,9 @@
 
 @import "variables/font";
 
-@function _error($message, $capture: false) {
+$_is_test-environment: false !default;
+
+@function _error($message, $capture: $_is_test-environment) {
   @if $capture {
     @return "ERROR: #{$message}";
   }
@@ -10,38 +12,38 @@
   @error "#{$message}";
 }
 
-@function validate-spacing-arguments($sizes-in-px, $space-type, $dimension: "", $capture-errors: false) {
+@function validate-spacing-arguments($sizes-in-px, $space-type, $dimension: "") {
 
   @if $space-type != "padding" and $space-type != "margin" {
-    @return _error("Incorrect space-type supplied: must be either 'margin' or 'padding'", $capture-errors);
+    @return _error("Incorrect space-type supplied: must be either 'margin' or 'padding'");
   }
 
   @if $dimension == "" and length($sizes-in-px) > 4 {
-    @return _error("More than four sizes supplied when no dimension", $capture-errors);
+    @return _error("More than four sizes supplied when no dimension");
   }
 
   @if $dimension == "inline" and length($sizes-in-px) > 2 {
-    @return _error("More than two sizes supplied with 'inline' dimension", $capture-errors);
+    @return _error("More than two sizes supplied with 'inline' dimension");
   }
 
   @if $dimension == "inline-start" and length($sizes-in-px) > 1 {
-    @return _error("More than one size supplied with 'inline-start' dimension", $capture-errors);
+    @return _error("More than one size supplied with 'inline-start' dimension");
   }
 
   @if $dimension == "inline-end" and length($sizes-in-px) > 1 {
-    @return _error("More than one size supplied with 'inline-end' dimension", $capture-errors);
+    @return _error("More than one size supplied with 'inline-end' dimension");
   }
 
   @if $dimension == "block" and length($sizes-in-px) > 2 {
-    @return _error("More than two sizes supplied with 'block' dimension", $capture-errors);
+    @return _error("More than two sizes supplied with 'block' dimension");
   }
 
   @if $dimension == "block-start" and length($sizes-in-px) > 1 {
-    @return _error("More than one size supplied with 'block-start' dimension", $capture-errors);
+    @return _error("More than one size supplied with 'block-start' dimension");
   }
 
   @if $dimension == "block-end" and length($sizes-in-px) > 1 {
-    @return _error("More than one size supplied with 'block-end' dimension", $capture-errors);
+    @return _error("More than one size supplied with 'block-end' dimension");
   }
 
   @return "OK";
