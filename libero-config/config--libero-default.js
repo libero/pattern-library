@@ -2,13 +2,13 @@ const Color = require('color');
 
 const config = { data: {}, layerAllocations: {} };
 
-config.data.baseline_grid = {space: {}};
-config.data.baseline_grid.space.extra_small_in_px = 12;
-config.data.baseline_grid.space.small_in_px = '!expression baseline_grid.space.extra_small_in_px * 2';
-config.data.baseline_grid.space.smallish_in_px = '!expression baseline_grid.space.small_in_px * 1.5';
-config.data.baseline_grid.space.medium_in_px = '!expression baseline_grid.space.small_in_px * 2';
-config.data.baseline_grid.space.large_in_px = '!expression baseline_grid.space.small_in_px * 3';
-config.data.baseline_grid.space.extra_large_in_px = '!expression baseline_grid.space.small_in_px * 5';
+config.data.baselinegrid = {space: {}};
+config.data.baselinegrid.space.extra_small_in_px = 12;
+config.data.baselinegrid.space.small_in_px = '!expression baselinegrid.space.extra_small_in_px * 2';
+config.data.baselinegrid.space.smallish_in_px = '!expression baselinegrid.space.small_in_px * 1.5';
+config.data.baselinegrid.space.medium_in_px = '!expression baselinegrid.space.small_in_px * 2';
+config.data.baselinegrid.space.large_in_px = '!expression baselinegrid.space.small_in_px * 3';
+config.data.baselinegrid.space.extra_large_in_px = '!expression baselinegrid.space.small_in_px * 5';
 
 config.data.breakpoint = {site: {}};
 config.data.breakpoint.site.x_small = 320;
@@ -55,7 +55,7 @@ config.data.font.size.caption_in_px = 13;
 
 // Specify the top level properties to be distributed to layers (sass, js & templates)
 config.layerAllocations = {
-  sass: ['baseline_grid', 'breakpoint', 'color', 'font'],
+  sass: ['baselinegrid', 'breakpoint', 'color', 'font'],
   js: ['breakpoint'],
   // template: ['breakpoint']
 };
