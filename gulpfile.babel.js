@@ -87,13 +87,13 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, exportRoot) => {
 
 const config = buildConfig(process.argv, 'source', 'test', 'export');
 
+const sassOptions = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
+
 // Builders
 
 const cleanSharedConfig = () => del(config.files.src.derivedConfigs);
 
 export const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeConfig);
-
-const cleanCss = () => del(config.files.src.css);
 
 export const lintSass = () => {
   if (!config.sassLinting) {
@@ -119,9 +119,10 @@ export const testSass = () =>
   gulp.src(config.files.test.sassTestsEntryPoint)
     .pipe(mocha({reporter: 'spec'}));
 
-export const generateCss = () => {
-  const sassOptions = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
-  return gulp.src(config.files.src.sassEntryPoint)
+const cleanCss = () => del(config.files.src.css);
+
+const compileCss = () =>
+  gulp.src(config.files.src.sassEntryPoint)
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass(sassOptions).on('error', sass.logError))
@@ -129,13 +130,10 @@ export const generateCss = () => {
     .pipe(rename(config.files.out.cssFilename))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.dir.src.css));
-};
 
-export const build = gulp.parallel(
-  lintSass,
-  testSass,
-  gulp.series(cleanCss, generateCss),
-);
+export const generateCss = gulp.series(cleanCss, compileCss);
+
+export const build = gulp.parallel(lintSass, testSass, generateCss);
 
 export const assemble = gulp.series(distributeSharedConfig, build);
 
@@ -161,7 +159,7 @@ const exportFonts = () =>
 
 const exportTemplates = () =>
   gulp.src(config.files.src.templates)
-    // Rename files to standard Twig usage
+  // Rename files to standard Twig usage
     .pipe(rename(path => {
       path.basename = path.basename.replace(/^_/, '');
       path.extname = '.html.twig';
