@@ -173,6 +173,20 @@
 
   }
 
+  @include test("errors when 5 sizes values passed and no dimension") {
+    @include assert() {
+
+      @include output {
+        @include padding(1 2 3 4 5)
+      }
+
+      @include expect {
+        _error: "More than four sizes supplied when no dimension"
+      }
+
+    }
+  }
+
   @include it("generates correct fallbacks with a single zero value for dimension 'inline'") {
     @include assert() {
 
@@ -347,6 +361,20 @@
     }
   }
 
+  @include test("errors when 3 sizes values passed with dimension 'inline'") {
+    @include assert() {
+
+      @include output {
+        @include padding(1 2 3, "inline")
+      }
+
+      @include expect {
+        _error: "More than two sizes supplied with 'inline' dimension"
+      }
+
+    }
+  }
+
   @include it("generates correct fallbacks with a single non-zero value for the dimension 'inline-start'") {
     @include assert() {
 
@@ -369,6 +397,20 @@
           padding-inline-start: 1rem;
         }
       }
+    }
+  }
+
+  @include test("errors when 2 sizes values passed with dimension 'inline-start'") {
+    @include assert() {
+
+      @include output {
+        @include padding(1 2, "inline-start")
+      }
+
+      @include expect {
+        _error: "More than one size supplied with 'inline-start' dimension"
+      }
+
     }
   }
 
@@ -418,6 +460,20 @@
           padding-inline-end: 1rem;
         }
       }
+    }
+  }
+
+  @include test("errors when 2 sizes values passed with dimension 'inline-end'") {
+    @include assert() {
+
+      @include output {
+        @include padding(1 2, "inline-end")
+      }
+
+      @include expect {
+        _error: "More than one size supplied with 'inline-end' dimension"
+      }
+
     }
   }
 
@@ -475,6 +531,20 @@
     }
   }
 
+  @include test("errors when 3 sizes values passed with dimension 'block'") {
+    @include assert() {
+
+      @include output {
+        @include padding(1 2 3, "block")
+      }
+
+      @include expect {
+        _error: "More than two sizes supplied with 'block' dimension"
+      }
+
+    }
+  }
+
   @include it("generates correct values for a single zero value and dimension 'block-start'") {
     @include assert() {
 
@@ -507,6 +577,20 @@
     }
   }
 
+  @include test("errors when 2 sizes values passed with dimension 'block-start'") {
+    @include assert() {
+
+      @include output {
+        @include padding(1 2, "block-start")
+      }
+
+      @include expect {
+        _error: "More than one size supplied with 'block-start' dimension"
+      }
+
+    }
+  }
+
   @include it("generates correct values for a single zero value and dimension 'block-end'") {
     @include assert() {
 
@@ -534,6 +618,20 @@
         padding-bottom: 1rem;
 
         padding-block-end: 1rem;
+      }
+
+    }
+  }
+
+  @include test("errors when 2 sizes values passed with dimension 'block-end'") {
+    @include assert() {
+
+      @include output {
+        @include padding(1 2, "block-end")
+      }
+
+      @include expect {
+        _error: "More than one size supplied with 'block-end' dimension"
       }
 
     }
@@ -685,6 +783,20 @@
 
   }
 
+  @include test("errors when 5 sizes values passed and no dimension") {
+    @include assert() {
+
+      @include output {
+        @include margin(1 2 3 4 5)
+      }
+
+      @include expect {
+        _error: "More than four sizes supplied when no dimension"
+      }
+
+    }
+  }
+
   @include it("generates correct fallbacks with a single zero value for dimension 'inline'") {
     @include assert() {
 
@@ -834,6 +946,20 @@
     }
   }
 
+  @include test("errors when 3 sizes values passed with dimension 'inline'") {
+    @include assert() {
+
+      @include output {
+        @include margin(1 2 3, "inline")
+      }
+
+      @include expect {
+        _error: "More than two sizes supplied with 'inline' dimension"
+      }
+
+    }
+  }
+
   @include it("generates correct fallbacks with a single zero value for the dimension 'inline-start'") {
    @include assert() {
 
@@ -882,6 +1008,20 @@
      }
   }
 }
+
+  @include test("errors when 2 sizes values passed with dimension 'inline-start'") {
+    @include assert() {
+
+      @include output {
+        @include margin(1 2, "inline-start")
+      }
+
+      @include expect {
+        _error: "More than one size supplied with 'inline-start' dimension"
+      }
+
+    }
+  }
 
   @include it("generates correct fallbacks with a single zero value for the dimension 'inline-end'") {
     @include assert() {
@@ -932,6 +1072,19 @@
    }
 }
 
+  @include test("errors when 2 sizes values passed with dimension 'inline-end'") {
+    @include assert() {
+
+      @include output {
+        @include margin(1 2, "inline-end")
+      }
+
+      @include expect {
+        _error: "More than one size supplied with 'inline-end' dimension"
+      }
+
+    }
+  }
 
   @include it("generates correct fallbacks with a single zero value for dimension 'block'") {
     @include assert() {
@@ -987,6 +1140,20 @@
     }
   }
 
+  @include test("errors when 3 sizes values passed with dimension 'block'") {
+    @include assert() {
+
+      @include output {
+        @include margin(1 2 3, "block")
+      }
+
+      @include expect {
+        _error: "More than two sizes supplied with 'block' dimension"
+      }
+
+    }
+  }
+
   @include it("generates correct values for a single zero value and dimension 'block-start'") {
     @include assert() {
 
@@ -1019,6 +1186,20 @@
     }
   }
 
+  @include test("errors when 2 sizes values passed with dimension 'block-start'") {
+    @include assert() {
+
+      @include output {
+        @include margin(1 2, "block-start")
+      }
+
+      @include expect {
+        _error: "More than one size supplied with 'block-start' dimension"
+      }
+
+    }
+  }
+
   @include it("generates correct values for a single zero value and dimension 'block-end'") {
     @include assert() {
 
@@ -1046,6 +1227,20 @@
         margin-bottom: 1rem;
 
         margin-block-end: 1rem;
+      }
+
+    }
+  }
+
+  @include test("errors when 2 sizes values passed with dimension 'block-end'") {
+    @include assert() {
+
+      @include output {
+        @include margin(1 2, "block-end")
+      }
+
+      @include expect {
+        _error: "More than one size supplied with 'block-end' dimension"
       }
 
     }

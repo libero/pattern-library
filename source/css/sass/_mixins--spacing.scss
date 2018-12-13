@@ -76,15 +76,20 @@
 //</div>
 @mixin _spacing($sizes-in-px, $space-type, $dimension: "") {
 
-  // $validation-status is throw away, it's only used to enable validate-spacing-arguments() function to be invoked
-  $validation-status: validate-spacing-arguments($sizes-in-px, $space-type, $dimension);
-
   @if $dimension == "" {
-    @include _construct-dimensionless-space($sizes-in-px, $space-type);
+    @if length($sizes-in-px) > 4 {
+      @include _error("More than four sizes supplied when no dimension");
+    } @else {
+      @include _construct-dimensionless-space($sizes-in-px, $space-type);
+    }
   }
 
   @if $dimension == "inline" {
-    @if $sizes-in-px == 0 {
+
+    @if length($sizes-in-px) > 2 {
+      @include _error("More than two sizes supplied with 'inline' dimension");
+    } @else if $sizes-in-px == 0 {
+
       #{$space-type}-left: 0;
       #{$space-type}-right: 0;
       #{$space-type}-inline: 0;
@@ -141,7 +146,9 @@
 
   @if $dimension == "inline-start" {
 
-    @if $sizes-in-px == 0 {
+    @if length($sizes-in-px) > 1 {
+      @include _error("More than one size supplied with 'inline-start' dimension");
+    } @else if $sizes-in-px == 0 {
       @include _when-left-to-right {
         #{$space-type}-left: 0;
       }
@@ -166,7 +173,9 @@
 
   @if $dimension == "inline-end" {
 
-    @if $sizes-in-px == 0 {
+    @if $dimension == "inline-end" and length($sizes-in-px) > 1 {
+      @include _error("More than one size supplied with 'inline-end' dimension");
+    } @else if $sizes-in-px == 0 {
       @include _when-left-to-right {
         #{$space-type}-right: 0;
       }
@@ -192,7 +201,9 @@
   // Vertical writing modes not yet supported
   @if $dimension == "block" {
 
-    @if $sizes-in-px == 0 {
+    @if $dimension == "block" and length($sizes-in-px) > 2 {
+      @include _error("More than two sizes supplied with 'block' dimension");
+    } @else if $sizes-in-px == 0 {
       #{$space-type}-top: 0;
       #{$space-type}-bottom: 0;
       #{$space-type}-block: 0;
@@ -214,7 +225,9 @@
   }
 
   @if $dimension == "block-start" {
-    @if $sizes-in-px == 0 {
+    @if $dimension == "block-start" and length($sizes-in-px) > 1 {
+      @include _error("More than one size supplied with 'block-start' dimension");
+    } @else if $sizes-in-px == 0 {
       #{$space-type}-top: #{$sizes-in-px};
       #{$space-type}-block-start: #{$sizes-in-px};
     } @else {
@@ -225,7 +238,9 @@
   }
 
   @if $dimension == "block-end" {
-    @if $sizes-in-px == 0 {
+    @if $dimension == "block-end" and length($sizes-in-px) > 1 {
+      @include _error("More than one size supplied with 'block-end' dimension");
+    } @else if $sizes-in-px == 0 {
       #{$space-type}-bottom: #{$sizes-in-px};
       #{$space-type}-block-end: #{$sizes-in-px};
     } @else {
