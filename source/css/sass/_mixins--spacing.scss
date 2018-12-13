@@ -84,7 +84,7 @@
     }
   }
 
-  @if $dimension == "inline" {
+  @else if $dimension == "inline" {
 
     @if length($sizes-in-px) > 2 {
       @include _error("More than two sizes supplied with 'inline' dimension");
@@ -144,7 +144,7 @@
     }
   }
 
-  @if $dimension == "inline-start" {
+  @else if $dimension == "inline-start" {
 
     @if length($sizes-in-px) > 1 {
       @include _error("More than one size supplied with 'inline-start' dimension");
@@ -171,7 +171,7 @@
     }
   }
 
-  @if $dimension == "inline-end" {
+  @else if $dimension == "inline-end" {
 
     @if $dimension == "inline-end" and length($sizes-in-px) > 1 {
       @include _error("More than one size supplied with 'inline-end' dimension");
@@ -199,7 +199,7 @@
   }
 
   // Vertical writing modes not yet supported
-  @if $dimension == "block" {
+  @else if $dimension == "block" {
 
     @if $dimension == "block" and length($sizes-in-px) > 2 {
       @include _error("More than two sizes supplied with 'block' dimension");
@@ -224,7 +224,7 @@
     }
   }
 
-  @if $dimension == "block-start" {
+  @else if $dimension == "block-start" {
     @if $dimension == "block-start" and length($sizes-in-px) > 1 {
       @include _error("More than one size supplied with 'block-start' dimension");
     } @else if $sizes-in-px == 0 {
@@ -237,7 +237,7 @@
     }
   }
 
-  @if $dimension == "block-end" {
+  @else if $dimension == "block-end" {
     @if $dimension == "block-end" and length($sizes-in-px) > 1 {
       @include _error("More than one size supplied with 'block-end' dimension");
     } @else if $sizes-in-px == 0 {
@@ -248,6 +248,14 @@
       #{$space-type}-bottom: #{get-rem-from-px($sizes-in-px)}rem;
       #{$space-type}-block-end: #{get-rem-from-px($sizes-in-px)}rem;
     }
+  }
+
+  @else if index(("top", "bottom", "left", "right"), $dimension) {
+    @include _error("'#{$dimension}' is a physical dimension, use its logical equivilant");
+  }
+
+  @else {
+    @include _error("Unknown dimension '#{$dimension}'");
   }
 }
 
@@ -260,23 +268,8 @@
 }
 
 @mixin nospace($dimension: "") {
-  $allowed-dimensions: "inline", "inline-start", "inline-end", "block", "";
-  @if index($allowed-dimensions, $dimension) != null {
-    @include margin(0, $dimension);
-    @include padding(0, $dimension);
-  } @else if $dimension == "block-start" {
-    //vertical writing modes not yet supported
-    margin-top: 0;
-    margin-block-start: 0;
-    padding-top: 0;
-    padding-block-start: 0;
-  } @else if $dimension == "block-end" {
-    //vertical writing modes not yet supported
-    margin-bottom: 0;
-    margin-block-end: 0;
-    padding-bottom: 0;
-    padding-block-end: 0;
-  }
+  @include margin(0, $dimension);
+  @include padding(0, $dimension);
 }
 
 // blg stands for "baseline grid"

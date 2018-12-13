@@ -637,6 +637,32 @@
     }
   }
 
+  @include test("errors on invalid dimensions") {
+    @include assert() {
+
+      @include output {
+        @include padding(1, "top")
+      }
+
+      @include expect {
+        _error: "'top' is a physical dimension, use its logical equivilant"
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include padding(1, "foo")
+      }
+
+      @include expect {
+        _error: "Unknown dimension 'foo'"
+      }
+
+    }
+  }
+
 }
 
 @include describe("margin [Mixin]") {
@@ -1246,6 +1272,32 @@
     }
   }
 
+  @include test("errors on invalid dimensions") {
+    @include assert() {
+
+      @include output {
+        @include margin(1, "top")
+      }
+
+      @include expect {
+        _error: "'top' is a physical dimension, use its logical equivilant"
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include margin(1, "foo")
+      }
+
+      @include expect {
+        _error: "Unknown dimension 'foo'"
+      }
+
+    }
+  }
+
 }
 
 @include describe("nospace [Mixin]") {
@@ -1410,4 +1462,31 @@
 
     }
   }
+
+  @include test("errors on invalid dimensions") {
+    @include assert() {
+
+      @include output {
+        @include nospace("top")
+      }
+
+      @include contains {
+        _error: "'top' is a physical dimension, use its logical equivilant"
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include nospace("foo")
+      }
+
+      @include contains {
+        _error: "Unknown dimension 'foo'"
+      }
+
+    }
+  }
+
 }
