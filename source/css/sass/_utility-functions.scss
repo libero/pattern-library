@@ -17,5 +17,13 @@ $_is_test-environment: false !default;
 }
 
 @function get-rem-from-px($size_in_px) {
+  @if type-of($size_in_px) != "number" {
+    @return _error("Expected a number, not a "+type-of($size_in_px));
+  } @else if (not unitless($size_in_px)) {
+    @return _error("Expected a unitless number");
+  } @else if ($size_in_px <= 0) {
+    @return _error("Expected a number greater than 0");
+  }
+
   @return $size_in_px/$font-size-base-in-px;
 }

@@ -17,4 +17,21 @@
     );
   }
 
+  @include test("errors on invalid sizes") {
+    @include assert-equal(
+        get-rem-from-px("foo"),
+        "Expected a number, not a string"
+    );
+
+    @include assert-equal(
+        get-rem-from-px(1rem),
+        "Expected a unitless number"
+    );
+
+    @include assert-equal(
+        get-rem-from-px(0),
+        "Expected a number greater than 0"
+    );
+  }
+
 }
