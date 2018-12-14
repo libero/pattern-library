@@ -1,10 +1,9 @@
-@import "variables/color";
-@import "variables/content_header";
-@import "variables/font";
-@import "variables/baselinegrid";
-@import "utility-functions";
-
-// General purpose
+@import "../functions/sizes";
+@import "../variables/baselinegrid";
+@import "../variables/color";
+@import "../variables/content_header";
+@import "../variables/font";
+@import "spacing";
 
 @mixin font-size($size_in_px) {
   font-size: #{$size_in_px}px;
@@ -18,7 +17,7 @@
 
 @mixin _heading-base-typography() {
   font-family: $font-secondary;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 @mixin h1-typography() {
@@ -61,6 +60,17 @@
   font-family: $font-primary;
   font-style: normal;
   @include set-font-size-and-vertical-height(11);
+}
+
+@mixin body-para {
+  @include body-typography();
+  @include body-spacing();
+}
+
+@mixin inline-image {
+  margin-bottom: 0.1em;
+  max-height: 1em;
+  vertical-align: middle;
 }
 
 @mixin title-font-size($title-font-size) {

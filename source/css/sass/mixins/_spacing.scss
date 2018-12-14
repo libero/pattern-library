@@ -1,7 +1,9 @@
-@import "utility-functions";
-@import "variables";
-
-// NOTE: mixins beginning with underscore "_" are internal to this file only: they MUST NOT be used externally.
+@import "../functions/sizes";
+@import "../functions/validation";
+@import "../mixins/sizes";
+@import "../variables/baselinegrid";
+@import "../variables/breakpoint";
+@import "../variables/grid";
 
 @mixin _spacing-left($size-in-px, $space-type) {
   @if $size-in-px == 0 {
@@ -413,7 +415,7 @@
 
 @mixin wrapper() {
   box-sizing: content-box;
-  @include constrain-width($grid-max_width, "max");
+  @include max-inline-size($grid-max_width);
   margin: auto;
 
   padding-left: 7%;

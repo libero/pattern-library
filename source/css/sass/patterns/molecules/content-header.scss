@@ -1,4 +1,7 @@
-@import "../../definitions";
+@import "../../variables/baselinegrid";
+@import "../../variables/color";
+@import "../../mixins/spacing";
+@import "../../mixins/typography";
 
 .content-header {
   color: $color-text-normal;
