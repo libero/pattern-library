@@ -104,7 +104,7 @@ const cleanSharedConfig = () => del(config.files.src.derivedConfigs);
 
 export const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeConfig);
 
-export const lintSass = () => {
+const lintSass = () => {
   if (!config.sass.linting) {
     console.info('Skipping sass:lint');
     return Promise.resolve();
@@ -124,9 +124,11 @@ export const lintSass = () => {
     .pipe(postcss(processors, {syntax: syntaxScss}));
 };
 
-export const testSass = () =>
+const testSass = () =>
   gulp.src(config.files.test.sassTestsEntryPoint)
     .pipe(mocha({reporter: 'spec'}));
+
+export const validateSass = gulp.parallel(lintSass, testSass);
 
 const cleanCss = () => del(config.files.src.css);
 
@@ -142,7 +144,7 @@ const compileCss = () =>
 
 export const generateCss = gulp.series(cleanCss, compileCss);
 
-export const build = gulp.parallel(lintSass, testSass, generateCss);
+export const build = gulp.parallel(validateSass, generateCss);
 
 export const assemble = gulp.series(distributeSharedConfig, build);
 
