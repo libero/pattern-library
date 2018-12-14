@@ -23,7 +23,6 @@ FROM node AS gulp
 WORKDIR /app
 
 COPY .babelrc \
-    .stylelintignore \
     .stylelintrc \
     gulpfile.babel.js \
     ./

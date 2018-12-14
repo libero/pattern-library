@@ -22,7 +22,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, exportRoot) => {
     invocationArgs, {
       default: {
         environment: 'production',
-        sassEntryPoint: 'build.scss',
+        sassEntryPoint: 'base.scss',
         cssOutFilename: 'all.css',
         'sass-lint': true,
       },
@@ -55,6 +55,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, exportRoot) => {
 
   config.dir.out.css = `${config.exportRoot}/css`;
   config.dir.out.sass = `${config.dir.out.css}/sass`;
+  config.dir.out.sassVendor = `${config.dir.out.css}/sass/vendor`;
   config.dir.out.images = `${config.exportRoot}/images`;
   config.dir.out.fonts = `${config.exportRoot}/fonts`;
   config.dir.out.templates = `${config.exportRoot}/templates`;
@@ -68,9 +69,18 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, exportRoot) => {
     `${config.dir.src.css}/**/*.css`,
     `${config.dir.src.css}/**/*.map`,
     `!${config.dir.src.css}/pattern-scaffolding.css`,
+    `!${config.dir.src.css}/sass/**/*`,
   ];
-  config.files.src.sass = `${config.dir.src.sass}/**/*.scss`;
+  config.files.src.sass = [
+    `${config.dir.src.sass}/**/*.scss`,
+    `!${config.dir.src.sass}/vendor/**/*`,
+  ];
   config.files.src.sassEntryPoint = `${config.dir.src.sass}/${invocationOptions.sassEntryPoint}`;
+  config.files.src.sassVendor = [
+    `${config.dir.src.sass}/vendor/**/*.scss`,
+    `${config.dir.src.sass}/vendor/**/*.css`,
+    `${config.dir.src.sass}/vendor/**/LICENSE.*`,
+  ];
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
   config.files.src.templates = [`${config.dir.src.templates}/*.twig`, `${config.dir.src.templates}/**/*.twig`];
@@ -113,7 +123,7 @@ export const lintSass = () => {
     ),
   ];
 
-  return gulp.src([config.files.src.sass])
+  return gulp.src(config.files.src.sass)
     .pipe(postcss(processors, {syntax: syntaxScss}));
 };
 
@@ -151,6 +161,10 @@ const exportSass = () =>
   gulp.src(config.files.src.sass)
     .pipe(gulp.dest(config.dir.out.sass));
 
+const exportSassVendor = () =>
+  gulp.src(config.files.src.sassVendor)
+    .pipe(gulp.dest(config.dir.out.sassVendor));
+
 const exportImages = () =>
   gulp.src(config.files.src.images)
     .pipe(gulp.dest(config.dir.out.images));
@@ -174,7 +188,7 @@ const exportTemplates = () =>
 
 export const exportPatterns = gulp.series(
   cleanExport,
-  gulp.parallel(exportCss, exportSass, exportImages, exportFonts, exportTemplates),
+  gulp.parallel(exportCss, exportSass, exportSassVendor, exportImages, exportFonts, exportTemplates),
 );
 
 // Default
