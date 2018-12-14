@@ -1,5 +1,3 @@
-'use strict';
-
 import del from 'del';
 import distributeConfig from './libero-config/bin/distributeConfig';
 import flatten from 'gulp-flatten';
@@ -99,7 +97,6 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, exportRoot) => {
 };
 
 const config = buildConfig(process.argv, 'source', 'test', 'export');
-
 
 // Builders
 
