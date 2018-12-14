@@ -1,0 +1,9 @@
+$_is_test-environment: false !default;
+
+@function _error($message, $capture: $_is_test-environment) {
+  @if $capture {
+    @return $message;
+  }
+
+  @error $message;
+}
