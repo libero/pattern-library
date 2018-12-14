@@ -1,6 +1,6 @@
-@import "utility-functions";
-@import "variables/breakpoint";
-@import "variables/font";
+@import "../functions/sizes";
+@import "../variables/breakpoint";
+@import "../variables/font";
 
 $mq-base-font-size: to-px($font-size-base-in-px);
 
@@ -12,4 +12,4 @@ $mq-breakpoints: (
   x-wide: to-px($breakpoint-site-x_wide),
 );
 
-@import "../../../node_modules/sass-mq/mq";
+@import "../vendor/sass-mq/_mq";

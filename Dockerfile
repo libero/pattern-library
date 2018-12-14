@@ -22,9 +22,9 @@ FROM node AS gulp
 
 WORKDIR /app
 
-COPY .stylelintignore \
+COPY .babelrc \
     .stylelintrc \
-    gulpfile.js \
+    gulpfile.babel.js \
     ./
 COPY libero-config/ libero-config/
 COPY --from=npm /app/node_modules/ node_modules/
@@ -55,6 +55,12 @@ RUN mkdir public source && \
 # Stage: Generate pattern library
 #
 FROM php:7.2.12-cli-alpine AS build
+
+RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
+    pecl install inotify && \
+    docker-php-ext-enable inotify && \
+    rm -rf /tmp/pear/ && \
+    apk del .build-deps
 
 WORKDIR /app
 
