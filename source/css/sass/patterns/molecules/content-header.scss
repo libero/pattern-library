@@ -1,5 +1,6 @@
 @import "../../variables/baselinegrid";
 @import "../../variables/color";
+@import "../../variables/content_header";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 
@@ -25,33 +26,106 @@
 }
 
 .content-header__title--xx-short {
-  @include header-title-size("xx-short");
+  @include font-size($content_header-title-size-xx_large);
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-small)}em) {
+    @include font-size($content_header-title-size-xxx_large);
+  }
 }
 
 .content-header__title--x-short {
-  @include header-title-size("x-short");
+  @include font-size($content_header-title-size-x_large);
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+    @include font-size($content_header-title-size-xx_large);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-wide)}em) {
+    @include font-size($content_header-title-size-xxx_large);
+  }
 }
 
 .content-header__title--short {
-  @include header-title-size("short");
+  @include font-size($content_header-title-size-medium);
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-small)}em) {
+    @include font-size($content_header-title-size-large);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+    @include font-size($content_header-title-size-x_large);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-wide)}em) {
+    @include font-size($content_header-title-size-xx_large);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-x-wide)}em) {
+    @include font-size($content_header-title-size-xxx_large);
+  }
 }
 
 .content-header__title--medium {
-  @include header-title-size("medium");
+  @include font-size($content_header-title-size-small);
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-small)}em) {
+    @include font-size($content_header-title-size-medium);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+    @include font-size($content_header-title-size-large);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-wide)}em) {
+    @include font-size($content_header-title-size-x_large);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-x-wide)}em) {
+    @include font-size($content_header-title-size-xxx_large);
+  }
 }
 
 .content-header__title--long {
-  @include header-title-size("long");
+  @include font-size($content_header-title-size-x_small);
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-small)}em) {
+    @include font-size($content_header-title-size-small);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+    @include font-size($content_header-title-size-large);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-x-wide)}em) {
+    @include font-size($content_header-title-size-x_large);
+  }
+
 }
 
 .content-header__title--x-long {
-  @include header-title-size("x-long");
+  @include font-size($content_header-title-size-x_small);
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-medium)}em) {
+    @include font-size($content_header-title-size-small);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-wide)}em) {
+    @include font-size($content_header-title-size-small);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-x-wide)}em) {
+    @include font-size($content_header-title-size-medium);
+  }
 }
 
 .content-header__title--xx-long {
-  @include header-title-size("xx-long");
-}
+  @include font-size($content_header-title-size-xx_small);
 
-.content-header__title--xxx-long {
-  @include header-title-size("xxx-long");
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-small)}em) {
+    @include font-size($content_header-title-size-x_small);
+  }
+
+  @media only all and (min-width: #{get-rem-from-px($breakpoint-site-wide)}em) {
+    @include font-size($content_header-title-size-small);
+  }
 }
