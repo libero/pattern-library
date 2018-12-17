@@ -423,13 +423,13 @@
   padding-right: 7%;
   padding-inline: 7%;
 
-  @include mq($from: medium) {
+  @include mq($media-type: screen, $from: medium) {
     padding-left: 14%;
     padding-right: 14%;
     padding-inline: 14%;
   }
 
-  @include mq($from: x-wide) {
+  @include mq($media-type: screen, $from: x-wide) {
     padding-left: 3%;
     padding-right: 3%;
     padding-inline: 3%;
