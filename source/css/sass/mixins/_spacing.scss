@@ -51,7 +51,7 @@
   $validation-status: validate-spacing-arguments($sizes, $space-type, $dimension);
 
   @if $dimension == "" {
-    @include safe-rem(#{$space-type}, $sizes);
+    @include safe-rem($space-type, $sizes);
   }
 
   @if $dimension == "inline" {
