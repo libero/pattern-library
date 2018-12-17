@@ -25,7 +25,7 @@ $rem-fallback: true;
 
     @each $property in $properties {
       @if $pixel == true {
-        @include rem(($property: $values));
+        @include rem($property, $values...);
       } @else {
         #{$property}: $values;
       }
