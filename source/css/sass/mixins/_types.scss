@@ -14,22 +14,25 @@ $rem-fallback: true;
 
   } @else {
 
-    $pixel: false;
+    $convert: false;
     @each $valueList in $values {
       @each $value in $valueList {
-        @if type-of($value) == "number" and unit($value) == "px" {
-          $pixel: true;
+        @if type-of($value) == "number" and index((rem, px), unit($value)) {
+          $convert: true;
         }
       }
     }
 
     @each $property in $properties {
-      @if $pixel == true {
+      @if $convert == true {
         @include rem($property, $values...);
+      } @else if $rem-px-only {
+        #{$property}: rem-convert(px, $values...);
       } @else {
         #{$property}: $values;
       }
     }
+
   }
 
 }
