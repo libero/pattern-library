@@ -11,11 +11,11 @@ config.data.baselinegrid.space.large_in_px = '!expression baselinegrid.space.sma
 config.data.baselinegrid.space.extra_large_in_px = '!expression baselinegrid.space.small_in_px * 5';
 
 config.data.breakpoint = {site: {}};
-config.data.breakpoint.site.x_small = 320;
-config.data.breakpoint.site.small = 480;
-config.data.breakpoint.site.medium = 730;
-config.data.breakpoint.site.wide = 900;
-config.data.breakpoint.site.x_wide = 1200;
+config.data.breakpoint.site.x_small_in_px = 320;
+config.data.breakpoint.site.small_in_px = 480;
+config.data.breakpoint.site.medium_in_px = 730;
+config.data.breakpoint.site.wide_in_px = 900;
+config.data.breakpoint.site.x_wide_in_px = 1200;
 
 config.data.color = { primary: {}, text: {} };
 config.data.color.background = Color('#fff');

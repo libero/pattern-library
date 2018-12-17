@@ -1,0 +1,35 @@
+@import "../variables/font";
+@import "../vendor/sass-rem/rem";
+
+$rem-baseline: $font-size-base;
+$rem-fallback: true;
+
+@mixin safe-rem($properties, $values...) {
+
+  @if type-of($properties) == "map" {
+
+    @each $property in map-keys($properties) {
+      @include safe-rem($property, map-get($properties, $property));
+    }
+
+  } @else {
+
+    $pixel: false;
+    @each $valueList in $values {
+      @each $value in $valueList {
+        @if type-of($value) == "number" and unit($value) == "px" {
+          $pixel: true;
+        }
+      }
+    }
+
+    @each $property in $properties {
+      @if $pixel == true {
+        @include rem(($property: $values));
+      } @else {
+        #{$property}: $values;
+      }
+    }
+  }
+
+}
