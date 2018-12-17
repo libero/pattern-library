@@ -40,12 +40,6 @@
     @return _error("More than one size supplied with 'block-end' dimension", $capture-errors);
   }
 
-  @each $size in $sizes {
-    @if $size != 0 and unit($size) != "px" {
-      @return _error("Expected a pixel value");
-    }
-  }
-
   @return "OK";
 
 }

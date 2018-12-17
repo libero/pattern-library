@@ -1,7 +1,9 @@
+@import "sizes";
+@import "types";
 @import "../functions/validation";
-@import "../mixins/types";
 @import "../variables/baselinegrid";
 @import "../variables/breakpoint";
+@import "../variables/grid";
 
 @mixin _spacing-left($size, $space-type) {
   @include safe-rem(#{$space-type}-left, $size);
@@ -323,4 +325,20 @@
 
 @mixin small-spacing() {
   @include blg-spacing("block-end", "small");
+}
+
+@mixin wrapper() {
+  box-sizing: content-box;
+  @include max-inline-size($grid-max_width);
+  margin: auto;
+
+  @include padding(7%, "inline");
+
+  @media only screen and (min-width: rem($breakpoint-site-medium)) {
+    @include padding(14%, "inline");
+  }
+
+  @media only screen and (min-width: rem($breakpoint-site-x_wide)) {
+    @include padding(3%, "inline");
+  }
 }

@@ -6,7 +6,7 @@
 
 @mixin set-font-size-and-vertical-height($font-size, $vertical-height: $baselinegrid-space-small) {
   @include safe-rem("font-size", $font-size);
-  line-height: $vertical-height / unitless($font-size);
+  line-height: $vertical-height / $font-size;
 }
 
 @mixin _heading-base-typography() {
@@ -16,12 +16,12 @@
 
 @mixin h1-typography() {
   @include _heading-base-typography();
-  @include set-font-size-and-vertical-height($font-size-h1, 48);
+  @include set-font-size-and-vertical-height($font-size-h1, 48px);
 }
 
 @mixin h2-typography() {
   @include _heading-base-typography();
-  @include set-font-size-and-vertical-height($font-size-h2, 30);
+  @include set-font-size-and-vertical-height($font-size-h2, 30px);
 }
 
 @mixin h3-typography() {
@@ -53,7 +53,7 @@
 @mixin small-typography() {
   font-family: $font-primary;
   font-style: normal;
-  @include set-font-size-and-vertical-height(11);
+  @include set-font-size-and-vertical-height(11px);
 }
 
 @mixin body-para {
