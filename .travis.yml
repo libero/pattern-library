@@ -6,6 +6,7 @@ services: docker
 
 env:
     global:
+        - COMPOSE_PROJECT_NAME=patternlibrary
         - IMAGE_TAG=$TRAVIS_COMMIT
 
 script:
