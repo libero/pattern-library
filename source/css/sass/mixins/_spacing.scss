@@ -46,14 +46,14 @@
   $validation-status: validate-spacing-arguments($sizes, $space-type, $dimension);
 
   @if $dimension == "" {
-    @include safe-rem($space-type, $sizes);
+    @include rem($space-type, $sizes);
   }
 
   @if $dimension == "inline" {
     @if length($sizes) == 1 {
 
-      @include safe-rem(#{$space-type}-left, $sizes);
-      @include safe-rem(#{$space-type}-right, $sizes);
+      @include rem(#{$space-type}-left, $sizes);
+      @include rem(#{$space-type}-right, $sizes);
       #{$space-type}-inline: rem($sizes);
 
     } @else {
@@ -63,19 +63,19 @@
 
       @if $firstValue == $secondValue {
 
-        @include safe-rem(#{$space-type}-left, $firstValue);
-        @include safe-rem(#{$space-type}-right, $secondValue);
+        @include rem(#{$space-type}-left, $firstValue);
+        @include rem(#{$space-type}-right, $secondValue);
 
       } @else {
 
         @include _when-left-to-right {
-          @include safe-rem(#{$space-type}-left, $firstValue);
-          @include safe-rem(#{$space-type}-right, $secondValue);
+          @include rem(#{$space-type}-left, $firstValue);
+          @include rem(#{$space-type}-right, $secondValue);
         }
 
         @include _when-right-to-left {
-          @include safe-rem(#{$space-type}-right, $firstValue);
-          @include safe-rem(#{$space-type}-left, $secondValue);
+          @include rem(#{$space-type}-right, $firstValue);
+          @include rem(#{$space-type}-left, $secondValue);
         }
 
       }
@@ -93,10 +93,10 @@
 
   @if $dimension == "inline-start" {
     @include _when-left-to-right {
-      @include safe-rem(#{$space-type}-left, nth($sizes, 1));
+      @include rem(#{$space-type}-left, nth($sizes, 1));
     }
     @include _when-right-to-left {
-      @include safe-rem(#{$space-type}-right, nth($sizes, 1));
+      @include rem(#{$space-type}-right, nth($sizes, 1));
     }
     html[dir] & {
       #{$space-type}-inline-start: rem(nth($sizes, 1));
@@ -106,10 +106,10 @@
   @if $dimension == "inline-end" {
 
     @include _when-left-to-right {
-      @include safe-rem(#{$space-type}-right, nth($sizes, 1));
+      @include rem(#{$space-type}-right, nth($sizes, 1));
     }
     @include _when-right-to-left {
-      @include safe-rem(#{$space-type}-left, nth($sizes, 1));
+      @include rem(#{$space-type}-left, nth($sizes, 1));
     }
     html[dir] & {
       #{$space-type}-inline-end: rem(nth($sizes, 1));
@@ -121,12 +121,12 @@
   @if $dimension == "block" {
 
     @if type_of($sizes) == list and length($sizes) >= 2 {
-      @include safe-rem((
+      @include rem((
         #{$space-type}-top: nth($sizes, 1),
         #{$space-type}-bottom: nth($sizes, 2),
       ));
     } @else {
-      @include safe-rem((
+      @include rem((
         #{$space-type}-top: $sizes,
         #{$space-type}-bottom: $sizes,
       ));
@@ -135,12 +135,12 @@
   }
 
   @if $dimension == "block-start" {
-    @include safe-rem(#{$space-type}-top, $sizes);
+    @include rem(#{$space-type}-top, $sizes);
     #{$space-type}-block-start: rem($sizes);
   }
 
   @if $dimension == "block-end" {
-    @include safe-rem(#{$space-type}-bottom, $sizes);
+    @include rem(#{$space-type}-bottom, $sizes);
     #{$space-type}-block-end: rem($sizes);
   }
 }

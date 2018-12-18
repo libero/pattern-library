@@ -4,12 +4,13 @@
 $rem-baseline: $font-size-base;
 $rem-fallback: true;
 
-@mixin safe-rem($properties, $values...) {
+// Overridden to apply https://github.com/pierreburel/sass-rem/pull/12
+@mixin rem($properties, $values...) {
 
   @if type-of($properties) == "map" {
 
     @each $property in map-keys($properties) {
-      @include safe-rem($property, map-get($properties, $property));
+      @include rem($property, map-get($properties, $property));
     }
 
   } @else {
@@ -25,7 +26,12 @@ $rem-fallback: true;
 
     @each $property in $properties {
       @if $convert == true {
-        @include rem($property, $values...);
+        @if $rem-fallback or $rem-px-only {
+          #{$property}: rem-convert(px, $values...);
+        }
+        @if not $rem-px-only {
+          #{$property}: rem-convert(rem, $values...);
+        }
       } @else if $rem-px-only {
         #{$property}: rem-convert(px, $values...);
       } @else {

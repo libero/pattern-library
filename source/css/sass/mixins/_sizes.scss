@@ -2,22 +2,22 @@
 @import "../mixins/types";
 
 @mixin block-size($size) {
-  @include safe-rem(height, $size);
+  @include rem(height, $size);
   block-size: rem($size);
 }
 
 @mixin inline-size($size) {
-  @include safe-rem(width, $size);
+  @include rem(width, $size);
   inline-size: rem($size);
 }
 
 @mixin _constrain-block-size($size, $extreme) {
-  @include safe-rem(#{$extreme}-height, $size);
+  @include rem(#{$extreme}-height, $size);
   #{$extreme}-block-size: rem($size);
 }
 
 @mixin _constrain-inline-size($size, $extreme) {
-  @include safe-rem(#{$extreme}-width, $size);
+  @include rem(#{$extreme}-width, $size);
   #{$extreme}-inline-size: rem($size);
 }
 

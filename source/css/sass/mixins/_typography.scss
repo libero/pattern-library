@@ -5,7 +5,7 @@
 @import "spacing";
 
 @mixin set-font-size-and-vertical-height($font-size, $vertical-height: $baselinegrid-space-small) {
-  @include safe-rem("font-size", $font-size);
+  @include rem("font-size", $font-size);
   line-height: $vertical-height / $font-size;
 }
 
