@@ -44,68 +44,66 @@
 @mixin _spacing($sizes, $space-type, $dimension: "") {
 
   @if $dimension == "" {
-    @if length($sizes) > 4 {
-      @include _error("More than four sizes supplied when no dimension");
-    } @else {
+
+    @include _expect_at_most($sizes, 4, "More than four sizes supplied when no dimension") {
       @include rem($space-type, $sizes);
     }
-  }
 
-  @else if $dimension == "inline" {
+  } @else if $dimension == "inline" {
 
-    @if length($sizes) > 2 {
-      @include _error("More than two sizes supplied with 'inline' dimension");
-    } @else if length($sizes) == 1 {
+    @include _expect_at_most($sizes, 2, "More than two sizes supplied with 'inline' dimension") {
 
-      @include rem((
-        #{$space-type}-left: $sizes,
-        #{$space-type}-right: $sizes,
-      ));
-      #{$space-type}-inline: rem($sizes);
-
-    } @else {
-
-      $firstValue: nth($sizes, 1);
-      $secondValue: nth($sizes, 2);
-
-      @if $firstValue == $secondValue {
+      @if length($sizes) == 1 {
 
         @include rem((
-          #{$space-type}-left: $firstValue,
-          #{$space-type}-right: $secondValue,
+          #{$space-type}-left: $sizes,
+          #{$space-type}-right: $sizes,
         ));
-        #{$space-type}-inline: rem($firstValue);
+        #{$space-type}-inline: rem($sizes);
 
       } @else {
 
-        @include _when-left-to-right {
+        $firstValue: nth($sizes, 1);
+        $secondValue: nth($sizes, 2);
+
+        @if $firstValue == $secondValue {
+
           @include rem((
             #{$space-type}-left: $firstValue,
             #{$space-type}-right: $secondValue,
           ));
-        }
+          #{$space-type}-inline: rem($firstValue);
 
-        @include _when-right-to-left {
-          @include rem((
-            #{$space-type}-right: $firstValue,
-            #{$space-type}-left: $secondValue,
-          ));
-        }
+        } @else {
 
-        html[dir] & {
-          #{$space-type}-inline: rem($firstValue $secondValue);
+          @include _when-left-to-right {
+            @include rem((
+              #{$space-type}-left: $firstValue,
+              #{$space-type}-right: $secondValue,
+            ));
+          }
+
+          @include _when-right-to-left {
+            @include rem((
+              #{$space-type}-right: $firstValue,
+              #{$space-type}-left: $secondValue,
+            ));
+          }
+
+          html[dir] & {
+            #{$space-type}-inline: rem($firstValue $secondValue);
+          }
+
         }
 
       }
 
     }
-  }
 
-  @else if $dimension == "inline-start" {
+  } @else if $dimension == "inline-start" {
 
-    @if length($sizes) > 1 {
-      @include _error("More than one size supplied with 'inline-start' dimension");
-    } @else {
+    @include _expect_single_value($sizes, "More than one size supplied with 'inline-start' dimension") {
+
       @include _when-left-to-right {
         @include rem(#{$space-type}-left, $sizes);
       }
@@ -115,14 +113,13 @@
       html[dir] & {
         #{$space-type}-inline-start: rem($sizes);
       }
+
     }
-  }
 
-  @else if $dimension == "inline-end" {
+  } @else if $dimension == "inline-end" {
 
-    @if length($sizes) > 1 {
-      @include _error("More than one size supplied with 'inline-end' dimension");
-    } @else {
+    @include _expect_single_value($sizes, "More than one size supplied with 'inline-end' dimension") {
+
       @include _when-left-to-right {
         @include rem(#{$space-type}-right, $sizes);
       }
@@ -132,15 +129,13 @@
       html[dir] & {
         #{$space-type}-inline-end: rem($sizes);
       }
+
     }
-  }
 
-  // Vertical writing modes not yet supported
-  @else if $dimension == "block" {
+  } @else if $dimension == "block" {
 
-    @if length($sizes) > 2 {
-      @include _error("More than two sizes supplied with 'block' dimension");
-    } @else {
+    @include _expect_at_most($sizes, 2, "More than two sizes supplied with 'block' dimension") {
+
       @if length($sizes) == 2 {
         @include rem((
           #{$space-type}-top: nth($sizes, 1),
@@ -153,34 +148,31 @@
         ));
       }
       #{$space-type}-block: rem($sizes);
-    }
-  }
 
-  @else if $dimension == "block-start" {
-    @if length($sizes) > 1 {
-      @include _error("More than one size supplied with 'block-start' dimension");
-    } @else {
+    }
+
+  } @else if $dimension == "block-start" {
+
+    @include _expect_single_value($sizes, "More than one size supplied with 'block-start' dimension") {
+
       @include rem(#{$space-type}-top, $sizes);
       #{$space-type}-block-start: rem($sizes);
     }
-  }
 
-  @else if $dimension == "block-end" {
-    @if length($sizes) > 1 {
-      @include _error("More than one size supplied with 'block-end' dimension");
-    } @else {
+  } @else if $dimension == "block-end" {
+
+    @include _expect_single_value($sizes, "More than one size supplied with 'block-end' dimension") {
+
       @include rem(#{$space-type}-bottom, $sizes);
       #{$space-type}-block-end: rem($sizes);
     }
-  }
 
-  @else if index(("top", "bottom", "left", "right"), $dimension) {
+  } @else if index(("top", "bottom", "left", "right"), $dimension) {
     @include _error("'#{$dimension}' is a physical dimension, use its logical equivilant");
-  }
-
-  @else {
+  } @else {
     @include _error("Unknown dimension '#{$dimension}'");
   }
+
 }
 
 @mixin padding($sizes, $dimension: "") {
