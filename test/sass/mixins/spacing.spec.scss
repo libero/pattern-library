@@ -21,7 +21,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16);
+        @include padding(16px);
       }
 
       @include expect {
@@ -36,7 +36,7 @@
     @include assert() {
 
       @include output {
-        @include padding(32 48);
+        @include padding(32px 48px);
       }
 
       @include expect {
@@ -51,7 +51,7 @@
     @include assert() {
 
       @include output {
-        @include padding(32 48 64);
+        @include padding(32px 48px 64px);
       }
 
       @include expect {
@@ -66,7 +66,7 @@
     @include assert() {
 
       @include output {
-        @include padding(0 48);
+        @include padding(0 48px);
       }
 
       @include expect {
@@ -79,7 +79,7 @@
     @include assert() {
 
       @include output {
-        @include padding(48 0);
+        @include padding(48px 0);
       }
 
       @include expect {
@@ -95,7 +95,7 @@
     @include assert() {
 
       @include output {
-        @include padding(0 48 128);
+        @include padding(0 48px 128px);
       }
 
       @include expect {
@@ -108,7 +108,7 @@
     @include assert() {
 
       @include output {
-        @include padding(48 0 128);
+        @include padding(48px 0 128px);
       }
 
       @include expect {
@@ -121,7 +121,7 @@
     @include assert() {
 
       @include output {
-        @include padding(48 128 0);
+        @include padding(48px 128px 0);
       }
 
       @include expect {
@@ -149,7 +149,7 @@
     @include assert() {
 
       @include output {
-        @include padding(0 48 128 256);
+        @include padding(0 48px 128px 256px);
       }
 
       @include expect {
@@ -207,7 +207,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16, "inline");
+        @include padding(16px, "inline");
       }
 
       @include expect {
@@ -225,7 +225,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16 32, "inline");
+        @include padding(16px 32px, "inline");
       }
 
       @include expect {
@@ -254,7 +254,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16 16, "inline");
+        @include padding(16px 16px, "inline");
       }
 
       @include expect {
@@ -270,7 +270,7 @@
     @include assert() {
 
       @include output {
-        @include padding(0 32, "inline");
+        @include padding(0 32px, "inline");
       }
 
       @include expect {
@@ -297,7 +297,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16 0, "inline");
+        @include padding(16px 0, "inline");
       }
 
       @include expect {
@@ -378,7 +378,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16, "inline-start");
+        @include padding(16px, "inline-start");
       }
 
       @include expect {
@@ -441,7 +441,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16, "inline-end");
+        @include padding(16px, "inline-end");
       }
 
       @include expect {
@@ -496,7 +496,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16, "block");
+        @include padding(16px, "block");
       }
 
       @include expect {
@@ -515,7 +515,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16 32, "block");
+        @include padding(16px 32px, "block");
       }
 
       @include expect {
@@ -563,7 +563,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16, "block-start");
+        @include padding(16px, "block-start");
       }
 
       @include expect {
@@ -609,7 +609,7 @@
     @include assert() {
 
       @include output {
-        @include padding(16, "block-end");
+        @include padding(16px, "block-end");
       }
 
       @include expect {
@@ -684,7 +684,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16);
+        @include margin(16px);
       }
 
       @include expect {
@@ -699,7 +699,7 @@
     @include assert() {
 
       @include output {
-        @include margin(32 48);
+        @include margin(32px 48px);
       }
 
       @include expect {
@@ -714,7 +714,7 @@
     @include assert() {
 
       @include output {
-        @include margin(0 48);
+        @include margin(0 48px);
       }
 
       @include expect {
@@ -727,7 +727,7 @@
     @include assert() {
 
       @include output {
-        @include margin(48 0);
+        @include margin(48px 0);
       }
 
       @include expect {
@@ -743,7 +743,7 @@
     @include assert() {
 
       @include output {
-        @include margin(32 48 64);
+        @include margin(32px 48px 64px);
       }
 
       @include expect {
@@ -758,7 +758,7 @@
     @include assert() {
 
       @include output {
-        @include margin(0 48 128);
+        @include margin(0 48px 128px);
       }
 
       @include expect {
@@ -771,7 +771,7 @@
     @include assert() {
 
       @include output {
-        @include margin(48 0 128);
+        @include margin(48px 0 128px);
       }
 
       @include expect {
@@ -784,7 +784,7 @@
     @include assert() {
 
       @include output {
-        @include margin(48 128 0);
+        @include margin(48px 128px 0);
       }
 
       @include expect {
@@ -842,7 +842,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16, "inline");
+        @include margin(16px, "inline");
       }
 
       @include expect {
@@ -860,7 +860,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16 32, "inline");
+        @include margin(16px 32px, "inline");
       }
 
       @include expect {
@@ -889,7 +889,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16 16, "inline");
+        @include margin(16px 16px, "inline");
       }
 
       @include expect {
@@ -905,7 +905,7 @@
     @include assert() {
 
       @include output {
-        @include margin(0 32, "inline");
+        @include margin(0 32px, "inline");
       }
 
       @include expect {
@@ -932,7 +932,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16 0, "inline");
+        @include margin(16px 0, "inline");
       }
 
       @include expect {
@@ -1013,7 +1013,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16, "inline-start");
+        @include margin(16px, "inline-start");
       }
 
       @include expect {
@@ -1076,7 +1076,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16, "inline-end");
+        @include margin(16px, "inline-end");
       }
 
       @include expect {
@@ -1131,7 +1131,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16, "block");
+        @include margin(16px, "block");
       }
 
       @include expect {
@@ -1150,7 +1150,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16 32, "block");
+        @include margin(16px 32px, "block");
       }
 
       @include expect {
@@ -1198,7 +1198,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16, "block-start");
+        @include margin(16px, "block-start");
       }
 
       @include expect {
@@ -1244,7 +1244,7 @@
     @include assert() {
 
       @include output {
-        @include margin(16, "block-end");
+        @include margin(16px, "block-end");
       }
 
       @include expect {
