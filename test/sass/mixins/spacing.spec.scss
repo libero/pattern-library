@@ -334,7 +334,7 @@
 
   }
 
-  @include test("errors when 5 sizes values passed and no dimension") {
+  @include it("errors when 5 sizes values passed and no dimension") {
 
     @include assert() {
 
@@ -589,7 +589,7 @@
 
   }
 
-  @include test("errors when 3 sizes values passed with dimension 'inline'") {
+  @include it("errors when 3 sizes values passed with dimension 'inline'") {
 
     @include assert() {
 
@@ -705,7 +705,7 @@
 
   }
 
-  @include test("errors when 2 sizes values passed with dimension 'inline-start'") {
+  @include it("errors when 2 sizes values passed with dimension 'inline-start'") {
 
     @include assert() {
 
@@ -822,7 +822,7 @@
 
   }
 
-  @include test("errors when 2 sizes values passed with dimension 'inline-end'") {
+  @include it("errors when 2 sizes values passed with dimension 'inline-end'") {
 
     @include assert() {
 
@@ -957,7 +957,7 @@
 
   }
 
-  @include test("errors when 3 sizes values passed with dimension 'block'") {
+  @include it("errors when 3 sizes values passed with dimension 'block'") {
 
     @include assert() {
 
@@ -1035,7 +1035,7 @@
 
   }
 
-  @include test("errors when 2 sizes values passed with dimension 'block-start'") {
+  @include it("errors when 2 sizes values passed with dimension 'block-start'") {
 
     @include assert() {
 
@@ -1113,7 +1113,7 @@
 
   }
 
-  @include test("errors when 2 sizes values passed with dimension 'block-end'") {
+  @include it("errors when 2 sizes values passed with dimension 'block-end'") {
 
     @include assert() {
 
@@ -1129,7 +1129,7 @@
 
   }
 
-  @include test("errors on invalid dimensions") {
+  @include it("errors on invalid dimensions") {
 
     @include assert() {
 
@@ -1492,7 +1492,7 @@
 
   }
 
-  @include test("errors when 5 sizes values passed and no dimension") {
+  @include it("errors when 5 sizes values passed and no dimension") {
 
     @include assert() {
 
@@ -1747,7 +1747,7 @@
 
   }
 
-  @include test("errors when 3 sizes values passed with dimension 'inline'") {
+  @include it("errors when 3 sizes values passed with dimension 'inline'") {
 
     @include assert() {
 
@@ -1863,7 +1863,7 @@
 
   }
 
-  @include test("errors when 2 sizes values passed with dimension 'inline-start'") {
+  @include it("errors when 2 sizes values passed with dimension 'inline-start'") {
 
     @include assert() {
 
@@ -1980,7 +1980,7 @@
 
   }
 
-  @include test("errors when 2 sizes values passed with dimension 'inline-end'") {
+  @include it("errors when 2 sizes values passed with dimension 'inline-end'") {
 
     @include assert() {
 
@@ -2115,7 +2115,7 @@
 
   }
 
-  @include test("errors when 3 sizes values passed with dimension 'block'") {
+  @include it("errors when 3 sizes values passed with dimension 'block'") {
 
     @include assert() {
 
@@ -2193,7 +2193,7 @@
 
   }
 
-  @include test("errors when 2 sizes values passed with dimension 'block-start'") {
+  @include it("errors when 2 sizes values passed with dimension 'block-start'") {
 
     @include assert() {
 
@@ -2271,7 +2271,7 @@
 
   }
 
-  @include test("errors when 2 sizes values passed with dimension 'block-end'") {
+  @include it("errors when 2 sizes values passed with dimension 'block-end'") {
 
     @include assert() {
 
@@ -2287,7 +2287,7 @@
 
   }
 
-  @include test("errors on invalid dimensions") {
+  @include it("errors on invalid dimensions") {
 
     @include assert() {
 
@@ -2494,7 +2494,7 @@
 
   }
 
-  @include test("errors on invalid dimensions") {
+  @include it("errors on invalid dimensions") {
 
     @include assert() {
 
