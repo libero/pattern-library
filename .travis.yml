@@ -4,6 +4,10 @@ language: minimal
 
 services: docker
 
+env:
+    global:
+        - IMAGE_TAG=$TRAVIS_COMMIT
+
 script:
     - docker-compose --file docker-compose.yml --file docker-compose.ci.yml build
 
