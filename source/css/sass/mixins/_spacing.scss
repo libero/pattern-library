@@ -6,14 +6,6 @@
 @import "../variables/breakpoint";
 @import "../variables/grid";
 
-@mixin _spacing-left($size, $space-type) {
-  @include safe-rem(#{$space-type}-left, $size);
-}
-
-@mixin _spacing-right($size, $space-type) {
-  @include safe-rem(#{$space-type}-right, $size);
-}
-
 @mixin _when-left-to-right {
   html[dir="ltr"] &:not([dir]),
   &[dir="ltr"] {
@@ -60,8 +52,8 @@
   @if $dimension == "inline" {
     @if length($sizes) == 1 {
 
-      @include _spacing-left($sizes, $space-type);
-      @include _spacing-right($sizes, $space-type);
+      @include safe-rem(#{$space-type}-left, $sizes);
+      @include safe-rem(#{$space-type}-right, $sizes);
       #{$space-type}-inline: rem($sizes);
 
     } @else {
@@ -71,19 +63,19 @@
 
       @if $firstValue == $secondValue {
 
-        @include _spacing-left($firstValue, $space-type);
-        @include _spacing-right($secondValue, $space-type);
+        @include safe-rem(#{$space-type}-left, $firstValue);
+        @include safe-rem(#{$space-type}-right, $secondValue);
 
       } @else {
 
         @include _when-left-to-right {
-          @include _spacing-left($firstValue, $space-type);
-          @include _spacing-right($secondValue, $space-type);
+          @include safe-rem(#{$space-type}-left, $firstValue);
+          @include safe-rem(#{$space-type}-right, $secondValue);
         }
 
         @include _when-right-to-left {
-          @include _spacing-right($firstValue, $space-type);
-          @include _spacing-left($secondValue, $space-type);
+          @include safe-rem(#{$space-type}-right, $firstValue);
+          @include safe-rem(#{$space-type}-left, $secondValue);
         }
 
       }
@@ -101,10 +93,10 @@
 
   @if $dimension == "inline-start" {
     @include _when-left-to-right {
-      @include _spacing-left(nth($sizes, 1), $space-type);
+      @include safe-rem(#{$space-type}-left, nth($sizes, 1));
     }
     @include _when-right-to-left {
-      @include _spacing-right(nth($sizes, 1), $space-type);
+      @include safe-rem(#{$space-type}-right, nth($sizes, 1));
     }
     html[dir] & {
       #{$space-type}-inline-start: rem(nth($sizes, 1));
@@ -114,10 +106,10 @@
   @if $dimension == "inline-end" {
 
     @include _when-left-to-right {
-      @include _spacing-right(nth($sizes, 1), $space-type);
+      @include safe-rem(#{$space-type}-right, nth($sizes, 1));
     }
     @include _when-right-to-left {
-      @include _spacing-left(nth($sizes, 1), $space-type);
+      @include safe-rem(#{$space-type}-left, nth($sizes, 1));
     }
     html[dir] & {
       #{$space-type}-inline-end: rem(nth($sizes, 1));
