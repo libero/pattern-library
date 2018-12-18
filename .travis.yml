@@ -18,7 +18,6 @@ after_success:
     - .travis/package.sh
     - .scripts/travis/push-image.sh pattern-library
 
-
 deploy:
   provider: releases
   api_key:
