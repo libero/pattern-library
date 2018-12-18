@@ -1,6 +1,7 @@
 @import "sizes";
 @import "types";
 @import "../functions/validation";
+@import "../mixins/media-query";
 @import "../variables/baselinegrid";
 @import "../variables/breakpoint";
 @import "../variables/grid";
@@ -214,7 +215,7 @@
 
   @include blg-spacing("block-start", "small");
 
-  @media only all and (min-width: #{rem($breakpoint-site-medium) * 1em}) {
+  @include mq($from: medium) {
     @include blg-spacing("block-start", "medium");
   }
 
@@ -224,7 +225,7 @@
 
   @include blg-spacing("block-end", "small");
 
-  @media only all and (min-width: #{rem($breakpoint-site-medium) * 1em}) {
+  @include mq($from: medium) {
     @include blg-spacing("block-end", "medium");
   }
 
@@ -234,7 +235,7 @@
 
   @include blg-spacing("block-start", "large");
 
-  @media only all and (min-width: #{rem($breakpoint-site-medium) * 1em}) {
+  @include mq($from: medium) {
     @include blg-spacing("block-start", "extra-large");
   }
 
@@ -244,7 +245,7 @@
 
   @include blg-spacing("block-end", "large");
 
-  @media only all and (min-width: #{rem($breakpoint-site-medium) * 1em}) {
+  @include mq($from: medium) {
     @include blg-spacing("block-end", "extra-large");
   }
 
@@ -264,7 +265,7 @@
 
   @include blg-spacing("block-end", "medium", "margin");
 
-  @media only all and (min-width: #{rem($breakpoint-site-medium) * 1em}) {
+  @include mq($from: medium) {
     @include blg-spacing("block-end", "large", "margin");
   }
 
@@ -274,7 +275,7 @@
 
   @include blg-spacing("block-end", "small", "margin");
 
-  @media only all and (min-width: #{rem($breakpoint-site-medium) * 1em}) {
+  @include mq($from: medium) {
     @include blg-spacing("block-end", "medium", "margin");
   }
 
@@ -334,11 +335,11 @@
 
   @include padding(7%, "inline");
 
-  @media only screen and (min-width: rem($breakpoint-site-medium)) {
+  @include mq($media-type: screen, $from: medium) {
     @include padding(14%, "inline");
   }
 
-  @media only screen and (min-width: rem($breakpoint-site-x_wide)) {
+  @include mq($media-type: screen, $from: x-wide) {
     @include padding(3%, "inline");
   }
 }

@@ -2,6 +2,7 @@
 @import "../../variables/color";
 @import "../../variables/content_header";
 @import "../../functions/types";
+@import "../../mixins/media-query";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 
@@ -29,7 +30,7 @@
 .content-header__title--xx-short {
   @include safe-rem(font-size, $content_header-title-size-xx_large);
 
-  @media only all and (min-width: rem($breakpoint-site-small)) {
+  @include mq($from: small) {
     @include safe-rem(font-size, $content_header-title-size-xxx_large);
   }
 }
@@ -37,11 +38,11 @@
 .content-header__title--x-short {
   @include safe-rem(font-size, $content_header-title-size-x_large);
 
-  @media only all and (min-width: rem($breakpoint-site-medium)) {
+  @include mq($from: medium) {
     @include safe-rem(font-size, $content_header-title-size-xx_large);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-wide)) {
+  @include mq($from: wide) {
     @include safe-rem(font-size, $content_header-title-size-xxx_large);
   }
 }
@@ -49,19 +50,19 @@
 .content-header__title--short {
   @include safe-rem(font-size, $content_header-title-size-medium);
 
-  @media only all and (min-width: rem($breakpoint-site-small)) {
+  @include mq($from: small) {
     @include safe-rem(font-size, $content_header-title-size-large);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-medium)) {
+  @include mq($from: medium) {
     @include safe-rem(font-size, $content_header-title-size-x_large);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-wide)) {
+  @include mq($from: wide) {
     @include safe-rem(font-size, $content_header-title-size-xx_large);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-x-wide)) {
+  @include mq($from: x-wide) {
     @include safe-rem(font-size, $content_header-title-size-xxx_large);
   }
 }
@@ -69,19 +70,19 @@
 .content-header__title--medium {
   @include safe-rem(font-size, $content_header-title-size-small);
 
-  @media only all and (min-width: rem($breakpoint-site-small)) {
+  @include mq($from: small) {
     @include safe-rem(font-size, $content_header-title-size-medium);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-medium)) {
+  @include mq($from: medium) {
     @include safe-rem(font-size, $content_header-title-size-large);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-wide)) {
+  @include mq($from: wide) {
     @include safe-rem(font-size, $content_header-title-size-x_large);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-x-wide)) {
+  @include mq($from: x-wide) {
     @include safe-rem(font-size, $content_header-title-size-xxx_large);
   }
 }
@@ -89,15 +90,15 @@
 .content-header__title--long {
   @include safe-rem(font-size, $content_header-title-size-x_small);
 
-  @media only all and (min-width: rem($breakpoint-site-small)) {
+  @include mq($from: small) {
     @include safe-rem(font-size, $content_header-title-size-small);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-medium)) {
+  @include mq($from: medium) {
     @include safe-rem(font-size, $content_header-title-size-large);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-x-wide)) {
+  @include mq($from: x-wide) {
     @include safe-rem(font-size, $content_header-title-size-x_large);
   }
 
@@ -106,15 +107,15 @@
 .content-header__title--x-long {
   @include safe-rem(font-size, $content_header-title-size-x_small);
 
-  @media only all and (min-width: rem($breakpoint-site-medium)) {
+  @include mq($from: medium) {
     @include safe-rem(font-size, $content_header-title-size-small);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-wide)) {
+  @include mq($from: wide) {
     @include safe-rem(font-size, $content_header-title-size-small);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-x-wide)) {
+  @include mq($from: x-wide) {
     @include safe-rem(font-size, $content_header-title-size-medium);
   }
 }
@@ -122,11 +123,11 @@
 .content-header__title--xx-long {
   @include safe-rem(font-size, $content_header-title-size-xx_small);
 
-  @media only all and (min-width: rem($breakpoint-site-small)) {
+  @include mq($from: small) {
     @include safe-rem(font-size, $content_header-title-size-x_small);
   }
 
-  @media only all and (min-width: rem($breakpoint-site-wide)) {
+  @include mq($from: wide) {
     @include safe-rem(font-size, $content_header-title-size-small);
   }
 }
