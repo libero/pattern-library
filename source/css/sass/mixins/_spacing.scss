@@ -57,8 +57,10 @@
       @include _error("More than two sizes supplied with 'inline' dimension");
     } @else if length($sizes) == 1 {
 
-      @include rem(#{$space-type}-left, $sizes);
-      @include rem(#{$space-type}-right, $sizes);
+      @include rem((
+        #{$space-type}-left: $sizes,
+        #{$space-type}-right: $sizes,
+      ));
       #{$space-type}-inline: rem($sizes);
 
     } @else {
@@ -68,29 +70,32 @@
 
       @if $firstValue == $secondValue {
 
-        @include rem(#{$space-type}-left, $firstValue);
-        @include rem(#{$space-type}-right, $secondValue);
+        @include rem((
+          #{$space-type}-left: $firstValue,
+          #{$space-type}-right: $secondValue,
+        ));
+        #{$space-type}-inline: rem($firstValue);
 
       } @else {
 
         @include _when-left-to-right {
-          @include rem(#{$space-type}-left, $firstValue);
-          @include rem(#{$space-type}-right, $secondValue);
+          @include rem((
+            #{$space-type}-left: $firstValue,
+            #{$space-type}-right: $secondValue,
+          ));
         }
 
         @include _when-right-to-left {
-          @include rem(#{$space-type}-right, $firstValue);
-          @include rem(#{$space-type}-left, $secondValue);
+          @include rem((
+            #{$space-type}-right: $firstValue,
+            #{$space-type}-left: $secondValue,
+          ));
         }
 
-      }
-
-      @if $firstValue == $secondValue {
-        #{$space-type}-inline: rem($firstValue);
-      } @else {
         html[dir] & {
           #{$space-type}-inline: rem($firstValue $secondValue);
         }
+
       }
 
     }
@@ -102,13 +107,13 @@
       @include _error("More than one size supplied with 'inline-start' dimension");
     } @else {
       @include _when-left-to-right {
-        @include rem(#{$space-type}-left, nth($sizes, 1));
+        @include rem(#{$space-type}-left, $sizes);
       }
       @include _when-right-to-left {
-        @include rem(#{$space-type}-right, nth($sizes, 1));
+        @include rem(#{$space-type}-right, $sizes);
       }
       html[dir] & {
-        #{$space-type}-inline-start: rem(nth($sizes, 1));
+        #{$space-type}-inline-start: rem($sizes);
       }
     }
   }
@@ -119,13 +124,13 @@
       @include _error("More than one size supplied with 'inline-end' dimension");
     } @else {
       @include _when-left-to-right {
-        @include rem(#{$space-type}-right, nth($sizes, 1));
+        @include rem(#{$space-type}-right, $sizes);
       }
       @include _when-right-to-left {
-        @include rem(#{$space-type}-left, nth($sizes, 1));
+        @include rem(#{$space-type}-left, $sizes);
       }
       html[dir] & {
-        #{$space-type}-inline-end: rem(nth($sizes, 1));
+        #{$space-type}-inline-end: rem($sizes);
       }
     }
   }
