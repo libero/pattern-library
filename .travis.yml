@@ -15,6 +15,8 @@ after_success:
     - docker run --name pattern-library-patterns patternlibrary_gulp npx gulp exportPatterns
     - docker cp pattern-library-patterns:/app/export/. export/
     - .travis/package.sh
+    - .scripts/travis/push-image.sh pattern-library
+
 
 deploy:
   provider: releases
