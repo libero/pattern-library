@@ -1,4 +1,4 @@
-@import "../../../node_modules/sass-true/sass/true";
+@import "../test";
 @import "../../../source/css/sass/mixins/sizes";
 
 @include describe("@mixin block-size") {
@@ -42,6 +42,22 @@
         height: 16px;
         height: 1rem;
         block-size: 1rem;
+      }
+
+    }
+
+  }
+
+  @include it("errors when 2 sizes values passed") {
+
+    @include assert() {
+
+      @include output {
+        @include block-size(1 2);
+      }
+
+      @include expect {
+        _error: "Expected a single value";
       }
 
     }
@@ -97,6 +113,22 @@
 
   }
 
+  @include it("errors when 2 sizes values passed") {
+
+    @include assert() {
+
+      @include output {
+        @include inline-size(1 2);
+      }
+
+      @include expect {
+        _error: "Expected a single value";
+      }
+
+    }
+
+  }
+
 }
 
 @include describe("@mixin max-block-size") {
@@ -140,6 +172,22 @@
         max-height: 16px;
         max-height: 1rem;
         max-block-size: 1rem;
+      }
+
+    }
+
+  }
+
+  @include it("errors when 2 sizes values passed") {
+
+    @include assert() {
+
+      @include output {
+        @include max-block-size(1 2);
+      }
+
+      @include expect {
+        _error: "Expected a single value";
       }
 
     }
@@ -195,6 +243,22 @@
 
   }
 
+  @include it("errors when 2 sizes values passed") {
+
+    @include assert() {
+
+      @include output {
+        @include min-block-size(1 2);
+      }
+
+      @include expect {
+        _error: "Expected a single value";
+      }
+
+    }
+
+  }
+
 }
 
 @include describe("@mixin max-inline-size") {
@@ -213,6 +277,22 @@
       }
 
     }
+  }
+
+  @include it("errors when 2 sizes values passed") {
+
+    @include assert() {
+
+      @include output {
+        @include max-inline-size(1 2);
+      }
+
+      @include expect {
+        _error: "Expected a single value";
+      }
+
+    }
+
   }
 
 }
@@ -258,6 +338,22 @@
         min-width: 16px;
         min-width: 1rem;
         min-inline-size: 1rem;
+      }
+
+    }
+
+  }
+
+  @include it("errors when 2 sizes values passed") {
+
+    @include assert() {
+
+      @include output {
+        @include min-inline-size(1 2);
+      }
+
+      @include expect {
+        _error: "Expected a single value";
       }
 
     }
