@@ -221,6 +221,7 @@ const watchServer = () => gulp.watch(config.publicRoot, reloadServer);
 
 const initialiseServer = done => {
   browserSync.init({
+    notify: false,
     open: false,
     port: 80,
     server: {
