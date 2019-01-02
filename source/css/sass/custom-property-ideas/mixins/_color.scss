@@ -12,7 +12,7 @@
 
   }
   @else {
-    @error("Trying to set unknown color name  " + $customPropertyName);
+    @error("Trying to set unknown " + $customPropertyNamePrefix + "  name:  " + $customPropertyName);
   }
 }
 
