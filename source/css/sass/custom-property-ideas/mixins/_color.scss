@@ -25,6 +25,6 @@
 }
 
 @mixin set-colors($color-name, $background-color-name) {
-  @include set-css-property-from-map(color, $color-name, "color", $colors);
-  @include set-css-property-from-map(background-color, $background-color-name, "color", $colors);
+  @include set-color($color-name);
+  @include set-background-color($background-color-name);
 }
