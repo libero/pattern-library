@@ -1,6 +1,7 @@
 @import "../color-map";
 
-@mixin set-css-property-from-map($propertyName, $customPropertyNameStem, $customPropertyNamePrefix, $customPropertyMap) {
+// Move this to non-color-specific file
+@mixin set-from-map($propertyName, $customPropertyNameStem, $customPropertyNamePrefix, $customPropertyMap) {
   $value: map-get($customPropertyMap, $customPropertyNameStem);
   @if $value != null {
     $customPropertyName: unquote(--#{$customPropertyNamePrefix}-#{$customPropertyNameStem});
@@ -16,16 +17,16 @@
   }
 }
 
-@mixin set-css-property-from-color-map($property-name, $color-name) {
-  @include set-css-property-from-map($property-name, $color-name, "color", $colors);
+@mixin set-from-color-map($property-name, $color-name) {
+  @include set-from-map($property-name, $color-name, "color", $colors);
 }
 
 @mixin set-color($color-name) {
-  @include set-css-property-from-color-map(color, $color-name);
+  @include set-from-color-map(color, $color-name);
 }
 
 @mixin set-background-color($color-name) {
-  @include set-css-property-from-color-map(background-color, $color-name);
+  @include set-from-color-map(background-color, $color-name);
 }
 
 @mixin set-colors($color-name, $background-color-name) {
