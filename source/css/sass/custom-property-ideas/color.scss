@@ -1,0 +1,6 @@
+@import "mixins/color";
+
+body {
+  @include set-colors("warning", "text-ui_background");
+  z-index: 222;
+}
