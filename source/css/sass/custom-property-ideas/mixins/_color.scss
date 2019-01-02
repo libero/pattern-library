@@ -16,12 +16,16 @@
   }
 }
 
+@mixin set-css-property-from-color-map($property-name, $color-name) {
+  @include set-css-property-from-map($property-name, $color-name, "color", $colors);
+}
+
 @mixin set-color($color-name) {
-  @include set-css-property-from-map(color, $color-name, "color", $colors);
+  @include set-css-property-from-color-map(color, $color-name);
 }
 
 @mixin set-background-color($color-name) {
-  @include set-css-property-from-map(background-color, $color-name, "color", $colors);
+  @include set-css-property-from-color-map(background-color, $color-name);
 }
 
 @mixin set-colors($color-name, $background-color-name) {
