@@ -56,6 +56,11 @@
   @include set-font-size-and-vertical-height(11px);
 }
 
+@mixin font-size-and-vertical-height($font-size-in-px, $vertical-height-in-px: 24) {
+  @include font-size($font-size-in-px);
+  line-height: #{($vertical-height-in-px / $font-size-in-px)};
+}
+
 @mixin body-para {
   @include body-typography();
   @include body-spacing();
@@ -65,4 +70,41 @@
   margin-bottom: 0.1em;
   max-height: 1em;
   vertical-align: middle;
+}
+
+@mixin _label-typeg($uppercase: true) {
+  font-family: $font-secondary;
+  font-weight: normal;
+  @include font-size-and-vertical-height(11);
+  letter-spacing: 0.5px;
+  @if $uppercase {
+    text-transform: uppercase;
+  }
+}
+
+@mixin label-content-typeg($color:$color-text-secondary, $uppercase: true) {
+  @include _label-typeg($uppercase);
+  color: $color;
+}
+
+@mixin label-subject-typeg() {
+  @include _label-typeg();
+  color: $color-primary-normal;
+}
+
+@mixin font-size($size_in_px) {
+  font-size: #{$size_in_px}px;
+  font-size: get-rem-from-px($size_in_px) * 1rem;
+}
+
+@function get-rem-from-px($size_in_px) {
+  @return $size_in_px/$font-size-base-in-px;
+}
+
+@function get-px-from-rem($size_in_rem) {
+  @return $size_in_rem * $font-size-base-in-px;
+}
+
+@function get-rem-from-px($size_in_px) {
+  @return $size_in_px/$font-size-base-in-px;
 }

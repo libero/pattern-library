@@ -1,0 +1,31 @@
+
+<section class="article-meta">
+  <div class="article-meta__container">
+
+    {% for group in groups %}
+
+      <section class="article-meta__group">
+        <h4 class="article-meta__group_title">{{group.title}}</h4>
+        <ul class="article-meta__link_list">
+
+          {% for item in group.items %}
+            {% if item is not empty %}
+
+              <li class="article-meta__link_list_item">
+                {% if item.url == true %}
+                  <a href="{{item.url}}" class="article-meta__link">{{item.name}}</a>
+                {% elseif item.name == true %}
+                  {{item.name}}
+                {% endif %}
+              </li>
+
+            {% endif %}
+          {% endfor %}
+
+        </ul>
+      </section>
+
+    {% endfor %}
+
+  </div>
+</section>

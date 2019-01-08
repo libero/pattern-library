@@ -1,0 +1,64 @@
+.article-meta {
+  border-top: 1px solid $color-text-dividers;
+  @include blg-spacing("block-start", "medium", "padding");
+  font-family: $font-secondary;
+  text-align: center;
+
+  // Need the extra specificity here to override
+  .article-meta__link {
+    border-bottom: none;
+    color: $color-primary-normal;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-primary-dark;
+    }
+
+  }
+
+  .article-meta__group_title {
+    @include label-content-typeg($color-text-secondary);
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+
+  .article-meta__link_list {
+    list-style: none;
+    padding: 0;
+    @include blg-spacing("block-end", "small", "margin");
+    padding: 0;
+
+    .article-meta__link_list_item {
+      display: inline;
+      @include label-subject-typeg();
+      margin: 0;
+      padding: 0;
+      &:after {
+        content: ", ";
+      }
+    }
+
+    .article-meta__link_list_item:last-child {
+      &:after {
+        content: "";
+      }
+    }
+
+  }
+}
+
+.article-meta__link_list_item:last-child {
+  &:after {
+    content: "";
+  }
+}
+
+.article-meta__group:last-child .article-meta__link_list {
+  margin-bottom: 0;
+}
+
+@media only screen and (min-width: #{get-rem-from-px(640)}rem) {
+  .article-meta {
+    text-align: left;
+  }
+}
