@@ -1,6 +1,7 @@
 .article-meta {
   border-top: 1px solid $color-text-dividers;
   @include blg-spacing("block-start", "medium", "padding");
+  @include rem(font-size, $font-size-caption);
   font-family: $font-secondary;
   text-align: center;
 
@@ -57,7 +58,7 @@
   margin-bottom: 0;
 }
 
-@media only screen and (min-width: #{get-rem-from-px(640)}rem) {
+@media only screen and (min-width: $breakpoint-site-medium) {
   .article-meta {
     text-align: left;
   }

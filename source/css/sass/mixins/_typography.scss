@@ -56,11 +56,6 @@
   @include set-font-size-and-vertical-height(11px);
 }
 
-@mixin font-size-and-vertical-height($font-size-in-px, $vertical-height-in-px: 24) {
-  @include font-size($font-size-in-px);
-  line-height: #{($vertical-height-in-px / $font-size-in-px)};
-}
-
 @mixin body-para {
   @include body-typography();
   @include body-spacing();
@@ -92,19 +87,11 @@
   color: $color-primary-normal;
 }
 
+@mixin font-size-and-vertical-height($font-size-in-px, $vertical-height-in-px: 24) {
+  @include font-size($font-size-in-px);
+  line-height: #{($vertical-height-in-px / $font-size-in-px)};
+}
+
 @mixin font-size($size_in_px) {
   font-size: #{$size_in_px}px;
-  font-size: get-rem-from-px($size_in_px) * 1rem;
-}
-
-@function get-rem-from-px($size_in_px) {
-  @return $size_in_px/$font-size-base-in-px;
-}
-
-@function get-px-from-rem($size_in_rem) {
-  @return $size_in_rem * $font-size-base-in-px;
-}
-
-@function get-rem-from-px($size_in_px) {
-  @return $size_in_px/$font-size-base-in-px;
 }
