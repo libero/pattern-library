@@ -1,0 +1,18 @@
+groups:
+  - group:
+    title: Categories and Tags
+    items:
+      - item:
+        url: /#
+        name: insight
+      - item:
+        url: /#
+        name: DEVELOPMENTAL BIOLOGY AND STEM CELLS
+  - group:
+    title: Research organisms
+    items:
+      - item:
+        url: /#
+        name: CAENORHABDITIS ELEGANS
+      - item:
+        name: Lorem Ipsum

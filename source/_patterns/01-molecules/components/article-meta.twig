@@ -1,0 +1,30 @@
+
+<div class="item-tags">
+
+    {% for group in groups %}
+
+      <section class="item-tags__group">
+        {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__group_title' ~ lengthClass]) }) %}
+        {% include 'atoms-heading' with {text: group.title, level:4} %}
+        <ul class="item-tags__link_list">
+
+          {% for item in group.items %}
+            {% if item is not empty %}
+
+              <li class="item-tags__link_list_item">
+                {% if item.url == true %}
+                  <a href="{{item.url}}" class="item-tags__link">{{item.name}}</a>
+                {% elseif item.name == true %}
+                  {{item.name}}
+                {% endif %}
+              </li>
+
+            {% endif %}
+          {% endfor %}
+
+        </ul>
+      </section>
+
+    {% endfor %}
+
+</div>
