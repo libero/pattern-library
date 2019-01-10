@@ -12,11 +12,9 @@
             {% if item is not empty %}
 
               <li class="item-tags__link_list_item">
-                {% if item.url == true %}
-                  <a href="{{item.url}}" class="item-tags__link">{{item.name}}</a>
-                {% elseif item.name == true %}
-                  {{item.name}}
-                {% endif %}
+                {% with item %}
+                  {% include 'atoms-link' %}
+                {% endwith %}
               </li>
 
             {% endif %}
