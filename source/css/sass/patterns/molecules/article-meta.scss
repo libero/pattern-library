@@ -3,6 +3,12 @@
   @include rem(font-size, $font-size-caption);
   font-family: $font-secondary;
   text-align: center;
+
+  @include mq($from: medium) {
+    .item-tags__group {
+      text-align: left;
+    }
+  }
 }
 
 // Need the extra specificity here to override
@@ -48,10 +54,4 @@
 
 .item-tags__group:last-child .item-tags__link_list {
   margin-bottom: 0;
-}
-
-@media only screen and (min-width: $breakpoint-site-medium) {
-  .item-tags__group {
-    text-align: left;
-  }
 }
