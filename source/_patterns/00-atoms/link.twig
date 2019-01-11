@@ -1,5 +1,5 @@
-{% if url == true %}
+{%- if url == true -%}
   <a href="{{ url }}" class="item-tags__link">{{ name }}</a>
-{% elseif name == true %}
-  {{ name }}
-{% endif %}
+{%- elseif name == true -%}
+  {{- name -}}
+{%- endif -%}
