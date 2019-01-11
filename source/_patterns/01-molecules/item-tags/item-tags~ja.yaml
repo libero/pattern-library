@@ -4,22 +4,27 @@ groups:
   - title:
       text: 虹色
     items:
-      - name: 赤
-        url: '#'
-      - name: オレンジ
-      - name: 黄色
-      - name: 緑
-        url: '#'
-      - name: 水色
-        url: '#'
-      - name: 青
-      - name: 紫
+      - text: 赤
+        attributes:
+          href: '#'
+      - text: オレンジ
+      - text: 黄色
+      - text: 緑
+        attributes:
+          href: '#'
+      - text: 水色
+        attributes:
+          href: '#'
+      - text: 青
+      - text: 紫
   - title:
       text: コンパスのポイント
     items:
-      - name: 北
-        url: '#'
-      - name: 東
-        url: '#'
-      - name: 南
-      - name: 西
+      - text: 北
+        attributes:
+          href: '#'
+      - text: 東
+        attributes:
+          href: '#'
+      - text: 南
+      - text: 西

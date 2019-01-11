@@ -22,7 +22,13 @@
             <li class="item-tags__list_item">
 
               {%- with item only -%}
+
+                {%- if attributes.href is defined -%}
+                  {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__link']) }) -%}
+                {%- endif -%}
+
                 {%- include 'atoms-link' -%}
+
               {%- endwith -%}
 
             </li>

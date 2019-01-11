@@ -5,22 +5,27 @@ groups:
   - title:
       text: ألوان قوس قزح
     items:
-      - name: أحمر
-        url: '#'
-      - name: برتقالي
-      - name: أصفر
-      - name: أخضر
-        url: '#'
-      - name: أزرق
-        url: '#'
-      - name: نيلي
-      - name: بنفسجي
+      - text: أحمر
+        attributes:
+          href: '#'
+      - text: برتقالي
+      - text: أصفر
+      - text: أخضر
+        attributes:
+          href: '#'
+      - text: أزرق
+        attributes:
+          href: '#'
+      - text: نيلي
+      - text: بنفسجي
   - title:
       text: اتجاهات البوصلة
     items:
-      - name: شمال
-        url: '#'
-      - name: شرق
-        url: '#'
-      - name: جنوب
-      - name: غرب
+      - text: شمال
+        attributes:
+          href: '#'
+      - text: شرق
+        attributes:
+          href: '#'
+      - text: جنوب
+      - text: غرب

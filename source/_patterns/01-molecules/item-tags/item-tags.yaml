@@ -2,22 +2,27 @@ groups:
   - title:
       text: Colours of the rainbow
     items:
-      - name: Red
-        url: '#'
-      - name: Orange
-      - name: Yellow
-      - name: Green
-        url: '#'
-      - name: Blue
-        url: '#'
-      - name: Indigo
-      - name: Violet
+      - text: Red
+        attributes:
+          href: '#'
+      - text: Orange
+      - text: Yellow
+      - text: Green
+        attributes:
+          href: '#'
+      - text: Blue
+        attributes:
+          href: '#'
+      - text: Indigo
+      - text: Violet
   - title:
       text: Points of the compass
     items:
-      - name: North
-        url: '#'
-      - name: East
-        url: '#'
-      - name: South
-      - name: West
+      - text: North
+        attributes:
+          href: '#'
+      - text: East
+        attributes:
+          href: '#'
+      - text: South
+      - text: West
