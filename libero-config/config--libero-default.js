@@ -65,6 +65,7 @@ config.data.font.size.h4_in_px = 20;
 config.data.font.size.h5_in_px = 18;
 config.data.font.size.h6_in_px = 16;
 config.data.font.size.caption_in_px = 13;
+config.data.font.size.label_in_px = 11;
 
 // Specify the top level properties to be distributed to layers (sass, js & templates)
 config.layerAllocations = {

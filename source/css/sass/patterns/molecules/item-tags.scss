@@ -1,46 +1,35 @@
+@import "../../mixins/media-query";
+@import "../../mixins/spacing";
+@import "../../mixins/types";
+@import "../../mixins/typography";
+@import "../../variables/color";
+
 .item-tags {
   @include blg-spacing("block-start", "medium", "padding");
-  @include rem(font-size, $font-size-caption);
-  font-family: $font-secondary;
   text-align: center;
 
   @include mq($from: medium) {
-    .item-tags__group {
-      text-align: initial;
-    }
+    text-align: initial;
   }
-}
-
-// Need the extra specificity here to override
-.item-tags__link {
-  border-bottom: none;
-  color: $color-primary-normal;
-  text-decoration: none;
-
-  &:hover {
-    color: $color-primary-dark;
-  }
-
 }
 
 .item-tags__group_title {
-  @include label-content-typeg($color-text-secondary);
-  padding-bottom: 0;
-  padding-top: 0;
+  @include label-content-typography();
+  @include padding(0, "block");
 }
 
-.item-tags__link_list {
+.item-tags__list {
   list-style: none;
-  margin: 0;
   @include blg-spacing("block-end", "small", "margin");
-  padding: 0;
+  @include nospace("inline-start");
+  .item-tags__group:last-child & {
+    @include margin(0, "block-end");
+  }
 }
 
-.item-tags__link_list_item {
+.item-tags__list_item {
   display: inline;
-  @include label-subject-typeg();
-  margin: 0;
-  padding: 0;
+  @include label-subject-typography();
 
   &:after {
     content: ", ";
@@ -53,14 +42,17 @@
   &:lang(ja):after {
     content: "、";
   }
-}
 
-.item-tags__link_list_item:last-child {
-  &:after {
+  &:last-child:after {
     content: "";
   }
 }
 
-.item-tags__group:last-child .item-tags__link_list {
-  margin-bottom: 0;
+.item-tags__link {
+  color: inherit;
+  text-decoration: inherit;
+
+  &:hover {
+    color: $color-primary-dark;
+  }
 }

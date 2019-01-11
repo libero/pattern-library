@@ -67,31 +67,21 @@
   vertical-align: middle;
 }
 
-@mixin _label-typeg($uppercase: true) {
+@mixin _label-typography($color, $uppercase: true) {
+  color: $color;
   font-family: $font-secondary;
   font-weight: normal;
-  @include font-size-and-vertical-height(11);
+  @include set-font-size-and-vertical-height($font-size-label);
   letter-spacing: 0.5px;
   @if $uppercase {
     text-transform: uppercase;
   }
 }
 
-@mixin label-content-typeg($color:$color-text-secondary, $uppercase: true) {
-  @include _label-typeg($uppercase);
-  color: $color;
+@mixin label-content-typography($color: $color-text-secondary, $uppercase: true) {
+  @include _label-typography($color, $uppercase);
 }
 
-@mixin label-subject-typeg() {
-  @include _label-typeg();
-  color: $color-primary-normal;
-}
-
-@mixin font-size-and-vertical-height($font-size-in-px, $vertical-height-in-px: 24) {
-  @include font-size($font-size-in-px);
-  line-height: #{($vertical-height-in-px / $font-size-in-px)};
-}
-
-@mixin font-size($size_in_px) {
-  font-size: #{$size_in_px}px;
+@mixin label-subject-typography() {
+  @include _label-typography($color-primary-normal);
 }
