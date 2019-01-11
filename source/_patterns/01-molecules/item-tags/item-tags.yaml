@@ -1,12 +1,23 @@
 groups:
-  - title: Categories and Tags
+  - title:
+      text: Colours of the rainbow
     items:
-      - url: /#
-        name: insight
-      - url: /#
-        name: DEVELOPMENTAL BIOLOGY AND STEM CELLS
-  - title: Research organisms
+      - name: Red
+        url: '#'
+      - name: Orange
+      - name: Yellow
+      - name: Green
+        url: '#'
+      - name: Blue
+        url: '#'
+      - name: Indigo
+      - name: Violet
+  - title:
+      text: Points of the compass
     items:
-      - url: /#
-        name: CAENORHABDITIS ELEGANS
-      - name: Lorem Ipsum
+      - name: North
+        url: '#'
+      - name: East
+        url: '#'
+      - name: South
+      - name: West

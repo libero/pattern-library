@@ -1,0 +1,25 @@
+attributes:
+  lang: ja
+groups:
+  - title:
+      text: 虹色
+    items:
+      - name: 赤
+        url: '#'
+      - name: オレンジ
+      - name: 黄色
+      - name: 緑
+        url: '#'
+      - name: 水色
+        url: '#'
+      - name: 青
+      - name: 紫
+  - title:
+      text: コンパスのポイント
+    items:
+      - name: 北
+        url: '#'
+      - name: 東
+        url: '#'
+      - name: 南
+      - name: 西

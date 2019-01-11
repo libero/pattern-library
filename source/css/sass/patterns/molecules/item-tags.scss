@@ -6,7 +6,7 @@
 
   @include mq($from: medium) {
     .item-tags__group {
-      text-align: left;
+      text-align: initial;
     }
   }
 }
@@ -44,6 +44,14 @@
 
   &:after {
     content: ", ";
+  }
+
+  &:lang(ar):after {
+    content: "، ";
+  }
+
+  &:lang(ja):after {
+    content: "、";
   }
 }
 
