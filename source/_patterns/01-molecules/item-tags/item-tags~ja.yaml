@@ -3,28 +3,41 @@ attributes:
 groups:
   - title:
       text: 虹色
-    items:
-      - text: 赤
-        attributes:
-          href: '#'
-      - text: オレンジ
-      - text: 黄色
-      - text: 緑
-        attributes:
-          href: '#'
-      - text: 水色
-        attributes:
-          href: '#'
-      - text: 青
-      - text: 紫
+    list:
+      items:
+        - content:
+            attributes:
+              href: '#'
+            text: 赤
+        - content:
+            text: オレンジ
+        - content:
+            text: 黄色
+        - content:
+            attributes:
+              href: '#'
+            text: 緑
+        - content:
+            attributes:
+              href: '#'
+            text: 水色
+        - content:
+            text: 青
+        - content:
+            text: 紫
   - title:
       text: コンパスのポイント
-    items:
-      - text: 北
-        attributes:
-          href: '#'
-      - text: 東
-        attributes:
-          href: '#'
-      - text: 南
-      - text: 西
+    list:
+      items:
+        - content:
+            attributes:
+              href: '#'
+            text: 北
+        - content:
+            attributes:
+              href: '#'
+            text: 東
+        - content:
+            text: 南
+        - content:
+            text: 西

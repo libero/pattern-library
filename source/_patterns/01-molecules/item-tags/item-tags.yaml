@@ -1,28 +1,41 @@
 groups:
   - title:
       text: Colours of the rainbow
-    items:
-      - text: Red
-        attributes:
-          href: '#'
-      - text: Orange
-      - text: Yellow
-      - text: Green
-        attributes:
-          href: '#'
-      - text: Blue
-        attributes:
-          href: '#'
-      - text: Indigo
-      - text: Violet
+    list:
+      items:
+        - content:
+            attributes:
+              href: '#'
+            text: Red
+        - content:
+            text: Orange
+        - content:
+            text: Yellow
+        - content:
+            attributes:
+              href: '#'
+            text: Green
+        - content:
+            attributes:
+              href: '#'
+            text: Blue
+        - content:
+            text: Indigo
+        - content:
+            text: Violet
   - title:
       text: Points of the compass
-    items:
-      - text: North
-        attributes:
-          href: '#'
-      - text: East
-        attributes:
-          href: '#'
-      - text: South
-      - text: West
+    list:
+      items:
+        - content:
+            attributes:
+              href: '#'
+            text: North
+        - content:
+            attributes:
+              href: '#'
+            text: East
+        - content:
+            text: South
+        - content:
+            text: West
