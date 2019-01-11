@@ -1,28 +1,34 @@
-
 <div class="item-tags">
 
-    {% for group in groups %}
+  {% for group in groups %}
 
-      <section class="item-tags__group">
-        {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__group_title' ~ lengthClass]) }) %}
-        {% include 'atoms-heading' with {text: group.title, level:4} %}
-        <ul class="item-tags__link_list">
+    <section class="item-tags__group">
 
-          {% for item in group.items %}
-            {% if item is not empty %}
+      {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__group_title' ~ lengthClass]) }) %}
+      {% include 'atoms-heading' with {text: group.title, level:4} %}
 
-              <li class="item-tags__link_list_item">
-                {% with item %}
-                  {% include 'atoms-link' %}
-                {% endwith %}
-              </li>
+      <ul class="item-tags__link_list">
 
-            {% endif %}
-          {% endfor %}
+        {% for item in group.items %}
 
-        </ul>
-      </section>
+          {% if item is not empty %}
 
-    {% endfor %}
+            <li class="item-tags__link_list_item">
+
+              {% with item %}
+                {% include 'atoms-link' %}
+              {% endwith %}
+
+            </li>
+
+          {% endif %}
+
+        {% endfor %}
+
+      </ul>
+
+    </section>
+
+  {% endfor %}
 
 </div>
