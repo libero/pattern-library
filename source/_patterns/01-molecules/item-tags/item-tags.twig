@@ -7,7 +7,6 @@
     {%- for group in groups -%}
 
       {%- with group only -%}
-
         {%- block group -%}
 
           {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__group']) }) -%}
@@ -17,18 +16,15 @@
             {%- block section -%}
 
               {%- with title only -%}
-
                 {%- block title -%}
 
                   {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__group_title']) }) -%}
                   {%- include 'atoms-heading' with {level: 4} -%}
 
-                {%- endblock -%}
-
+                {%- endblock title -%}
               {%- endwith -%}
 
               {%- with list only -%}
-
                 {%- block list -%}
 
                   {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__list']) }) -%}
@@ -38,7 +34,6 @@
                     {%- for item in items -%}
 
                       {%- with item only -%}
-
                         {%- block item -%}
 
                           {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__list_item']) }) -%}
@@ -46,7 +41,6 @@
                           <li {%- include('atoms-attributes') -%}>
 
                             {%- with content only -%}
-
                               {%- block content -%}
 
                                 {%- if attributes.href is defined -%}
@@ -55,34 +49,30 @@
 
                                 {%- include 'atoms-link' -%}
 
-                              {%- endblock -%}
-
+                              {%- endblock content -%}
                             {%- endwith -%}
 
                           </li>
 
-                        {%- endblock -%}
-
+                        {%- endblock item -%}
                       {%- endwith -%}
 
                     {%- endfor -%}
 
                   </ul>
 
-                {%- endblock -%}
-
+                {%- endblock list -%}
               {%- endwith -%}
 
-            {%- endblock -%}
+            {%- endblock section -%}
 
           </section>
 
-        {%- endblock -%}
-
+        {%- endblock group -%}
       {%- endwith -%}
 
     {%- endfor -%}
 
-  {%- endblock -%}
+  {%- endblock body -%}
 
 </div>
