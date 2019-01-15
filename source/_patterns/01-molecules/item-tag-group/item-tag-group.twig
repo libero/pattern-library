@@ -15,43 +15,7 @@
             {%- endwith -%}
 
             {%- with list only -%}
-                {%- block list -%}
-
-                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tag-group__list']) }) -%}
-
-                    <ul {%- include('atoms-attributes') -%}>
-
-                        {%- for item in items -%}
-
-                            {%- with item only -%}
-                                {%- block item -%}
-
-                                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tag-group__list_item']) }) -%}
-
-                                    <li {%- include('atoms-attributes') -%}>
-
-                                        {%- with content only -%}
-                                            {%- block content -%}
-
-                                                {%- if attributes.href is defined -%}
-                                                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tag-group__link']) }) -%}
-                                                {%- endif -%}
-
-                                                {%- include 'atoms-link' -%}
-
-                                            {%- endblock content -%}
-                                        {%- endwith -%}
-
-                                    </li>
-
-                                {%- endblock item -%}
-                            {%- endwith -%}
-
-                        {%- endfor -%}
-
-                    </ul>
-
-                {%- endblock list -%}
+                {%- include('molecules-item-tag-list') -%}
             {%- endwith -%}
 
         {%- endblock section -%}
