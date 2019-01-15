@@ -9,64 +9,8 @@
       {%- with group only -%}
         {%- block group -%}
 
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__group']) }) -%}
-
-          <section {%- include('atoms-attributes') -%}>
-
-            {%- block section -%}
-
-              {%- with title only -%}
-                {%- block title -%}
-
-                  {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__group_title']) }) -%}
-                  {%- include 'atoms-heading' with {level: 4} -%}
-
-                {%- endblock title -%}
-              {%- endwith -%}
-
-              {%- with list only -%}
-                {%- block list -%}
-
-                  {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__list']) }) -%}
-
-                  <ul {%- include('atoms-attributes') -%}>
-
-                    {%- for item in items -%}
-
-                      {%- with item only -%}
-                        {%- block item -%}
-
-                          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__list_item']) }) -%}
-
-                          <li {%- include('atoms-attributes') -%}>
-
-                            {%- with content only -%}
-                              {%- block content -%}
-
-                                {%- if attributes.href is defined -%}
-                                  {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags__link']) }) -%}
-                                {%- endif -%}
-
-                                {%- include 'atoms-link' -%}
-
-                              {%- endblock content -%}
-                            {%- endwith -%}
-
-                          </li>
-
-                        {%- endblock item -%}
-                      {%- endwith -%}
-
-                    {%- endfor -%}
-
-                  </ul>
-
-                {%- endblock list -%}
-              {%- endwith -%}
-
-            {%- endblock section -%}
-
-          </section>
+            {#{%- include 'item-tag-group' with {group: group} -%}#}
+            {%- include('molecules-item-tag-group') -%}
 
         {%- endblock group -%}
       {%- endwith -%}
