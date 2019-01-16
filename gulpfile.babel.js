@@ -1,6 +1,6 @@
 import browserSync from 'browser-sync';
 import del from 'del';
-import distributeConfig from './libero-config/bin/distributeConfig';
+import distributeConfig from '@libero/pattern-library-config-manager';
 import flatten from 'gulp-flatten';
 import gulp from 'gulp';
 import minimist from 'minimist';
