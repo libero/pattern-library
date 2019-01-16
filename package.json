@@ -39,6 +39,6 @@
     "node": ">=10.12"
   },
   "dependencies": {
-    "@libero/pattern-library-config-manager": "0.0.4"
+    "@libero/pattern-library-config-manager": "0.0.5"
   }
 }
