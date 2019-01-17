@@ -8,9 +8,6 @@ Developer quick start: running `docker-compose down --volumes && docker-compose 
  
 #### Uses of configuration  
 Configuration is used to be the single source of truth for knowledge that needs to be shared across across front end technology boundaries. For example, media query breakpoint values need to exist in the styling layer, but they are also often needed by JavaScript. Note that for flexibility all configuration could be maintained using this system in order to make it easier to later distribute configuration if it suddenly becomes necessary.  
-  
-#### Anatomy of configuration  
-(All config file code examples are taken from `/libero-config/config--libero-default.js`.)  
 
 ##### Simple example
 `config.data` is where you define your configuration data.

@@ -206,9 +206,10 @@ const watchSass = () => gulp.watch(config.files.src.sass, build);
 
 const watchSassTests = () => gulp.watch(config.files.test.sass, build);
 
-const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
+// TODO: replace with new watcher once config override arrangement decided
+// const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 
-export const watch = gulp.parallel(watchSass, watchSassTests, watchSharedConfig);
+export const watch = gulp.parallel(watchSass, watchSassTests/*, watchSharedConfig */);
 
 // Server
 
