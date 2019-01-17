@@ -1,0 +1,89 @@
+@import "../test";
+@import "../../../source/css/sass/mixins/typography";
+
+@include describe("@mixin font-size") {
+
+  @include it("sets the font size using the map's value when the argument is a map key") {
+
+    @include assert() {
+
+      $fixture: (
+        some-size: 16px,
+      );
+
+      @include output {
+        @include font-size(some-size, $fixture);
+      }
+
+      @include expect {
+        font-size: 16px;
+        font-size: 1rem;
+      }
+
+    }
+
+  }
+
+  @include it("sets the font size using the argument directly when it's not a map key") {
+
+    @include assert() {
+
+      $fixture: (
+        some-size: 16px,
+      );
+
+      @include output {
+        @include font-size(32px, $fixture);
+      }
+
+      @include expect {
+        font-size: 32px;
+        font-size: 2rem;
+      }
+
+    }
+
+  }
+
+  @include it("errors if the argument does not resolve to a string") {
+
+    @include assert() {
+
+      $fixture: (
+        some-key: (one, two, three, px,),
+      );
+
+      @include output {
+        @include font-size(some-key, $fixture);
+      }
+
+      @include expect {
+        _error: "Font size must be set using a 'px'-suffixed string.";
+      }
+
+    }
+
+  }
+
+  @include it("errors if the argument does not resolve to a 'px'-suffixed string") {
+
+    @include assert() {
+
+      $fixture: (
+        some-key: i-do-not-have-a-px-suffix,
+      );
+
+      @include output {
+        @include font-size(some-key, $fixture);
+      }
+
+      @include expect {
+        _error: "Font size must be set using a 'px'-suffixed string.";
+      }
+
+    }
+
+  }
+
+
+}
