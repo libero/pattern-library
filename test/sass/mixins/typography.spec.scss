@@ -103,6 +103,7 @@
 
       @include expect {
         font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+        font-family: var(--font-some-font-family);
       }
 
     }
