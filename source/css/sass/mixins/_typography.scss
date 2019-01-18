@@ -1,10 +1,13 @@
+@import "../functions/maps";
 @import "../mixins/types";
 @import "../variables/baselinegrid";
 @import "../variables/color";
 @import "../variables/font";
 @import "spacing";
 
-@mixin font-size($size, $map: $font) {
+$_default-font-map: $font;
+
+@mixin font-size($size, $map: $_default-font-map) {
   $font-size: $size;
   @if map_has_key($map, $size) {
     $font-size: map_get($map, $size);
@@ -18,12 +21,12 @@
 
 }
 
-@mixin font-family($designation, $map: $font) {
-  $font-family: "";
-  @if map_has_key($map, $designation) {
-    font-family: #{map_get($map, $designation)};
-  } @else {
+@mixin font-family($designation, $map: $_default-font-map) {
+  $font-family: get-value-from-map($map, $designation);
+  @if $font-family == "[Not found]" {
     @include _error("Font family key `#{$designation}` not found in map");
+  } @else {
+    font-family: unquote($font-family);
   }
 }
 

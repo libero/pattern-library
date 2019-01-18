@@ -113,7 +113,7 @@
 
     @include assert() {
 
-      $fixture: ();
+      $fixture: (one: two);
 
       @include output {
         @include font-family(non-existent-key, $fixture);
