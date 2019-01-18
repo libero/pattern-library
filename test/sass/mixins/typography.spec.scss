@@ -1,5 +1,6 @@
 @import "../test";
-@import "../../../source/css/sass/mixins/typography";
+//@import "../../../source/css/sass/mixins/typography";
+@import "../../../source/css/sass/mixins/typography-staging";
 
 @include describe("@mixin font-size") {
 
@@ -70,7 +71,7 @@
     @include assert() {
 
       $fixture: (
-        some-key: i-do-not-have-a-px-suffix,
+        some-key: i-do-not-have-a-px-suffix-but-i-do-end-in-rem,
       );
 
       @include output {
