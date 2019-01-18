@@ -1,5 +1,14 @@
 @import "../variables/font";
 @import "../vendor/sass-rem/rem";
 
-$rem-baseline: $font-size-base;
+@function get-font-size($designation) {
+  @if map_has_key($font, $designation) {
+    @return map_get($font, $designation);
+  }
+
+  @error "Key #{$designation} not found in the $font map.";
+}
+
+//$rem-baseline: $font-size-base;
+$rem-baseline: get-font-size(size-base);
 $rem-fallback: true;
