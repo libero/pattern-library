@@ -18,13 +18,22 @@
 
 }
 
+@mixin font-family($designation, $map: $font) {
+  $font-family: "";
+  @if map_has_key($map, $designation) {
+    font-family: #{map_get($map, $designation)};
+  } @else {
+    @include _error("Font family key `#{$designation}` not found in map");
+  }
+}
+
 @mixin set-font-size-and-vertical-height($font-size, $vertical-height: $baselinegrid-space-small) {
   @include font-size(font-size, $font-size);
   line-height: $vertical-height / $font-size;
 }
 
 @mixin _heading-base-typography() {
-  font-family: $font-secondary;
+  @include font-family(secondary);
   font-weight: 600;
 }
 
@@ -59,13 +68,13 @@
 }
 
 @mixin body-typography() {
-  font-family: $font-primary;
+  @include font-family(primary);
   @include set-font-size-and-vertical-height(size-base);
   font-weight: normal;
 }
 
 @mixin small-typography() {
-  font-family: $font-primary;
+  @include font-family(primary);
   font-style: normal;
   @include set-font-size-and-vertical-height(11px);
 }
@@ -83,7 +92,7 @@
 
 @mixin _label-typography($color, $uppercase: true) {
   color: $color;
-  font-family: $font-secondary;
+  @include font-family(secondary);
   font-weight: normal;
   @include set-font-size-and-vertical-height(size-label);
   letter-spacing: #{letterspacing-label};

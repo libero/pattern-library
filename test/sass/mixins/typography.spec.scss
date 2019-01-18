@@ -85,5 +85,46 @@
 
   }
 
+}
+
+@include describe("@mixin font-family") {
+
+  @include it("sets the font family using the map's value when the argument is a map key") {
+
+    @include assert() {
+
+      $fixture: (
+        some-font-family: '"Noto Sans", Arial, Helvetica, sans-serif',
+      );
+
+      @include output {
+        @include font-family(some-font-family, $fixture);
+      }
+
+      @include expect {
+        font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+      }
+
+    }
+
+  }
+
+  @include it("errors when the argument is not a map key") {
+
+    @include assert() {
+
+      $fixture: ();
+
+      @include output {
+        @include font-family(non-existent-key, $fixture);
+      }
+
+      @include expect {
+        _error: "Font family key `non-existent-key` not found in map";
+      }
+
+    }
+
+  }
 
 }
