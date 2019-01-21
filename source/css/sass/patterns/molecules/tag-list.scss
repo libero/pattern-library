@@ -1,6 +1,6 @@
 @import "../../mixins/typography";
 
-.item-tag-list {
+.tag-list {
   list-style: none;
   @include blg-spacing("block-end", "small", "margin");
   @include nospace("inline-start");
@@ -9,7 +9,7 @@
   }
 }
 
-.item-tag-list__item {
+.tag-list__item {
   display: inline;
   @include label-subject-typography();
 
@@ -30,7 +30,7 @@
   }
 }
 
-.item-tag-list__link {
+.tag-list__link {
   color: inherit;
   text-decoration: inherit;
 

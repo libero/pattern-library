@@ -1,4 +1,4 @@
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tag-list']) }) -%}
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list']) }) -%}
 
 <ul {%- include('atoms-attributes') -%}>
 
@@ -7,7 +7,7 @@
     {%- with item only -%}
       {%- block item -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tag-list__item']) }) -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__item']) }) -%}
 
         <li {%- include('atoms-attributes') -%}>
 
@@ -15,7 +15,7 @@
             {%- block content -%}
 
               {%- if attributes.href is defined -%}
-                {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tag-list__link']) }) -%}
+                {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__link']) }) -%}
               {%- endif -%}
 
               {%- include 'atoms-link' -%}
