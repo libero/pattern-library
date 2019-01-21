@@ -108,7 +108,7 @@
 
 }
 
-@include it("errors if the argument does not resolve to a 'px'-suffixed number") {
+@include it("errors if the argument does not resolve to a 'px'-suffixed or 'rem'-suffixed number") {
 
   @include assert() {
 
@@ -121,7 +121,7 @@
     }
 
     @include expect {
-      _error: "Font size must be set using a 'px'-suffixed number or a 'rem'-suffixed number.§";
+      _error: "Font size must be set using a 'px'-suffixed number or a 'rem'-suffixed number.";
     }
 
   }
