@@ -22,3 +22,7 @@
 @mixin set-color($designation, $map: $color) {
   @include _set-color-based-property(color, $designation, $map);
 }
+
+@mixin set-background-color($designation, $map: $color) {
+  @include _set-color-based-property(background-color, $designation, $map);
+}

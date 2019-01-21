@@ -77,3 +77,81 @@
   }
 
 }
+
+@include describe("@mixin set-background-color") {
+
+  @include it("sets the background-color using the map's value when the argument is a map key, and the corresponding value is a color") {
+
+    @include assert() {
+
+      $fixture: (
+          some-color: rgba(11, 22, 33, 0.44),
+      );
+
+      @include output {
+        @include set-background-color(some-color, $fixture);
+      }
+
+      @include expect {
+        background-color: rgba(11, 22, 33, 0.44);
+        background-color: var(--color-#{some-color});
+      }
+
+    }
+
+  }
+
+  @include it("sets the background-color directly when the argument is a color value") {
+
+    @include assert() {
+
+      @include output {
+        @include set-background-color(rgb(55, 55, 55));
+      }
+
+      @include expect {
+        background-color: rgb(55, 55, 55);
+      }
+
+    }
+
+  }
+
+  @include it("errors if the argument is a map key resolving to a non-color value") {
+
+    @include assert() {
+
+      $fixture: (unused-key: unused-value);
+
+      @include output {
+        @include set-background-color(not-a-color, $fixture);
+      }
+
+      @include expect {
+        _error: "Trying to set a non-color value to property `background-color`";
+      }
+
+    }
+
+  }
+
+  @include it("errors if the argument is neither a map key nor a color value") {
+
+    @include assert() {
+
+      $fixture: (key-to-not-a-color: not-a-color);
+
+      @include output {
+        @include set-background-color(key-to-not-a-color, $fixture);
+      }
+
+      @include expect {
+        _error: "Trying to set a non-color value to property `background-color`";
+      }
+
+    }
+
+  }
+
+}
+
