@@ -1,4 +1,5 @@
 @import "../functions/maps";
+@import "../functions/colors";
 @import "../mixins/types";
 @import "../variables/baselinegrid";
 @import "../variables/color";
@@ -110,10 +111,15 @@ $_default-font-map: $font;
   }
 }
 
-@mixin label-content-typography($color: $color-text-secondary, $uppercase: true) {
-  @include _label-typography($color, $uppercase);
+@mixin label-content-typography($color: text-secondary, $uppercase: true, $map: $color) {
+  $col: get-color($color, $map);
+  @if $col != "[Not found]" {
+    @include _label-typography($col, $uppercase);
+  } @else {
+    @include _error("Can't resolve `#{$color}` in the color map");
+  }
 }
 
 @mixin label-subject-typography() {
-  @include _label-typography($color-primary-normal);
+  @include _label-typography(get-color(primay-normal));
 }
