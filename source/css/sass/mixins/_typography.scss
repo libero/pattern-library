@@ -8,15 +8,20 @@
 $_default-font-map: $font;
 
 @mixin font-size($size, $map: $_default-font-map) {
+
   $font-size: $size;
   @if map_has_key($map, $size) {
     $font-size: map_get($map, $size);
   }
 
-  @if type_of($font-size) != "number" or not unitless($font-size / 1px) {
-    @include _error("Font size must be set using a 'px'-suffixed string.");
-  } @else {
+  @if is-a-px-number($font-size) or is-a-rem-number($font-size) {
     @include rem(font-size, $font-size);
+    @if map_has_key($map, $size) {
+      font-size: var(--font-#{$size});
+    }
+
+  } @else {
+    @include _error("Font size must be set using a 'px'-suffixed number or a 'rem'-suffixed number.");
   }
 
 }

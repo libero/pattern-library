@@ -18,69 +18,110 @@
       @include expect {
         font-size: 16px;
         font-size: 1rem;
+        font-size: var(--font-some-size);
       }
 
     }
 
   }
+}
 
-  @include it("sets the font size using the argument directly when it's not a map key") {
+@include it("sets the font size using the argument directly when it's not a map key") {
 
-    @include assert() {
+  @include assert() {
 
-      $fixture: (
+    $fixture: (
+      some-size: 16px,
+    );
+
+    @include output {
+      @include font-size(32px, $fixture);
+    }
+
+    @include expect {
+      font-size: 32px;
+      font-size: 2rem;
+    }
+
+  }
+
+}
+
+@include it("can accommodate rem numbers") {
+
+  @include assert() {
+
+    $fixture: (
+        some-size: 1rem,
+    );
+
+    @include output {
+      @include font-size(2rem, $fixture);
+    }
+
+    @include expect {
+      font-size: 32px;
+      font-size: 2rem;
+    }
+
+  }
+
+}
+
+@include it("can accommodate px numbers") {
+
+  @include assert() {
+
+    $fixture: (
         some-size: 16px,
-      );
+    );
 
-      @include output {
-        @include font-size(32px, $fixture);
-      }
+    @include output {
+      @include font-size(32px, $fixture);
+    }
 
-      @include expect {
-        font-size: 32px;
-        font-size: 2rem;
-      }
-
+    @include expect {
+      font-size: 32px;
+      font-size: 2rem;
     }
 
   }
 
-  @include it("errors if the argument does not resolve to a string") {
+}
+@include it("errors if the argument does not resolve to a number") {
 
-    @include assert() {
+  @include assert() {
 
-      $fixture: (
-        some-key: (one, two, three, px,),
-      );
+    $fixture: (
+      some-key: (one, two, three, px),
+    );
 
-      @include output {
-        @include font-size(some-key, $fixture);
-      }
+    @include output {
+      @include font-size(some-key, $fixture);
+    }
 
-      @include expect {
-        _error: "Font size must be set using a 'px'-suffixed string.";
-      }
-
+    @include expect {
+      _error: "Font size must be set using a 'px'-suffixed number or a 'rem'-suffixed number.";
     }
 
   }
 
-  @include it("errors if the argument does not resolve to a 'px'-suffixed string") {
+}
 
-    @include assert() {
+@include it("errors if the argument does not resolve to a 'px'-suffixed number") {
 
-      $fixture: (
-        some-key: i-do-not-have-a-px-suffix-but-i-do-end-in-rem,
-      );
+  @include assert() {
 
-      @include output {
-        @include font-size(some-key, $fixture);
-      }
+    $fixture: (
+      some-key: a-string-i-do-not-have-a-px-suffix-but-i-do-end-in-rem,
+    );
 
-      @include expect {
-        _error: "Font size must be set using a 'px'-suffixed string.";
-      }
+    @include output {
+      @include font-size(some-key, $fixture);
+    }
 
+    @include expect {
+      _error: "Font size must be set using a 'px'-suffixed number or a 'rem'-suffixed number.§";
     }
 
   }
