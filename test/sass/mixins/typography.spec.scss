@@ -170,3 +170,43 @@
   }
 
 }
+
+@include describe("@mixin label-content-typography") {
+
+  @include it("Errors if the color argument supplied is not found in the color map") {
+
+    @include assert() {
+
+      $fixture: (some-key: some-value);
+
+      @include output {
+        @include label-content-typography(not-a-color-map-key, true, $fixture);
+      }
+
+      @include expect {
+        _error: "Can't resolve `not-a-color-map-key` in the color map";
+      }
+
+    }
+
+  }
+
+  @include it("Doesn't error if the color argument supplied is found in the color map") {
+
+    @include assert() {
+
+      $fixture: (some-color: red);
+
+      @include output {
+        @include label-content-typography(some-color, true, $fixture);
+      }
+
+      @include contains {
+        color: red;
+      }
+
+    }
+
+  }
+
+}

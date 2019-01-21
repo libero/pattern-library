@@ -4,7 +4,7 @@
 @import "../mixins/validation";
 
 @mixin _set-color-based-property($property, $color, $map) {
-  $value: get-value-from-map-with-default($map, $color);
+  $value: get-value-from-map-or-pass-through($map, $color);
 
   @if type_of($value) == "color" {
     #{$property}: $value;

@@ -9,12 +9,7 @@
 $_default-font-map: $font;
 
 @mixin font-size($size, $map: $_default-font-map) {
-
-  $font-size: $size;
-  @if map_has_key($map, $size) {
-    $font-size: map_get($map, $size);
-  }
-
+  $font-size: get-value-from-map-or-pass-through($map, $size);
   @if is-a-px-number($font-size) or is-a-rem-number($font-size) {
     @include rem(font-size, $font-size);
     @if map_has_key($map, $size) {
