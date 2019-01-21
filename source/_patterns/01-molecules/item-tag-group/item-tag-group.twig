@@ -1,25 +1,26 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tag-group']) }) -%}
 
-{%- block group -%}
+<section {%- include('atoms-attributes') -%}>
 
-    <section {%- include('atoms-attributes') -%}>
+  {%- block section -%}
 
-        {%- block section -%}
-            {%- with title only -%}
-                {%- block title -%}
+    {%- with title only -%}
+      {%- block title -%}
 
-                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tag-group__title']) }) -%}
-                    {%- include 'atoms-heading' with {level: 4} -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tag-group__title']) }) -%}
+        {%- include 'atoms-heading' with {level: 4} -%}
 
-                {%- endblock title -%}
-            {%- endwith -%}
+      {%- endblock title -%}
+    {%- endwith -%}
 
-            {%- with list only -%}
-                {%- include('molecules-item-tag-list') -%}
-            {%- endwith -%}
+    {%- with list only -%}
+      {%- block list %}
 
-        {%- endblock section -%}
+        {%- include('molecules-item-tag-list') -%}
 
-    </section>
+      {%- endblock list -%}
+    {%- endwith -%}
 
-{%- endblock group -%}
+  {%- endblock section -%}
+
+</section>
