@@ -3,3 +3,46 @@ lang: ru
 contentHeader:
   contentTitle:
     text: Следующие три исследователя ранней карьеры получили гранты на поездки
+
+tags:
+  groups:
+    - title:
+        text: Цвета радуги
+      list:
+        items:
+          - content:
+              attributes:
+                href: '#'
+              text: Красный
+          - content:
+              text: Оранжевый
+          - content:
+              text: Жёлтый
+          - content:
+              attributes:
+                href: '#'
+              text: Зелёный
+          - content:
+              attributes:
+                href: '#'
+              text: Голубой
+          - content:
+              text: Синий
+          - content:
+              text: Фиолетовый
+    - title:
+        text: Румб
+      list:
+        items:
+          - content:
+              attributes:
+                href: '#'
+              text: Север
+          - content:
+              attributes:
+                href: '#'
+              text: Восток
+          - content:
+              text: Юг
+          - content:
+              text: Запад
