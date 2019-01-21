@@ -6,3 +6,11 @@
 
   @return "[Not found]";
 }
+
+@function get-value-from-map-with-default($map, $keyOrDefault) {
+  $value: get-value-from-map($map, $keyOrDefault);
+  @if $value == "[Not found]" {
+    $value: $keyOrDefault;
+  }
+  @return $value;
+}

@@ -1,12 +1,10 @@
 @import "../variables/color";
 @import "../variables/custom-properties--color";
+@import "../functions/colors";
 @import "../mixins/validation";
 
 @mixin _set-color-based-property($property, $color, $map) {
-  $value: $color;
-  @if map_has_key($map, $color) {
-    $value: map_get($map, $color);
-  }
+  $value: get-color-value-from-map($color, $map);
 
   @if type_of($value) == "color" {
     #{$property}: $value;
