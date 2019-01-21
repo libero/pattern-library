@@ -32,7 +32,7 @@ $_default-font-map: $font;
     @include _error("Font family key `#{$designation}` not found in map");
   } @else {
     font-family: unquote($font-family);
-    font-family: var(--font#{$designation});
+    font-family: var(--font-#{$designation});
   }
 }
 
