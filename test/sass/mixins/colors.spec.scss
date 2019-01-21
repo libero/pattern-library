@@ -1,0 +1,79 @@
+@import "../test";
+@import "../../../source/css/sass/mixins/colors";
+
+@include describe("@mixin set-color") {
+
+  @include it("sets the color using the map's value when the argument is a map key, and the corresponding value is a color") {
+
+    @include assert() {
+
+      $fixture: (
+        some-color: rgba(11, 22, 33, 0.44),
+      );
+
+      @include output {
+        @include set-color(some-color, $fixture);
+      }
+
+      @include expect {
+        color: rgba(11, 22, 33, 0.44);
+        color: var(--color-#{some-color});
+      }
+
+    }
+
+  }
+
+  @include it("sets the color directly when the argument is a color value") {
+
+    @include assert() {
+
+      @include output {
+        @include set-color(rgb(55, 55, 55));
+      }
+
+      @include expect {
+        color: rgb(55, 55, 55);
+      }
+
+    }
+
+  }
+
+  @include it("errors if the argument is a map key resolving to a non-color value") {
+
+    @include assert() {
+
+      $fixture: (unused-key: unused-value);
+
+      @include output {
+        @include set-color(not-a-color, $fixture);
+      }
+
+      @include expect {
+        _error: "Trying to set a non-color value to property `color`";
+      }
+
+    }
+
+  }
+
+  @include it("errors if the argument is neither a map key nor a color value") {
+
+    @include assert() {
+
+      $fixture: (key-to-not-a-color: not-a-color);
+
+      @include output {
+        @include set-color(key-to-not-a-color, $fixture);
+      }
+
+      @include expect {
+        _error: "Trying to set a non-color value to property `color`";
+      }
+
+    }
+
+  }
+
+}
