@@ -11,7 +11,7 @@
 
 .tag-list__item {
   display: inline;
-  @include label-subject-typography();
+  @include label-tag-typography();
 
   &:after {
     content: ", ";
