@@ -1,0 +1,6 @@
+@import "../variables/breakpoint";
+@import "maps";
+
+@function get-breakpoint($name, $map: $breakpoint) {
+  @return get-value-from-map($map, $name);
+}
