@@ -48,7 +48,6 @@ $_default-color-map: $color;
   font-weight: 600;
 }
 
-// FIX: Tie $line-height to a variable once baseline grid mixins in place
 @mixin heading-level-typography($level, $line-height: get-baselinegrid-measure(small), $map: $_default-font-map) {
   @if type_of($level) != "number" or not unitless($level) or $level < 1 or $level > 6 {
     @include _error("Invalid heading level `#{$level}` supplied");
