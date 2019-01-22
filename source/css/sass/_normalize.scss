@@ -2,6 +2,7 @@
 @import "mixins/typography";
 @import "variables/color";
 @import "vendor/normalize.css/normalize";
+@import "functions/colors";
 
 *,
 *:before,
@@ -15,8 +16,8 @@ body {
 }
 
 body {
-  background-color: $color-background;
-  color: $color-text-normal;
+  background-color: get-color(background);
+  color: get-color(normal);
   text-rendering: optimizeLegibility;
   @include body-typography();
 }
@@ -56,7 +57,7 @@ p {
 }
 
 a {
-  color: $color-primary-normal;
+  color: get-color(primary-normal);
   text-decoration: none;
 }
 
