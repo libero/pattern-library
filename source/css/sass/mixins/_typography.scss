@@ -7,7 +7,12 @@
 @import "spacing";
 
 $_default-font-map: $font;
+$_default-color-map: $color;
 
+/* TODO: Consider a `strict` param that would use get-value-from-map rather than get-value-from-map-or-pass-through.
+
+    This may allow better centralisation of the core bits of what happens when the key is not found in the map
+ */
 @mixin font-size($size, $map: $_default-font-map) {
   $font-size: get-value-from-map-or-pass-through($map, $size);
   @if is-a-px-number($font-size) or is-a-rem-number($font-size) {
@@ -34,7 +39,7 @@ $_default-font-map: $font;
 
 // FIX: Reinstate once baseline grid mixins in place
 //@mixin set-font-size-and-vertical-height($font-size, $vertical-height: $baselinegrid-space-small) {
-@mixin set-font-size-and-vertical-height($font-size, $vertical-height: 24px, $map: $font) {
+@mixin set-font-size-and-vertical-height($font-size, $vertical-height: 24px, $map: $_default-font-map) {
   @include font-size($font-size, $map);
   line-height: $vertical-height / $font-size;
 }
@@ -44,8 +49,8 @@ $_default-font-map: $font;
   font-weight: 600;
 }
 
-// FIX: Tie $line-height to a variable
-@mixin heading-level-typography($level, /*$line-height: 24px, */$map: $font) {
+// FIX: Tie $line-height to a variable once baseline grid mixins in place
+@mixin heading-level-typography($level, $line-height: 24px, $map: $_default-font-map) {
   @if type_of($level) != "number" or not unitless($level) or $level < 1 or $level > 6 {
     @include _error("Invalid heading level `#{$level}` supplied");
   } @else {
@@ -54,23 +59,13 @@ $_default-font-map: $font;
     @if map_has_key($map, $key) {
       $font-size: map_get($map, $key);
       @include _heading-base-typography();
-      @include set-font-size-and-vertical-height($font-size, 48px, $map);
+      @include set-font-size-and-vertical-height($font-size, $line-height, $map);
       font-size: var(--font-#{$key});
     } @else {
       @include _error("Font map is missing the definition of h#{$level} font size");
     }
 
   }
-}
-
-@mixin h1-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-vertical-height(size-h1, 48px);
-}
-
-@mixin h2-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-vertical-height(size-h2, 30px);
 }
 
 @mixin body-typography() {
@@ -107,7 +102,7 @@ $_default-font-map: $font;
   }
 }
 
-@mixin label-content-typography($color: text-secondary, $uppercase: true, $map: $color) {
+@mixin label-content-typography($color: text-secondary, $uppercase: true, $map: $_default-color-map) {
   $col: get-color($color, $map);
   @if $col != "[Not found]" {
     @include _label-typography($col, $uppercase);

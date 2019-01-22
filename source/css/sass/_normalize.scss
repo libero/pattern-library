@@ -22,12 +22,12 @@ body {
 }
 
 h1 {
-  @include h1-typography();
+  @include heading-level-typography(1, 48px);
   @include h1-spacing();
 }
 
 h2 {
-  @include h2-typography();
+  @include heading-level-typography(1, 30px);
   @include h2-spacing();
 }
 

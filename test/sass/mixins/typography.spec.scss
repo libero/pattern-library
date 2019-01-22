@@ -7,13 +7,12 @@
 
     @include assert() {
 
-      $fixture-map: (
+      $fixture: (
         some-size: 16px,
       );
-      $fixture-line-height: 24px;
 
       @include output {
-        @include font-size(some-size, $fixture-map);
+        @include font-size(some-size, $fixture);
       }
 
       @include expect {
@@ -214,7 +213,7 @@
 
 @include describe("@mixin heading-level-typography") {
 
-  $fixture: (
+  $fixture-map: (
     size-h1: 10px,
     size-h2: 20px,
     size-h3: 30px,
@@ -224,13 +223,14 @@
     // invalid heading size in order to verify the mixin doesn't use it
     size-h7: 70px,
   );
+  $fixture-line-height: 24px;
 
   @include it("sets the h1 font size when supplied level 1") {
 
     @include assert() {
 
       @include output {
-        @include heading-level-typography(1, $fixture);
+        @include heading-level-typography(1, $fixture-line-height, $fixture-map);
       }
 
       @include contains {
@@ -247,7 +247,7 @@
     @include assert() {
 
       @include output {
-        @include heading-level-typography(2, $fixture);
+        @include heading-level-typography(2, $fixture-line-height, $fixture-map);
       }
 
       @include contains {
@@ -264,7 +264,7 @@
     @include assert() {
 
       @include output {
-        @include heading-level-typography(3, $fixture);
+        @include heading-level-typography(3, $fixture-line-height, $fixture-map);
       }
 
       @include contains {
@@ -281,7 +281,7 @@
     @include assert() {
 
       @include output {
-        @include heading-level-typography(4, $fixture);
+        @include heading-level-typography(4, $fixture-line-height, $fixture-map);
       }
 
       @include contains {
@@ -298,7 +298,7 @@
     @include assert() {
 
       @include output {
-        @include heading-level-typography(5, $fixture);
+        @include heading-level-typography(5, $fixture-line-height, $fixture-map);
       }
 
       @include contains {
@@ -315,7 +315,7 @@
     @include assert() {
 
       @include output {
-        @include heading-level-typography(6, $fixture);
+        @include heading-level-typography(6, $fixture-line-height, $fixture-map);
       }
 
       @include contains {
@@ -332,7 +332,7 @@
     @include assert() {
 
       @include output {
-        @include heading-level-typography(7, $fixture);
+        @include heading-level-typography(7, $fixture-line-height, $fixture-map);
       }
 
       @include expect() {
@@ -348,7 +348,7 @@
     @include assert() {
 
       @include output {
-        @include heading-level-typography(1, (size-h2: 20px));
+        @include heading-level-typography(1, $fixture-line-height, (size-h2: 20px));
       }
 
       @include expect() {
