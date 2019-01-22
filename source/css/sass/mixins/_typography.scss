@@ -1,4 +1,5 @@
 @import "../functions/maps";
+@import "../functions/baselinegrid";
 @import "../functions/colors";
 @import "../mixins/types";
 @import "../variables/baselinegrid";
@@ -37,9 +38,7 @@ $_default-color-map: $color;
   }
 }
 
-// FIX: Reinstate once baseline grid mixins in place
-//@mixin set-font-size-and-vertical-height($font-size, $vertical-height: $baselinegrid-space-small) {
-@mixin set-font-size-and-vertical-height($font-size, $vertical-height: 24px, $map: $_default-font-map) {
+@mixin set-font-size-and-vertical-height($font-size, $vertical-height: get-baselinegrid-measure(small), $map: $_default-font-map) {
   @include font-size($font-size, $map);
   line-height: $vertical-height / $font-size;
 }
@@ -50,7 +49,7 @@ $_default-color-map: $color;
 }
 
 // FIX: Tie $line-height to a variable once baseline grid mixins in place
-@mixin heading-level-typography($level, $line-height: 24px, $map: $_default-font-map) {
+@mixin heading-level-typography($level, $line-height: get-baselinegrid-measure(small), $map: $_default-font-map) {
   @if type_of($level) != "number" or not unitless($level) or $level < 1 or $level > 6 {
     @include _error("Invalid heading level `#{$level}` supplied");
   } @else {
