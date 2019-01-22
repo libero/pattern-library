@@ -191,7 +191,7 @@
 
   }
 
-  @include it("Doesn't error if the color argument supplied is found in the color map") {
+  @include it("Sets the color to be the value of the key in the color map if the color argument supplied is found in the color map") {
 
     @include assert() {
 
