@@ -40,7 +40,12 @@ $_default-color-map: $color;
 
 @mixin set-font-size-and-vertical-height($font-size, $vertical-height: get-baselinegrid-measure(small), $map: $_default-font-map) {
   @include font-size($font-size, $map);
-  line-height: $vertical-height / $font-size;
+
+  @if map_has_key($map, $font-size) {
+    line-height: $vertical-height / map_get($map, $font-size);
+  } @else {
+    line-height: $vertical-height / $font-size;
+  }
 }
 
 @mixin _heading-base-typography() {

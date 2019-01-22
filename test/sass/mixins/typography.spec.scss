@@ -360,3 +360,84 @@
   }
 
 }
+
+@include describe("@mixin set-font-size-and-vertical-height") {
+
+  @include it("sets the font size when directly supplied") {
+
+    @include assert() {
+
+      @include output {
+        @include set-font-size-and-vertical-height(32px);
+      }
+
+      @include contains {
+        font-size: 32px;
+        font-size: 2rem;
+      }
+
+    }
+
+  }
+
+  @include it("sets the font size when supplied via the a map") {
+
+    @include assert() {
+
+      $fixture-map: (base-size: 16px);
+      $fixture-desired-height: 32px;
+
+      @include output {
+        @include set-font-size-and-vertical-height(base-size, $fixture-desired-height, $fixture-map);
+      }
+
+      @include contains {
+        font-size: 16px;
+        font-size: 1rem;
+        font-size: var(--font-base-size);
+      }
+
+    }
+
+  }
+
+  @include it("correctly calculates the line height in order to obtain the supplied vertical height, taking into account the font size when supplied directly") {
+
+    @include it("sets the font size when directly supplied") {
+
+      @include assert() {
+
+        @include output {
+          @include set-font-size-and-vertical-height(32px, 40px);
+        }
+
+        @include contains {
+          line-height: 1.25;
+        }
+
+      }
+
+    }
+
+  }
+
+  @include it("correctly calculates the line height in order to obtain the supplied vertical height, taking into account the font size when supplied via a map") {
+
+    @include assert() {
+
+      $fixture-map: (base-size: 16px);
+      $fixture-desired-height: 32px;
+
+      @include output {
+        @include set-font-size-and-vertical-height(base-size, $fixture-desired-height, $fixture-map);
+      }
+
+      @include contains {
+        line-height: 2;
+      }
+
+    }
+
+  }
+
+}
