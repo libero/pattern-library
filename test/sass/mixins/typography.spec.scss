@@ -7,12 +7,13 @@
 
     @include assert() {
 
-      $fixture: (
+      $fixture-map: (
         some-size: 16px,
       );
+      $fixture-line-height: 24px;
 
       @include output {
-        @include font-size(some-size, $fixture);
+        @include font-size(some-size, $fixture-map);
       }
 
       @include expect {
@@ -203,6 +204,155 @@
 
       @include contains {
         color: red;
+      }
+
+    }
+
+  }
+
+}
+
+@include describe("@mixin heading-level-typography") {
+
+  $fixture: (
+    size-h1: 10px,
+    size-h2: 20px,
+    size-h3: 30px,
+    size-h4: 40px,
+    size-h5: 50px,
+    size-h6: 60px,
+    // invalid heading size in order to verify the mixin doesn't use it
+    size-h7: 70px,
+  );
+
+  @include it("sets the h1 font size when supplied level 1") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(1, $fixture);
+      }
+
+      @include contains {
+        font-size: 10px;
+        font-size: var(--font-size-h1);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h1 font size when supplied level 2") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(2, $fixture);
+      }
+
+      @include contains {
+        font-size: 20px;
+        font-size: var(--font-size-h2);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h1 font size when supplied level 3") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(3, $fixture);
+      }
+
+      @include contains {
+        font-size: 30px;
+        font-size: var(--font-size-h3);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h1 font size when supplied level 4") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(4, $fixture);
+      }
+
+      @include contains {
+        font-size: 40px;
+        font-size: var(--font-size-h4);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h5 font size when supplied level 5") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(5, $fixture);
+      }
+
+      @include contains {
+        font-size: 50px;
+        font-size: var(--font-size-h5);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h6 font size when supplied level 6") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(6, $fixture);
+      }
+
+      @include contains {
+        font-size: 60px;
+        font-size: var(--font-size-h6);
+      }
+
+    }
+
+  }
+
+  @include it("errors if supplied a heading level argument not between 1 and 6 inclusive") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(7, $fixture);
+      }
+
+      @include expect() {
+        _error: "Invalid heading level `7` supplied";
+      }
+
+    }
+
+  }
+
+  @include it("errors a valid headling level lacks a font size defninition in the map") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(1, (size-h2: 20px));
+      }
+
+      @include expect() {
+        _error: "Font map is missing the definition of h1 font size";
       }
 
     }

@@ -32,22 +32,22 @@ h2 {
 }
 
 h3 {
-  @include h3-typography();
+  @include heading-level-typography(3);
   @include h3-spacing();
 }
 
 h4 {
-  @include h4-typography();
+  @include heading-level-typography(4);
   @include h4-spacing();
 }
 
 h5 {
-  @include h5-typography();
+  @include heading-level-typography(5);
   @include h5-spacing();
 }
 
 h6 {
-  @include h6-typography();
+  @include heading-level-typography(6);
   @include h6-spacing();
 }
 

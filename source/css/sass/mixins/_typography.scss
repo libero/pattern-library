@@ -32,14 +32,35 @@ $_default-font-map: $font;
   }
 }
 
-@mixin set-font-size-and-vertical-height($font-size, $vertical-height: $baselinegrid-space-small) {
-  @include font-size(font-size, $font-size);
+// FIX: Reinstate once baseline grid mixins in place
+//@mixin set-font-size-and-vertical-height($font-size, $vertical-height: $baselinegrid-space-small) {
+@mixin set-font-size-and-vertical-height($font-size, $vertical-height: 24px, $map: $font) {
+  @include font-size($font-size, $map);
   line-height: $vertical-height / $font-size;
 }
 
 @mixin _heading-base-typography() {
   @include font-family(secondary);
   font-weight: 600;
+}
+
+// FIX: Tie $line-height to a variable
+@mixin heading-level-typography($level, /*$line-height: 24px, */$map: $font) {
+  @if type_of($level) != "number" or not unitless($level) or $level < 1 or $level > 6 {
+    @include _error("Invalid heading level `#{$level}` supplied");
+  } @else {
+
+    $key: size-h#{$level};
+    @if map_has_key($map, $key) {
+      $font-size: map_get($map, $key);
+      @include _heading-base-typography();
+      @include set-font-size-and-vertical-height($font-size, 48px, $map);
+      font-size: var(--font-#{$key});
+    } @else {
+      @include _error("Font map is missing the definition of h#{$level} font size");
+    }
+
+  }
 }
 
 @mixin h1-typography() {
@@ -50,26 +71,6 @@ $_default-font-map: $font;
 @mixin h2-typography() {
   @include _heading-base-typography();
   @include set-font-size-and-vertical-height(size-h2, 30px);
-}
-
-@mixin h3-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-vertical-height(size-h3);
-}
-
-@mixin h4-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-vertical-height(size-h4);
-}
-
-@mixin h5-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-vertical-height(size-h5);
-}
-
-@mixin h6-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-vertical-height(size-h6);
 }
 
 @mixin body-typography() {
