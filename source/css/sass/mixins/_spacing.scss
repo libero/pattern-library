@@ -2,10 +2,13 @@
 @import "sizes";
 @import "types";
 @import "../functions/validation";
+@import "../functions/baselinegrid";
 @import "../mixins/media-query";
 @import "../variables/baselinegrid";
 @import "../variables/breakpoint";
 @import "../variables/grid";
+
+$_default-baselinegrid-map: $baselinegrid;
 
 @mixin _when-left-to-right {
   html[dir="ltr"] &:not([dir]),
@@ -189,33 +192,21 @@
 }
 
 // blg stands for "baseline grid"
+@mixin blg-spacing($dimension, $level, $type: "padding", $map: $_default-baselinegrid-map) {
 
-@mixin blg-spacing($dimension, $level, $type: "padding") {
-  @if $type == "padding" {
-    @if $level == "extra-small" {
-      @include padding($baselinegrid-space-extra-small, $dimension);
-    } @else if $level == "small" {
-      @include padding($baselinegrid-space-small, $dimension);
-    } @else if $level == "smallish" {
-      @include padding($baselinegrid-space-smallish, $dimension);
-    } @else if $level == "medium" {
-      @include padding($baselinegrid-space-medium, $dimension);
-    } @else if $level == "large" {
-      @include padding($baselinegrid-space-large, $dimension);
-    }
-  } @else if $type == "margin" {
-    @if $level == "extra-small" {
-      @include margin($baselinegrid-space-extra-small, $dimension);
-    } @else if $level == "small" {
-      @include margin($baselinegrid-space-small, $dimension);
-    } @else if $level == "smallish" {
-      @include margin($baselinegrid-space-smallish, $dimension);
-    } @else if $level == "medium" {
-      @include margin($baselinegrid-space-medium, $dimension);
-    } @else if $level == "large" {
-      @include margin($baselinegrid-space-large, $dimension);
-    }
+  $baselinegrid-measure: get-baselinegrid-measure($level, $map);
+  @if $baselinegrid-measure == "[Not found]" {
+    @include _error("Expected supplied level `#{$level}` to be a baselinegrid map key");
   }
+
+  @if $type == "margin" {
+    @include margin($baselinegrid-measure, $dimension);
+  } @else if $type == "padding" {
+    @include padding($baselinegrid-measure, $dimension);
+  } @else {
+    @include _error("Supplied type was neither margin nor padding: got `#{$type}`");
+  }
+
 }
 
 @mixin blg-pad-top--small-to-medium {
