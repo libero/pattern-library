@@ -1,33 +1,58 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list']) }) -%}
 
-<ul {%- include('atoms-attributes') -%}>
+<div {%- include('atoms-attributes') -%}>
 
-  {%- for item in items -%}
+  {%- with title|default({}) only -%}
+    {%- block title -%}
 
-    {%- with item only -%}
-      {%- block item -%}
+      {% if text %}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__item']) }) -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__title']) }) -%}
+        {%- include 'atoms-heading' with {level: level|default(4)} -%}
 
-        <li {%- include('atoms-attributes') -%}>
+      {% endif %}
 
-          {%- with content only -%}
-            {%- block content -%}
+    {%- endblock title -%}
+  {%- endwith -%}
 
-              {%- if attributes.href is defined -%}
-                {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__link']) }) -%}
-              {%- endif -%}
+  {%- with list only -%}
+    {%- block list -%}
 
-              {%- include 'atoms-link' -%}
+      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__list']) }) -%}
 
-            {%- endblock content -%}
+      <ul {%- include('atoms-attributes') -%}>
+
+        {%- for item in items -%}
+
+          {%- with item only -%}
+            {%- block item -%}
+
+              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__item']) }) -%}
+
+              <li {%- include('atoms-attributes') -%}>
+
+                {%- with content only -%}
+                  {%- block content -%}
+
+                    {%- if attributes.href is defined -%}
+                      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__link']) }) -%}
+                    {%- endif -%}
+
+                    {%- include 'atoms-link' -%}
+
+                  {%- endblock content -%}
+                {%- endwith -%}
+
+              </li>
+
+            {%- endblock item -%}
           {%- endwith -%}
 
-        </li>
+        {%- endfor -%}
 
-      {%- endblock item -%}
-    {%- endwith -%}
+      </ul>
 
-  {%- endfor -%}
+    {%- endblock list -%}
+  {%- endwith -%}
 
-</ul>
+</div>
