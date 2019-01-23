@@ -280,54 +280,54 @@ $_default-baselinegrid-map: $baselinegrid;
 
 }
 
-@mixin blg-column-container() {
+@mixin blg-column-container {
   @include blg-margin-bottom--medium-to-large();
 }
 
-@mixin h1-spacing() {
+@mixin h1-spacing {
   margin: 0;
 }
 
-@mixin h2-spacing() {
+@mixin h2-spacing {
   margin: 0;
   @include padding(21px, "block-end");
   @include padding(21px, "block-start");
 }
 
-@mixin h3-spacing() {
+@mixin h3-spacing {
   margin: 0;
   @include blg-spacing("block-start", "extra-small");
   @include blg-spacing("block-end", "extra-small");
 }
 
-@mixin h4-spacing() {
+@mixin h4-spacing {
   margin: 0;
   @include blg-spacing("block-start", "extra-small");
   @include blg-spacing("block-end", "extra-small");
 }
 
-@mixin h5-spacing() {
+@mixin h5-spacing {
   margin: 0;
   @include blg-spacing("block-start", "extra-small");
   @include blg-spacing("block-end", "extra-small");
 }
 
-@mixin h6-spacing() {
+@mixin h6-spacing {
   margin: 0;
   @include padding(10px, "block-start");
   @include padding(14px, "block-end");
 }
 
-@mixin body-spacing() {
+@mixin body-spacing {
   margin: 0;
   @include blg-spacing("block-end", "small", "margin");
 }
 
-@mixin small-spacing() {
+@mixin small-spacing {
   @include blg-spacing("block-end", "small");
 }
 
-@mixin wrapper() {
+@mixin wrapper {
   box-sizing: content-box;
   @include max-inline-size(get-grid-measure(max_width));
   margin: auto;
