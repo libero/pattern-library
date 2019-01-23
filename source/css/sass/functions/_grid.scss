@@ -1,0 +1,6 @@
+@import "../variables/grid";
+@import "maps";
+
+@function get-grid-measure ($name, $map: $grid) {
+  @return get-value-from-map($map, $name);
+}

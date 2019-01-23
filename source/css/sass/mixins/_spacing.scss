@@ -3,6 +3,7 @@
 @import "types";
 @import "../functions/validation";
 @import "../functions/baselinegrid";
+@import "../functions/grid";
 @import "../mixins/media-query";
 @import "../variables/baselinegrid";
 @import "../variables/breakpoint";
@@ -328,7 +329,7 @@ $_default-baselinegrid-map: $baselinegrid;
 
 @mixin wrapper() {
   box-sizing: content-box;
-  @include max-inline-size($grid-max_width);
+  @include max-inline-size(get-grid-measure(max_width));
   margin: auto;
 
   @include padding(7%, "inline");
