@@ -114,6 +114,6 @@ $_default-color-map: $color;
   }
 }
 
-@mixin label-subject-typography() {
+@mixin label-tag-typography() {
   @include _label-typography(get-color(primay-normal));
 }
