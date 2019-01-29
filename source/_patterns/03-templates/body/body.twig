@@ -23,10 +23,8 @@
 
         {%- block template -%}
 
-            {%- if pageTemplate.name == 'single-column' -%}
-
-                {% include 'templates-single-column' %}
-
+            {%- if pageTemplate.name is defined -%}
+                {%- include node.template with node.arguments only -%}
             {%- endif -%}
 
         {%- endblock template -%}
