@@ -14,6 +14,7 @@ patternStates:
     - inreview
     - complete
 styleGuideExcludes:
+    - 03-templates
     - 04-pages
 cacheBusterOn: 'true'
 exportDir: export
