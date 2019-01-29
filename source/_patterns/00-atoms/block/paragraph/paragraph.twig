@@ -1,0 +1,3 @@
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['paragraph']) }) %}
+
+<p {%- include 'atoms-attributes' %}>{{ paragraph }}</p>
