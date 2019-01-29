@@ -1,0 +1,36 @@
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([]) }) -%}
+
+<body {%- include('atoms-attributes') -%}>
+
+    {# site header goes here#}
+
+    {%- if contentHeader is defined -%}
+
+        {% block contentHeader %}
+
+            {% with contentHeader only %}
+
+                {% include 'molecules-content-header' %}
+
+            {% endwith %}
+
+        {% endblock %}
+
+    {%- endif -%}
+
+
+    {%- if pageTemplate.name is defined -%}
+
+        {%- block template -%}
+
+            {%- if pageTemplate.name == 'single-column' -%}
+
+                {% include 'templates-single-column' %}
+
+            {%- endif -%}
+
+        {%- endblock template -%}
+
+    {%- endif -%}
+
+</body>
