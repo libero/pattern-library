@@ -1,4 +1,4 @@
-content:
+text:
   - It's not
   - template: atoms-italic
     arguments:
