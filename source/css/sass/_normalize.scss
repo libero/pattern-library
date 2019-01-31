@@ -107,6 +107,7 @@ sub {
 
 @supports (font-variant-position: sub) {
   sub {
+    bottom: initial;
     font-variant-position: sub;
   }
 }
