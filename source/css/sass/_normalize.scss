@@ -107,6 +107,7 @@ sup {
 
 @supports (font-variant-position: sup) {
   sup {
+    top: initial;
     font-variant-position: sup;
   }
 }
