@@ -94,7 +94,6 @@ small {
   @include small-spacing();
 }
 
-sub,
 sup {
   font-size: 75%;
   line-height: 0;
@@ -104,6 +103,12 @@ sup {
 
 sup {
   top: -0.5em;
+}
+
+@supports (font-variant-position: sup) {
+  sup {
+    font-variant-position: sup;
+  }
 }
 
 address {
