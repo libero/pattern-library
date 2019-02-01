@@ -1,4 +1,8 @@
-{%- if nodes is iterable -%}
+{%- if nodes is not defined -%}
+
+  {# Do nothing #}
+
+{%- elseif nodes is iterable -%}
 
   {%- for node in nodes -%}
 
