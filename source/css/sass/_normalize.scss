@@ -95,19 +95,13 @@ small {
 }
 
 sub {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sub {
+  @include text-scripts;
   bottom: -0.25em;
 }
 
 @supports (font-variant-position: sub) {
   sub {
-    bottom: initial;
+    position: static;
     font-variant-position: sub;
   }
 }

@@ -67,6 +67,13 @@
   vertical-align: middle;
 }
 
+@mixin  text-scripts {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
 @mixin _label-typography($color, $uppercase: true) {
   color: $color;
   font-family: $font-secondary;
