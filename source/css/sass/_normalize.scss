@@ -95,15 +95,8 @@ small {
 }
 
 sub {
-  @include text-scripts;
+  @include _font-variant-position(sub);
   bottom: -0.25em;
-}
-
-@supports (font-variant-position: sub) {
-  sub {
-    position: static;
-    font-variant-position: sub;
-  }
 }
 
 address {
