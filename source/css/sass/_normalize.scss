@@ -95,15 +95,8 @@ small {
 }
 
 sup {
-  @include text-scripts;
+  @include _font-variant-position(super);
   top: -0.5em;
-}
-
-@supports (font-variant-position: sup) {
-  sup {
-    position: static;
-    font-variant-position: sup;
-  }
 }
 
 address {
