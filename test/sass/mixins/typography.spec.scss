@@ -1,0 +1,28 @@
+@import "../test";
+@import "../../../source/css/sass/mixins/typography";
+
+@include describe("@mixin typography") {
+
+  @include it("generates superscript in font-variant-position") {
+
+    @include assert() {
+
+      @include output {
+        @include font-variant-position(super);
+      }
+
+      @include contains {
+        top: -0.5em;
+
+        @supports (font-variant-position: super) {
+          font-size: inherit;
+          font-variant-position: super;
+          position: static;
+        }
+      }
+
+    }
+
+  }
+
+}
