@@ -76,7 +76,7 @@
   @if $position == super {
     top: -0.5em;
   } @else {
-    @include _error("Does not match '#{$position}'");
+    @include _error("Unknown position '#{$position}'");
   }
 
   @supports (font-variant-position: $position) {
