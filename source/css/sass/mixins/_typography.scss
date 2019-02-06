@@ -67,18 +67,22 @@
   vertical-align: middle;
 }
 
-@mixin _font-variant-position($position) {
+@mixin font-variant-position($position) {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 
   @if $position == super {
     top: -0.5em;
+  } @else {
+    @include _error("Does not match '#{$position}'");
   }
 
-  @supports (font-variant-position: #{$position}) {
+  @supports (font-variant-position: $position) {
     font-size: inherit;
     font-variant-position: $position;
-    line-height: normal;
     position: static;
-    vertical-align: baseline;
   }
 }
 
