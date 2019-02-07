@@ -95,7 +95,7 @@ small {
 }
 
 sub {
-  @include _font-variant-position(sub);
+  @include font-variant-position(sub);
 }
 
 address {
