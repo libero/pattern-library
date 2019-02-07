@@ -20,7 +20,20 @@
           position: static;
         }
       }
+    }
+  }
 
+  @include it("errors when Unknown position") {
+
+    @include assert() {
+
+      @include output {
+        @include font-variant-position(abc);
+      }
+
+      @include contains {
+        _error: "Unknown position 'abc'";
+      }
     }
 
   }
