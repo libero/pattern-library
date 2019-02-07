@@ -1,0 +1,41 @@
+@import "../test";
+@import "../../../source/css/sass/mixins/typography";
+
+@include describe("@mixin typography") {
+
+  @include it("generates subscript in font-variant-position") {
+
+    @include assert() {
+
+      @include output {
+        @include font-variant-position(sub);
+      }
+
+      @include contains {
+        bottom: -0.25em;
+
+        @supports (font-variant-position: sub) {
+          font-size: inherit;
+          font-variant-position: sub;
+          position: static;
+        }
+      }
+    }
+  }
+
+  @include it("errors when Unknown position") {
+
+    @include assert() {
+
+      @include output {
+        @include font-variant-position(abc);
+      }
+
+      @include contains {
+        _error: "Unknown position 'abc'";
+      }
+    }
+
+  }
+
+}
