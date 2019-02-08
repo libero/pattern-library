@@ -19,9 +19,9 @@
 
 }
 
-// TODO: consider using more abstract name if that would ease re-use
 .grid--article {
 
+  // Expects a grid with 12 usable columns in the middle with one gutter-providing column on each inline edge
   .grid {
 
     .grid-tertiary-column {
