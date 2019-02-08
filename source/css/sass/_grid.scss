@@ -60,3 +60,23 @@
   }
 
 }
+
+.grid--inside-elife {
+
+  & > * {
+
+    @include mq($from: wide) {
+      grid-column: 3 / -3;
+    }
+
+  }
+
+  & > * {
+
+    @include mq($from: x-wide) {
+      grid-column: 4 / -4;
+    }
+
+  }
+
+}
