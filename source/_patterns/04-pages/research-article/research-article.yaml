@@ -41,8 +41,7 @@ body:
   - template: atoms-paragraph
     arguments:
       text:
-        - |
-          From oranges to
+        - From oranges to
         - template: atoms-sup
           arguments:
             text: ' apples '
