@@ -1,13 +1,5 @@
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid', 'grid--inside-elife']) }) -%}
 
-{#
-
-content-container grid__item one-whole
-
-                            large--ten-twelfths push--large--one-twelfth x-large--eight-twelfths
-                push--x-large--two-twelfths                        grid-column
-
-#}
 <div {%- include 'atoms-attributes' %}>
 
     <!-- site-header-wrapper is needed to allow a full width keyline beneath the site header, whilst at the same time
