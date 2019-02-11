@@ -29,10 +29,22 @@
 
       @include output {
         @include font-variant-position(abc);
+        top: -0.5em;
       }
 
-      @include contains {
+      @include expect {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
         _error: "Unknown position 'abc'";
+        top: -0.5em;
+
+        @supports (font-variant-position: abc) {
+          font-size: inherit;
+          font-variant-position: abc;
+          position: static;
+        }
       }
     }
 
