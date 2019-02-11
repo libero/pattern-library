@@ -1,6 +1,7 @@
 // TODO: Move to configuration once using refactor arriving via npm module
 $grid: (
-  column-count: 12,
+  main-column-count: 12,
+  edge-colum-count:3,
   edge-space-medium: 7vw,
   edge-space-large: 14vw,
   column-gap: 1.6%,
@@ -8,8 +9,10 @@ $grid: (
 );
 
 // Nullify the effect of the first and last gutters by reducing both the first and last column tracks by the width of the grid gap.
-@function grid-edge-space($size, $grid-gap) {
-  @return calc(#{map_get($grid, edge-space-#{$size})} - #{$grid-gap});
+@function grid-edge-space($size, $grid-gap, $edge-column-count) {
+  // To calculate the width of each edge column, take the total size of the edge, subtract the width of all that edge's
+  // column gutters, and divide the result by the number of edge columns required
+  @return repeat($edge-column-count, calc((#{map_get($grid, edge-space-#{$size})} - (#{$grid-gap} * #{$edge-column-count})) / #{$edge-column-count}));
 }
 
 // return the column gap even if specified as a percentage
@@ -17,5 +20,6 @@ $grid: (
   @if unit($specified-col-gap) != "%" {
     @return $specified-col-gap;
   }
+  // "$specified-col-gap / 100%" divides $specified-col-gap by 100 and cancels out the % sign making the expression unitless.
   @return $max-width * ($specified-col-gap / 100%);
 }

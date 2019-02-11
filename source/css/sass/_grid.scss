@@ -3,7 +3,12 @@
 @import "mixins/spacing";
 
 .grid {
-  @include grid-setup(map_get($grid, column-count), map_get($grid, column-gap), map_get($grid, max-width));
+  @include grid-setup(
+    map_get($grid, main-column-count),
+    map_get($grid, edge-colum-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
 
   & > * {
     @include grid-span-all-but-edges();
