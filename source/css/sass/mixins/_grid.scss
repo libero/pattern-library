@@ -13,12 +13,21 @@
 // $column-gap can be set in any css length unit
 // $max-width: the maximum width for the main area (assumption: this will kick in at the x-wide breakpoint)
 @mixin grid-setup($main-column-count, $edge-column-count, $column-gap, $max-width) {
+
   display: grid;
+
+  // setup columns
   grid-column-gap: $column-gap;
-  grid-template-columns: grid-edge-space(medium, $column-gap, $edge-column-count) repeat($main-column-count, 1fr) grid-edge-space(medium, $column-gap, $edge-column-count);
+  grid-template-columns:
+    [full-start] grid-edge-space(medium, $column-gap, $edge-column-count)
+    build-main-columns($main-column-count, 1fr)
+    grid-edge-space(medium, $column-gap, $edge-column-count) [full-end];
 
   @include mq($from: medium) {
-    grid-template-columns: grid-edge-space(large, $column-gap, $edge-column-count) repeat($main-column-count, 1fr) grid-edge-space(large, $column-gap, $edge-column-count);
+    grid-template-columns:
+      [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
+      build-main-columns($main-column-count, 1fr)
+      grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
   }
 
   // Assumption: max-width constraint kicks in when the x-wide breakpoint is triggered
@@ -28,16 +37,14 @@
 
     // There are $main-column-count - 1 gutters to account for within the central $main-column-count number of columns:
     $column-track-fixed: ($max-width - ($column-gap-fixed * ($main-column-count - 1))) / $main-column-count;
-    grid-template-columns: repeat($edge-column-count, #{1 / $edge-column-count}fr)
-      repeat($main-column-count, $column-track-fixed)
-      repeat($edge-column-count, #{1 / $edge-column-count}fr);
+    grid-template-columns:
+      [full-start] repeat($edge-column-count, #{1 / $edge-column-count}fr)
+      build-main-columns($main-column-count, $column-track-fixed)
+      repeat($edge-column-count, #{1 / $edge-column-count}fr) [full-end];
+
   }
-}
 
-@mixin grid-span-all {
-  grid-column: 1 / -1;
-}
-
-@mixin grid-span-all-but-edges {
-  grid-column: 2 / -2;
+  // set up rows
+  //grid-template-rows: [site-header-start] auto [site-header-end];
+  grid-template-rows: [site-header] auto [main] 1fr;
 }

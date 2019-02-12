@@ -23,3 +23,19 @@ $grid: (
   // "$specified-col-gap / 100%" divides $specified-col-gap by 100 and cancels out the % sign making the expression unitless.
   @return $max-width * ($specified-col-gap / 100%);
 }
+
+// listing explicitly rather than using css's repeat as we want a different grid line name for each repeated instance
+@function build-main-columns($column-count, $size) {
+  $columns: "";
+  @for  $col-number from 1 to $column-count + 1 {
+    $track-name: "";
+    @if $col-number == 1 {
+      $track-name: "[#{main-start column-}#{$col-number}]";
+    } @else {
+      $track-name: "[#{column-}#{$col-number}]";
+    }
+    $columns: $columns + " #{$track-name} #{$size}";
+  }
+  $columns: $columns + " [main-end]";
+  @return unquote($columns);
+}
