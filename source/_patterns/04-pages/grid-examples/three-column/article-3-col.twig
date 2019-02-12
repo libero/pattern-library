@@ -1,12 +1,13 @@
-{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid', 'grid--article']) }) -%}
+{#{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid', 'grid--article']) }) -%}#}
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid']) }) -%}
 
 <div {%- include 'atoms-attributes' %}>
 
-    <div class="site-header-wrapper grid grid-item-span-all">
+    <div class="site-header-wrapper grid">
         <div class="site-header">Site header goes here</div>
     </div>
 
-    <main class="grid grid-item-span-all">
+    <main class="grid grid--article-type-A grid-item-span-all main" role="main">
 
         <div>
             {% include 'organisms-content-header' with contentHeader only %}

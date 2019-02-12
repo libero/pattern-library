@@ -4,6 +4,12 @@
 @import "../vendor/sass-mq/mq";
 @import "../functions/grid";
 
+// This generic approach is very flexible, with the trade-off that it doesn't allow much customisation of grid line names
+// below the highest levels. This means that deeper content placement on the grid probably needs to be by column number
+// & span, not line name, as I don't think this approach allows easy redefinition of the grid at breakpoints to control display.
+// We could instead go with a more strictly specified grid structure with more specific line names deeper in, and
+// where the grid is redefined within media queries, but that will be much less flexible and so likely have higher update costs.
+
 // The grid comprises $main-column-count columns, to contain the content plus $edge-column-count columns on either side of
 // the $main-column-count columns in order to provide centring while retaining the ability to appear to break out of the
 // grid into the this left / right space normally used for centring.
@@ -12,6 +18,7 @@
 // $edge-column-count is the number of columns per inline edge that is created to allow 'breakout' into, and to provide centering
 // $column-gap can be set in any css length unit
 // $max-width: the maximum width for the main area (assumption: this will kick in at the x-wide breakpoint)
+
 @mixin grid-setup($main-column-count, $edge-column-count, $column-gap, $max-width) {
 
   display: grid;
@@ -45,6 +52,5 @@
   }
 
   // set up rows
-  //grid-template-rows: [site-header-start] auto [site-header-end];
   grid-template-rows: [site-header] auto [main] 1fr;
 }

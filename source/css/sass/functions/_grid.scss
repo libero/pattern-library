@@ -24,7 +24,7 @@ $grid: (
   @return $max-width * ($specified-col-gap / 100%);
 }
 
-// listing explicitly rather than using css's repeat as we want a different grid line name for each repeated instance
+// listing explicitly rather than using css repeat() as we want a different grid line name for each repeated instance
 @function build-main-columns($column-count, $size) {
   $columns: "";
   @for  $col-number from 1 to $column-count + 1 {
