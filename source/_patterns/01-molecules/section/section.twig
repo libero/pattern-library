@@ -19,14 +19,18 @@
 
   {%- endwith -%}
 
-  {%- block content -%}
+  {%- with {content: content} only -%}
 
-    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section__body']) }) -%}
+    {%- block content -%}
 
-    <div {%- include 'atoms-attributes' -%}>
-      {%- include 'atoms-text' with {nodes: content} -%}
-    </div>
+      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section__body']) }) -%}
 
-  {%- endblock -%}
+      <div {%- include 'atoms-attributes' -%}>
+        {%- include 'atoms-text' with {nodes: content} -%}
+      </div>
+
+    {%- endblock -%}
+
+  {%- endwith -%}
 
 </section>
