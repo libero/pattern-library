@@ -33,7 +33,13 @@
 // Used for research articles
 .grid--article-type-A {
 
-  & > .grid-tertiary-column {
+  @include grid-setup-article-type-A(
+    map_get($grid, edge-colum-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
+
+  & > .grid-tertiary-content {
 
     @include mq($from: x-wide) {
       grid-column: main / span 2;
@@ -41,26 +47,26 @@
 
   }
 
-  & > .grid-main-column {
+  & > .grid-primary-content {
 
     @include mq($from: wide) {
       grid-column: main / span 8;
     }
 
     @include mq($from: x-wide) {
-      grid-column: 4 / span 7;
+      grid-column: primary-start-x-wide / span 7;
     }
 
   }
 
-  & > .grid-secondary-column {
+  & > .grid-secondary-content {
 
     @include mq($from: wide) {
-      grid-column: 10 / span 4;
+      grid-column: secondary-start-wide / span 4;
     }
 
     @include mq($from: x-wide) {
-      grid-column: 11 / span 3;
+      grid-column: secondary-start-x-wide / span 3;
     }
 
   }
