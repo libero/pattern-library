@@ -12,37 +12,18 @@
     map_get($grid, max-width)
   );
 
-  & > .grid-tertiary-content {
-
-    @include mq($from: x-wide) {
-      grid-column: main / span 2;
-    }
-
-  }
-
   & > .grid-primary-content {
-
-    @include mq($from: wide) {
-      grid-column: main / span 8;
-    }
-
-    @include mq($from: x-wide) {
-      grid-column: primary-start-x-wide / span 7;
-    }
-
+    grid-column: primary;
   }
 
   & > .grid-secondary-content {
-
-    @include mq($from: wide) {
-      grid-column: secondary-start-wide / span 4;
-    }
-
-    @include mq($from: x-wide) {
-      grid-column: secondary-start-x-wide / span 3;
-    }
-
+    grid-column: secondary;
   }
+
+  & > .grid-tertiary-content {
+    grid-column: tertiary;
+  }
+
 }
 
 .grid--article-type-B {

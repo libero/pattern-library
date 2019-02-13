@@ -4,6 +4,7 @@
 @import "../vendor/sass-mq/mq";
 @import "../functions/grid";
 
+// Properties applying across all grids
 @mixin _grid-setup-base ($column-gap) {
   display: grid;
   grid-column-gap: $column-gap;
@@ -26,8 +27,15 @@
     grid-row: site-header;
   }
 
+  .grid-item-span-full {
+    grid-column: full;
+  }
+
 }
 
+// Used for research article
+// Place items in the grid by name into "primary", "secondary" or "tertiary" areas
+// It's possible to 'break out' of these areas by using the class 'grid-item-span-full'. Not yet possible to break out across a subset of the edge columns.
 // The grid comprises 12 columns to contain the content plus $edge-column-count columns on either side of
 // the $main-column-count columns in order to provide centring while retaining the ability to appear to break out of the grid into the this left / right space normally used for centring.
 
@@ -40,21 +48,21 @@
 
   // Fixed to 12 grid columns in the main area, with a variable number of edge columns
   grid-template-columns:
-    [full-start] grid-edge-space(medium, $column-gap, $edge-column-count)
-    [main-start] repeat(12, 1fr) [main-end]
-    grid-edge-space(medium, $column-gap, $edge-column-count) [full-end];
+    [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
+    [main-start primary-start secondary-start tertiary-start] repeat(12, 1fr) [primary-end secondary-end tertiary-end main-end]
+    grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
 
   @include mq($from: medium) {
     grid-template-columns:
       [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
-      [main-start] repeat(12, 1fr) [main-end]
+      [main-start primary-start secondary-start tertiary-start] repeat(12, 1fr) [primary-end secondary-end tertiary-end main-end]
       grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
   }
 
   @include mq($from: wide) {
     grid-template-columns:
       [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
-      [main-start] repeat(8, 1fr) [secondary-start-wide] 1fr repeat(3, 1fr) [main-end]
+      [main-start primary-start tertiary-start] repeat(8, 1fr) [primary-end secondary-start] repeat(4, 1fr) [secondary-end tertiary-end main-end]
       grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
   }
 
@@ -66,45 +74,8 @@
     $column-track-fixed: ($max-width - ($column-gap-fixed * (12 - 1))) / 12;
     grid-template-columns:
       [full-start] repeat($edge-column-count, #{1 / $edge-column-count}fr)
-      [main-start] repeat(2, $column-track-fixed) [primary-start-x-wide] $column-track-fixed repeat(6, $column-track-fixed) [secondary-start-x-wide] $column-track-fixed repeat(2, $column-track-fixed) [main-end]
+      [main-start tertiary-start] repeat(2, $column-track-fixed) [tertiary-end primary-start] repeat(7, $column-track-fixed) [primary-end secondary-start] repeat(3, $column-track-fixed) [secondary-end main-end]
       repeat($edge-column-count, #{1 / $edge-column-count}fr) [full-end];
   }
 
 }
-
-// Old code, dragons etc
-//@mixin grid-setup($main-column-count, $edge-column-count, $column-gap, $max-width) {
-//
-//  display: grid;
-//
-//  // setup columns
-//  grid-column-gap: $column-gap;
-//  grid-template-columns:
-//      [full-start] grid-edge-space(medium, $column-gap, $edge-column-count)
-//      build-main-columns($main-column-count, 1fr)
-//      grid-edge-space(medium, $column-gap, $edge-column-count) [full-end];
-//
-//  @include mq($from: medium) {
-//    grid-template-columns:
-//        [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
-//        build-main-columns($main-column-count, 1fr)
-//        grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
-//  }
-//
-//  // Assumption: max-width constraint kicks in when the x-wide breakpoint is triggered
-//  @include mq($from: x-wide) {
-//    $column-gap-fixed: calc-fixed-col-gap($column-gap, $max-width);
-//    grid-column-gap: $column-gap-fixed;
-//
-//    // There are $main-column-count - 1 gutters to account for within the central $main-column-count number of columns:
-//    $column-track-fixed: ($max-width - ($column-gap-fixed * ($main-column-count - 1))) / $main-column-count;
-//    grid-template-columns:
-//        [full-start] repeat($edge-column-count, #{1 / $edge-column-count}fr)
-//        build-main-columns($main-column-count, $column-track-fixed)
-//        repeat($edge-column-count, #{1 / $edge-column-count}fr) [full-end];
-//
-//  }
-//
-//  // set up rows
-//  grid-template-rows: [site-header] auto [main] 1fr;
-//}
