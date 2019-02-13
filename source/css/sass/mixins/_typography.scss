@@ -86,7 +86,6 @@
   } @else {
     @include _error("Unknown position '#{$position}'");
   }
-
 }
 
 @mixin _label-typography($color, $uppercase: true) {
