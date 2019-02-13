@@ -11,37 +11,48 @@ contentHeader:
           text: Plant Biology
 
 body:
-  - template: atoms-paragraph
+  - template: molecules-section
     arguments:
-      text:
-        - |
-          The origin of angiosperms has been a long-standing botanical debate. The great diversity of angiosperms in the
-          Early Cretaceous makes the Jurassic a promising period in which to anticipate the origins of the angiosperms.
-          Here, based on observations of 264 specimens of 198 individual flowers preserved on 34 slabs in various states
-          and orientations, from the South Xiangshan Formation (Early Jurassic) of China, we describe a fossil flower,
-        - template: atoms-italic
+      heading:
+        text: Abstract
+      content:
+        - template: atoms-paragraph
           arguments:
-            text: ' Nanjinganthus dendrostyla '
-        - |
-          gen. et sp. nov.. The large number of specimens and various preservations allow for an evidence-based
-          reconstruction of the flower. From the evidence of the combination of an invaginated receptacle and ovarian
-          roof, we infer that the seeds of
-        - template: atoms-italic
-          arguments:
-            text: ' Nanjinganthus '
-        - |
-          were completely enclosed. Evidence of an actinomorphic flower with a dendroid style, cup-form receptacle, and
-          angiospermy, is consistent with
-        - template: atoms-italic
-          arguments:
-            text: ' Nanjinganthus '
-        - |
-          being a bona fide angiosperm from the Jurassic, an inference that we hope will re-invigorate research into
-          angiosperm origins.
-  - template: atoms-paragraph
+            text:
+              - |
+                The origin of angiosperms has been a long-standing botanical debate. The great diversity of angiosperms
+                in the Early Cretaceous makes the Jurassic a promising period in which to anticipate the origins of the
+                angiosperms. Here, based on observations of 264 specimens of 198 individual flowers preserved on 34
+                slabs in various states and orientations, from the South Xiangshan Formation (Early Jurassic) of China,
+                we describe a fossil flower,
+              - template: atoms-italic
+                arguments:
+                  text: ' Nanjinganthus dendrostyla '
+              - |
+                gen. et sp. nov.. The large number of specimens and various preservations allow for an evidence-based
+                reconstruction of the flower. From the evidence of the combination of an invaginated receptacle and
+                ovarian roof, we infer that the seeds of
+              - template: atoms-italic
+                arguments:
+                  text: ' Nanjinganthus '
+              - |
+                were completely enclosed. Evidence of an actinomorphic flower with a dendroid style, cup-form
+                receptacle, and angiospermy, is consistent with
+              - template: atoms-italic
+                arguments:
+                  text: ' Nanjinganthus '
+              - |
+                being a bona fide angiosperm from the Jurassic, an inference that we hope will re-invigorate research
+                into angiosperm origins.
+  - template: molecules-section
     arguments:
-      text:
-        - |1
+      heading:
+        text: eLife Digest
+      content:
+        - template: atoms-paragraph
+          arguments:
+            text:
+              - |1
           From
         - template: atoms-sub
           arguments:
@@ -74,16 +85,16 @@ body:
       text:
         - |
           Now, Fu et al. describe over 200 specimens of a new fossil flower that presents this characteristic, as well
-          as other distinctive features such as petals and sepals – the leaf-like parts that protect a flower bud.
-          Called
-        - template: atoms-italic
-          arguments:
-            text: ' Nanjinganthus'
-        - |
-          , the plant dates back to more than 174 million years ago, making it the oldest known record of a ‘true’
-          flower by almost 50 million years. Contrary to mainstream belief, this would place the apparition of flowering
-          plants to the Early Jurassic, the period that saw dinosaurs dominating the planet. This discovery may reshape
-          our current understanding of the evolution of flowers.
+          as other distinctive features such as petals and sepals – the leaf-like parts that protect a flower
+                bud. Called
+              - template: atoms-italic
+                arguments:
+                  text: ' Nanjinganthus'
+              - |
+                , the plant dates back to more than 174 million years ago, making it the oldest known record of a ‘true’
+                flower by almost 50 million years. Contrary to mainstream belief, this would place the apparition of
+                flowering plants to the Early Jurassic, the period that saw dinosaurs dominating the planet. This
+                discovery may reshape our current understanding of the evolution of flowers.
 
 tags:
   groups:
