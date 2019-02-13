@@ -4,68 +4,41 @@
 @import "../vendor/sass-mq/mq";
 @import "../functions/grid";
 
-// This generic approach is very flexible, with the trade-off that it doesn't allow much customisation of grid line names
-// below the highest levels. This means that deeper content placement on the grid probably needs to be by column number
-// & span, not line name, as I don't think this approach allows easy redefinition of the grid at breakpoints to control display.
-// We could instead go with a more strictly specified grid structure with more specific line names deeper in, and
-// where the grid is redefined within media queries, but that will be much less flexible and so likely have higher update costs.
-
-// The grid comprises $main-column-count columns, to contain the content plus $edge-column-count columns on either side of
-// the $main-column-count columns in order to provide centring while retaining the ability to appear to break out of the
-// grid into the this left / right space normally used for centring.
-
-// $main-column-count is the number of columns for the main area (i.e. excluding any gutter tracks on the left and right edge)
-// $edge-column-count is the number of columns per inline edge that is created to allow 'breakout' into, and to provide centering
-// $column-gap can be set in any css length unit
-// $max-width: the maximum width for the main area (assumption: this will kick in at the x-wide breakpoint)
-
-@mixin grid-setup($main-column-count, $edge-column-count, $column-gap, $max-width) {
-
-  display: grid;
-
-  // setup columns
-  grid-column-gap: $column-gap;
-  grid-template-columns:
-    [full-start] grid-edge-space(medium, $column-gap, $edge-column-count)
-    build-main-columns($main-column-count, 1fr)
-    grid-edge-space(medium, $column-gap, $edge-column-count) [full-end];
-
-  @include mq($from: medium) {
-    grid-template-columns:
-      [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
-      build-main-columns($main-column-count, 1fr)
-      grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
-  }
-
-  // Assumption: max-width constraint kicks in when the x-wide breakpoint is triggered
-  @include mq($from: x-wide) {
-    $column-gap-fixed: calc-fixed-col-gap($column-gap, $max-width);
-    grid-column-gap: $column-gap-fixed;
-
-    // There are $main-column-count - 1 gutters to account for within the central $main-column-count number of columns:
-    $column-track-fixed: ($max-width - ($column-gap-fixed * ($main-column-count - 1))) / $main-column-count;
-    grid-template-columns:
-      [full-start] repeat($edge-column-count, #{1 / $edge-column-count}fr)
-      build-main-columns($main-column-count, $column-track-fixed)
-      repeat($edge-column-count, #{1 / $edge-column-count}fr) [full-end];
-
-  }
-
-  // set up rows
-  grid-template-rows: [site-header] auto [main] 1fr;
-}
-
 @mixin _grid-setup-base ($column-gap) {
   display: grid;
   grid-column-gap: $column-gap;
   grid-template-rows: [site-header] auto [main] 1fr;
+
+  & > * {
+    grid-column: main;
+  }
+
+  & > .grid-item-span-main {
+    grid-column: main;
+  }
+
+  & .main {
+    grid-column: full;
+  }
+
+  & > .site-header-wrapper {
+    grid-column: full;
+    grid-row: site-header;
+  }
+
 }
 
-// Fixed to 12 grid columns in the main area, with a variable number of edge columns
+// The grid comprises 12 columns to contain the content plus $edge-column-count columns on either side of
+// the $main-column-count columns in order to provide centring while retaining the ability to appear to break out of the grid into the this left / right space normally used for centring.
+
+// $edge-column-count is the number of columns per inline edge that is created to allow 'breakout' into, and to provide centering
+// $column-gap can be set in any css length unit
+// $max-width: the maximum width for the main area (assumption: this will kick in at the x-wide breakpoint)
 @mixin grid-setup-article-type-A($edge-column-count, $column-gap, $max-width) {
 
   @include _grid-setup-base($column-gap);
 
+  // Fixed to 12 grid columns in the main area, with a variable number of edge columns
   grid-template-columns:
     [full-start] grid-edge-space(medium, $column-gap, $edge-column-count)
     [main-start] repeat(12, 1fr) [main-end]
@@ -85,7 +58,6 @@
       grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
   }
 
-  // FIX: something's wrong withe x-wide
   @include mq($from: x-wide) {
     $column-gap-fixed: calc-fixed-col-gap($column-gap, $max-width);
     grid-column-gap: $column-gap-fixed;
@@ -99,3 +71,40 @@
   }
 
 }
+
+// Old code, dragons etc
+//@mixin grid-setup($main-column-count, $edge-column-count, $column-gap, $max-width) {
+//
+//  display: grid;
+//
+//  // setup columns
+//  grid-column-gap: $column-gap;
+//  grid-template-columns:
+//      [full-start] grid-edge-space(medium, $column-gap, $edge-column-count)
+//      build-main-columns($main-column-count, 1fr)
+//      grid-edge-space(medium, $column-gap, $edge-column-count) [full-end];
+//
+//  @include mq($from: medium) {
+//    grid-template-columns:
+//        [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
+//        build-main-columns($main-column-count, 1fr)
+//        grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
+//  }
+//
+//  // Assumption: max-width constraint kicks in when the x-wide breakpoint is triggered
+//  @include mq($from: x-wide) {
+//    $column-gap-fixed: calc-fixed-col-gap($column-gap, $max-width);
+//    grid-column-gap: $column-gap-fixed;
+//
+//    // There are $main-column-count - 1 gutters to account for within the central $main-column-count number of columns:
+//    $column-track-fixed: ($max-width - ($column-gap-fixed * ($main-column-count - 1))) / $main-column-count;
+//    grid-template-columns:
+//        [full-start] repeat($edge-column-count, #{1 / $edge-column-count}fr)
+//        build-main-columns($main-column-count, $column-track-fixed)
+//        repeat($edge-column-count, #{1 / $edge-column-count}fr) [full-end];
+//
+//  }
+//
+//  // set up rows
+//  grid-template-rows: [site-header] auto [main] 1fr;
+//}

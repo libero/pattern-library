@@ -2,36 +2,9 @@
 @import "mixins/grid";
 @import "mixins/spacing";
 
-.grid {
-  @include grid-setup(
-    map_get($grid, main-column-count),
-    map_get($grid, edge-colum-count),
-    map_get($grid, column-gap),
-    map_get($grid, max-width)
-  );
-
-  & > * {
-    grid-column: main;
-  }
-
-  & > .grid-item-span-main {
-    grid-column: main;
-  }
-
-  & .main {
-    grid-column: full;
-  }
-
-  & > .site-header-wrapper {
-    grid-column: full;
-    grid-row: site-header;
-  }
-
-}
-
-// Assumes a grid of 12 main columns plus one gutter column on each inline side
 // Used for research articles
-.grid--article-type-A {
+.grid.grid--article-type-A,
+.grid--article-type-A .grid {
 
   @include grid-setup-article-type-A(
     map_get($grid, edge-colum-count),
@@ -70,7 +43,6 @@
     }
 
   }
-
 }
 
 .grid--article-type-B {
