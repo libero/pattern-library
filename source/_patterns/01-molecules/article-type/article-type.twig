@@ -1,6 +1,8 @@
-<div class="meta__type">
-  <a href="#">Research Article</a>
-  <span class="date">
-    <time datetime="">Jan 25, 2019</time>
-  </span>
-</div>
+<ul class="article__type">
+  {% for item in items %}
+    <li>
+      <a href="#">{{item.value}}</a>
+    </li>
+
+  {% endfor %}
+</ul>
