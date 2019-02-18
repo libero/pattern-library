@@ -4,7 +4,7 @@
 @import "../vendor/sass-mq/mq";
 @import "../functions/grid";
 
-// Properties applying across all grids
+//Properties applying across all grids
 @mixin _grid-setup-base ($column-gap) {
   display: grid;
   grid-column-gap: $column-gap;
@@ -78,4 +78,52 @@
       repeat($edge-column-count, #{1 / $edge-column-count}fr) [full-end];
   }
 
+}
+
+@mixin grid-setup-research-article($edge-column-count, $column-gap, $max-width) {
+
+  display: grid;
+  grid-column-gap: $column-gap;
+  grid-template-rows: [site-header] auto [main] 1fr;
+
+  // Fixed to 12 grid columns in the main area, with a variable number of edge columns
+  grid-template-columns:
+    [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
+    [main-start primary-start secondary-start tertiary-start] repeat(12, 1fr) [primary-end secondary-end tertiary-end main-end]
+    grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
+
+  @include mq($from: medium) {
+    grid-template-columns:
+      [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
+      [main-start primary-start secondary-start tertiary-start] repeat(12, 1fr) [primary-end secondary-end tertiary-end main-end]
+      grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
+  }
+
+  @include mq($from: wide) {
+    grid-template-columns:
+      [full-start] grid-edge-space(large, $column-gap, $edge-column-count)
+      [main-start primary-start tertiary-start] repeat(8, 1fr) [primary-end secondary-start] repeat(4, 1fr) [secondary-end tertiary-end main-end]
+      grid-edge-space(large, $column-gap, $edge-column-count) [full-end];
+  }
+
+  @include mq($from: x-wide) {
+    $column-gap-fixed: calc-fixed-col-gap($column-gap, $max-width);
+    grid-column-gap: $column-gap-fixed;
+
+    // There are main-columns - 1 gutters to account for within the central $main-column-count number of columns:
+    $column-track-fixed: ($max-width - ($column-gap-fixed * (12 - 1))) / 12;
+    grid-template-columns:
+      [full-start] repeat($edge-column-count, #{1 / $edge-column-count}fr)
+      [main-start tertiary-start] repeat(2, $column-track-fixed) [tertiary-end primary-start] repeat(7, $column-track-fixed) [primary-end secondary-start] repeat(3, $column-track-fixed) [secondary-end main-end]
+      repeat($edge-column-count, #{1 / $edge-column-count}fr) [full-end];
+  }
+
+}
+
+@mixin grid-span-full() {
+  grid-column: full;
+}
+
+@mixin grid-span-main() {
+  grid-column: main;
 }

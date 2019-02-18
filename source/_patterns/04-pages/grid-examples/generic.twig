@@ -1,0 +1,23 @@
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
+
+<div {%- include 'atoms-attributes' %}>
+
+    <div class="page-grid-item page-grid-item--has-keyline">
+        <div>Site header</div>
+    </div>
+
+    <div class="page-grid-item">
+        <div>any beginning stuff</div></div>
+    <div class="page-grid-item">
+        <div>main stuff</div>
+    </div>
+    <div class="page-grid-item">
+        <div class="specific-1">first centred thing with full length keyline before and after</div>
+        <div class="specific-2">second centred thing with full length keyline after</div>
+    </div>
+
+    <div class="page-grid-item">
+        <div>site footer</div>
+    </div>
+
+</div>

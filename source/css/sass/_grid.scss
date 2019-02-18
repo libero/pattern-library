@@ -1,4 +1,5 @@
 @import "variables/color";
+@import "mixins/decorations";
 @import "mixins/grid";
 @import "mixins/spacing";
 
@@ -26,22 +27,79 @@
 
 }
 
-.grid--article-type-B {
+//.grid--article-type-B {
+//
+//  & > * {
+//
+//    @include mq($from: wide) {
+//      grid-column: 3 / -3;
+//    }
+//
+//  }
+//
+//  & > * {
+//
+//    @include mq($from: x-wide) {
+//      grid-column: 4 / -4;
+//    }
+//
+//  }
+//
+//}
+
+.grid-item-span-full {
+  @include grid-span-full();
+}
+
+.grid-item-span-main {
+  @include grid-span-main();
+}
+
+.page-grid {
+
+  @include grid-setup-research-article(
+    map_get($grid, edge-colum-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
+
+}
+
+.page-grid-item {
+
+  @include grid-setup-research-article(
+    map_get($grid, edge-colum-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
+
+  @include grid-span-full();
 
   & > * {
-
-    @include mq($from: wide) {
-      grid-column: 3 / -3;
-    }
-
+    @include grid-span-main();
   }
 
-  & > * {
-
-    @include mq($from: x-wide) {
-      grid-column: 4 / -4;
-    }
-
+  & > .grid-item-span-full {
+    @include grid-span-full();
   }
 
+  &.page-grid-item--has-keyline {
+    @include divider(block-end);
+  }
+
+}
+
+.specific-1 {
+  @include divider(block-start);
+  @include divider(block-end);
+  @include grid-span-full();
+  justify-content: center;
+  text-align: center;
+}
+
+.specific-2 {
+  @include divider(block-end);
+  @include grid-span-full();
+  justify-content: center;
+  text-align: center;
 }
