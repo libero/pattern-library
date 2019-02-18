@@ -94,6 +94,14 @@ small {
   @include small-spacing();
 }
 
+sub {
+  @include font-variant-position(sub);
+}
+
+sup {
+  @include font-variant-position(super);
+}
+
 address {
   @include small-typography();
   @include small-spacing();
