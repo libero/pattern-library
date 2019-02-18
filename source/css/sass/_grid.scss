@@ -57,6 +57,7 @@
 
 .page-grid {
 
+  // TODO: change the name of this mixin?
   @include grid-setup-research-article(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
