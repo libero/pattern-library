@@ -4,15 +4,17 @@
 @import "../../variables/font";
 @import "../../mixins/spacing";
 
-.meta__type {
-  @include body-spacing();
-  color: $color-text-secondary;
-  font-weight: normal;
-  font-size: 0.6875rem;
-  line-height: 2.18182;
-  letter-spacing: 0.5px;
+.article__type {
+  @include small-spacing();
 
   a {
+    @include small-typography();
+    @include _label-typography($color-text-secondary, $uppercase: true);
+    color: $color-text-secondary;
     text-transform: uppercase;
+
+    &:hover {
+      color: $color-primary-normal;
+    }
   }
 }
