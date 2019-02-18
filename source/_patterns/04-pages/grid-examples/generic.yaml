@@ -11,7 +11,11 @@ contentHeader:
           text: Cell Biology
       - content:
           text: Epidemiology and Global Health
-content:
+primaryContent:
+  - template: atoms-heading
+    arguments:
+      level: 2
+      text: Main content
   - template: atoms-paragraph
     arguments:
       text:
@@ -80,9 +84,19 @@ content:
           flower by almost 50 million years. Contrary to mainstream belief, this would place the apparition of flowering
           plants to the Early Jurassic, the period that saw dinosaurs dominating the planet. This discovery may reshape
           our current understanding of the evolution of flowers.
-sidebar:
+secondaryContent:
+  - template: atoms-heading
+    arguments:
+      level: 2
+      text: Secondary content
   - template: atoms-paragraph
     arguments:
       text:
         - |
           Libero is stewarded by eLife and supported by a robust community of publishers and developers worldwide, making sure it’s always at the cutting edge. And because our community values transparency, all of Libero’s decision making and development is done in the open.
+tertiaryContent:
+  - template: atoms-paragraph
+    arguments:
+      text:
+        - |
+          tertiary content (view selector)

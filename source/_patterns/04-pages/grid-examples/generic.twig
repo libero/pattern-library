@@ -15,17 +15,16 @@
             {% include 'organisms-content-header' with contentHeader only %}
 
             <div class="grid-tertiary-content">
-                tertiary content (view selector)
+                {%- include 'atoms-text' with {nodes: tertiaryContent} -%}
             </div>
 
             <div class="grid-primary-content">
-                <h2>Main content</h2>
-                {%- include 'atoms-text' with {nodes: content} -%}
+                {%- include 'atoms-text' with {nodes: primaryContent} -%}
+
             </div>
 
             <div class="grid-secondary-content">
-                <h2>Secondary content</h2>
-                {%- include 'atoms-text' with {nodes: sidebar} -%}
+                {%- include 'atoms-text' with {nodes: secondaryContent} -%}
             </div>
 
         </main>
