@@ -1,6 +1,7 @@
 @import "../../variables/baselinegrid";
 @import "../../variables/color";
 @import "../../variables/content_header";
+@import "../../mixins/grid";
 @import "../../functions/types";
 @import "../../mixins/media-query";
 @import "../../mixins/spacing";
@@ -11,6 +12,7 @@
   text-align: center;
   @include blg-spacing("block-start", "medium");
   @include blg-spacing("block-end", "small");
+  @include grid-span-main();
 
   &:after {
     border-bottom: 1px solid $color-text-dividers;

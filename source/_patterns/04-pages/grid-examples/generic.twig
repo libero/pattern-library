@@ -9,8 +9,26 @@
 
     <div class="page-grid-item">
         <div>any beginning stuff</div></div>
-    <div class="page-grid-item grid-research-article">
-        <div>main stuff</div>
+    <div class="page-grid-item">
+        <main class="grid-research-article" role="main">
+
+            {% include 'organisms-content-header' with contentHeader only %}
+
+            <div class="grid-tertiary-content">
+                tertiary content (view selector)
+            </div>
+
+            <div class="grid-primary-content">
+                <h2>Main content</h2>
+                {%- include 'atoms-text' with {nodes: content} -%}
+            </div>
+
+            <div class="grid-secondary-content">
+                <h2>Secondary content</h2>
+                {%- include 'atoms-text' with {nodes: sidebar} -%}
+            </div>
+
+        </main>
     </div>
 
     <div class="page-grid-item">

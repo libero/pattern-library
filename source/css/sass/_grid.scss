@@ -96,6 +96,21 @@
     map_get($grid, column-gap),
     map_get($grid, max-width)
   );
+
+  @include grid-span-full();
+
+  & > .grid-primary-content {
+    grid-column: primary;
+  }
+
+  & > .grid-secondary-content {
+    grid-column: secondary;
+  }
+
+  & > .grid-tertiary-content {
+    grid-column: tertiary;
+  }
+
 }
 
 .specific-1 {
