@@ -58,7 +58,7 @@
 .page-grid {
 
   // TODO: change the name of this mixin?
-  @include grid-setup-research-article(
+  @include grid-setup-base(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width)
@@ -68,7 +68,7 @@
 
 .page-grid-item {
 
-  @include grid-setup-research-article(
+  @include grid-setup-base(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width)
@@ -88,6 +88,14 @@
     @include divider(block-end);
   }
 
+}
+
+.grid-research-article {
+  @include grid-setup-research-article(
+    map_get($grid, edge-colum-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
 }
 
 .specific-1 {
