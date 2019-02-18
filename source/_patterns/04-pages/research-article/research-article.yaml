@@ -19,7 +19,7 @@ body:
         - template: atoms-paragraph
           arguments:
             text:
-              - >+
+              - >
                 The origin of angiosperms has been a long-standing botanical debate. The great diversity of angiosperms
                 in the Early Cretaceous makes the Jurassic a promising period in which to anticipate the origins of the
                 angiosperms. Here, based on observations of 264 specimens of 198 individual flowers preserved on 34
@@ -60,7 +60,7 @@ body:
               - template: atoms-sup
                 arguments:
                   text: apples
-              - >+
+              - >
                 , flowering plants produce most of the fruits and vegetables that we can see on display in a
                 supermarket. While we may take little notice of the
               - template: atoms-bold
@@ -86,7 +86,7 @@ body:
         - template: atoms-paragraph
           arguments:
             text:
-              - >+
+              - >
                 Now, Fu et al. describe over 200 specimens of a new fossil flower that presents this characteristic, as
                 well as other distinctive features such as petals and sepals – the leaf-like parts that protect a flower
                 bud. Called
