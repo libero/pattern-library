@@ -1,9 +1,11 @@
+attributes:
+  class:
+    - page-grid-item--has-keyline-start
+    - page-grid-item--has-keyline-end
 content:
   attributes:
     class:
       - grid-research-article
-    role:
-      main
   contentHeader:
     contentTitle:
       text: Content title
