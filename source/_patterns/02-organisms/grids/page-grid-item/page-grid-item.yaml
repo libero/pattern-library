@@ -1,6 +1,9 @@
 content:
-  isMain:
-      true
+  attributes:
+    class:
+      - grid-research-article
+    role:
+      main
   contentHeader:
     contentTitle:
       text: Content title

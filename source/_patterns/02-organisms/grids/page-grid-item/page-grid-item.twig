@@ -4,15 +4,15 @@
 
     {% with content only %}
 
-        {%- if isMain is defined and isMain %}
+    {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge([]) }) -%}
+
+    {% if attributes.role is defined and attributes.role == 'main' %}
             {% set element = 'main' %}
-            {% set role = ' role="main"' %}
         {% else %}
             {% set element = 'div' %}
-            {% set role = '' %}
         {% endif %}
 
-        <{{ element }} class="grid-research-article"{{ role }}>
+        <{{ element }} {%- include 'atoms-attributes' %}>
 
             {% include 'organisms-content-header' with contentHeader only %}
 
