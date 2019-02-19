@@ -1,8 +1,8 @@
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid-item']) }) -%}
 
 {% if content is defined %}
-    <div {%- include 'atoms-attributes' %} data-root-el>
 
+    <div {%- include 'atoms-attributes' %}>
 
         {% with content only %}
 
