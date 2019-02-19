@@ -84,7 +84,11 @@
     @include grid-span-full();
   }
 
-  &.page-grid-item--has-keyline {
+  &.page-grid-item--has-keyline-start {
+    @include divider(block-start);
+  }
+
+  &.page-grid-item--has-keyline-end {
     @include divider(block-end);
   }
 
