@@ -40,3 +40,6 @@ twigFilterExt: filter.php
 twigFunctionExt: function.php
 twigTagExt: tag.php
 twigTestExt: test.php
+plugins:
+    dataTransform:
+        enabled: true
