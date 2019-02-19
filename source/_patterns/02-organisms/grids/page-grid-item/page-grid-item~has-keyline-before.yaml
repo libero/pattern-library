@@ -1,0 +1,13 @@
+attributes:
+  class:
+    - page-grid-item--has-keyline-start
+content:
+  attributes:
+    class:
+      - some-other-grid-class
+  primaryContent:
+    - template: atoms-paragraph
+      arguments:
+        text:
+          - |
+            Has a full width keyline before

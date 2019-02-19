@@ -1,8 +1,6 @@
 attributes:
   class:
-    - page-grid-item--has-keyline-start
     - page-grid-item--has-keyline-end
-    - thing
 content:
   attributes:
     class:
@@ -12,4 +10,4 @@ content:
       arguments:
         text:
           - |
-            Has a full width keyline both before and afterwards
+            Has a full width keyline afterwards
