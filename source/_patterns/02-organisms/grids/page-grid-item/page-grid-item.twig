@@ -14,19 +14,33 @@
 
         <{{ element }} {%- include 'atoms-attributes' %}>
 
-            {% include 'organisms-content-header' with contentHeader only %}
+            {% if contentHeader is defined %}
 
-            <div class="grid-tertiary-content">
-                {%- include 'atoms-text' with {nodes: tertiaryContent} -%}
-            </div>
+                {% include 'organisms-content-header' with contentHeader only %}
 
-            <div class="grid-primary-content">
-                {%- include 'atoms-text' with {nodes: primaryContent} -%}
-            </div>
+            {% endif %}
 
-            <div class="grid-secondary-content">
-                {%- include 'atoms-text' with {nodes: secondaryContent} -%}
-            </div>
+            {% if tertiaryContent is defined %}
+
+                <div class="grid-tertiary-content">
+                    {%- include 'atoms-text' with {nodes: tertiaryContent} -%}
+                </div>
+
+            {% endif %}
+
+            {% if primaryContent is defined %}
+
+                <div class="grid-primary-content">
+                    {%- include 'atoms-text' with {nodes: primaryContent} -%}
+                </div>
+
+            {% endif %}
+
+            {% if secondaryContent is defined %}
+                    <div class="grid-secondary-content">
+                        {%- include 'atoms-text' with {nodes: secondaryContent} -%}
+                    </div>
+            {% endif %}
 
         </{{ element }}>
 
