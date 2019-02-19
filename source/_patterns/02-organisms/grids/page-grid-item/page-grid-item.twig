@@ -1,49 +1,53 @@
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid-item']) }) -%}
 
-<div {%- include 'atoms-attributes' %}>
+{% if content is defined %}
+    <div {%- include 'atoms-attributes' %} data-root-el>
 
-    {% with content only %}
 
-    {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge([]) }) -%}
+        {% with content only %}
 
-    {% if attributes.role is defined and attributes.role == 'main' %}
-            {% set element = 'main' %}
-        {% else %}
-            {% set element = 'div' %}
-        {% endif %}
+        {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge([]) }) -%}
 
-        <{{ element }} {%- include 'atoms-attributes' %}>
-
-            {% if contentHeader is defined %}
-
-                {% include 'organisms-content-header' with contentHeader only %}
-
+        {% if attributes.role is defined and attributes.role == 'main' %}
+                {% set element = 'main' %}
+            {% else %}
+                {% set element = 'div' %}
             {% endif %}
 
-            {% if tertiaryContent is defined %}
+            <{{ element }} {%- include 'atoms-attributes' %}>
 
-                <div class="grid-tertiary-content">
-                    {%- include 'atoms-text' with {nodes: tertiaryContent} -%}
-                </div>
+                {% if contentHeader is defined %}
 
-            {% endif %}
+                    {% include 'organisms-content-header' with contentHeader only %}
 
-            {% if primaryContent is defined %}
+                {% endif %}
 
-                <div class="grid-primary-content">
-                    {%- include 'atoms-text' with {nodes: primaryContent} -%}
-                </div>
+                {% if tertiaryContent is defined %}
 
-            {% endif %}
-
-            {% if secondaryContent is defined %}
-                    <div class="grid-secondary-content">
-                        {%- include 'atoms-text' with {nodes: secondaryContent} -%}
+                    <div class="grid-tertiary-content">
+                        {%- include 'atoms-text' with {nodes: tertiaryContent} -%}
                     </div>
-            {% endif %}
 
-        </{{ element }}>
+                {% endif %}
 
-    {% endwith %}
+                {% if primaryContent is defined %}
 
-</div>
+                    <div class="grid-primary-content">
+                        {%- include 'atoms-text' with {nodes: primaryContent} -%}
+                    </div>
+
+                {% endif %}
+
+                {% if secondaryContent is defined %}
+                        <div class="grid-secondary-content">
+                            {%- include 'atoms-text' with {nodes: secondaryContent} -%}
+                        </div>
+                {% endif %}
+
+            </{{ element }}>
+
+        {% endwith %}
+
+    </div>
+
+{% endif %}

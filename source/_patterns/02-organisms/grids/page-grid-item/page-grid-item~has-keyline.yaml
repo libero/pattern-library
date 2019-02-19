@@ -4,4 +4,12 @@ attributes:
     - page-grid-item--has-keyline-end
     - thing
 content:
-  - has a full width keyline both before and afterwards
+  attributes:
+    class:
+      - some-other-grid-class
+  primaryContent:
+    - template: atoms-paragraph
+      arguments:
+        text:
+          - |
+            Has a full width keyline both before and afterwards
