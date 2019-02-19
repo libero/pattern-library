@@ -1,0 +1,35 @@
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid-item']) }) -%}
+
+<div {%- include 'atoms-attributes' %}>
+
+    {% with content only %}
+
+        {%- if isMain is defined and isMain %}
+            {% set element = 'main' %}
+            {% set role = ' role="main"' %}
+        {% else %}
+            {% set element = 'div' %}
+            {% set role = '' %}
+        {% endif %}
+
+        <{{ element }} class="grid-research-article"{{ role }}>
+
+            {% include 'organisms-content-header' with contentHeader only %}
+
+            <div class="grid-tertiary-content">
+                {%- include 'atoms-text' with {nodes: tertiaryContent} -%}
+            </div>
+
+            <div class="grid-primary-content">
+                {%- include 'atoms-text' with {nodes: primaryContent} -%}
+            </div>
+
+            <div class="grid-secondary-content">
+                {%- include 'atoms-text' with {nodes: secondaryContent} -%}
+            </div>
+
+        </{{ element }}>
+
+    {% endwith %}
+
+</div>
