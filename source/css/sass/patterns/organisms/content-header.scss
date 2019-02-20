@@ -18,7 +18,7 @@
     content: "";
     display: block;
     @include padding($baselinegrid-space-small - 1, "block-start");
-    width: 100%;
+    @include block-size(100%);
   }
 }
 
