@@ -1,42 +1,40 @@
-{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
-
-<div {%- include 'atoms-attributes' %}>
-
-    {# Suggests a page-grid-item pattern with hsasKeyline property #}
-    <div class="page-grid-item page-grid-item--has-keyline-start">
-        <div>Site header</div>
-    </div>
-
-    <div class="page-grid-item">
-        <div>any beginning stuff</div></div>
-    <div class="page-grid-item">
-        <main class="grid-research-article" role="main">
-
-            {% include 'organisms-content-header' with contentHeader only %}
-
-            <div class="grid-tertiary-content">
-                {%- include 'atoms-text' with {nodes: tertiaryContent} -%}
-            </div>
-
-            <div class="grid-primary-content">
-                {%- include 'atoms-text' with {nodes: primaryContent} -%}
-
-            </div>
-
-            <div class="grid-secondary-content">
-                {%- include 'atoms-text' with {nodes: secondaryContent} -%}
-            </div>
-
-        </main>
-    </div>
-
-    <div class="page-grid-item">
-        <div class="specific-1">first centred thing with full length keyline before and after</div>
-        <div class="specific-2">second centred thing with full length keyline after</div>
-    </div>
-
-    <div class="page-grid-item">
-        <div>site footer</div>
-    </div>
-
-</div>
+{% include 'templates-page-grid' with {
+  items: [
+    {
+      keylineEnd: true,
+      content: [
+        {
+          template: 'atoms-paragraph',
+          arguments: {text: 'site header'},
+        }
+      ]
+    },
+    {
+      content: [
+        {
+          template: 'organisms-content-header',
+          arguments: contentHeader,
+        },
+        {
+          template: 'atoms-paragraph',
+          arguments: {text: 'any beginning stuff'},
+        },
+      ],
+    },
+    {
+      template: 'templates-research-article-grid',
+      primaryContent: primaryContent,
+      secondaryContent: secondaryContent,
+      tertiaryContent: tertiaryContent,
+    },
+    {
+      keylineStart: true,
+      content: [
+      {
+        template: 'atoms-paragraph',
+        arguments: {text: 'site footer'},
+      }
+    ]
+    },
+  ],
+} only %}

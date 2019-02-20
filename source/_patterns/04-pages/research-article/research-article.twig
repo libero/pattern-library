@@ -1,7 +1,18 @@
-{% include 'organisms-content-header' with contentHeader only %}
-
-{% include 'templates-single-column-grid' with {content:
-  body|merge([
-    {template: 'organisms-item-tags', arguments: tags},
-  ])
+{% include 'templates-page-grid' with {
+  items: [
+    {
+      content: [
+        {
+          template: 'organisms-content-header',
+          arguments: contentHeader,
+        },
+      ],
+    },
+    {
+      template: 'templates-research-article-grid',
+      primaryContent: body|merge([
+        {template: 'organisms-item-tags', arguments: tags},
+      ]),
+    },
+  ],
 } only %}

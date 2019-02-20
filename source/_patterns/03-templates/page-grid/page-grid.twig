@@ -1,7 +1,33 @@
-{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid']) }) -%}
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
 
 <div {%- include 'atoms-attributes' %}>
 
-    {%- include 'atoms-text' with {nodes: content} -%}
+  {%- with {items: items} only -%}
+    {%- block items -%}
+
+      {%- for item in items -%}
+
+        {%- with item only -%}
+          {%- block item -%}
+
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid-item']) }) -%}
+
+            {%- if keylineStart|default(false) -%}
+              {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-start']) }) -%}
+            {%- endif -%}
+
+            {%- if keylineEnd|default(false) -%}
+              {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-end']) }) -%}
+            {%- endif -%}
+
+            {%- include template|default('templates-single-column-grid') -%}
+
+          {%- endblock item %}
+        {%- endwith -%}
+
+      {%- endfor -%}
+
+    {%- endblock items -%}
+  {%- endwith -%}
 
 </div>
