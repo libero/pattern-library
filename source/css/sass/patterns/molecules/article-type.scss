@@ -10,7 +10,7 @@
 
   a {
     @include small-typography();
-    @include _label-typography($color-text-secondary, $uppercase: true);
+    @include label-typography($color-text-secondary, $uppercase: true);
     color: $color-text-secondary;
     text-transform: uppercase;
 

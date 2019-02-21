@@ -91,7 +91,7 @@
   }
 }
 
-@mixin _label-typography($color, $uppercase: true) {
+@mixin label-typography($color, $uppercase: true) {
   color: $color;
   font-family: $font-secondary;
   font-weight: normal;
@@ -103,11 +103,11 @@
 }
 
 @mixin label-content-typography($color: $color-text-secondary, $uppercase: true) {
-  @include _label-typography($color, $uppercase);
+  @include label-typography($color, $uppercase);
 }
 
 @mixin label-tag-typography() {
-  @include _label-typography($color-primary-normal);
+  @include label-typography($color-primary-normal);
 }
 
 @mixin remove-bullets-unordered-list() {
