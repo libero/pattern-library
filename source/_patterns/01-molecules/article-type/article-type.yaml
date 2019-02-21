@@ -1,3 +1,5 @@
 items:
-  - label: Type of article
-    value: Research Article
+  - content:
+      attributes:
+        href: '#'
+      text: Article Research

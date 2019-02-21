@@ -1,7 +1,7 @@
 <ul class="article__type">
   {% for item in items %}
     <li>
-      <a href="#">{{item.value}}</a>
+      <a href="{{item.content.attributes.href}}">{{item.content.text}}</a>
     </li>
   {% endfor %}
 </ul>
