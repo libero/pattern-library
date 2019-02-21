@@ -1,7 +1,0 @@
-content:
-  primaryContent:
-    - template: atoms-paragraph
-      arguments:
-        text:
-          - |
-            [Base pattern not used directly, see examples of variants]
