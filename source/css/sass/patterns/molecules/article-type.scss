@@ -6,6 +6,7 @@
 
 .article__type {
   @include small-spacing();
+  @include remove-bullets-unordered-list();
 
   a {
     @include small-typography();

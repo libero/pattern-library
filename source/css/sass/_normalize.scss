@@ -64,9 +64,6 @@ ul,
 ol {
   @include blg-spacing("block-end", "small", "margin");
   margin-top: 0;
-  padding-left: 0;
-  // Overflow auto is so the bullet will be still read from a screen reader and will push the bullet off screen
-  overflow: auto;
 }
 
 dl {
