@@ -91,7 +91,9 @@
           }
 
           html[dir] & {
-            #{$space-type}-inline: rem($firstValue $secondValue);
+            // Not using shorthand due to lack of browser support.
+            #{$space-type}-inline-start: rem($firstValue);
+            #{$space-type}-inline-end: rem($secondValue);
           }
 
         }
@@ -136,18 +138,34 @@
 
     @include _expect_at_most($sizes, 2, "More than two sizes supplied with 'block' dimension") {
 
-      @if length($sizes) == 2 {
-        @include rem((
-          #{$space-type}-top: nth($sizes, 1),
-          #{$space-type}-bottom: nth($sizes, 2),
-        ));
-      } @else {
+      @if length($sizes) == 1 {
+
         @include rem((
           #{$space-type}-top: $sizes,
           #{$space-type}-bottom: $sizes,
         ));
+        #{$space-type}-block: rem($sizes);
+
+      } @else {
+
+        $firstValue: nth($sizes, 1);
+        $secondValue: nth($sizes, 2);
+
+        @include rem((
+          #{$space-type}-top: $firstValue,
+          #{$space-type}-bottom: $secondValue,
+        ));
+
+        @if $firstValue == $secondValue {
+          #{$space-type}-block: rem($firstValue);
+        } @else {
+          // Not using shorthand due to lack of browser support.
+          #{$space-type}-block-start: rem($firstValue);
+          #{$space-type}-block-end: rem($secondValue);
+
+        }
+
       }
-      #{$space-type}-block: rem($sizes);
 
     }
 
@@ -157,6 +175,7 @@
 
       @include rem(#{$space-type}-top, $sizes);
       #{$space-type}-block-start: rem($sizes);
+
     }
 
   } @else if $dimension == "block-end" {
@@ -165,6 +184,7 @@
 
       @include rem(#{$space-type}-bottom, $sizes);
       #{$space-type}-block-end: rem($sizes);
+
     }
 
   } @else if index(("top", "bottom", "left", "right"), $dimension) {
