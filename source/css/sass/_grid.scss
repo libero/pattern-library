@@ -3,50 +3,6 @@
 @import "mixins/grid";
 @import "mixins/spacing";
 
-// Used for research articles
-.grid.grid--article-type-A,
-.grid--article-type-A .grid {
-
-  @include grid-setup-article-type-A(
-    map_get($grid, edge-colum-count),
-    map_get($grid, column-gap),
-    map_get($grid, max-width)
-  );
-
-  & > .grid-primary-content {
-    grid-column: primary;
-  }
-
-  & > .grid-secondary-content {
-    grid-column: secondary;
-  }
-
-  & > .grid-tertiary-content {
-    grid-column: tertiary;
-  }
-
-}
-
-//.grid--article-type-B {
-//
-//  & > * {
-//
-//    @include mq($from: wide) {
-//      grid-column: 3 / -3;
-//    }
-//
-//  }
-//
-//  & > * {
-//
-//    @include mq($from: x-wide) {
-//      grid-column: 4 / -4;
-//    }
-//
-//  }
-//
-//}
-
 .grid-item-span-full {
   @include grid-span-full();
 }
@@ -56,19 +12,17 @@
 }
 
 .page-grid {
-
-  // TODO: change the name of this mixin?
-  @include grid-setup-base(
+  @include grid-setup-base(map_get($grid, column-gap));
+  @include grid-setup-basic-columns(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width)
   );
-
 }
 
 .page-grid-item {
-
-  @include grid-setup-base(
+  @include grid-setup-base(map_get($grid, column-gap));
+  @include grid-setup-basic-columns(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width)
@@ -95,20 +49,11 @@
 }
 
 .grid-research-article {
-  @include grid-setup-research-article(
-    map_get($grid, edge-colum-count),
-    map_get($grid, column-gap),
-    map_get($grid, max-width)
-  );
-
+  @include grid-setup-base(map_get($grid, column-gap));
   @include grid-span-full();
 
   & > .grid-primary-content {
     grid-column: primary;
-  }
-
-  & > .grid-secondary-content {
-    grid-column: secondary;
   }
 
   & > .grid-tertiary-content {
@@ -117,17 +62,22 @@
 
 }
 
-.specific-1 {
-  @include divider(block-start);
-  @include divider(block-end);
-  @include grid-span-full();
-  justify-content: center;
-  text-align: center;
+.grid-research-article--no-secondary-content {
+  @include grid-setup-research-article-no-secondary-content(
+    map_get($grid, edge-colum-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
 }
 
-.specific-2 {
-  @include divider(block-end);
-  @include grid-span-full();
-  justify-content: center;
-  text-align: center;
+.grid-research-article--has-secondary-content {
+  @include grid-setup-research-article-with-secondary-content(
+    map_get($grid, edge-colum-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
+
+  & > .grid-secondary-content {
+    grid-column: secondary;
+  }
 }

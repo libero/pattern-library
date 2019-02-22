@@ -1,4 +1,12 @@
-{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-research-article']) }) -%}
+{% set gridBaseName = 'grid-research-article' %}
+{% set gridVariantName = '' %}
+{% if secondaryContent is defined %}
+  {% set gridVariantName = gridBaseName ~ '--has-secondary-content' %}
+{% else %}
+    {% set gridVariantName = gridBaseName ~ '--no-secondary-content' %}
+{% endif %}
+
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge([gridBaseName, gridVariantName]) }) -%}
 
 <div {%- include 'atoms-attributes' %}>
 

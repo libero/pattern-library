@@ -24,18 +24,54 @@ $grid: (
   @return $max-width * ($specified-col-gap / 100%);
 }
 
-// listing explicitly rather than using css repeat() as we want a different grid line name for each repeated instance
-@function build-main-columns($column-count, $size) {
-  $columns: "";
-  @for  $col-number from 1 to $column-count + 1 {
-    $track-name: "";
-    @if $col-number == 1 {
-      $track-name: "[#{main-start column-}#{$col-number}]";
-    } @else {
-      $track-name: "[#{column-}#{$col-number}]";
-    }
-    $columns: $columns + " #{$track-name} #{$size}";
+// TODO: For tests: $edge-space and $column-gap should either both be present or neither be present
+@function grid-start($edge-column-count, $edge-space: null, $column-gap: null) {
+  @if $edge-space and $column-gap {
+    @return [full-start] grid-edge-space($edge-space, $column-gap, $edge-column-count);
   }
-  $columns: $columns + " [main-end]";
-  @return unquote($columns);
+  @return [full-start] repeat($edge-column-count, #{1 / $edge-column-count}fr);
+}
+
+@function grid-end($edge-column-count, $edge-space: null, $column-gap: null) {
+  @if $edge-space and $column-gap {
+    @return grid-edge-space($edge-space, $column-gap, $edge-column-count) [full-end];
+  }
+  @return repeat($edge-column-count, #{1 / $edge-column-count}fr) [full-end];
+}
+
+// TODO: For tests: if $breakpoint == x-wide then $column-track-fixed-width must be a length value
+@function grid-main-research-article($hasSecondaryContent, $breakpoint, $column-track-fixed-width: null) {
+  $mainColumnsByBreakPoint: (
+    default: (
+      withSecondary: [main-start primary-start secondary-start tertiary-start] repeat(12, 1fr) [tertiary-end secondary-end primary-end main-end],
+      noSecondary: [main-start primary-start secondary-start tertiary-start] repeat(12, 1fr) [tertiary-end secondary-end primary-end main-end],
+    ),
+    medium: (
+      withSecondary: [main-start primary-start tertiary-start] repeat(8, 1fr) [primary-end secondary-start] repeat(4, 1fr) [secondary-end tertiary-end main-end],
+      noSecondary: [main-start] 1fr [primary-start tertiary-start] repeat(10, 1fr) [primary-end tertiary-end] 1fr [main-end],
+    ),
+    wide: (
+      withSecondary: [main-start primary-start tertiary-start] repeat(8, 1fr) [primary-end secondary-start] repeat(4, 1fr) [secondary-end tertiary-end main-end],
+      noSecondary: [main-start] 1fr [primary-start tertiary-start] repeat(10, 1fr) [primary-end tertiary-end] 1fr [main-end],
+    ),
+    x-wide: (
+      withSecondary: [main-start tertiary-start] repeat(2, $column-track-fixed-width) [tertiary-end primary-start] repeat(7, $column-track-fixed-width) [primary-end secondary-start] repeat(3, $column-track-fixed-width) [secondary-end main-end],
+      noSecondary: [main-start tertiary-start] repeat(2, $column-track-fixed-width) [tertiary-end primary-start] repeat(7, $column-track-fixed-width) [primary-end] repeat(3, $column-track-fixed-width) [main-end]
+    ),
+  );
+
+  $columnsForBreakpoint: map_get($mainColumnsByBreakPoint, $breakpoint);
+
+  @if $hasSecondaryContent {
+    @return map_get($columnsForBreakpoint, withSecondary);
+  } @else {
+    @return map_get($columnsForBreakpoint, noSecondary);
+  }
+}
+
+@function grid-main-basic($column-track-fixed-width: null) {
+  @if $column-track-fixed-width {
+    @return [main-start] repeat(12, $column-track-fixed-width) [main-end];
+  }
+  @return [main-start] repeat(12, 1fr) [main-end];
 }
