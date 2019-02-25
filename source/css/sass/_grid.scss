@@ -48,7 +48,7 @@
 
 }
 
-.grid-research-article {
+.grid-content {
   @include grid-setup-base(map_get($grid, column-gap));
   @include grid-span-full();
 
@@ -62,7 +62,7 @@
 
 }
 
-.grid-content--no-secondary {
+.grid-content--no-secondary-content {
   @include grid-setup-content-no-secondary-content(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
@@ -70,7 +70,7 @@
   );
 }
 
-.grid-content--has-secondary {
+.grid-content--has-secondary-content {
   @include grid-setup-content-with-secondary-content(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
