@@ -40,7 +40,7 @@ $grid: (
 }
 
 // TODO: For tests: if $breakpoint == x-wide then $column-track-fixed-width must be a length value
-@function grid-main-research-article($hasSecondaryContent, $breakpoint, $column-track-fixed-width: null) {
+@function grid-main-content($hasSecondaryContent, $breakpoint, $column-track-fixed-width: null) {
   $mainColumnsByBreakPoint: (
     default: (
       withSecondary: [main-start primary-start secondary-start tertiary-start] repeat(12, 1fr) [tertiary-end secondary-end primary-end main-end],

@@ -63,7 +63,7 @@
 }
 
 .grid-research-article--no-secondary-content {
-  @include grid-setup-research-article-no-secondary-content(
+  @include grid-setup-content-no-secondary-content(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width)
@@ -71,7 +71,7 @@
 }
 
 .grid-research-article--has-secondary-content {
-  @include grid-setup-research-article-with-secondary-content(
+  @include grid-setup-content-with-secondary-content(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width)

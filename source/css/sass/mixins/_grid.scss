@@ -58,27 +58,27 @@
 
 }
 
-@mixin _grid-setup-research-article($edge-column-count, $column-gap, $max-width, $hasSecondary) {
+@mixin _grid-setup-content($edge-column-count, $column-gap, $max-width, $hasSecondary) {
 
   @include grid-setup-base($column-gap);
 
   // Fixed to 12 grid columns in the main area, with a variable number of edge columns
   grid-template-columns:
     grid-start($edge-column-count, medium, $column-gap)
-    grid-main-research-article($hasSecondary, default)
+    grid-main-content($hasSecondary, default)
     grid-end($edge-column-count, medium, $column-gap);
 
   @include mq($from: medium) {
     grid-template-columns:
       grid-start($edge-column-count, large, $column-gap)
-      grid-main-research-article($hasSecondary, medium)
+      grid-main-content($hasSecondary, medium)
       grid-end($edge-column-count, large, $column-gap);
   }
 
   @include mq($from: wide) {
     grid-template-columns:
       grid-start($edge-column-count, large, $column-gap)
-      grid-main-research-article($hasSecondary, wide)
+      grid-main-content($hasSecondary, wide)
       grid-end($edge-column-count, large, $column-gap);
   }
 
@@ -92,14 +92,14 @@
 
     grid-template-columns:
       grid-start($edge-column-count)
-      grid-main-research-article($hasSecondary, x-wide, $column-track-fixed-width)
+      grid-main-content($hasSecondary, x-wide, $column-track-fixed-width)
       grid-end($edge-column-count);
   }
 
 }
 
-@mixin grid-setup-research-article-with-secondary-content($edge-column-count, $column-gap, $max-width) {
-  @include _grid-setup-research-article(
+@mixin grid-setup-content-with-secondary-content($edge-column-count, $column-gap, $max-width) {
+  @include _grid-setup-content(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width),
@@ -107,8 +107,8 @@
   );
 }
 
-@mixin grid-setup-research-article-no-secondary-content($edge-column-count, $column-gap, $max-width) {
-  @include _grid-setup-research-article(
+@mixin grid-setup-content-no-secondary-content($edge-column-count, $column-gap, $max-width) {
+  @include _grid-setup-content(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width),
