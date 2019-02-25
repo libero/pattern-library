@@ -56,7 +56,7 @@ $grid: (
     ),
     x-wide: (
       withSecondary: [main-start tertiary-start] repeat(2, $column-track-fixed-width) [tertiary-end primary-start] repeat(7, $column-track-fixed-width) [primary-end secondary-start] repeat(3, $column-track-fixed-width) [secondary-end main-end],
-      noSecondary: [main-start tertiary-start] repeat(2, $column-track-fixed-width) [tertiary-end primary-start] repeat(7, $column-track-fixed-width) [primary-end] repeat(3, $column-track-fixed-width) [main-end]
+      noSecondary: [main-start tertiary-start] repeat(2, $column-track-fixed-width) [tertiary-end primary-start] repeat(8, $column-track-fixed-width) [primary-end] repeat(2, $column-track-fixed-width) [main-end]
     ),
   );
 
