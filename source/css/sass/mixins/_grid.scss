@@ -1,7 +1,7 @@
 @import "../variables/grid";
 @import "../variables/font";
 @import "../vendor/sass-rem/rem";
-@import "../vendor/sass-mq/mq";
+@import "media-query";
 @import "../functions/grid";
 
 // Place items in the grid by name into "primary", "secondary" or "tertiary" areas
