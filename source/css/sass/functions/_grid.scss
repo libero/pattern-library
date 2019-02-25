@@ -16,16 +16,21 @@ $grid: (
 }
 
 // return the column gap even if specified as a percentage
-@function calc-fixed-col-gap($specified-col-gap, $max-width) {
+@function calc-fixed-col-gap($specified-col-gap, $max-width: null) {
   @if unit($specified-col-gap) != "%" {
     @return $specified-col-gap;
+  }
+  @if not $max-width {
+    @return "max-width is required when column gap is specified as a percentage";
   }
   // "$specified-col-gap / 100%" divides $specified-col-gap by 100 and cancels out the % sign making the expression unitless.
   @return $max-width * ($specified-col-gap / 100%);
 }
 
-// TODO: For tests: $edge-space and $column-gap should either both be present or neither be present
 @function grid-start($edge-column-count, $edge-space: null, $column-gap: null) {
+  @if $edge-space and not $column-gap {
+    @return "Expected both edge space and column gap, but only edge-space supplied";
+  }
   @if $edge-space and $column-gap {
     @return [full-start] grid-edge-space($edge-space, $column-gap, $edge-column-count);
   }
@@ -33,6 +38,9 @@ $grid: (
 }
 
 @function grid-end($edge-column-count, $edge-space: null, $column-gap: null) {
+  @if $edge-space and not $column-gap {
+    @return "Expected both edge space and column gap, but only edge-space supplied";
+  }
   @if $edge-space and $column-gap {
     @return grid-edge-space($edge-space, $column-gap, $edge-column-count) [full-end];
   }
@@ -41,10 +49,14 @@ $grid: (
 
 // TODO: For tests: if $breakpoint == x-wide then $column-track-fixed-width must be a length value
 @function grid-main-content($hasSecondaryContent, $breakpoint, $column-track-fixed-width: null) {
+  @if $breakpoint == x-wide and not $column-track-fixed-width {
+    @return "A column track fixed width must be provided for the x-wide breakpoint";
+  }
+
   $mainColumnsByBreakPoint: (
     default: (
       withSecondary: [main-start primary-start secondary-start tertiary-start] repeat(12, 1fr) [tertiary-end secondary-end primary-end main-end],
-      noSecondary: [main-start primary-start secondary-start tertiary-start] repeat(12, 1fr) [tertiary-end secondary-end primary-end main-end],
+      noSecondary: [main-start primary-start tertiary-start] repeat(12, 1fr) [tertiary-end primary-end main-end],
     ),
     medium: (
       withSecondary: [main-start primary-start tertiary-start] repeat(8, 1fr) [primary-end secondary-start] repeat(4, 1fr) [secondary-end tertiary-end main-end],
