@@ -8,7 +8,15 @@
 
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge([gridBaseName, gridVariantName]) }) -%}
 
-<div {%- include 'atoms-attributes' %}>
+
+{% if isMain is defined and isMain %}
+  {% set element = 'main' %}
+  {% set attributes = attributes|merge({role: 'main' }) %}
+{% else %}
+  {% set element = 'div' %}
+{% endif %}
+
+<{{ element }} {%- include 'atoms-attributes' %}>
 
   {%- with {content: tertiaryContent|default([])} only -%}
     {%- block tertiaryContent -%}
@@ -58,4 +66,4 @@
     {%- endblock secondaryContent -%}
   {%- endwith -%}
 
-</div>
+</{{ element }}>
