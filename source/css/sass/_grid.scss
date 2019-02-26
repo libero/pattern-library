@@ -50,7 +50,6 @@
 
 .grid-content {
   @include grid-setup-base(map_get($grid, column-gap), map_get($grid, max-width));
-  @include grid-span-full();
 
   & > .grid-primary-content {
     grid-column: primary;
