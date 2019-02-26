@@ -1,16 +1,22 @@
 {% include 'templates-page-grid' with {
   items: [
     {
-      content: [
+      template: 'templates-page-grid',
+      isMain: true,
+      items: [
         {
-          template: 'organisms-content-header',
-          arguments: contentHeader,
+          content: [
+            {
+              template: 'organisms-content-header',
+              arguments: contentHeader,
+            },
+          ],
+        },
+        {
+          template: 'templates-content-grid',
+          primaryContent: body,
         },
       ],
-    },
-    {
-      template: 'templates-content-grid',
-      primaryContent: body,
     },
   ],
 } only %}

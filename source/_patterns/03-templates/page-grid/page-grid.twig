@@ -1,6 +1,13 @@
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
 
-<div {%- include 'atoms-attributes' %}>
+{% if isMain|default(false) %}
+  {% set element = 'main' %}
+  {% set attributes = attributes|merge({role: 'main' }) %}
+{% else %}
+  {% set element = 'div' %}
+{% endif %}
+
+<{{ element }} {%- include 'atoms-attributes' %}>
 
   {%- with {items: items} only -%}
     {%- block items -%}
@@ -30,4 +37,4 @@
     {%- endblock items -%}
   {%- endwith -%}
 
-</div>
+</{{ element }}>
