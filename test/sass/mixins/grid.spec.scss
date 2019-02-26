@@ -73,7 +73,6 @@
         }
 
         grid-column-gap: $gap;
-        grid-template-rows: [site-header] auto [main] 1fr;
         grid-column: full;
       }
     }
@@ -153,7 +152,6 @@
         }
 
         grid-column-gap: 1.6%;
-        grid-template-rows: [site-header] auto [main] 1fr;
         grid-column: full;
 
         grid-template-columns:
@@ -225,7 +223,6 @@
         }
 
         grid-column-gap: 1.6%;
-        grid-template-rows: [site-header] auto [main] 1fr;
         grid-column: full;
 
         grid-template-columns:
