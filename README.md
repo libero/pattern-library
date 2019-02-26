@@ -93,6 +93,9 @@ The build process uses a Node.js container image to build all assets, and copy t
   
 `export/` can then be packaged to be released on Github, or reused elsewhere.
 
+## Using the grid
+The grid is implemented using css grid.
+
 Getting help
 ------------
 

@@ -42,15 +42,28 @@
   @include it("Sets the minimal styles required for the grid system") {
 
     $gap: 20px;
+    $max-width: 1114px;
 
     @include assert() {
 
       @include output {
-        @include grid-setup-base($gap);
+        @include grid-setup-base($gap, $max-width);
       }
 
       @include expect {
-        display: grid;
+        max-width: $max-width;
+        margin-left: auto;
+        margin-right: auto;
+        margin-inline: auto;
+
+        @supports (display: grid) {
+          display: grid;
+          max-width: unset;
+          margin-left: unset;
+          margin-right: unset;
+          margin-inline: unset;
+        }
+
         grid-column-gap: $gap;
         grid-template-rows: [site-header] auto [main] 1fr;
         grid-column: full;
@@ -110,7 +123,19 @@
       }
 
       @include expect {
-        display: grid;
+        max-width: 1114px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-inline: auto;
+
+        @supports (display: grid) {
+          display: grid;
+          max-width: unset;
+          margin-left: unset;
+          margin-right: unset;
+          margin-inline: unset;
+        }
+
         grid-column-gap: 1.6%;
         grid-template-rows: [site-header] auto [main] 1fr;
         grid-column: full;
@@ -162,7 +187,19 @@
       }
 
       @include expect {
-        display: grid;
+        max-width: 1114px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-inline: auto;
+
+        @supports (display: grid) {
+          display: grid;
+          max-width: unset;
+          margin-left: unset;
+          margin-right: unset;
+          margin-inline: unset;
+        }
+
         grid-column-gap: 1.6%;
         grid-template-rows: [site-header] auto [main] 1fr;
         grid-column: full;

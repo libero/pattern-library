@@ -202,9 +202,9 @@ export default gulp.series(assemble, exportPatterns);
 
 // Watchers
 
-const watchSass = () => gulp.watch(config.files.src.sass, build);
+export const watchSass = () => gulp.watch(config.files.src.sass, build);
 
-const watchSassTests = () => gulp.watch(config.files.test.sass, build);
+export const watchSassTests = () => gulp.watch(config.files.test.sass, build);
 
 const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 

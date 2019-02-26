@@ -1,8 +1,9 @@
 @import "../variables/grid";
 @import "../variables/font";
 @import "../vendor/sass-rem/rem";
-@import "media-query";
 @import "../functions/grid";
+@import "media-query";
+@import "spacing";
 
 // Place items in the grid by name into "primary", "secondary" or "tertiary" areas
 // It's possible to 'break out' of these areas by using the class 'grid-item-span-full'. Not yet possible to break out across a subset of the edge columns.
@@ -21,8 +22,17 @@
   grid-column: main;
 }
 
-@mixin grid-setup-base($column-gap) {
-  display: grid;
+@mixin grid-setup-base($column-gap, $max-width) {
+
+  max-width: $max-width;
+
+  @include margin(auto, inline);
+
+  @supports (display: grid) {
+    display: grid;
+    max-width: unset;
+    @include margin(unset, inline);
+  }
   grid-column-gap: $column-gap;
   grid-template-rows: [site-header] auto [main] 1fr;
 
@@ -60,7 +70,7 @@
 
 @mixin _grid-setup-content($edge-column-count, $column-gap, $max-width, $hasSecondary) {
 
-  @include grid-setup-base($column-gap);
+  @include grid-setup-base($column-gap, map_get($grid, max-width));
 
   // Fixed to 12 grid columns in the main area, with a variable number of edge columns
   grid-template-columns:

@@ -12,7 +12,7 @@
 }
 
 .page-grid {
-  @include grid-setup-base(map_get($grid, column-gap));
+  @include grid-setup-base(map_get($grid, column-gap), map_get($grid, max-width));
   @include grid-setup-basic-columns(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
@@ -21,7 +21,7 @@
 }
 
 .page-grid-item {
-  @include grid-setup-base(map_get($grid, column-gap));
+  @include grid-setup-base(map_get($grid, column-gap), map_get($grid, max-width));
   @include grid-setup-basic-columns(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
@@ -49,7 +49,7 @@
 }
 
 .grid-content {
-  @include grid-setup-base(map_get($grid, column-gap));
+  @include grid-setup-base(map_get($grid, column-gap), map_get($grid, max-width));
   @include grid-span-full();
 
   & > .grid-primary-content {
