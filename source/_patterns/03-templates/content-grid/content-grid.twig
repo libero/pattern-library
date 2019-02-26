@@ -34,7 +34,7 @@
     {%- endblock tertiaryContent -%}
   {%- endwith -%}
 
-  {%- with {content: primaryContent} only -%}
+  {%- with {content: primaryContent|default([])} only -%}
     {%- block primaryContent -%}
 
       {%- if content|length -%}
