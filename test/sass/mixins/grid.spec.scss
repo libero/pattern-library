@@ -55,6 +55,10 @@
         margin-left: auto;
         margin-right: auto;
         margin-inline: auto;
+        padding-left: 1.6%;
+        padding-right: 1.6%;
+        padding-inline: 1.6%;
+        box-sizing: content-box;
 
         @supports (display: grid) {
           display: grid;
@@ -62,6 +66,10 @@
           margin-left: unset;
           margin-right: unset;
           margin-inline: unset;
+          padding-left: unset;
+          padding-right: unset;
+          padding-inline: unset;
+          box-sizing: border-box;
         }
 
         grid-column-gap: $gap;
@@ -127,6 +135,10 @@
         margin-left: auto;
         margin-right: auto;
         margin-inline: auto;
+        padding-left: 1.6%;
+        padding-right: 1.6%;
+        padding-inline: 1.6%;
+        box-sizing: content-box;
 
         @supports (display: grid) {
           display: grid;
@@ -134,6 +146,10 @@
           margin-left: unset;
           margin-right: unset;
           margin-inline: unset;
+          padding-left: unset;
+          padding-right: unset;
+          padding-inline: unset;
+          box-sizing: border-box;
         }
 
         grid-column-gap: 1.6%;
@@ -191,6 +207,10 @@
         margin-left: auto;
         margin-right: auto;
         margin-inline: auto;
+        padding-left: 1.6%;
+        padding-right: 1.6%;
+        padding-inline: 1.6%;
+        box-sizing: content-box;
 
         @supports (display: grid) {
           display: grid;
@@ -198,6 +218,10 @@
           margin-left: unset;
           margin-right: unset;
           margin-inline: unset;
+          padding-left: unset;
+          padding-right: unset;
+          padding-inline: unset;
+          box-sizing: border-box;
         }
 
         grid-column-gap: 1.6%;

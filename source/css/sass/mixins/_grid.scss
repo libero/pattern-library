@@ -27,11 +27,15 @@
   max-width: $max-width;
 
   @include margin(auto, inline);
+  @include padding(1.6%, inline);
+  box-sizing: content-box;
 
   @supports (display: grid) {
     display: grid;
     max-width: unset;
     @include margin(unset, inline);
+    @include padding(unset, inline);
+    box-sizing: border-box;
   }
   grid-column-gap: $column-gap;
   grid-template-rows: [site-header] auto [main] 1fr;
