@@ -2,12 +2,16 @@
 
 <div {%- include 'atoms-attributes' %}>
 
-  {%- with {content: content|default([])} only -%}
+  {%- with {content: content|default([]), isFull: isFull|default(false)} only -%}
     {%- block content -%}
 
       {%- if content|length -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-full']) }) -%}
+        {%- if isFull -%}
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-full']) }) -%}
+        {%- else -%}
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-main']) }) -%}
+        {%- endif -%}
 
         <div {%- include 'atoms-attributes' %}>
           {%- include 'atoms-text' with {nodes: content} -%}

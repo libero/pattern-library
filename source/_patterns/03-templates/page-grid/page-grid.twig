@@ -1,11 +1,11 @@
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
 
-{% if isMain|default(false) %}
-  {% set element = 'main' %}
-  {% set attributes = attributes|merge({role: 'main' }) %}
-{% else %}
-  {% set element = 'div' %}
-{% endif %}
+{%- if isMain|default(false) -%}
+  {%- set element = 'main' -%}
+  {%- set attributes = attributes|merge({role: 'main' }) -%}
+{%- else -%}
+  {%- set element = 'div' -%}
+{%- endif -%}
 
 <{{ element }} {%- include 'atoms-attributes' %}>
 
@@ -27,7 +27,7 @@
               {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-end']) }) -%}
             {%- endif -%}
 
-            {%- include template|default('templates-single-column-grid-main-width') -%}
+            {%- include template|default('templates-single-column-grid') -%}
 
           {%- endblock item %}
         {%- endwith -%}
