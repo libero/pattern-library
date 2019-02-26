@@ -20,7 +20,7 @@
               {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-end']) }) -%}
             {%- endif -%}
 
-            {%- include template|default('templates-content-grid') -%}
+            {%- include template|default('templates-single-column-main-width') -%}
 
           {%- endblock item %}
         {%- endwith -%}

@@ -12,8 +12,7 @@
 }
 
 .page-grid {
-  @include grid-setup-base(map_get($grid, column-gap), map_get($grid, max-width));
-  @include grid-setup-basic-columns(
+  @include grid-setup-basic(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width)
@@ -21,31 +20,19 @@
 }
 
 .page-grid-item {
-  @include grid-setup-base(map_get($grid, column-gap), map_get($grid, max-width));
-  @include grid-setup-basic-columns(
+  @include grid-setup-basic-with-classes(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width)
   );
+}
 
-  @include grid-span-full();
-
-  & > * {
-    @include grid-span-main();
-  }
-
-  & > .grid-item-span-full {
-    @include grid-span-full();
-  }
-
-  &.page-grid-item--has-keyline-start {
-    @include divider(block-start);
-  }
-
-  &.page-grid-item--has-keyline-end {
-    @include divider(block-end);
-  }
-
+.grid-single-column {
+  @include grid-setup-basic-with-classes(
+    map_get($grid, edge-colum-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
 }
 
 .grid-content {

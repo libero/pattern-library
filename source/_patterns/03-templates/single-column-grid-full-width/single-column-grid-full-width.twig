@@ -1,0 +1,26 @@
+{% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-single-column']) }) -%}
+{% if isMain is defined and isMain %}
+  {% set element = 'main' %}
+  {% set attributes = attributes|merge({role: 'main' }) %}
+{% else %}
+  {% set element = 'div' %}
+{% endif %}
+
+<{{ element }} {%- include 'atoms-attributes' %}>
+
+{%- with {content: content|default([])} only -%}
+  {%- block content -%}
+
+    {%- if content|length -%}
+
+      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-full']) }) -%}
+
+      <div {%- include 'atoms-attributes' %}>
+        {%- include 'atoms-text' with {nodes: content} -%}
+      </div>
+
+    {%- endif -%}
+
+  {%- endblock content -%}
+{%- endwith -%}
+</{{ element }}>
