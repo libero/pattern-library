@@ -2,21 +2,21 @@
   items: [
     {
       template: 'templates-page-grid',
-      isMain: true,
-      items: [
-        {
-          content: [
-            {
-              template: 'organisms-content-header',
-              arguments: contentHeader,
+      arguments: {
+        isMain: true,
+        items: [
+          {
+            template: 'organisms-content-header',
+            arguments: contentHeader,
+          },
+          {
+            template: 'templates-content-grid',
+            arguments: {
+             primaryContent: body,
             },
-          ],
-        },
-        {
-          template: 'templates-content-grid',
-          primaryContent: body,
-        },
-      ],
+          },
+        ],
+      },
     },
   ],
 } only %}

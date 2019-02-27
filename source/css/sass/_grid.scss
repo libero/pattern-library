@@ -11,6 +11,10 @@
   @include grid-span-main();
 }
 
+.page-grid-item {
+  @include grid-span-main();
+}
+
 .page-grid {
   @include grid-setup-basic(
     map_get($grid, edge-colum-count),
@@ -19,16 +23,16 @@
   );
 }
 
-.page-grid-item {
-  @include grid-setup-basic-with-classes(
-    map_get($grid, edge-colum-count),
-    map_get($grid, column-gap),
-    map_get($grid, max-width)
-  );
+.page-grid-item--has-keyline-start {
+  @include divider(block-start);
+}
+
+.page-grid-item--has-keyline-end {
+  @include divider(block-end);
 }
 
 .grid-single-column {
-  @include grid-setup-basic-with-classes(
+  @include grid-setup-basic(
     map_get($grid, edge-colum-count),
     map_get($grid, column-gap),
     map_get($grid, max-width)

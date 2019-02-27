@@ -77,33 +77,6 @@
   @include grid-setup-basic-columns($edge-column-count, $column-gap, $max-width);
 }
 
-@mixin grid-setup-basic-classes {
-
-  @include grid-span-full();
-
-  & > * {
-    @include grid-span-main();
-  }
-
-  & > .grid-item-span-full {
-    @include grid-span-full();
-  }
-
-  &.page-grid-item--has-keyline-start {
-    @include divider(block-start);
-  }
-
-  &.page-grid-item--has-keyline-end {
-    @include divider(block-end);
-  }
-
-}
-
-@mixin grid-setup-basic-with-classes($edge-column-count, $column-gap, $max-width) {
-  @include grid-setup-basic($edge-column-count, $column-gap, $max-width);
-  @include grid-setup-basic-classes();
-}
-
 @mixin _grid-setup-content($edge-column-count, $column-gap, $max-width, $hasSecondary) {
 
   @include grid-setup-base($column-gap, map_get($grid, max-width));

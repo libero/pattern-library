@@ -2,23 +2,23 @@
   items: [
     {
       template: 'templates-page-grid',
-      isMain: true,
-      items: [
-        {
-          content: [
-            {
-              template: 'organisms-content-header',
-              arguments: contentHeader,
+      arguments: {
+        isMain: true,
+        items: [
+          {
+            template: 'organisms-content-header',
+            arguments: contentHeader,
+          },
+          {
+            template: 'templates-content-grid',
+            arguments: {
+              primaryContent: body|merge([
+                {template: 'organisms-item-tags', arguments: tags},
+              ]),
             },
-          ],
-        },
-        {
-          template: 'templates-content-grid',
-          primaryContent: body|merge([
-            {template: 'organisms-item-tags', arguments: tags},
-          ]),
-        },
-      ],
+          },
+        ],
+      },
     },
   ],
 } only %}

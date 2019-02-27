@@ -1,15 +1,18 @@
 items:
   - template: 'templates-single-column-grid'
-    isFull: true
-    content:
-      - full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full
+    arguments:
+      isFull: true
+      content:
+        - full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full
   - template: 'templates-content-grid'
-    primaryContent:
-      - primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary
-    secondaryContent:
-      - secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary
-    tertiaryContent:
-      - tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary
+    arguments:
+      primaryContent:
+        - primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary
+      secondaryContent:
+        - secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary
+      tertiaryContent:
+        - tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary
   - template: 'templates-single-column-grid'
-    content:
-      - main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main
+    arguments:
+      content:
+        - main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main

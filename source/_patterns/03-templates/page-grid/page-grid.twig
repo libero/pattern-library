@@ -17,17 +17,21 @@
         {%- with item only -%}
           {%- block item -%}
 
-            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid-item']) }) -%}
+            {%- with arguments|default({})|merge({_keylineStart: keylineStart|default(false), _keylineEnd: keylineEnd|default(false), _template: template|default('templates-single-column-grid')}) only -%}
 
-            {%- if keylineStart|default(false) -%}
-              {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-start']) }) -%}
-            {%- endif -%}
+              {%- set attributes = attributes|default({})|merge({class: attributes.class|default(['page-grid-item'])}) -%}
 
-            {%- if keylineEnd|default(false) -%}
-              {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-end']) }) -%}
-            {%- endif -%}
+              {%- if _keylineStart -%}
+                {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-start']) }) -%}
+              {%- endif -%}
 
-            {%- include template|default('templates-single-column-grid') -%}
+              {%- if _keylineEnd -%}
+                {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-end']) }) -%}
+              {%- endif -%}
+
+              {%- include _template -%}
+
+            {%- endwith -%}
 
           {%- endblock item %}
         {%- endwith -%}
