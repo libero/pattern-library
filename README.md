@@ -94,7 +94,22 @@ The build process uses a Node.js container image to build all assets, and copy t
 `export/` can then be packaged to be released on Github, or reused elsewhere.
 
 ## Using the grid
-The grid is implemented using css grid.
+The grid is implemented using CSS grid. Non-supporting browsers will display a single column constrained to the specified max width.
+
+The grid comprises a full-viewport-width CSS grid within which is a central section of 12 columns. The central 12 columns are collectively known as the `main` part of the grid, which holds the content of the page. The full width of the grid from viewport edge to viewport edge is known as the `full` width grid. The `full` width grid exists in order to allow items of content to give the impression of breaking out of the (`main` part of the) grid. It should also make it easier to implement subgrids when they get browser support.  
+
+[image]
+
+In order to preserve these capabilities of seeming to break out of the grid, and of supporting sub grids, every level of a page layout grid applied must span the `full` width of the grid using the CSS class `grid-item-span-full`, or the mixin it employs: `grid-span-full`.
+
+### `page-grid`
+The page grid is the the top level page grid. It in turn includes a lower-level grid into which the page text actually loads (by default this lower-level grid is `single-column-grid`). It also has the facility to apply a `full` width keyline above and / or below a grid item using the classes `page-grid-item--has-keyline-start` and `page-grid-item--has-keyline-end`.    
+
+### `single-column-grid`
+The single column grid will set content across the `main` part of the grid.
+
+### `content-grid`
+The grid for all content pages (i.e. not listing pages). In addition to the `main` and `full` designations, this grid defines parts for `primaryContent`, `secondaryContent`, and `tertiaryContent`. Whether or not there is any `secondaryContent` determines the behavior of `primaryContent` on the grid. An absence of `tertiaryContent` does not affect the behaviour of the `primaryContent` nor any `tertiaryContent`.      
 
 Getting help
 ------------
