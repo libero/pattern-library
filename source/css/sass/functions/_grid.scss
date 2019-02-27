@@ -47,7 +47,6 @@ $grid: (
   @return repeat($edge-column-count, #{1 / $edge-column-count}fr) [full-end];
 }
 
-// TODO: For tests: if $breakpoint == x-wide then $column-track-fixed-width must be a length value
 @function grid-main-content($hasSecondaryContent, $breakpoint, $column-track-fixed-width: null) {
   @if $breakpoint == x-wide and not $column-track-fixed-width {
     @return "A column track fixed width must be provided for the x-wide breakpoint";
