@@ -1,0 +1,54 @@
+@import "../../functions/grid";
+@import "../../mixins/grid";
+
+.content-grid {
+  $edge-columns: map_get($grid, edge-column-count);
+  --column-gap: #{map_get($grid, column-gap)};
+  --column-width: 1fr;
+  --edge-space: #{map_get($grid, edge-space-medium)};
+  --primary-columns: 12;
+  --template-columns-edge: repeat(#{$edge-columns}, calc((var(--edge-space) - (var(--column-gap) * #{$edge-columns})) / #{$edge-columns}));
+  --template-columns-main: [main-start primary-start secondary-start tertiary-start] repeat(var(--primary-columns), var(--column-width)) [tertiary-end secondary-end primary-end main-end];
+
+  @include mq($from: medium) {
+    --edge-space: #{map_get($grid, edge-space-large)};
+  }
+
+  @include mq($from: x-wide) {
+    $column-gap-fixed-width: calc-fixed-col-gap(map_get($grid, column-gap), map_get($grid, max-width));
+    --column-gap: #{$column-gap-fixed-width};
+    // There are main-columns - 1 gutters to account for within the central $main-column-count number of columns:
+    --column-width: #{(map_get($grid, max-width) - ($column-gap-fixed-width * (12 - 1))) / 12};
+    --primary-columns: 8;
+    --template-columns-edge: repeat(#{$edge-columns}, #{(1 / $edge-columns) * 1fr});
+    --template-columns-main: [main-start tertiary-start] repeat(2, var(--column-width)) [tertiary-end primary-start] repeat(var(--primary-columns), var(--column-width)) [primary-end secondary-start] repeat(calc(12 - 2 - var(--primary-columns)), var(--column-width)) [secondary-end main-end];
+  }
+
+  @include grid-setup-base(map_get($grid, column-gap), map_get($grid, max-width));
+
+  grid-column-gap: var(--column-gap);
+  grid-template-columns: [full-start] var(--template-columns-edge) var(--template-columns-main) var(--template-columns-edge) [full-end];
+}
+
+.content-grid--has-secondary {
+  @include mq($from: medium, $until: x-wide) {
+    --primary-columns: 8;
+    --template-columns-main: [main-start primary-start tertiary-start] repeat(var(--primary-columns), 1fr) [primary-end secondary-start] repeat(calc(12 - var(--primary-columns)), 1fr) [secondary-end tertiary-end main-end]
+  }
+
+  @include mq($from: x-wide) {
+    --primary-columns: 7;
+  }
+}
+
+.content-grid__primary {
+  grid-column: primary;
+}
+
+.content-grid__secondary {
+  grid-column: secondary;
+}
+
+.content-grid__tertiary {
+  grid-column: tertiary;
+}

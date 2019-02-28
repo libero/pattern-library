@@ -17,6 +17,9 @@
 
 @mixin grid-span-full() {
   grid-column: full;
+  &.page-grid__item {
+    grid-column: full;
+  }
 }
 
 @mixin grid-span-main() {
@@ -31,7 +34,7 @@
   @include padding(1.6%, inline);
   box-sizing: content-box;
 
-  @supports (display: grid) {
+  @supports (display: grid) and (--custom: property) {
     display: grid;
     max-width: unset;
     @include margin(unset, inline);
@@ -119,7 +122,7 @@
 
 @mixin grid-setup-content-with-secondary-content($edge-column-count, $column-gap, $max-width) {
   @include _grid-setup-content(
-    map_get($grid, edge-colum-count),
+    map_get($grid, edge-column-count),
     map_get($grid, column-gap),
     map_get($grid, max-width),
     true
@@ -128,7 +131,7 @@
 
 @mixin grid-setup-content-no-secondary-content($edge-column-count, $column-gap, $max-width) {
   @include _grid-setup-content(
-    map_get($grid, edge-colum-count),
+    map_get($grid, edge-column-count),
     map_get($grid, column-gap),
     map_get($grid, max-width),
     false

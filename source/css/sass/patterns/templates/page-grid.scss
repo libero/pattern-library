@@ -1,0 +1,23 @@
+@import "../../functions/grid";
+@import "../../mixins/decorations";
+@import "../../mixins/grid";
+
+.page-grid {
+  @include grid-setup-basic(
+    map_get($grid, edge-column-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
+}
+
+.page-grid__item {
+  @include grid-span-main();
+}
+
+.page-grid__item--has-keyline-start {
+  @include divider(block-start);
+}
+
+.page-grid__item--has-keyline-end {
+  @include divider(block-end);
+}

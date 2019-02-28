@@ -1,12 +1,8 @@
-{%- set gridBaseName = 'grid-content' -%}
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid']) }) -%}
 
 {%- if secondaryContent|default([])|length -%}
-  {%- set gridVariantName = gridBaseName ~ '--has-secondary-content' -%}
-{%- else -%}
-  {%- set gridVariantName = gridBaseName ~ '--no-secondary-content' -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid--has-secondary']) }) -%}
 {%- endif -%}
-
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge([gridBaseName, gridVariantName]) }) -%}
 
 <div {%- include 'atoms-attributes' %}>
 
@@ -15,7 +11,7 @@
 
       {%- if content|length -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-tertiary-content']) }) -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__tertiary']) }) -%}
 
         <div {%- include 'atoms-attributes' %}>
           {%- include 'atoms-text' with {nodes: content} -%}
@@ -31,7 +27,7 @@
 
       {%- if content|length -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-primary-content']) }) -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__primary']) }) -%}
 
         <div {%- include 'atoms-attributes' %}>
           {%- include 'atoms-text' with {nodes: content} -%}
@@ -47,7 +43,7 @@
 
       {%- if content|length -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-secondary-content']) }) -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__secondary']) }) -%}
 
         <div {%- include 'atoms-attributes' %}>
           {%- include 'atoms-text' with {nodes: content} -%}

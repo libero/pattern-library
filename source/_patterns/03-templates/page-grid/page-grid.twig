@@ -19,14 +19,14 @@
 
             {%- with arguments|default({})|merge({_keylineStart: keylineStart|default(false), _keylineEnd: keylineEnd|default(false), _template: template|default('templates-single-column-grid')}) only -%}
 
-              {%- set attributes = attributes|default({})|merge({class: attributes.class|default(['page-grid-item'])}) -%}
+              {%- set attributes = attributes|default({})|merge({class: attributes.class|default(['page-grid__item'])}) -%}
 
               {%- if _keylineStart -%}
-                {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-start']) }) -%}
+                {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid__item--has-keyline-start']) }) -%}
               {%- endif -%}
 
               {%- if _keylineEnd -%}
-                {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid-item--has-keyline-end']) }) -%}
+                {%- set attributes = attributes|merge({class: attributes.class|merge(['page-grid__item--has-keyline-end']) }) -%}
               {%- endif -%}
 
               {%- include _template -%}

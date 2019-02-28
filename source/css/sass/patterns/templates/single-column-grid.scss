@@ -1,0 +1,10 @@
+@import "../../functions/grid";
+@import "../../mixins/grid";
+
+.single-column-grid {
+  @include grid-setup-basic(
+    map_get($grid, edge-column-count),
+    map_get($grid, column-gap),
+    map_get($grid, max-width)
+  );
+}
