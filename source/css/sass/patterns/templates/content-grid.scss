@@ -7,11 +7,13 @@
     "start-edge tertiary  end-edge"
     "start-edge primary   end-edge"
     "start-edge secondary end-edge";
-  grid-template-columns: calc(var(--edge-space) - var(--column-gap)) var(--primary-columns) calc(var(--edge-space) - var(--column-gap));
+  grid-template-columns: 1fr var(--primary-column-width) 1fr;
   grid-column-gap: var(--column-gap);
   --edge-space: #{map_get($grid, edge-space-medium)};
+  --column-width: calc((100% - (var(--edge-space) * 2) - (var(--column-gap) * (12 - 1))) / 12);
   --column-gap: #{map_get($grid, column-gap)};
-  --primary-columns: 12fr;
+  --primary-columns: 12;
+  --primary-column-width: calc((var(--primary-columns) * var(--column-width)) + ((var(--primary-columns) - 1) * var(--column-gap)));
 
   @include mq($from: medium) {
     --edge-space: #{map_get($grid, edge-space-large)};
@@ -21,15 +23,13 @@
     --primary-columns: 8;
     --secondary-columns: calc((12 - var(--primary-columns)) / 2);
     --tertiary-columns: calc(12 - var(--primary-columns) - var(--secondary-columns));
-    --edge-space: 1fr;
     $column-gap-fixed-width: calc-fixed-col-gap(map_get($grid, column-gap), map_get($grid, max-width));
     --column-gap: #{$column-gap-fixed-width};
     --column-width: #{(map_get($grid, max-width) - ($column-gap-fixed-width * (12 - 1))) / 12};
-    --primary-column-width: calc((var(--primary-columns) * var(--column-width)) + ((var(--primary-columns) - 1) * var(--column-gap)));
     --secondary-column-width: calc((var(--secondary-columns) * var(--column-width)) + ((var(--secondary-columns) - 1) * var(--column-gap)));
     --tertiary-column-width: calc((var(--tertiary-columns) * var(--column-width)) + ((var(--tertiary-columns) - 1) * var(--column-gap)));
     grid-template-areas: "start-edge tertiary primary secondary end-edge";
-    grid-template-columns: var(--edge-space) var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) var(--edge-space);
+    grid-template-columns: 1fr var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) 1fr;
   }
 
   @include grid-span-full();
@@ -37,12 +37,13 @@
 
 .content-grid--has-secondary {
   @include mq($from: medium, $until: x-wide) {
-    --primary-columns: 8fr;
-    --secondary-columns: 4fr;
+    --primary-columns: 8;
+    --secondary-columns: 4;
+    --secondary-column-width: calc((var(--secondary-columns) * var(--column-width)) + ((var(--secondary-columns) - 1) * var(--column-gap)));
     grid-template-areas:
       "start-edge tertiary tertiary  end-edge"
       "start-edge primary  secondary end-edge";
-    grid-template-columns: calc(var(--edge-space) - var(--column-gap)) var(--primary-columns) var(--secondary-columns) calc(var(--edge-space) - var(--column-gap));
+    grid-template-columns: 1fr var(--primary-column-width) var(--secondary-column-width) 1fr;
   }
 
   @include mq($from: x-wide) {
