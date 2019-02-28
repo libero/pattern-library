@@ -1,27 +1,34 @@
 @import "../../mixins/sizes";
 @import "../../mixins/typography";
 
-.tag-list {
+.tags {
   @include blg-spacing("block-end", "small", "margin");
 }
 
-.tag-list__title {
+.tags-list__title {
   @include label-content-typography();
   @include padding(0, "block");
 }
 
-.tag-list__list {
+.tags-list {
   list-style: none;
   @include blg-spacing("block-end", "small", "margin");
   @include label-tag-typography();
   @include padding(0, "inline-start");
 }
 
-.tag-list__list--single-line {
+.tags-list__single-line {
   @include truncate-with-ellipsis();
 }
 
-.tag-list__item {
+.tags-list__article-type {
+  span,
+  a {
+    @include label-content-typography($color: $color-text-secondary);
+  }
+}
+
+.tags-list__item {
   display: inline;
   @include label-tag-typography();
 
@@ -42,7 +49,7 @@
   }
 }
 
-.tag-list__link {
+.tags-list__link {
   color: inherit;
   text-decoration: inherit;
 

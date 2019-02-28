@@ -1,0 +1,17 @@
+list:
+  articleType: true
+  items:
+    - content:
+        attributes:
+          href: '#'
+          aria-label: Article Type
+        text: Article Research
+    - content:
+        attributes:
+          href: '#'
+          aria-label: Article Type
+        text: Tools and Resources
+    - content:
+        attributes:
+          aria-label: Article Type
+        text: Short Report
