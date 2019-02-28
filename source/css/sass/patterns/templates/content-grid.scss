@@ -2,42 +2,52 @@
 @import "../../mixins/grid";
 
 .content-grid {
-  $edge-columns: map_get($grid, edge-column-count);
-  --column-gap: #{map_get($grid, column-gap)};
-  --column-width: 1fr;
+  display: grid;
+  grid-template-areas:
+    "start-edge tertiary  end-edge"
+    "start-edge primary   end-edge"
+    "start-edge secondary end-edge";
+  grid-template-columns: calc(var(--edge-space) - var(--column-gap)) var(--primary-columns) calc(var(--edge-space) - var(--column-gap));
+  grid-column-gap: var(--column-gap);
   --edge-space: #{map_get($grid, edge-space-medium)};
-  --primary-columns: 12;
-  --template-columns-edge: repeat(#{$edge-columns}, calc((var(--edge-space) - (var(--column-gap) * #{$edge-columns})) / #{$edge-columns}));
-  --template-columns-main: [main-start primary-start secondary-start tertiary-start] repeat(var(--primary-columns), var(--column-width)) [tertiary-end secondary-end primary-end main-end];
+  --column-gap: #{map_get($grid, column-gap)};
+  --primary-columns: 12fr;
 
   @include mq($from: medium) {
     --edge-space: #{map_get($grid, edge-space-large)};
   }
 
   @include mq($from: x-wide) {
+    --primary-columns: 8;
+    --secondary-columns: calc((12 - var(--primary-columns)) / 2);
+    --tertiary-columns: calc(12 - var(--primary-columns) - var(--secondary-columns));
+    --edge-space: 1fr;
     $column-gap-fixed-width: calc-fixed-col-gap(map_get($grid, column-gap), map_get($grid, max-width));
     --column-gap: #{$column-gap-fixed-width};
-    // There are main-columns - 1 gutters to account for within the central $main-column-count number of columns:
     --column-width: #{(map_get($grid, max-width) - ($column-gap-fixed-width * (12 - 1))) / 12};
-    --primary-columns: 8;
-    --template-columns-edge: repeat(#{$edge-columns}, #{(1 / $edge-columns) * 1fr});
-    --template-columns-main: [main-start tertiary-start] repeat(2, var(--column-width)) [tertiary-end primary-start] repeat(var(--primary-columns), var(--column-width)) [primary-end secondary-start] repeat(calc(12 - 2 - var(--primary-columns)), var(--column-width)) [secondary-end main-end];
+    --primary-column-width: calc((var(--primary-columns) * var(--column-width)) + ((var(--primary-columns) - 1) * var(--column-gap)));
+    --secondary-column-width: calc((var(--secondary-columns) * var(--column-width)) + ((var(--secondary-columns) - 1) * var(--column-gap)));
+    --tertiary-column-width: calc((var(--tertiary-columns) * var(--column-width)) + ((var(--tertiary-columns) - 1) * var(--column-gap)));
+    grid-template-areas: "start-edge tertiary primary secondary end-edge";
+    grid-template-columns: var(--edge-space) var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) var(--edge-space);
   }
 
-  @include grid-setup-base(map_get($grid, column-gap), map_get($grid, max-width));
-
-  grid-column-gap: var(--column-gap);
-  grid-template-columns: [full-start] var(--template-columns-edge) var(--template-columns-main) var(--template-columns-edge) [full-end];
+  @include grid-span-full();
 }
 
 .content-grid--has-secondary {
   @include mq($from: medium, $until: x-wide) {
-    --primary-columns: 8;
-    --template-columns-main: [main-start primary-start tertiary-start] repeat(var(--primary-columns), 1fr) [primary-end secondary-start] repeat(calc(12 - var(--primary-columns)), 1fr) [secondary-end tertiary-end main-end]
+    --primary-columns: 8fr;
+    --secondary-columns: 4fr;
+    grid-template-areas:
+      "start-edge tertiary tertiary  end-edge"
+      "start-edge primary  secondary end-edge";
+    grid-template-columns: calc(var(--edge-space) - var(--column-gap)) var(--primary-columns) var(--secondary-columns) calc(var(--edge-space) - var(--column-gap));
   }
 
   @include mq($from: x-wide) {
     --primary-columns: 7;
+    --secondary-columns: 3;
   }
 }
 
