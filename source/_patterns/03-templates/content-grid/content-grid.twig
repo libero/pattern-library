@@ -22,18 +22,14 @@
     {%- endblock tertiaryContent -%}
   {%- endwith -%}
 
-  {%- with {content: primaryContent|default([])} only -%}
+  {%- with {content: primaryContent} only -%}
     {%- block primaryContent -%}
 
-      {%- if content|length -%}
+      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__primary']) }) -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__primary']) }) -%}
-
-        <div {%- include 'atoms-attributes' %}>
-          {%- include 'atoms-text' with {nodes: content} -%}
-        </div>
-
-      {%- endif -%}
+      <div {%- include 'atoms-attributes' %}>
+        {%- include 'atoms-text' with {nodes: content} -%}
+      </div>
 
     {%- endblock primaryContent -%}
   {%- endwith -%}
