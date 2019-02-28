@@ -7,10 +7,10 @@
 
       {%- if content|length -%}
 
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['single-column-grid__item']) }) -%}
+
         {%- if isFull -%}
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-full']) }) -%}
-        {%- else -%}
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['grid-item-span-main']) }) -%}
+          {%- set attributes = attributes|merge({class: attributes.class|merge(['single-column-grid__item--full']) }) -%}
         {%- endif -%}
 
         <div {%- include 'atoms-attributes' %}>

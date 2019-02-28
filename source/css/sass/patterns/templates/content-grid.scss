@@ -1,7 +1,9 @@
-@import "../../functions/grid";
-@import "../../mixins/grid";
+@import "../../mixins/media-query";
 
 .content-grid {
+  --primary-columns: var(--columns);
+  --primary-column-width: #{column-width(--primary-columns)};
+
   display: grid;
   grid-template-areas:
     "start-edge tertiary  end-edge"
@@ -9,37 +11,24 @@
     "start-edge secondary end-edge";
   grid-template-columns: 1fr var(--primary-column-width) 1fr;
   grid-column-gap: var(--column-gap);
-  --edge-space: #{map_get($grid, edge-space-medium)};
-  --column-width: calc((100% - (var(--edge-space) * 2) - (var(--column-gap) * (12 - 1))) / 12);
-  --column-gap: #{map_get($grid, column-gap)};
-  --primary-columns: 12;
-  --primary-column-width: calc((var(--primary-columns) * var(--column-width)) + ((var(--primary-columns) - 1) * var(--column-gap)));
-
-  @include mq($from: medium) {
-    --edge-space: #{map_get($grid, edge-space-large)};
-  }
+  grid-column: full;
 
   @include mq($from: x-wide) {
-    --primary-columns: 8;
-    --secondary-columns: calc((12 - var(--primary-columns)) / 2);
-    --tertiary-columns: calc(12 - var(--primary-columns) - var(--secondary-columns));
-    $column-gap-fixed-width: calc-fixed-col-gap(map_get($grid, column-gap), map_get($grid, max-width));
-    --column-gap: #{$column-gap-fixed-width};
-    --column-width: #{(map_get($grid, max-width) - ($column-gap-fixed-width * (12 - 1))) / 12};
-    --secondary-column-width: calc((var(--secondary-columns) * var(--column-width)) + ((var(--secondary-columns) - 1) * var(--column-gap)));
-    --tertiary-column-width: calc((var(--tertiary-columns) * var(--column-width)) + ((var(--tertiary-columns) - 1) * var(--column-gap)));
+    --primary-columns: calc(0.7 * var(--columns));
+    --secondary-columns: calc((var(--columns) - var(--primary-columns)) / 2);
+    --tertiary-columns: calc(var(--columns) - var(--primary-columns) - var(--secondary-columns));
+    --secondary-column-width: #{column-width(--secondary-columns)};
+    --tertiary-column-width: #{column-width(--tertiary-columns)};
     grid-template-areas: "start-edge tertiary primary secondary end-edge";
     grid-template-columns: 1fr var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) 1fr;
   }
-
-  @include grid-span-full();
 }
 
 .content-grid--has-secondary {
   @include mq($from: medium, $until: x-wide) {
-    --primary-columns: 8;
-    --secondary-columns: 4;
-    --secondary-column-width: calc((var(--secondary-columns) * var(--column-width)) + ((var(--secondary-columns) - 1) * var(--column-gap)));
+    --primary-columns: calc(0.7 * var(--columns));
+    --secondary-columns: calc(var(--columns) - var(--primary-columns));
+    --secondary-column-width: #{column-width(--secondary-columns)};
     grid-template-areas:
       "start-edge tertiary tertiary  end-edge"
       "start-edge primary  secondary end-edge";
@@ -47,8 +36,8 @@
   }
 
   @include mq($from: x-wide) {
-    --primary-columns: 7;
-    --secondary-columns: 3;
+    --primary-columns: calc(0.6 * var(--columns));
+    --secondary-columns: calc(0.25 * var(--columns));
   }
 }
 

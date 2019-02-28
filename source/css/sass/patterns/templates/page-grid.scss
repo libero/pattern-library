@@ -1,17 +1,15 @@
-@import "../../functions/grid";
 @import "../../mixins/decorations";
-@import "../../mixins/grid";
 
 .page-grid {
-  @include grid-setup-basic(
-    map_get($grid, edge-column-count),
-    map_get($grid, column-gap),
-    map_get($grid, max-width)
-  );
+  display: grid;
+  grid-template-areas: "start-edge main end-edge";
+  grid-template-columns: [full-start] 1fr var(--main-width) 1fr [full-end];
+  grid-column-gap: var(--column-gap);
+  grid-column: full;
 }
 
 .page-grid__item {
-  @include grid-span-main();
+  grid-column: full;
 }
 
 .page-grid__item--has-keyline-start {

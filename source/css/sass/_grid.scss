@@ -1,12 +1,19 @@
-@import "variables/color";
-@import "mixins/decorations";
-@import "mixins/grid";
-@import "mixins/spacing";
+@import "functions/grid";
 
-.grid-item-span-full {
-  @include grid-span-full();
-}
+body {
+  --columns: 12;
+  --edge-space: #{map_get($grid, edge-space-medium)};
+  --column-width: calc((100% - (var(--edge-space) * 2) - (var(--column-gap) * (var(--columns) - 1))) / var(--columns));
+  --column-gap: #{map_get($grid, column-gap)};
+  --main-width: #{column-width(--columns)};
+  --max-width: #{map_get($grid, max-width)};
 
-.grid-item-span-main {
-  @include grid-span-main();
+  @include mq($from: medium) {
+    --edge-space: #{map_get($grid, edge-space-large)};
+  }
+
+  @include mq($from: x-wide) {
+    --column-gap: calc(var(--max-width) * #{map_get($grid, column-gap) / 100%});
+    --column-width: calc((var(--max-width) - (var(--column-gap) * (var(--columns) - 1))) / var(--columns));
+  }
 }

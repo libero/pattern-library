@@ -1,8 +1,8 @@
 @import "../../variables/baselinegrid";
 @import "../../variables/color";
 @import "../../variables/content_header";
-@import "../../mixins/grid";
 @import "../../functions/types";
+@import "../../mixins/decorations";
 @import "../../mixins/media-query";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
@@ -13,7 +13,9 @@
   @include blg-spacing("block-start", "medium", "margin");
   @include blg-spacing("block-end", "small", "margin");
   @include divider("block-end");
-  @include grid-span-main();
+  &.page-grid__item {
+    grid-column: main;
+  }
 }
 
 .content-header__title {
