@@ -1,0 +1,182 @@
+@import "types";
+@import "validation";
+
+@mixin _when-left-to-right {
+  html[dir="ltr"] &:not([dir]),
+  &[dir="ltr"] {
+    @content;
+  }
+}
+
+@mixin _when-right-to-left {
+  html[dir="rtl"] &:not([dir]),
+  &[dir="rtl"] {
+    @content;
+  }
+}
+
+@mixin _when-logical {
+  html[dir] & {
+    @content;
+  }
+}
+
+@function _property-name($parts, $dimension) {
+  @if (length($parts) == 0 or $parts == "") {
+    @return $dimension;
+  }
+
+  @if (length($parts) == 1) {
+    @return "#{$parts}-#{$dimension}";
+  }
+
+  @return "#{nth($parts, 1)}-#{$dimension}-#{nth($parts, 2)}";
+}
+
+@mixin logical-property($property-name, $dimension, $arguments) {
+
+  @if length($property-name) > 2 {
+    @include _error("Expected at most two property name parts");
+  } @else if $dimension == inline {
+
+    @if type-of($arguments) == "list" and length($arguments) > 1 {
+
+      @include _expect_at_most($arguments, 2, "More than two arguments supplied with 'inline' dimension") {
+
+        $firstArgument: nth($arguments, 1);
+        $secondArgument: nth($arguments, 2);
+
+        @if $firstArgument == $secondArgument {
+
+          @include rem((
+            #{_property-name($property-name, left)}: $firstArgument,
+            #{_property-name($property-name, right)}: $firstArgument,
+          ));
+          #{_property-name($property-name, inline)}: rem($firstArgument);
+
+        } @else {
+
+          @include _when-left-to-right() {
+            @include rem(_property-name($property-name, left), $firstArgument);
+            @include rem(_property-name($property-name, right), $secondArgument);
+          }
+
+          @include _when-right-to-left() {
+            @include rem(_property-name($property-name, right), $firstArgument);
+            @include rem(_property-name($property-name, left), $secondArgument);
+          }
+
+          @include _when-logical() {
+            #{_property-name($property-name, inline-start)}: rem($firstArgument);
+            #{_property-name($property-name, inline-end)}: rem($secondArgument);
+          }
+
+        }
+
+      }
+
+    } @else {
+
+      @include rem((
+        #{_property-name($property-name, left)}: $arguments,
+        #{_property-name($property-name, right)}: $arguments,
+      ));
+      #{_property-name($property-name, inline)}: rem($arguments);
+
+    }
+
+  } @else if $dimension == inline-start {
+
+    @include _when-left-to-right() {
+      @include rem(_property-name($property-name, left), $arguments);
+    }
+
+    @include _when-right-to-left() {
+      @include rem(_property-name($property-name, right), $arguments);
+    }
+
+    @include _when_logical() {
+      #{_property-name($property-name, inline-start)}: rem($arguments);
+    }
+
+  } @else if $dimension == inline-end {
+
+    @include _when-left-to-right() {
+      @include rem(_property-name($property-name, right), $arguments);
+    }
+
+    @include _when-right-to-left() {
+      @include rem(_property-name($property-name, left), $arguments);
+    }
+
+    @include _when_logical() {
+      #{_property-name($property-name, inline-end)}: rem($arguments);
+    }
+
+  } @else if $dimension == inline-size {
+
+    @include rem(_property-name($property-name, width), $arguments);
+    #{_property-name($property-name, inline-size)}: rem($arguments);
+
+  } @else if $dimension == block {
+
+    @if type-of($arguments) == "list" and length($arguments) > 1 {
+
+      @include _expect_at_most($arguments, 2, "More than two arguments supplied with 'block' dimension") {
+
+        $firstArgument: nth($arguments, 1);
+        $secondArgument: nth($arguments, 2);
+
+        @if $firstArgument == $secondArgument {
+
+          @include rem((
+            #{_property-name($property-name, top)}: $firstArgument,
+            #{_property-name($property-name, bottom)}: $firstArgument,
+          ));
+          #{_property-name($property-name, block)}: rem($firstArgument);
+
+        } @else {
+
+          @include rem((
+            #{_property-name($property-name, top)}: $firstArgument,
+            #{_property-name($property-name, bottom)}: $secondArgument,
+          ));
+          #{_property-name($property-name, block-start)}: rem($firstArgument);
+          #{_property-name($property-name, block-end)}: rem($secondArgument);
+
+        }
+
+      }
+
+    } @else {
+
+      @include rem((
+        #{_property-name($property-name, top)}: $arguments,
+        #{_property-name($property-name, bottom)}: $arguments,
+      ));
+      #{_property-name($property-name, block)}: rem($arguments);
+
+    }
+
+  } @else if $dimension == block-start {
+
+    @include rem(_property-name($property-name, top), $arguments);
+    #{_property-name($property-name, block-start)}: rem($arguments);
+
+  } @else if $dimension == block-end {
+
+    @include rem(_property-name($property-name, bottom), $arguments);
+    #{_property-name($property-name, block-end)}: rem($arguments);
+
+  } @else if $dimension == block-size {
+
+    @include rem(_property-name($property-name, height), $arguments);
+    #{_property-name($property-name, block-size)}: rem($arguments);
+
+  } @else if index((top, bottom, left, right, width, height), $dimension) {
+    @include _error("'#{$dimension}' is a physical dimension, use its logical equivilant");
+  } @else {
+    @include _error("Unknown dimension '#{$dimension}'");
+  }
+
+}
