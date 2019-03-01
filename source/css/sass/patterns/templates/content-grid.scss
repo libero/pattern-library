@@ -2,9 +2,10 @@
 @import "../../mixins/grid";
 @import "../../mixins/media-query";
 
+$columns: map_get($grid, main-column-count);
+
 .content-grid {
-  --primary-columns: var(--columns);
-  --primary-column-width: #{column-width(--primary-columns)};
+  --primary-column-width: #{column-width($columns)};
 
   @include base-grid(#{map_get($grid, max-width)});
   grid-template-areas:
@@ -15,11 +16,12 @@
   grid-column-gap: var(--column-gap);
 
   @include mq($from: x-wide) {
-    --primary-columns: calc(0.7 * var(--columns));
-    --secondary-columns: calc((var(--columns) - var(--primary-columns)) / 2);
-    --tertiary-columns: calc(var(--columns) - var(--primary-columns) - var(--secondary-columns));
-    --secondary-column-width: #{column-width(--secondary-columns)};
-    --tertiary-column-width: #{column-width(--tertiary-columns)};
+    $primary-columns: floor($columns * 0.7);
+    $secondary-columns: floor(($columns - $primary-columns) / 2);
+    $tertiary-columns: $columns - $primary-columns - $secondary-columns;
+    --primary-column-width: #{column-width($primary-columns)};
+    --secondary-column-width: #{column-width($secondary-columns)};
+    --tertiary-column-width: #{column-width($tertiary-columns)};
     grid-template-areas: "start-edge tertiary primary secondary end-edge";
     grid-template-columns: 1fr var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) 1fr;
   }
@@ -27,9 +29,10 @@
 
 .content-grid--has-secondary {
   @include mq($from: medium, $until: x-wide) {
-    --primary-columns: calc(0.7 * var(--columns));
-    --secondary-columns: calc(var(--columns) - var(--primary-columns));
-    --secondary-column-width: #{column-width(--secondary-columns)};
+    $primary-columns: floor($columns * 0.7);
+    $secondary-columns: $columns - $primary-columns;
+    --primary-column-width: #{column-width($primary-columns)};
+    --secondary-column-width: #{column-width($secondary-columns)};
     grid-template-areas:
       "start-edge tertiary tertiary  end-edge"
       "start-edge primary  secondary end-edge";
@@ -37,8 +40,12 @@
   }
 
   @include mq($from: x-wide) {
-    --primary-columns: calc(0.6 * var(--columns));
-    --secondary-columns: calc(0.25 * var(--columns));
+    $primary-columns: floor($columns * 0.6);
+    $secondary-columns: floor($columns * 0.25);
+    $tertiary-columns: $columns - $primary-columns - $secondary-columns;
+    --primary-column-width: #{column-width($primary-columns)};
+    --secondary-column-width: #{column-width($secondary-columns)};
+    --tertiary-column-width: #{column-width($tertiary-columns)};
   }
 }
 

@@ -8,6 +8,6 @@ $grid: (
   max-width: 1114px
 );
 
-@function column-width($name) {
-  @return calc((var(#{$name}) * var(--column-width)) + ((var(#{$name}) - 1) * var(--column-gap)));
+@function column-width($columns) {
+  @return calc((#{$columns} * var(--column-width)) + (#{$columns - 1} * var(--column-gap)));
 }

@@ -6,8 +6,8 @@
   @include it("returns the calculation for working out a column width") {
 
     @include assert-equal(
-      column-width(--my-variable),
-      calc((var(--my-variable) * var(--column-width)) + ((var(--my-variable) - 1) * var(--column-gap)))
+      column-width(12),
+      calc((12 * var(--column-width)) + (11 * var(--column-gap)))
     );
 
   }
