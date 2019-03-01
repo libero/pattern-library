@@ -1,9 +1,10 @@
+@import "../../functions/grid";
+@import "../../mixins/grid";
+
 .single-column-grid {
-  display: grid;
+  @include base-grid(#{map_get($grid, max-width)});
   grid-template-areas: "start-edge main end-edge";
   grid-template-columns: [full-start] 1fr var(--main-width) 1fr [full-end];
-  grid-column-gap: var(--column-gap);
-  grid-column: full;
 }
 
 .single-column-grid__item {

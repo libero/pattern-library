@@ -1,17 +1,18 @@
+@import "../../functions/grid";
+@import "../../mixins/grid";
 @import "../../mixins/media-query";
 
 .content-grid {
   --primary-columns: var(--columns);
   --primary-column-width: #{column-width(--primary-columns)};
 
-  display: grid;
+  @include base-grid(#{map_get($grid, max-width)});
   grid-template-areas:
     "start-edge tertiary  end-edge"
     "start-edge primary   end-edge"
     "start-edge secondary end-edge";
   grid-template-columns: 1fr var(--primary-column-width) 1fr;
   grid-column-gap: var(--column-gap);
-  grid-column: full;
 
   @include mq($from: x-wide) {
     --primary-columns: calc(0.7 * var(--columns));
