@@ -5,6 +5,7 @@
   @include base-grid(#{map_get($grid, max-width)});
   grid-template-areas: "start-edge main end-edge";
   grid-template-columns: [full-start] 1fr var(--main-width) 1fr [full-end];
+  grid-column-gap: var(--column-gap);
 }
 
 .single-column-grid__item {
