@@ -1,10 +1,11 @@
 @import "../../functions/grid";
 @import "../../mixins/grid";
+@import "../../variables/grid";
 
 .single-column-grid {
-  @include base-grid(#{map_get($grid, max-width)});
+  @include base-grid($grid-max_width);
   grid-template-areas: "start-edge main end-edge";
-  grid-template-columns: [full-start] 1fr #{column-width(map_get($grid, main-column-count))} 1fr [full-end];
+  grid-template-columns: [full-start] 1fr #{column-width($grid-main_column_count)} 1fr [full-end];
   grid-column-gap: var(--column-gap);
 }
 

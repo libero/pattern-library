@@ -1,13 +1,3 @@
-// TODO: Move to configuration once using refactor arriving via npm module
-$grid: (
-  main-column-count: 12,
-  edge-column-count:1,
-  edge-space-medium: 7vw,
-  edge-space-large: 14vw,
-  column-gap: 1.6%,
-  max-width: 1114px
-);
-
 @function column-width($columns) {
   @return calc((#{$columns} * var(--column-width)) + (#{$columns - 1} * var(--column-gap)));
 }

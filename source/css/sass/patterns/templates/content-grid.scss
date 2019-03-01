@@ -1,13 +1,12 @@
 @import "../../functions/grid";
 @import "../../mixins/grid";
 @import "../../mixins/media-query";
-
-$columns: map_get($grid, main-column-count);
+@import "../../variables/grid";
 
 .content-grid {
-  --primary-column-width: #{column-width($columns)};
+  --primary-column-width: #{column-width($grid-main_column_count)};
 
-  @include base-grid(#{map_get($grid, max-width)});
+  @include base-grid($grid-max_width);
   grid-template-areas:
     "start-edge tertiary  end-edge"
     "start-edge primary   end-edge"
@@ -16,9 +15,9 @@ $columns: map_get($grid, main-column-count);
   grid-column-gap: var(--column-gap);
 
   @include mq($from: x-wide) {
-    $primary-columns: floor($columns * 0.7);
-    $secondary-columns: floor(($columns - $primary-columns) / 2);
-    $tertiary-columns: $columns - $primary-columns - $secondary-columns;
+    $primary-columns: floor($grid-main_column_count * 0.7);
+    $secondary-columns: floor(($grid-main_column_count - $primary-columns) / 2);
+    $tertiary-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
     --tertiary-column-width: #{column-width($tertiary-columns)};
@@ -29,8 +28,8 @@ $columns: map_get($grid, main-column-count);
 
 .content-grid--has-secondary {
   @include mq($from: medium, $until: x-wide) {
-    $primary-columns: floor($columns * 0.7);
-    $secondary-columns: $columns - $primary-columns;
+    $primary-columns: floor($grid-main_column_count * 0.7);
+    $secondary-columns: $grid-main_column_count - $primary-columns;
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
     grid-template-areas:
@@ -40,9 +39,9 @@ $columns: map_get($grid, main-column-count);
   }
 
   @include mq($from: x-wide) {
-    $primary-columns: floor($columns * 0.6);
-    $secondary-columns: floor($columns * 0.25);
-    $tertiary-columns: $columns - $primary-columns - $secondary-columns;
+    $primary-columns: floor($grid-main_column_count * 0.6);
+    $secondary-columns: floor($grid-main_column_count * 0.25);
+    $tertiary-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
     --tertiary-column-width: #{column-width($tertiary-columns)};

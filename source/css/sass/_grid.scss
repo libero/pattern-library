@@ -1,18 +1,16 @@
-@import "functions/grid";
+@import "variables/grid";
 
 body {
-  $columns: map_get($grid, main-column-count);
-  $max-width: map_get($grid, max-width);
-  --column-gap: #{map_get($grid, column-gap)};
-  --column-width: calc((100% - (var(--edge-space) * 2) - (var(--column-gap) * #{$columns - 1})) / #{$columns});
-  --edge-space: #{map_get($grid, edge-space-medium)};
+  --column-gap: #{$grid-column_gap};
+  --column-width: calc((100% - (var(--edge-space) * 2) - (var(--column-gap) * #{$grid-main_column_count - 1})) / #{$grid-main_column_count});
+  --edge-space: #{$grid-edge_space-medium};
 
   @include mq($from: medium) {
-    --edge-space: #{map_get($grid, edge-space-large)};
+    --edge-space: #{$grid-edge_space-large};
   }
 
   @include mq($from: x-wide) {
-    --column-gap: #{($max-width * map_get($grid, column-gap)) / 100%};
-    --column-width: calc((#{$max-width} - (var(--column-gap) * #{$columns - 1})) / #{$columns});
+    --column-gap: #{($grid-max_width * $grid-column_gap) / 100%};
+    --column-width: calc((#{$grid-max_width} - (var(--column-gap) * #{$grid-main_column_count - 1})) / #{$grid-main_column_count});
   }
 }

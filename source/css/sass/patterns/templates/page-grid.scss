@@ -1,9 +1,9 @@
-@import "../../functions/grid";
 @import "../../mixins/decorations";
 @import "../../mixins/grid";
+@import "../../variables/grid";
 
 .page-grid {
-  @include base-grid(#{map_get($grid, max-width)});
+  @include base-grid($grid-max_width);
   grid-template-areas:
     "start"
     "main"
