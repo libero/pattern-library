@@ -1,23 +1,15 @@
 {% include 'templates-page-grid' with {
-  items: [
+  mainItems: [
     {
-      template: 'templates-page-grid',
+      template: 'organisms-content-header',
+      arguments: contentHeader,
+    },
+    {
+      template: 'templates-content-grid',
       arguments: {
-        isMain: true,
-        items: [
-          {
-            template: 'organisms-content-header',
-            arguments: contentHeader,
-          },
-          {
-            template: 'templates-content-grid',
-            arguments: {
-              primaryContent: body|merge([
-                {template: 'organisms-item-tags', arguments: tags},
-              ]),
-            },
-          },
-        ],
+        primaryContent: body|merge([
+          {template: 'organisms-item-tags', arguments: tags},
+        ]),
       },
     },
   ],

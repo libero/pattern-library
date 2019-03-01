@@ -13,7 +13,8 @@
   @include blg-spacing("block-start", "medium", "margin");
   @include blg-spacing("block-end", "small", "margin");
   @include divider("block-end");
-  &.page-grid__item {
+
+  &.single-column-grid__item {
     grid-column: main;
   }
 }

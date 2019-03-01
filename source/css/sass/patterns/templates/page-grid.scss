@@ -4,19 +4,22 @@
 
 .page-grid {
   @include base-grid(#{map_get($grid, max-width)});
-  grid-template-areas: "start-edge main end-edge";
-  grid-template-columns: [full-start] 1fr var(--main-width) 1fr [full-end];
-  grid-column-gap: var(--column-gap);
+  grid-template-areas:
+    "start"
+    "main"
+    "end";
 }
 
-.page-grid__item {
-  grid-column: full;
-}
-
-.page-grid__item--has-keyline-start {
-  @include divider(block-start);
-}
-
-.page-grid__item--has-keyline-end {
+.page-grid__item--start {
   @include divider(block-end);
+  grid-row: start;
+}
+
+.page-grid__item--main {
+  grid-row: main;
+}
+
+.page-grid__item--end {
+  @include divider(block-start);
+  grid-row: end;
 }
