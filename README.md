@@ -104,21 +104,43 @@ These guidelines govern the use of custom properties in this codebase:
 1. global values (i.e. those set on `:root`) should be named in uppercase to indicate they're global. (Aside: as we're not doing any theming, there shouldn't be many of these.)
 1. when using a css custom property for a changeable value, change its value, don't assign a different custom property on the change. For example:
     ```
+    // Fallbacks omitted for clarity
+    
     .component {
-              
+    
       --font-size: $font-size-small;
           
       @media ([condition]) {
+        
         --font-size: $font-size-large;      
+      
       }
-          
+
       font-size: var(--font-size);
            
     }
     ``` 
 1. for a property that changes, separate the logic of controlling the change from the implementation of the value (see previous example). This means every time you see `var(--something)`, you know that will be subject to a changing value
-1. beware of being too clever: keep the code easily readable  
+1. beware of being too clever: keep the code easily readable
+1. to deal with non-supporting browsers, fallback using double declaration:
+    ```
+    .component {
+    
+      font-size: $font-size-small;
+      --font-size: $font-size-small;
+          
+      @media ([condition]) {
+    
+        font-size: $font-size-large;        
+        --font-size: $font-size-large;      
+      
+      }
 
+      font-size: var(--font-size);
+           
+    }
+    ``` 
+ 
 Getting help
 ------------
 
