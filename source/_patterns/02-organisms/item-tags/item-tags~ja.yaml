@@ -10,8 +10,12 @@ groups:
               href: '#'
             text: 赤
         - content:
+            attributes:
+              href: '#'
             text: オレンジ
         - content:
+            attributes:
+              href: '#'
             text: 黄色
         - content:
             attributes:
@@ -22,8 +26,12 @@ groups:
               href: '#'
             text: 水色
         - content:
+            attributes:
+              href: '#'
             text: 青
         - content:
+            attributes:
+              href: '#'
             text: 紫
   - title:
       text: コンパスのポイント
@@ -38,6 +46,10 @@ groups:
               href: '#'
             text: 東
         - content:
+            attributes:
+              href: '#'
             text: 南
         - content:
+            attributes:
+              href: '#'
             text: 西

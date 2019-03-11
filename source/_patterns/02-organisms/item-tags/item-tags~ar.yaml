@@ -11,8 +11,12 @@ groups:
               href: '#'
             text: أحمر
         - content:
+            attributes:
+              href: '#'
             text: برتقالي
         - content:
+            attributes:
+              href: '#'
             text: أصفر
         - content:
             attributes:
@@ -23,8 +27,12 @@ groups:
               href: '#'
             text: أزرق
         - content:
+            attributes:
+              href: '#'
             text: نيلي
         - content:
+            attributes:
+              href: '#'
             text: بنفسجي
   - title:
       text: اتجاهات البوصلة
@@ -39,6 +47,10 @@ groups:
               href: '#'
             text: شرق
         - content:
+            attributes:
+              href: '#'
             text: جنوب
         - content:
+            attributes:
+              href: '#'
             text: غرب

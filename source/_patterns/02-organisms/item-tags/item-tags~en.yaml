@@ -8,8 +8,12 @@ groups:
               href: '#'
             text: Red
         - content:
+            attributes:
+              href: '#'
             text: Orange
         - content:
+            attributes:
+              href: '#'
             text: Yellow
         - content:
             attributes:
@@ -20,8 +24,12 @@ groups:
               href: '#'
             text: Blue
         - content:
+            attributes:
+              href: '#'
             text: Indigo
         - content:
+            attributes:
+              href: '#'
             text: Violet
   - title:
       text: Points of the compass
@@ -36,6 +44,10 @@ groups:
               href: '#'
             text: East
         - content:
+            attributes:
+              href: '#'
             text: South
         - content:
+            attributes:
+              href: '#'
             text: West
