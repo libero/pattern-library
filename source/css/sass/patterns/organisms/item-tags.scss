@@ -1,11 +1,11 @@
+@import "../../mixins/decorations";
 @import "../../mixins/media-query";
 @import "../../mixins/spacing";
-@import "../../mixins/types";
-@import "../../mixins/typography";
-@import "../../variables/color";
 
 .item-tags {
-  @include blg-spacing("block-start", "medium", "padding");
+  @include padding($baselinegrid-space-medium, "block-start");
+  @include margin($baselinegrid-space-medium, "block-end");
+  @include divider("block-start");
   text-align: center;
 
   @include mq($from: medium) {

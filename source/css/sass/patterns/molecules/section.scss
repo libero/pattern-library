@@ -1,5 +1,6 @@
 @import "../../mixins/spacing";
+@import "../../variables/baselinegrid";
 
 .section__body {
-  @include body-spacing();
+  @include margin($baselinegrid-space-medium, "block-end");
 }

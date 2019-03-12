@@ -51,8 +51,35 @@ h6 {
   @include h6-spacing();
 }
 
-p {
-  @include body-para();
+address,
+article,
+aside,
+blockquote,
+details,
+dl,
+fieldset,
+figure,
+footer,
+form,
+header,
+hr,
+nav,
+ol,
+p,
+pre,
+section,
+table,
+ul {
+  @include body-spacing();
+}
+
+dl,
+ol,
+ul {
+  dd > &,
+  li > & {
+    @include margin(0, "block-end");
+  }
 }
 
 a {
@@ -60,28 +87,11 @@ a {
   text-decoration: none;
 }
 
-ul,
-ol {
-  @include blg-spacing("block-end", "small", "margin");
-  margin-top: 0;
-}
-
-dl {
-  @include blg-spacing("block-end", "small", "margin");
-  margin-top: 0;
-}
-
-li,
-dt,
-dd {
-  @include body-typography();
-}
-
 dt {
   font-weight: bold;
 
   dd + & {
-    @include blg-spacing("block-start", "small", "margin");
+    @include margin($baselinegrid-space-small, "block-start");
   }
 }
 
@@ -89,9 +99,9 @@ dd {
   margin-left: 0;
 }
 
+address,
 small {
   @include small-typography();
-  @include small-spacing();
 }
 
 sub {
@@ -100,11 +110,6 @@ sub {
 
 sup {
   @include font-variant-position(super);
-}
-
-address {
-  @include small-typography();
-  @include small-spacing();
 }
 
 img {
