@@ -7,8 +7,12 @@ list:
           href: '#'
         text: 赤
     - content:
+        attributes:
+          href: '#'
         text: オレンジ
     - content:
+        attributes:
+          href: '#'
         text: 黄色
     - content:
         attributes:
@@ -17,8 +21,12 @@ list:
     - content:
         attributes:
           href: '#'
-        text: 水色
+        text: 水色sss
     - content:
+        attributes:
+          href: '#'
         text: 青
     - content:
+        attributes:
+          href: '#'
         text: 紫
