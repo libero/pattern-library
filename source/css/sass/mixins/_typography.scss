@@ -56,11 +56,6 @@
   @include set-font-size-and-vertical-height(11px);
 }
 
-@mixin body-para {
-  @include body-typography();
-  @include body-spacing();
-}
-
 @mixin inline-image {
   margin-bottom: 0.1em;
   max-height: 1em;
