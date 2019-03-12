@@ -111,6 +111,53 @@ The single column grid will set content across the `main` part of the grid.
 ### `content-grid`
 The grid for all content pages (i.e. not listing pages). In addition to the `main` and `full` designations, this grid defines parts for `primaryContent`, `secondaryContent`, and `tertiaryContent`. Whether or not there is any `secondaryContent` determines the behavior of `primaryContent` on the grid. An absence of `tertiaryContent` does not affect the behaviour of the `primaryContent` nor any `tertiaryContent`.      
 
+### Styling
+
+#### CSS Custom Properties
+These guidelines govern the use of custom properties in this codebase:
+
+1. constant values should be defined in SCSS; there is no need to express these as custom properties
+1. use a custom property when a css property changes e.g. in response to DOM conditions (e.g. `:focus`), media queries or via JavaScript
+1. global values (i.e. those set on `:root`) should be named in uppercase to indicate they're global. (Aside: as we're not doing any theming, there shouldn't be many of these.)
+1. when using a css custom property for a changeable value, change its value, don't assign a different custom property on the change. For example:
+    ```
+    // Fallbacks omitted for clarity
+    
+    .component {
+    
+      --font-size: $font-size-small;
+          
+      @media ([condition]) {
+        
+        --font-size: $font-size-large;      
+      
+      }
+
+      font-size: var(--font-size);
+           
+    }
+    ``` 
+1. for a property that changes, separate the logic of controlling the change from the implementation of the value (see previous example). This means every time you see `var(--something)`, you know that will be subject to a changing value
+1. beware of being too clever: keep the code easily readable
+1. to deal with non-supporting browsers, fallback using double declaration:
+    ```
+    .component {
+    
+      font-size: $font-size-small;
+      --font-size: $font-size-small;
+          
+      @media ([condition]) {
+    
+        font-size: $font-size-large;        
+        --font-size: $font-size-large;      
+      
+      }
+
+      font-size: var(--font-size);
+           
+    }
+    ``` 
+
 Getting help
 ------------
 
