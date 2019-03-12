@@ -12,7 +12,7 @@
 }
 
 .tag-list__list {
-  @include hidden-list();
+  @include list-style-none();
   @include label-tag-typography();
 }
 

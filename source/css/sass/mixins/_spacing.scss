@@ -240,7 +240,7 @@
   }
 }
 
-@mixin hidden-list() {
+@mixin list-style-none() {
   list-style: none;
   @include padding(0, "inline-start");
 }
