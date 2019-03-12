@@ -99,7 +99,7 @@ The build process uses a Node.js container image to build all assets, and copy t
 #### CSS Custom Properties
 These guidelines govern the use of custom properties in this codebase:
 
-1. global, constant values should be defined in scss, there is no need to express these as custom properties
+1. constant values should be defined in SCSS; there is no need to express these as custom properties
 1. use a custom property when a css property changes e.g. in response to DOM conditions (e.g. `:focus`), media queries or via JavaScript
 1. global values (i.e. those set on `:root`) should be named in uppercase to indicate they're global. (Aside: as we're not doing any theming, there shouldn't be many of these.)
 1. when using a css custom property for a changeable value, change its value, don't assign a different custom property on the change. For example:
