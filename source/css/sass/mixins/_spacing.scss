@@ -220,10 +220,6 @@
   @include _base-spacing();
 }
 
-@mixin small-spacing() {
-  @include _base-spacing();
-}
-
 @mixin wrapper() {
   box-sizing: content-box;
   @include max-inline-size($grid-max_width);
