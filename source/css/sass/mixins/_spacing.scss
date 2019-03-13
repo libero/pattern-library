@@ -188,36 +188,32 @@
   @include padding(0, $dimension);
 }
 
-@mixin _base-spacing($block-end: $baselinegrid-space-small) {
-  @include margin(0 $block-end, "block");
+@mixin block-spacing($end: $baselinegrid-space-small, $start: 0) {
+  @include margin($start $end, block);
 }
 
 @mixin h1-spacing() {
-  @include _base-spacing();
+  @include block-spacing();
 }
 
 @mixin h2-spacing() {
-  @include _base-spacing();
+  @include block-spacing();
 }
 
 @mixin h3-spacing() {
-  @include _base-spacing($baselinegrid-space-extra_small);
+  @include block-spacing($baselinegrid-space-extra_small);
 }
 
 @mixin h4-spacing() {
-  @include _base-spacing($baselinegrid-space-extra_small);
+  @include block-spacing($baselinegrid-space-extra_small);
 }
 
 @mixin h5-spacing() {
-  @include _base-spacing($baselinegrid-space-extra_small);
+  @include block-spacing($baselinegrid-space-extra_small);
 }
 
 @mixin h6-spacing() {
-  @include _base-spacing($baselinegrid-space-extra_small);
-}
-
-@mixin body-spacing() {
-  @include _base-spacing();
+  @include block-spacing($baselinegrid-space-extra_small);
 }
 
 @mixin wrapper() {

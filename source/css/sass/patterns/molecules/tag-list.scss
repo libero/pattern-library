@@ -3,12 +3,12 @@
 @import "../../variables/baselinegrid";
 
 .tag-list {
-  @include margin($baselinegrid-space-small, "block-end");
+  @include block-spacing();
 }
 
 .tag-list__title {
   @include label-content-typography();
-  @include margin(0, "block");
+  @include block-spacing(0);
 }
 
 .tag-list__list {

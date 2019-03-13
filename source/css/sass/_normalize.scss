@@ -70,7 +70,7 @@ pre,
 section,
 table,
 ul {
-  @include body-spacing();
+  @include block-spacing();
 }
 
 figure {
@@ -82,7 +82,7 @@ ol,
 ul {
   dd > &,
   li > & {
-    @include margin(0, "block-end");
+    @include block-spacing(0);
   }
 }
 
@@ -95,7 +95,7 @@ dt {
   font-weight: bold;
 
   dd + & {
-    @include margin($baselinegrid-space-small, "block-start");
+    @include block-spacing($start: $baselinegrid-space-small, $end: 0);
   }
 }
 
