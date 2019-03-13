@@ -189,7 +189,7 @@
 }
 
 @mixin _base-spacing($block-end: $baselinegrid-space-small) {
-  @include margin(0 0 $block-end);
+  @include margin(0 $block-end, "block");
 }
 
 @mixin h1-spacing() {

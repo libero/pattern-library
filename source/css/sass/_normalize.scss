@@ -73,6 +73,10 @@ ul {
   @include body-spacing();
 }
 
+figure {
+  @include margin(0, "inline");
+}
+
 dl,
 ol,
 ul {
