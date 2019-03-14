@@ -1,5 +1,5 @@
 list:
-  articleType: true
+  itemDetails: true
   items:
     - content:
         attributes:

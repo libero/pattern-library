@@ -22,8 +22,8 @@
 
       {%- if singleLine|default(false) -%}
         {%- set attributes = attributes|merge({class: attributes.class|merge(['item-tag__single-line']) }) -%}
-      {%- elseif articleType|default(false) -%}
-        {%- set attributes = attributes|merge({class: attributes.class|merge(['item-tag__article-type']) }) -%}
+      {%- elseif itemDetails|default(false) -%}
+        {%- set attributes = attributes|merge({class: attributes.class|merge(['item-tag__item-details']) }) -%}
       {%- endif -%}
 
       <ul {%- include('atoms-attributes') -%}>
