@@ -2,86 +2,51 @@
 
 <div {%- include 'atoms-attributes' %}>
 
-  {%- with {items: startItems|default([])} only -%}
+  {%- with start|default({}) only -%}
     {%- block start -%}
 
-      {%- if items|length -%}
+      {%- if template is defined -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default(['page-grid__item', 'page-grid__item--start'])}) -%}
+        {%- with arguments|merge({_template: template}) only -%}
 
-        <div {%- include 'atoms-attributes' %}>
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__start'])}) -%}
 
-          {%- for item in items -%}
+          {%- include _template -%}
 
-            {%- with item only -%}
-              {%- block startItem -%}
-
-                {%- include template with arguments only -%}
-
-              {%- endblock startItem -%}
-            {%- endwith -%}
-
-          {%- endfor -%}
-
-        </div>
+        {%- endwith -%}
 
       {%- endif -%}
 
     {%- endblock start -%}
   {%- endwith -%}
 
-  {%- with {items: mainItems} only -%}
+  {%- with main only -%}
     {%- block main -%}
 
-      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__item--main', 'single-column-grid']), role: 'main'}) -%}
+      {%- with arguments|merge({_template: template}) only -%}
 
-      <main {%- include 'atoms-attributes' %}>
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__main']), role: 'main'}) -%}
+        {%- set element = "main" -%}
 
-        {%- for item in items -%}
+        {%- include _template -%}
 
-          {%- with item only -%}
-            {%- block mainItem -%}
-
-              {%- with arguments|default({})|merge({_template: template|default('templates-single-column-grid')}) only -%}
-
-                {%- set attributes = attributes|default({})|merge({class: attributes.class|default(['single-column-grid__item', 'single-column-grid__item--full'])}) -%}
-
-                {%- include _template -%}
-
-              {%- endwith -%}
-
-            {%- endblock mainItem -%}
-          {%- endwith -%}
-
-        {%- endfor -%}
-
-      </main>
+      {%- endwith -%}
 
     {%- endblock main -%}
   {%- endwith -%}
 
-  {%- with {items: endItems|default([])} only -%}
+  {%- with end|default({}) only -%}
     {%- block end -%}
 
-      {%- if items|length -%}
+      {%- if template is defined -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default(['page-grid__item', 'page-grid__item--end'])}) -%}
+        {%- with arguments|merge({_template: template}) only -%}
 
-        <div {%- include 'atoms-attributes' %}>
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__end'])}) -%}
 
-          {%- for item in items -%}
+          {%- include _template -%}
 
-            {%- with item only -%}
-              {%- block endItem -%}
-
-                {%- include template with arguments only -%}
-
-              {%- endblock endItem -%}
-            {%- endwith -%}
-
-          {%- endfor -%}
-
-        </div>
+        {%- endwith -%}
 
       {%- endif -%}
 

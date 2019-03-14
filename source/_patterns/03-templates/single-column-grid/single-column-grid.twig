@@ -1,21 +1,37 @@
 {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['single-column-grid']) }) -%}
 
-<div {%- include 'atoms-attributes' %}>
+<{{ element|default('div') }} {%- include 'atoms-attributes' %}>
 
-  {%- with {content: content, isFull: isFull|default(false)} only -%}
-    {%- block content -%}
+  {%- for area in content -%}
+    {%- with area only -%}
 
-      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['single-column-grid__item']) }) -%}
+      {%- block item -%}
 
-      {%- if isFull -%}
-        {%- set attributes = attributes|merge({class: attributes.class|merge(['single-column-grid__item--full']) }) -%}
-      {%- endif -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['single-column-grid__item']) }) -%}
 
-      <div {%- include 'atoms-attributes' %}>
-        {%- include 'atoms-text' with {nodes: content} -%}
-      </div>
+        {%- if area is defined -%}
 
-    {%- endblock content -%}
-  {%- endwith -%}
+          {%- set attributes = attributes|merge({class: attributes.class|merge(['single-column-grid__item--' ~ area]) }) -%}
 
-</div>
+          <div {%- include 'atoms-attributes' %}>
+            {%- include 'atoms-text' with {nodes: content} -%}
+          </div>
+
+        {%- else -%}
+
+          {%- with arguments|merge({_template: template}) only -%}
+
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['single-column-grid__item'])}) -%}
+
+            {%- include _template -%}
+
+          {%- endwith -%}
+
+        {%- endif -%}
+
+      {%- endblock item -%}
+
+    {%- endwith -%}
+  {%- endfor -%}
+
+</{{ element|default('div') }}>

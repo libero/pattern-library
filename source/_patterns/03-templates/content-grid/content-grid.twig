@@ -1,53 +1,46 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid']) }) -%}
 
-{%- if secondaryContent|default([])|length -%}
+{%- set hasSecondary = false -%}
+{%- for area in content if area.area|default('full') == 'secondary' -%}
+  {%- set hasSecondary = true -%}
+{%- endfor -%}
+
+{%- if hasSecondary -%}
   {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid--has-secondary']) }) -%}
 {%- endif -%}
 
-<div {%- include 'atoms-attributes' %}>
+<{{ element|default('div') }} {%- include 'atoms-attributes' %}>
 
-  {%- with {content: tertiaryContent|default([])} only -%}
-    {%- block tertiaryContent -%}
+  {%- for area in content -%}
+    {%- with area only -%}
 
-      {%- if content|length -%}
+      {%- block item -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__tertiary']) }) -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__item']) }) -%}
 
-        <div {%- include 'atoms-attributes' %}>
-          {%- include 'atoms-text' with {nodes: content} -%}
-        </div>
+        {%- if area is defined -%}
 
-      {%- endif -%}
+          {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
 
-    {%- endblock tertiaryContent -%}
-  {%- endwith -%}
+          <div {%- include 'atoms-attributes' %}>
+            {%- include 'atoms-text' with {nodes: content} -%}
+          </div>
 
-  {%- with {content: primaryContent} only -%}
-    {%- block primaryContent -%}
+        {%- else -%}
 
-      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__primary']) }) -%}
+          {%- with arguments|merge({_template: template}) only -%}
 
-      <div {%- include 'atoms-attributes' %}>
-        {%- include 'atoms-text' with {nodes: content} -%}
-      </div>
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__item'])}) -%}
 
-    {%- endblock primaryContent -%}
-  {%- endwith -%}
+            {%- include _template -%}
 
-  {%- with {content: secondaryContent|default([])} only -%}
-    {%- block secondaryContent -%}
+          {%- endwith -%}
 
-      {%- if content|length -%}
+        {%- endif -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__secondary']) }) -%}
+      {%- endblock item -%}
 
-        <div {%- include 'atoms-attributes' %}>
-          {%- include 'atoms-text' with {nodes: content} -%}
-        </div>
+    {%- endwith -%}
+  {%- endfor -%}
 
-      {%- endif -%}
-
-    {%- endblock secondaryContent -%}
-  {%- endwith -%}
-
-</div>
+</{{ element|default('div') }}>

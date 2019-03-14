@@ -8,10 +8,9 @@
 
   @include base-grid($grid-max_width);
   grid-template-areas:
-    "start-edge tertiary  end-edge"
-    "start-edge primary   end-edge"
-    "start-edge secondary end-edge";
-  grid-template-columns: 1fr var(--primary-column-width) 1fr;
+    ". tertiary ."
+    ". primary  .";
+  grid-template-columns: [full-start] 1fr [main-start] var(--primary-column-width) [main-end] 1fr [full-end];
   grid-column-gap: var(--column-gap);
 
   @include mq($from: wide) {
@@ -22,10 +21,9 @@
     --secondary-column-width: #{column-width($secondary-columns)};
     --tertiary-column-width: #{column-width($tertiary-columns)};
     grid-template-areas:
-      "start-edge . tertiary  . end-edge"
-      "start-edge . primary   . end-edge"
-      "start-edge . secondary . end-edge";
-    grid-template-columns: 1fr var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) 1fr;
+      ". . tertiary . ."
+      ". . primary  . .";
+    grid-template-columns: [full-start] 1fr [main-start] var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
   }
 
   @include mq($from: x-wide) {
@@ -35,20 +33,25 @@
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
     --tertiary-column-width: #{column-width($tertiary-columns)};
-    grid-template-areas: "start-edge tertiary primary secondary end-edge";
+    grid-template-areas: ". tertiary primary . .";
   }
 }
 
 .content-grid--has-secondary {
+  grid-template-areas:
+    ". . tertiary  . ."
+    ". . primary   . ."
+    ". . secondary . .";
+
   @include mq($from: wide) {
     $primary-columns: floor($grid-main_column_count * 0.7);
     $secondary-columns: $grid-main_column_count - $primary-columns;
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
     grid-template-areas:
-      "start-edge tertiary tertiary  end-edge"
-      "start-edge primary  secondary end-edge";
-    grid-template-columns: 1fr var(--primary-column-width) var(--secondary-column-width) 1fr;
+      ". tertiary tertiary  ."
+      ". primary  secondary .";
+    grid-template-columns: [full-start] 1fr [main-start] var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
   }
 
   @include mq($from: x-wide) {
@@ -58,19 +61,31 @@
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
     --tertiary-column-width: #{column-width($tertiary-columns)};
-    grid-template-areas: "start-edge tertiary primary secondary end-edge";
-    grid-template-columns: 1fr var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) 1fr;
+    grid-template-areas: ". tertiary primary secondary .";
+    grid-template-columns: [full-start] 1fr [main-start] var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
   }
 }
 
-.content-grid__primary {
+.content-grid__item {
+  grid-column: main;
+}
+
+.content-grid__item--full {
+  grid-column: full;
+}
+
+.content-grid__item--main {
+  grid-column: main;
+}
+
+.content-grid__item--primary {
   grid-column: primary;
 }
 
-.content-grid__secondary {
+.content-grid__item--secondary {
   grid-column: secondary;
 }
 
-.content-grid__tertiary {
+.content-grid__item--tertiary {
   grid-column: tertiary;
 }

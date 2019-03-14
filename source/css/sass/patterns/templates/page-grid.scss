@@ -10,16 +10,16 @@
     "end";
 }
 
-.page-grid__item--start {
-  @include divider(block-end);
+.page-grid__start {
   grid-row: start;
+  @include divider(block-end);
 }
 
-.page-grid__item--main {
+.page-grid__main {
   grid-row: main;
 }
 
-.page-grid__item--end {
-  @include divider(block-start);
+.page-grid__end {
   grid-row: end;
+  @include divider(block-start);
 }

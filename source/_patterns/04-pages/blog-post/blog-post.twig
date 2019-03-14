@@ -1,14 +1,17 @@
 {% include 'templates-page-grid' with {
-  mainItems: [
-    {
-      template: 'organisms-content-header',
-      arguments: contentHeader,
+  main: {
+    template: 'templates-content-grid',
+    arguments: {
+      content: [
+        {
+          template: 'organisms-content-header',
+          arguments: contentHeader,
+        },
+        {
+          area: 'primary',
+          content: body,
+        },
+      ],
     },
-    {
-      template: 'templates-content-grid',
-      arguments: {
-        primaryContent: body,
-      },
-    },
-  ],
+  },
 } only %}

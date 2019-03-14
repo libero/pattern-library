@@ -1,6 +1,11 @@
-primaryContent:
-  - primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary
-secondaryContent:
-  - secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary
-tertiaryContent:
-  - tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary
+content:
+  - area: tertiary
+    content: tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiaryContent
+  - area: primary
+    content: primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary
+  - area: secondary
+    content: secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary secondary
+  - area: full
+    content: full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full full
+  - area: main
+    content: main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main

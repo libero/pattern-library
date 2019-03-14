@@ -1,4 +1,5 @@
-primaryContent:
-  - primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary
-tertiaryContent:
-  - tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary
+content:
+  - area: tertiary
+    content: tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiaryContent
+  - area: primary
+    content: primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary

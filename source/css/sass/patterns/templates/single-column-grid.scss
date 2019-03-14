@@ -4,12 +4,12 @@
 
 .single-column-grid {
   @include base-grid($grid-max_width);
-  grid-template-areas: "start-edge main end-edge";
+  grid-template-areas: ". main .";
   grid-template-columns: [full-start] 1fr #{column-width($grid-main_column_count)} 1fr [full-end];
   grid-column-gap: var(--column-gap);
 }
 
-.single-column-grid__item {
+.single-column-grid__item--main {
   grid-column: main;
 }
 
