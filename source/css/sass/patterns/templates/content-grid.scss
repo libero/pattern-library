@@ -66,16 +66,13 @@
   }
 }
 
-.content-grid__item {
+.content-grid__item,
+.content-grid__item--main {
   grid-column: main;
 }
 
 .content-grid__item--full {
   grid-column: full;
-}
-
-.content-grid__item--main {
-  grid-column: main;
 }
 
 .content-grid__item--primary {

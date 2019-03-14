@@ -14,10 +14,6 @@
   @include blg-spacing("block-start", "medium", "margin");
   @include blg-spacing("block-end", "small", "margin");
   @include divider("block-end");
-
-  &.single-column-grid__item {
-    grid-column: main;
-  }
 }
 
 .content-header__title {

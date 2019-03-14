@@ -9,6 +9,7 @@
   grid-column-gap: var(--column-gap);
 }
 
+.single-column-grid__item,
 .single-column-grid__item--main {
   grid-column: main;
 }
