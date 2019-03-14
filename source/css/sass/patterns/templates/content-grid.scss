@@ -14,6 +14,20 @@
   grid-template-columns: 1fr var(--primary-column-width) 1fr;
   grid-column-gap: var(--column-gap);
 
+  @include mq($from: wide) {
+    $primary-columns: $grid-main_column_count - 2;
+    $secondary-columns: floor(($grid-main_column_count - $primary-columns) / 2);
+    $tertiary-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
+    --primary-column-width: #{column-width($primary-columns)};
+    --secondary-column-width: #{column-width($secondary-columns)};
+    --tertiary-column-width: #{column-width($tertiary-columns)};
+    grid-template-areas:
+      "start-edge . tertiary  . end-edge"
+      "start-edge . primary   . end-edge"
+      "start-edge . secondary . end-edge";
+    grid-template-columns: 1fr var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) 1fr;
+  }
+
   @include mq($from: x-wide) {
     $primary-columns: floor($grid-main_column_count * 0.7);
     $secondary-columns: floor(($grid-main_column_count - $primary-columns) / 2);
@@ -22,12 +36,11 @@
     --secondary-column-width: #{column-width($secondary-columns)};
     --tertiary-column-width: #{column-width($tertiary-columns)};
     grid-template-areas: "start-edge tertiary primary secondary end-edge";
-    grid-template-columns: 1fr var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) 1fr;
   }
 }
 
 .content-grid--has-secondary {
-  @include mq($from: medium, $until: x-wide) {
+  @include mq($from: wide) {
     $primary-columns: floor($grid-main_column_count * 0.7);
     $secondary-columns: $grid-main_column_count - $primary-columns;
     --primary-column-width: #{column-width($primary-columns)};
@@ -45,6 +58,8 @@
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
     --tertiary-column-width: #{column-width($tertiary-columns)};
+    grid-template-areas: "start-edge tertiary primary secondary end-edge";
+    grid-template-columns: 1fr var(--tertiary-column-width) var(--primary-column-width) var(--secondary-column-width) 1fr;
   }
 }
 
