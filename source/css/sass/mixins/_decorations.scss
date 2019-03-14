@@ -1,5 +1,6 @@
+@import "../mixins/logical-properties";
 @import "../variables/color";
 
-@mixin divider($side) {
-  border-#{$side}: 1px solid $color-text-dividers;
+@mixin divider($dimension) {
+  @include logical-property(border, $dimension, 1px solid $color-text-dividers, $to-rem: false);
 }
