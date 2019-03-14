@@ -14,7 +14,7 @@
   @include blg-spacing("block-end", "small");
 
   &:after {
-    @include logical-property(border, block-end, 1px solid $color-text-dividers);
+    @include logical-property(border, block-end, 1px solid $color-text-dividers, $to-rem: false);
     content: "";
     display: block;
     @include padding($baselinegrid-space-small - 1, "block-start");

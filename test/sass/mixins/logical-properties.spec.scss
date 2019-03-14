@@ -141,6 +141,20 @@
 
     }
 
+    @include assert() {
+
+      @include output {
+        @include logical-property(margin, inline, 16px, $to-rem: false);
+      }
+
+      @include expect {
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-inline: 16px;
+      }
+
+    }
+
   }
 
   @include it("generates correct fallbacks for the dimension 'inline-start'") {
@@ -190,6 +204,29 @@
 
         html[dir] & {
           border-inline-start-width: 1rem;
+        }
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include logical-property(margin, inline-start, 16px, $to-rem: false);
+      }
+
+      @include expect {
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          margin-left: 16px;
+        }
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          margin-right: 16px;
+        }
+
+        html[dir] & {
+          margin-inline-start: 16px;
         }
       }
 
@@ -249,6 +286,29 @@
 
     }
 
+    @include assert() {
+
+      @include output {
+        @include logical-property(margin, inline-end, 16px, $to-rem: false);
+      }
+
+      @include expect {
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          margin-right: 16px;
+        }
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          margin-left: 16px;
+        }
+
+        html[dir] & {
+          margin-inline-end: 16px;
+        }
+      }
+
+    }
+
   }
 
   @include it("generates correct fallbacks for the dimension 'inline-size'") {
@@ -277,6 +337,19 @@
         max-width: 16px;
         max-width: 1rem;
         max-inline-size: 1rem;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include logical-property("", inline-size, 16px, $to-rem: false);
+      }
+
+      @include expect {
+        width: 16px;
+        inline-size: 16px;
       }
 
     }
@@ -395,6 +468,20 @@
 
     }
 
+    @include assert() {
+
+      @include output {
+        @include logical-property(margin, block, 16px, $to-rem: false);
+      }
+
+      @include expect {
+        margin-top: 16px;
+        margin-bottom: 16px;
+        margin-block: 16px;
+      }
+
+    }
+
   }
 
   @include it("generates correct fallbacks for the dimension 'block-start'") {
@@ -423,6 +510,19 @@
         border-top-width: 16px;
         border-top-width: 1rem;
         border-block-start-width: 1rem;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include logical-property(margin, block-start, 16px, $to-rem: false);
+      }
+
+      @include expect {
+        margin-top: 16px;
+        margin-block-start: 16px;
       }
 
     }
@@ -459,6 +559,19 @@
 
     }
 
+    @include assert() {
+
+      @include output {
+        @include logical-property(margin, block-end, 16px, $to-rem: false);
+      }
+
+      @include expect {
+        margin-bottom: 16px;
+        margin-block-end: 16px;
+      }
+
+    }
+
   }
 
   @include it("generates correct fallbacks for the dimension 'block-size'") {
@@ -487,6 +600,19 @@
         max-height: 16px;
         max-height: 1rem;
         max-block-size: 1rem;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include logical-property("", block-size, 16px, $to-rem: false);
+      }
+
+      @include expect {
+        height: 16px;
+        block-size: 16px;
       }
 
     }
