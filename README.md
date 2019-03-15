@@ -111,9 +111,9 @@ The single column grid will set content across the `main` part of the grid.
 ### `content-grid`
 The grid for all content pages (i.e. not listing pages). In addition to the `main` and `full` designations, this grid defines parts for `primaryContent`, `secondaryContent`, and `tertiaryContent`. Whether or not there is any `secondaryContent` determines the behavior of `primaryContent` on the grid. An absence of `tertiaryContent` does not affect the behaviour of the `primaryContent` nor any `tertiaryContent`.      
 
-### Styling
+## Styling
 
-#### CSS Custom Properties
+### CSS Custom Properties
 These guidelines govern the use of custom properties in this codebase:
 
 1. constant values should be defined in SCSS; there is no need to express these as custom properties
