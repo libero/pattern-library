@@ -1,0 +1,52 @@
+@import "../../mixins/sizes";
+@import "../../mixins/typography";
+
+.item-details {
+  @include blg-spacing("block-end", "small", "margin");
+}
+
+.item-detail-tag__title {
+  @include label-content-typography();
+  @include padding(0, "block");
+}
+
+.item-detail-tag {
+  list-style: none;
+  @include blg-spacing("block-end", "small", "margin");
+  @include label-tag-typography();
+  @include padding(0, "inline-start");
+}
+
+.item-detail-tag__single-line {
+  @include truncate-with-ellipsis();
+}
+
+.item-detail-tag__item {
+  display: inline;
+  @include label-content-typography($color: $color-text-secondary);
+
+  &:after {
+    content: ", ";
+  }
+
+  &:lang(ar):after {
+    content: "، ";
+  }
+
+  &:lang(ja):after {
+    content: "、";
+  }
+
+  &:last-child:after {
+    content: "";
+  }
+}
+
+.item-detail-tag__link {
+  text-decoration: inherit;
+  @include label-content-typography($color: $color-text-secondary);
+
+  &:hover {
+    color: $color-primary-dark;
+  }
+}
