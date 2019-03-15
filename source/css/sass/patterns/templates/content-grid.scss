@@ -39,9 +39,9 @@
 
 .content-grid--has-secondary {
   grid-template-areas:
-    ". . tertiary  . ."
-    ". . primary   . ."
-    ". . secondary . .";
+    ". tertiary  ."
+    ". primary   ."
+    ". secondary .";
 
   @include mq($from: wide) {
     $primary-columns: floor($grid-main_column_count * 0.7);
