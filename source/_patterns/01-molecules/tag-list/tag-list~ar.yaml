@@ -8,12 +8,8 @@ list:
           href: '#'
         text: أحمر
     - content:
-        attributes:
-          href: '#'
         text: برتقالي
     - content:
-        attributes:
-          href: '#'
         text: أصفر
     - content:
         attributes:
@@ -24,10 +20,6 @@ list:
           href: '#'
         text: أزرق
     - content:
-        attributes:
-          href: '#'
         text: نيلي
     - content:
-        attributes:
-          href: '#'
         text: بنفسجي

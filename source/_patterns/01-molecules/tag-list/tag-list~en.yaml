@@ -5,12 +5,8 @@ list:
           href: '#'
         text: Red
     - content:
-        attributes:
-          href: '#'
         text: Orange
     - content:
-        attributes:
-          href: '#'
         text: Yellow
     - content:
         attributes:
@@ -21,10 +17,6 @@ list:
           href: '#'
         text: Blue
     - content:
-        attributes:
-          href: '#'
         text: Indigo
     - content:
-        attributes:
-          href: '#'
         text: Violet

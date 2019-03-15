@@ -13,6 +13,5 @@ list:
         text: Tools and Resources
     - content:
         attributes:
-          href: '#'
           aria-label: Article Type
         text: Short Report
