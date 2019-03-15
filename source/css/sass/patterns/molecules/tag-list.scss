@@ -21,13 +21,6 @@
   @include truncate-with-ellipsis();
 }
 
-.item-tag__article-type {
-
-  .item-tag__link {
-    @include label-content-typography($color: $color-text-secondary);
-  }
-}
-
 .item-tag__item {
   display: inline;
   @include label-tag-typography();
