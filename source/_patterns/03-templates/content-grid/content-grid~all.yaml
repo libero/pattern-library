@@ -1,6 +1,6 @@
 content:
-  - area: tertiary
-    content: tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiary tertiaryContent
+  - area: extraNavigation
+    content: extraNavigation extraNavigation extraNavigation extraNavigation extraNavigation extraNavigation extraNavigation extraNavigation extraNavigation extraNavigation extraNavigation extraNavigation extraNavigation extraNavigationContent
   - area: primary
     content: primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary primary
   - area: secondary

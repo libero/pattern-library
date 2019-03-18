@@ -10,6 +10,12 @@ contentHeader:
       - content:
           text: Plant Biology
 
+extraNavigation:
+  - template: atoms-paragraph
+    arguments:
+      text: >
+        Extra navigation may go here
+
 primary:
   - template: molecules-section
     arguments:
@@ -98,15 +104,3 @@ primary:
                 flower by almost 50 million years. Contrary to mainstream belief, this would place the apparition of
                 flowering plants to the Early Jurassic, the period that saw dinosaurs dominating the planet. This
                 discovery may reshape our current understanding of the evolution of flowers.
-secondary:
-  - template: atoms-paragraph
-    arguments:
-      text: >
-        Secondary content: A world leader in advocacy for open science, Eisen, from University of California, Berkeley, and the Howard Hughes Medical Institute (HHMI), was chosen following a worldwide search and selection process. In addition to his scientific achievements as an HHMI Investigator and Professor of Molecular and Cell Biology, he has demonstrated outstanding leadership and commitment to reforming research communication for the benefit of scientists and society.
-
-tertiary:
-  - template: atoms-paragraph
-    arguments:
-      text: >
-        "Tertiary" area that needs renaming
-
