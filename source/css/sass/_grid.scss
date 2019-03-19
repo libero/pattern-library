@@ -2,16 +2,16 @@
 @import "variables/grid";
 
 :root {
-  --COLUMN-GAP: #{$grid-column_gap};
-  --COLUMN-WIDTH: calc((100% - (var(--EDGE-SPACE) * 2) - (var(--COLUMN-GAP) * #{$grid-main_column_count - 1})) / #{$grid-main_column_count});
-  --EDGE-SPACE: #{$grid-edge_space-medium};
+  --GRID-COLUMN-GAP: #{$grid-column_gap};
+  --GRID-COLUMN-WIDTH: calc((100% - (var(--GRID-EDGE-SPACE) * 2) - (var(--GRID-COLUMN-GAP) * #{$grid-main_column_count - 1})) / #{$grid-main_column_count});
+  --GRID-EDGE-SPACE: #{$grid-edge_space-medium};
 
   @include mq($from: medium) {
-    --EDGE-SPACE: #{$grid-edge_space-large};
+    --GRID-EDGE-SPACE: #{$grid-edge_space-large};
   }
 
   @include mq($from: x-wide) {
-    --COLUMN-GAP: #{($grid-max_width * $grid-column_gap) / 100%};
-    --COLUMN-WIDTH: calc((#{$grid-max_width} - (var(--COLUMN-GAP) * #{$grid-main_column_count - 1})) / #{$grid-main_column_count});
+    --GRID-COLUMN-GAP: #{($grid-max_width * $grid-column_gap) / 100%};
+    --GRID-COLUMN-WIDTH: calc((#{$grid-max_width} - (var(--GRID-COLUMN-GAP) * #{$grid-main_column_count - 1})) / #{$grid-main_column_count});
   }
 }
