@@ -8,7 +8,7 @@
 
   @include base-grid($grid-max_width);
   grid-template-areas:
-    ". extra-navigation ."
+    ". menu ."
     ". primary          .";
   grid-template-columns: [full-start] 1fr [main-start] var(--primary-column-width) [main-end] 1fr [full-end];
   grid-column-gap: var(--column-gap);
@@ -16,30 +16,30 @@
   @include mq($from: wide) {
     $primary-columns: $grid-main_column_count - 2;
     $secondary-columns: floor(($grid-main_column_count - $primary-columns) / 2);
-    $extra-navigation-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
+    $menu-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
-    --extra-navigation-column-width: #{column-width($extra-navigation-columns)};
+    --menu-column-width: #{column-width($menu-columns)};
     grid-template-areas:
-      ". . extra-navigation . ."
+      ". . menu . ."
       ". . primary          . .";
-    grid-template-columns: [full-start] 1fr [main-start] var(--extra-navigation-column-width) var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
+    grid-template-columns: [full-start] 1fr [main-start] var(--menu-column-width) var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
   }
 
   @include mq($from: x-wide) {
     $primary-columns: floor($grid-main_column_count * 0.7);
     $secondary-columns: floor(($grid-main_column_count - $primary-columns) / 2);
-    $extra-navigation-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
+    $menu-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
-    --extra-navigation-column-width: #{column-width($extra-navigation-columns)};
-    grid-template-areas: ". extra-navigation primary . .";
+    --menu-column-width: #{column-width($menu-columns)};
+    grid-template-areas: ". menu primary . .";
   }
 }
 
 .content-grid--has-secondary {
   grid-template-areas:
-    ". extra-navigation  ."
+    ". menu  ."
     ". primary           ."
     ". secondary         .";
 
@@ -49,7 +49,7 @@
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
     grid-template-areas:
-      ". extra-navigation extra-navigation  ."
+      ". menu menu  ."
       ". primary          secondary         .";
     grid-template-columns: [full-start] 1fr [main-start] var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
   }
@@ -57,12 +57,12 @@
   @include mq($from: x-wide) {
     $primary-columns: floor($grid-main_column_count * 0.6);
     $secondary-columns: floor($grid-main_column_count * 0.25);
-    $extra-navigation-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
+    $menu-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
-    --extra-navigation-column-width: #{column-width($extra-navigation-columns)};
-    grid-template-areas: ". extra-navigation primary secondary .";
-    grid-template-columns: [full-start] 1fr [main-start] var(--extra-navigation-column-width) var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
+    --menu-column-width: #{column-width($menu-columns)};
+    grid-template-areas: ". menu primary secondary .";
+    grid-template-columns: [full-start] 1fr [main-start] var(--menu-column-width) var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
   }
 }
 
@@ -83,6 +83,6 @@
   grid-column: secondary;
 }
 
-.content-grid__item--extra-navigation {
-  grid-column: extra-navigation;
+.content-grid__item--menu {
+  grid-column: menu;
 }

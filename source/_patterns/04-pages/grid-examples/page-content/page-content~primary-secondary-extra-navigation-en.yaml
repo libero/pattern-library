@@ -104,7 +104,7 @@ secondary:
       text: >
         Secondary content: A world leader in advocacy for open science, Eisen, from University of California, Berkeley, and the Howard Hughes Medical Institute (HHMI), was chosen following a worldwide search and selection process. In addition to his scientific achievements as an HHMI Investigator and Professor of Molecular and Cell Biology, he has demonstrated outstanding leadership and commitment to reforming research communication for the benefit of scientists and society.
 
-extraNavigation:
+menu:
   - template: atoms-paragraph
     arguments:
       text: >

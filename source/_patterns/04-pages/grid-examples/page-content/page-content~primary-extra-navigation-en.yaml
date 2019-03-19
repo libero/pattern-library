@@ -10,7 +10,7 @@ contentHeader:
       - content:
           text: Plant Biology
 
-extraNavigation:
+menu:
   - template: atoms-paragraph
     arguments:
       text: >
