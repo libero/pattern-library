@@ -14,12 +14,12 @@
   grid-column-gap: var(--GRID-COLUMN-GAP);
 
   @include mq($from: wide) {
-    $primary-columns: $grid-main_column_count - 2;
-    $secondary-columns: floor(($grid-main_column_count - $primary-columns) / 2);
-    $menu-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
-    --primary-column-width: #{get-overall-width($primary-columns)};
-    --secondary-column-width: #{get-overall-width($secondary-columns)};
-    --menu-column-width: #{get-overall-width($menu-columns)};
+    $primary-column-count: $grid-main_column_count - 2;
+    $secondary-column-count: floor(($grid-main_column_count - $primary-column-count) / 2);
+    $menu-column-count: $grid-main_column_count - $primary-column-count - $secondary-column-count;
+    --primary-column-width: #{get-overall-width($primary-column-count)};
+    --secondary-column-width: #{get-overall-width($secondary-column-count)};
+    --menu-column-width: #{get-overall-width($menu-column-count)};
     grid-template-areas:
       ". . menu    . ."
       ". . primary . .";
@@ -27,12 +27,12 @@
   }
 
   @include mq($from: x-wide) {
-    $primary-columns: floor($grid-main_column_count * 0.7);
-    $secondary-columns: floor(($grid-main_column_count - $primary-columns) / 2);
-    $menu-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
-    --primary-column-width: #{get-overall-width($primary-columns)};
-    --secondary-column-width: #{get-overall-width($secondary-columns)};
-    --menu-column-width: #{get-overall-width($menu-columns)};
+    $primary-column-count: floor($grid-main_column_count * 0.7);
+    $secondary-column-count: floor(($grid-main_column_count - $primary-column-count) / 2);
+    $menu-column-count: $grid-main_column_count - $primary-column-count - $secondary-column-count;
+    --primary-column-width: #{get-overall-width($primary-column-count)};
+    --secondary-column-width: #{get-overall-width($secondary-column-count)};
+    --menu-column-width: #{get-overall-width($menu-column-count)};
     grid-template-areas: ". menu primary . .";
   }
 }
@@ -44,10 +44,10 @@
     ". secondary .";
 
   @include mq($from: wide) {
-    $primary-columns: floor($grid-main_column_count * 0.7);
-    $secondary-columns: $grid-main_column_count - $primary-columns;
-    --primary-column-width: #{get-overall-width($primary-columns)};
-    --secondary-column-width: #{get-overall-width($secondary-columns)};
+    $primary-column-count: floor($grid-main_column_count * 0.7);
+    $secondary-column-count: $grid-main_column_count - $primary-column-count;
+    --primary-column-width: #{get-overall-width($primary-column-count)};
+    --secondary-column-width: #{get-overall-width($secondary-column-count)};
     grid-template-areas:
       ". menu    menu      ."
       ". primary secondary .";
@@ -55,12 +55,12 @@
   }
 
   @include mq($from: x-wide) {
-    $primary-columns: floor($grid-main_column_count * 0.6);
-    $secondary-columns: floor($grid-main_column_count * 0.25);
-    $menu-columns: $grid-main_column_count - $primary-columns - $secondary-columns;
-    --primary-column-width: #{get-overall-width($primary-columns)};
-    --secondary-column-width: #{get-overall-width($secondary-columns)};
-    --menu-column-width: #{get-overall-width($menu-columns)};
+    $primary-column-count: floor($grid-main_column_count * 0.6);
+    $secondary-column-count: floor($grid-main_column_count * 0.25);
+    $menu-column-count: $grid-main_column_count - $primary-column-count - $secondary-column-count;
+    --primary-column-width: #{get-overall-width($primary-column-count)};
+    --secondary-column-width: #{get-overall-width($secondary-column-count)};
+    --menu-column-width: #{get-overall-width($menu-column-count)};
     grid-template-areas: ". menu primary secondary .";
     grid-template-columns: [full-start] 1fr [main-start] var(--menu-column-width) var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
   }
