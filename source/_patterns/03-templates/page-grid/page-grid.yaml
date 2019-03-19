@@ -1,5 +1,5 @@
 start:
-  template: templates-single-column-grid
+  template: templates-content-grid
   arguments:
     content:
       - area: full
@@ -23,7 +23,7 @@ main:
       - area: main
         content: main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main main
 end:
-  template: templates-single-column-grid
+  template: templates-content-grid
   arguments:
     content:
       - area: main
