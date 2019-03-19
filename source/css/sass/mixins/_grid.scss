@@ -5,7 +5,7 @@
 @mixin base-grid($max-inline-size) {
   @include max-inline-size($max-inline-size);
   @include margin(auto, inline);
-  @include padding(1.6%, inline);
+  @include padding($grid-column_gap, inline);
   box-sizing: content-box;
 
   @supports (display: grid) and (--custom: property) {
