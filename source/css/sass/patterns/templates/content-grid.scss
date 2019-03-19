@@ -8,7 +8,7 @@
 
   @include base-grid($grid-max_width);
   grid-template-areas:
-    ". menu ."
+    ". menu             ."
     ". primary          .";
   grid-template-columns: [full-start] 1fr [main-start] var(--primary-column-width) [main-end] 1fr [full-end];
   grid-column-gap: var(--GRID-COLUMN-GAP);
@@ -21,7 +21,7 @@
     --secondary-column-width: #{column-width($secondary-columns)};
     --menu-column-width: #{column-width($menu-columns)};
     grid-template-areas:
-      ". . menu . ."
+      ". . menu             . ."
       ". . primary          . .";
     grid-template-columns: [full-start] 1fr [main-start] var(--menu-column-width) var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
   }
@@ -39,7 +39,7 @@
 
 .content-grid--has-secondary {
   grid-template-areas:
-    ". menu  ."
+    ". menu              ."
     ". primary           ."
     ". secondary         .";
 
@@ -49,7 +49,7 @@
     --primary-column-width: #{column-width($primary-columns)};
     --secondary-column-width: #{column-width($secondary-columns)};
     grid-template-areas:
-      ". menu menu  ."
+      ". menu menu        ."
       ". primary          secondary         .";
     grid-template-columns: [full-start] 1fr [main-start] var(--primary-column-width) var(--secondary-column-width) [main-end] 1fr [full-end];
   }
