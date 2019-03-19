@@ -7,7 +7,7 @@
 
     @include assert-equal(
       column-width(12),
-      calc((12 * var(--column-width)) + (11 * var(--column-gap)))
+      calc((12 * var(--COLUMN-WIDTH)) + (11 * var(--COLUMN-GAP)))
     );
 
   }

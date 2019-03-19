@@ -11,7 +11,7 @@
     ". menu ."
     ". primary          .";
   grid-template-columns: [full-start] 1fr [main-start] var(--primary-column-width) [main-end] 1fr [full-end];
-  grid-column-gap: var(--column-gap);
+  grid-column-gap: var(--COLUMN-GAP);
 
   @include mq($from: wide) {
     $primary-columns: $grid-main_column_count - 2;
