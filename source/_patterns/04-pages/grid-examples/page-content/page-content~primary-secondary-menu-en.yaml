@@ -108,5 +108,4 @@ menu:
   - template: atoms-paragraph
     arguments:
       text: >
-        Extra navigation may go here
-
+        Menu may go here
