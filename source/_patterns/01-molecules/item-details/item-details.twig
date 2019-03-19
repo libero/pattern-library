@@ -1,49 +1,39 @@
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-details']) }) -%}
+{%- with list only -%}
+  {%- block list -%}
 
-<div {%- include('atoms-attributes') -%}>
+    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-detail-tag']) }) -%}
 
-  {%- with list only -%}
-    {%- block list -%}
+    <ul {%- include('atoms-attributes') -%}>
 
-      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-detail-tag']) }) -%}
+      {%- for item in items -%}
 
-      {%- if itemDetails|default(false) -%}
-        {%- set attributes = attributes|merge({class: attributes.class|merge(['item-detail-tag__item']) }) -%}
-      {%- endif -%}
+        {%- with item only -%}
+          {%- block item -%}
 
-      <ul {%- include('atoms-attributes') -%}>
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-detail-tag__item']) }) -%}
 
-        {%- for item in items -%}
+            <li {%- include('atoms-attributes') -%}>
 
-          {%- with item only -%}
-            {%- block item -%}
+              {%- with content only -%}
+                {%- block content -%}
 
-              {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-detail-tag__item']) }) -%}
+                  {%- if attributes.href is defined -%}
+                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-detail-tag__link']) }) -%}
+                  {%- endif -%}
 
-              <li {%- include('atoms-attributes') -%}>
+                  {%- include 'atoms-link' -%}
 
-                {%- with content only -%}
-                  {%- block content -%}
+                {%- endblock content -%}
+              {%- endwith -%}
 
-                    {%- if attributes.href is defined -%}
-                      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-detail-tag__link']) }) -%}
-                    {%- endif -%}
+            </li>
 
-                    {%- include 'atoms-link' -%}
+          {%- endblock item -%}
+        {%- endwith -%}
 
-                  {%- endblock content -%}
-                {%- endwith -%}
+      {%- endfor -%}
 
-              </li>
+    </ul>
 
-            {%- endblock item -%}
-          {%- endwith -%}
-
-        {%- endfor -%}
-
-      </ul>
-
-    {%- endblock list -%}
-  {%- endwith -%}
-
-</div>
+  {%- endblock list -%}
+{%- endwith -%}
