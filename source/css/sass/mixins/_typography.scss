@@ -10,6 +10,11 @@
 $_default-font-map: $font;
 $_default-color-map: $color;
 
+@mixin set-font-size-and-line-height($font-size, $block-size: $baselinegrid-space-small) {
+  @include rem(font-size, $font-size);
+  line-height: $block-size / $font-size;
+}
+
 /* TODO: Consider a `strict` param that would use get-value-from-map rather than get-value-from-map-or-pass-through.
 
     This may allow better centralisation of the core bits of what happens when the key is not found in the map
@@ -80,7 +85,7 @@ $_default-color-map: $color;
 @mixin small-typography() {
   @include font-family(family-primary);
   font-style: normal;
-  @include set-font-size-and-vertical-height(11px);
+  @include set-font-size-and-line-height(11px);
 }
 
 @mixin body-para {
@@ -89,9 +94,33 @@ $_default-color-map: $color;
 }
 
 @mixin inline-image {
-  margin-bottom: 0.1em;
-  max-height: 1em;
+  @include margin(0.1em, "block-end");
+  @include max-block-size(1em);
   vertical-align: middle;
+}
+
+@mixin _base-font-variant-position($position) {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  @supports (font-variant-position: #{$position}) {
+    font-size: inherit;
+    font-variant-position: $position;
+    position: static;
+  }
+}
+
+@mixin font-variant-position($position) {
+  @if $position == sub {
+    @include _base_font-variant-position($position);
+    bottom: -0.25em; // stylelint-disable-line csstools/use-logical
+  } @else if $position == super {
+    @include _base_font-variant-position($position);
+    top: -0.5em; // stylelint-disable-line csstools/use-logical
+  } @else {
+    @include _error("Unknown position '#{$position}'");
+  }
 }
 
 @mixin _label-typography($color, $uppercase: true) {

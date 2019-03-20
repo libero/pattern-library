@@ -1,5 +1,5 @@
+@import "../mixins/types";
 @import "../variables/font";
-@import "../vendor/sass-rem/rem";
 
 @function get-font-size($designation) {
   @if map_has_key($font, $designation) {

@@ -86,7 +86,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.files.src.templates = [
     `${config.dir.src.templates}/*.twig`,
     `${config.dir.src.templates}/**/*.twig`,
-    `!${config.dir.src.templates}/03-pages/**/*.twig`,
+    `!${config.dir.src.templates}/04-pages/**/*.twig`,
   ];
   config.files.src.derivedConfigs = [
     `${config.dir.src.sass}/variables/**/*`,
@@ -186,7 +186,7 @@ const exportTemplates = () =>
       path.extname = '.html.twig';
     }))
     // Replace pattern-lab partial inclusion with generic Twig syntax
-    .pipe(replace(/(['"])(?:atoms|molecules|organisms)-(.+?)(\1)(?=[\s\S]*?(}}|%}))/g, '$1@LiberoPatterns/$2.html.twig$3'))
+    .pipe(replace(/(['"])(?:atoms|molecules|organisms|templates)-(.+?)(\1)(?=[\s\S]*?(}}|%}))/g, '$1@LiberoPatterns/$2.html.twig$3'))
     // Template files don't need their authoring hierarchy for downstream use
     .pipe(flatten({includeParents: false}))
     .pipe(gulp.dest(config.dir.out.templates));

@@ -5,6 +5,9 @@
     "./source/css/sass/variables/**/*",
     "./source/css/sass/vendor/**/*"
   ],
+  "plugins": [
+    "stylelint-use-logical"
+  ],
   "rules": {
     "block-closing-brace-newline-after": ["always", {"ignoreAtRules": ["if", "else"]}],
     "block-no-empty": true,
@@ -21,10 +24,11 @@
         "ignore": ["consecutive-duplicates-with-different-values"]
       }
     ],
+    "csstools/use-logical": "always",
     "declaration-block-semicolon-newline-after": "always",
     "declaration-block-semicolon-space-before": "never",
     "declaration-block-trailing-semicolon": "always",
-    "declaration-colon-space-after": "always",
+    "declaration-colon-space-after": "always-single-line",
     "declaration-colon-space-before": "never",
     "function-calc-no-unspaced-operator": true,
     "indentation": 2,

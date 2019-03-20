@@ -4,3 +4,7 @@
 @function get-grid-measure ($name, $map: $grid) {
   @return get-value-from-map($map, $name);
 }
+
+@function get-overall-width($columns) {
+  @return calc((#{$columns} * var(--GRID-COLUMN-WIDTH)) + (#{$columns - 1} * var(--GRID-COLUMN-GAP)));
+}
