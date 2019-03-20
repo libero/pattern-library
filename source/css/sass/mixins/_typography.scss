@@ -1,57 +1,89 @@
+@import "../functions/maps";
+@import "../functions/baselinegrid";
+@import "../functions/colors";
 @import "../mixins/types";
 @import "../variables/baselinegrid";
 @import "../variables/color";
 @import "../variables/font";
 @import "spacing";
 
+$_default-font-map: $font;
+$_default-color-map: $color;
+
 @mixin set-font-size-and-line-height($font-size, $block-size: $baselinegrid-space-small) {
   @include rem(font-size, $font-size);
   line-height: $block-size / $font-size;
 }
 
+/* TODO: Consider a `strict` param that would use get-value-from-map rather than get-value-from-map-or-pass-through.
+
+    This may allow better centralisation of the core bits of what happens when the key is not found in the map
+ */
+@mixin font-size($size, $map: $_default-font-map) {
+  $font-size: get-value-from-map-or-pass-through($map, $size);
+  @if is-a-px-number($font-size) or is-a-rem-number($font-size) {
+    @include rem(font-size, $font-size);
+    @if map_has_key($map, $size) {
+      font-size: var(--font-#{$size});
+    }
+
+  } @else {
+    @include _error("Font size must be set using a 'px'-suffixed number or a 'rem'-suffixed number.");
+  }
+
+}
+
+@mixin font-family($designation, $map: $_default-font-map) {
+  $font-family: get-value-from-map($map, $designation);
+  @if $font-family == "[Not found]" {
+    @include _error("Font family key `#{$designation}` not found in map");
+  } @else {
+    font-family: unquote($font-family);
+    font-family: var(--font-#{$designation});
+  }
+}
+
+@mixin set-font-size-and-vertical-height($font-size, $vertical-height: get-baselinegrid-measure(small), $map: $_default-font-map) {
+  @include font-size($font-size, $map);
+
+  @if map_has_key($map, $font-size) {
+    line-height: $vertical-height / map_get($map, $font-size);
+  } @else {
+    line-height: $vertical-height / $font-size;
+  }
+}
+
 @mixin _heading-base-typography() {
-  font-family: $font-secondary;
+  @include font-family(family-secondary);
   font-weight: 600;
 }
 
-@mixin h1-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height($font-size-h1, 48px);
-}
+@mixin heading-level-typography($level, $line-height: get-baselinegrid-measure(small), $map: $_default-font-map) {
+  @if type_of($level) != "number" or not unitless($level) or $level < 1 or $level > 6 {
+    @include _error("Invalid heading level `#{$level}` supplied");
+  } @else {
 
-@mixin h2-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height($font-size-h2, 30px);
-}
+    $key: size-h#{$level};
+    @if map_has_key($map, $key) {
+      $font-size: map_get($map, $key);
+      @include _heading-base-typography();
+      @include set-font-size-and-vertical-height($font-size, $line-height, $map);
+      font-size: var(--font-#{$key});
+    } @else {
+      @include _error("Font map is missing the definition of h#{$level} font size");
+    }
 
-@mixin h3-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height($font-size-h3);
-}
-
-@mixin h4-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height($font-size-h4);
-}
-
-@mixin h5-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height($font-size-h5);
-}
-
-@mixin h6-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height($font-size-h6);
+  }
 }
 
 @mixin body-typography() {
-  font-family: $font-primary;
-  @include set-font-size-and-line-height($font-size-base);
+  @include font-family(family-primary);
+  @include set-font-size-and-vertical-height(size-base);
   font-weight: normal;
 }
 
 @mixin small-typography() {
-  font-family: $font-primary;
+  @include font-family(family-primary);
   font-style: normal;
   @include set-font-size-and-line-height(11px);
 }
@@ -93,19 +125,24 @@
 
 @mixin _label-typography($color, $uppercase: true) {
   color: $color;
-  font-family: $font-secondary;
+  @include font-family(family-secondary);
   font-weight: normal;
-  @include set-font-size-and-line-height($font-size-label);
-  letter-spacing: $font-letterspacing-label;
+  @include set-font-size-and-vertical-height(size-label);
+  letter-spacing: #{letterspacing-label};
   @if $uppercase {
     text-transform: uppercase;
   }
 }
 
-@mixin label-content-typography($color: $color-text-secondary, $uppercase: true) {
-  @include _label-typography($color, $uppercase);
+@mixin label-content-typography($color: text-secondary, $uppercase: true, $map: $_default-color-map) {
+  $col: get-color($color, $map);
+  @if $col != "[Not found]" {
+    @include _label-typography($col, $uppercase);
+  } @else {
+    @include _error("Can't resolve `#{$color}` in the color map");
+  }
 }
 
 @mixin label-tag-typography() {
-  @include _label-typography($color-primary-normal);
+  @include _label-typography(get-color(primay-normal));
 }

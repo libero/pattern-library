@@ -3,10 +3,14 @@
 @import "sizes";
 @import "types";
 @import "../functions/validation";
+@import "../functions/baselinegrid";
+@import "../functions/grid";
 @import "../mixins/media-query";
 @import "../variables/baselinegrid";
 @import "../variables/breakpoint";
 @import "../variables/grid";
+
+$_default-baselinegrid-map: $baselinegrid;
 
 // Fallbacks for CSS logical properties contained within this mixin require the following treatment of HTML dir attributes:
 //  - document level: always specified, via the HTML element
@@ -94,33 +98,21 @@
 }
 
 // blg stands for "baseline grid"
+@mixin blg-spacing($dimension, $level, $type: "padding", $map: $_default-baselinegrid-map) {
 
-@mixin blg-spacing($dimension, $level, $type: "padding") {
-  @if $type == "padding" {
-    @if $level == "extra-small" {
-      @include padding($baselinegrid-space-extra-small, $dimension);
-    } @else if $level == "small" {
-      @include padding($baselinegrid-space-small, $dimension);
-    } @else if $level == "smallish" {
-      @include padding($baselinegrid-space-smallish, $dimension);
-    } @else if $level == "medium" {
-      @include padding($baselinegrid-space-medium, $dimension);
-    } @else if $level == "large" {
-      @include padding($baselinegrid-space-large, $dimension);
-    }
-  } @else if $type == "margin" {
-    @if $level == "extra-small" {
-      @include margin($baselinegrid-space-extra-small, $dimension);
-    } @else if $level == "small" {
-      @include margin($baselinegrid-space-small, $dimension);
-    } @else if $level == "smallish" {
-      @include margin($baselinegrid-space-smallish, $dimension);
-    } @else if $level == "medium" {
-      @include margin($baselinegrid-space-medium, $dimension);
-    } @else if $level == "large" {
-      @include margin($baselinegrid-space-large, $dimension);
-    }
+  $baselinegrid-measure: get-baselinegrid-measure($level, $map);
+  @if $baselinegrid-measure == "[Not found]" {
+    @include _error("Expected supplied level `#{$level}` to be a baselinegrid map key");
   }
+
+  @if $type == "margin" {
+    @include margin($baselinegrid-measure, $dimension);
+  } @else if $type == "padding" {
+    @include padding($baselinegrid-measure, $dimension);
+  } @else {
+    @include _error("Supplied type was neither margin nor padding: got `#{$type}`");
+  }
+
 }
 
 @mixin blg-pad-top--small-to-medium {
@@ -193,49 +185,49 @@
 
 }
 
-@mixin blg-column-container() {
+@mixin blg-column-container {
   @include blg-margin-bottom--medium-to-large();
 }
 
-@mixin h1-spacing() {
+@mixin h1-spacing {
   margin: 0;
 }
 
-@mixin h2-spacing() {
+@mixin h2-spacing {
   margin: 0;
   @include padding(21px, "block-end");
   @include padding(21px, "block-start");
 }
 
-@mixin h3-spacing() {
+@mixin h3-spacing {
   margin: 0;
   @include blg-spacing("block-start", "extra-small");
   @include blg-spacing("block-end", "extra-small");
 }
 
-@mixin h4-spacing() {
+@mixin h4-spacing {
   margin: 0;
   @include blg-spacing("block-start", "extra-small");
   @include blg-spacing("block-end", "extra-small");
 }
 
-@mixin h5-spacing() {
+@mixin h5-spacing {
   margin: 0;
   @include blg-spacing("block-start", "extra-small");
   @include blg-spacing("block-end", "extra-small");
 }
 
-@mixin h6-spacing() {
+@mixin h6-spacing {
   margin: 0;
   @include padding(10px, "block-start");
   @include padding(14px, "block-end");
 }
 
-@mixin body-spacing() {
+@mixin body-spacing {
   margin: 0;
   @include blg-spacing("block-end", "small", "margin");
 }
 
-@mixin small-spacing() {
+@mixin small-spacing {
   @include blg-spacing("block-end", "small");
 }

@@ -2539,3 +2539,187 @@
   }
 
 }
+
+@include describe("@mixin blg-spacing") {
+
+  $fixture-map: (
+    space-extra_small: 16px,
+    space-small: 32px,
+    space-smallish: 48px,
+    space-medium: 64px,
+    space-large: 80px,
+    space-extra_large: 96px,
+  );
+  $fixture-dimension: block-start;
+  $fixture-level: space-small;
+  $fixture-type: padding;
+
+  $rem-number-by-level: (
+    space-extra_small: 1rem,
+    space-small: 2rem,
+    space-smallish: 3rem,
+    space-medium: 4rem,
+    space-large: 5rem,
+    space-extra_large: 6rem,
+  );
+
+  @include it("errors if the type supplied is neither padding nor margin") {
+
+    @include assert() {
+
+      @include output {
+        @include blg-spacing($fixture-dimension, $fixture-level, neither-padding-nor-margin, $fixture-map);
+      }
+
+      @include contains {
+        _error: "Supplied type was neither margin nor padding: got `neither-padding-nor-margin`";
+      }
+
+    }
+
+  }
+
+  @include it("errors if the level supplied is not a key in the map") {
+
+    @include assert() {
+
+      @include output {
+        @include blg-spacing($fixture-dimension, not-a-map-key, $fixture-type, $fixture-map);
+      }
+
+      @include contains {
+        _error: "Expected supplied level `not-a-map-key` to be a baselinegrid map key";
+      }
+
+    }
+
+  }
+
+  @include it("sets padding-block-start correctly when given padding as the type and block-start as the dimension") {
+
+    @include assert() {
+      @include output() {
+        @include blg-spacing(block-start, $fixture-level, padding, $fixture-map);
+      }
+
+      @include contains() {
+        padding-block-start: map_get($rem-number-by-level, $fixture-level);
+      }
+
+    }
+
+  }
+
+  @include it("sets margin-block-start correctly when given margin as the type and block-start as the dimension") {
+
+    @include assert() {
+
+      @include output {
+        @include blg-spacing(block-start, $fixture-level, margin, $fixture-map);
+      }
+
+      @include contains {
+        margin-block-start: map_get($rem-number-by-level, $fixture-level);
+      }
+
+    }
+
+  }
+
+  @include it("sets the spacing quantity as extra-small when supplied with the level extra-small") {
+
+    @include assert() {
+
+      @include output {
+        @include blg-spacing($fixture-dimension, space-extra-small, $fixture-type, $fixture-map);
+      }
+
+      @include contains {
+        #{$fixture-type}-#{$fixture-dimension}: map_get($rem-number-by-level, space-extra-small);
+      }
+
+    }
+
+  }
+
+  @include it("sets the spacing quantity as small when supplied with the level small") {
+
+    @include assert() {
+
+      @include output {
+        @include blg-spacing($fixture-dimension, space-small, $fixture-type, $fixture-map);
+      }
+
+      @include contains {
+        #{$fixture-type}-#{$fixture-dimension}: map_get($rem-number-by-level, space-small);
+      }
+
+    }
+
+  }
+
+  @include it("sets the spacing quantity as smallish when supplied with the level smallish") {
+
+    @include assert() {
+
+      @include output {
+        @include blg-spacing($fixture-dimension, space-smallish, $fixture-type, $fixture-map);
+      }
+
+      @include contains {
+        #{$fixture-type}-#{$fixture-dimension}: map_get($rem-number-by-level, space-smallish);
+      }
+
+    }
+
+  }
+
+  @include it("sets the spacing quantity as medium when supplied with the level medium") {
+
+    @include assert() {
+
+      @include output {
+        @include blg-spacing($fixture-dimension, space-medium, $fixture-type, $fixture-map);
+      }
+
+      @include contains {
+        #{$fixture-type}-#{$fixture-dimension}: map_get($rem-number-by-level, space-medium);
+      }
+
+    }
+
+  }
+
+  @include it("sets the spacing quantity as large when supplied with the level large") {
+
+    @include assert() {
+
+      @include output {
+        @include blg-spacing($fixture-dimension, space-large, $fixture-type, $fixture-map);
+      }
+
+      @include contains {
+        #{$fixture-type}-#{$fixture-dimension}: map_get($rem-number-by-level, space-large);
+      }
+
+    }
+
+  }
+
+  @include it("sets the spacing quantity as extra large when supplied with the level extra large") {
+
+    @include assert() {
+
+      @include output {
+        @include blg-spacing($fixture-dimension, space-extra-large, $fixture-type, $fixture-map);
+      }
+
+      @include contains {
+        #{$fixture-type}-#{$fixture-dimension}: map_get($rem-number-by-level, space-extra-large);
+      }
+
+    }
+
+  }
+
+}

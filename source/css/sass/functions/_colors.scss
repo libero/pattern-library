@@ -1,0 +1,6 @@
+@import "../variables/color";
+@import "maps";
+
+@function get-color($name, $map: $color) {
+  @return get-value-from-map($map, $name);
+}

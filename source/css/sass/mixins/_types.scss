@@ -1,8 +1,6 @@
+@import "../functions/types";
 @import "../variables/font";
 @import "../vendor/sass-rem/rem";
-
-$rem-baseline: $font-size-base;
-$rem-fallback: true;
 
 // Overridden to apply https://github.com/pierreburel/sass-rem/pull/12
 @mixin rem($properties, $values...) {

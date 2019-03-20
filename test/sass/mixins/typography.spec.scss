@@ -1,6 +1,447 @@
 @import "../test";
 @import "../../../source/css/sass/mixins/typography";
 
+@include describe("@mixin font-size") {
+
+  @include it("sets the font size using the map's value when the argument is a map key") {
+
+    @include assert() {
+
+      $fixture: (
+        some-size: 16px,
+      );
+
+      @include output {
+        @include font-size(some-size, $fixture);
+      }
+
+      @include expect {
+        font-size: 16px;
+        font-size: 1rem;
+        font-size: var(--font-some-size);
+      }
+
+    }
+
+  }
+
+  @include it("sets the font size using the argument directly when it's not a map key") {
+
+    @include assert() {
+
+      $fixture: (
+        some-size: 16px,
+      );
+
+      @include output {
+        @include font-size(32px, $fixture);
+      }
+
+      @include expect {
+        font-size: 32px;
+        font-size: 2rem;
+      }
+
+    }
+
+  }
+
+  @include it("can accommodate rem numbers") {
+
+    @include assert() {
+
+      $fixture: (
+        some-size: 1rem,
+      );
+
+      @include output {
+        @include font-size(2rem, $fixture);
+      }
+
+      @include expect {
+        font-size: 32px;
+        font-size: 2rem;
+      }
+
+    }
+
+  }
+
+  @include it("can accommodate px numbers") {
+
+    @include assert() {
+
+      $fixture: (
+        some-size: 16px,
+      );
+
+      @include output {
+        @include font-size(32px, $fixture);
+      }
+
+      @include expect {
+        font-size: 32px;
+        font-size: 2rem;
+      }
+
+    }
+
+  }
+  @include it("errors if the argument does not resolve to a number") {
+
+    @include assert() {
+
+      $fixture: (
+        some-key: (one, two, three, px),
+      );
+
+      @include output {
+        @include font-size(some-key, $fixture);
+      }
+
+      @include expect {
+        _error: "Font size must be set using a 'px'-suffixed number or a 'rem'-suffixed number.";
+      }
+
+    }
+
+  }
+
+  @include it("errors if the argument does not resolve to a 'px'-suffixed or 'rem'-suffixed number") {
+
+    @include assert() {
+
+      $fixture: (
+        some-key: a-string-i-do-not-have-a-px-suffix-but-i-do-end-in-rem,
+      );
+
+      @include output {
+        @include font-size(some-key, $fixture);
+      }
+
+      @include expect {
+        _error: "Font size must be set using a 'px'-suffixed number or a 'rem'-suffixed number.";
+      }
+
+    }
+
+  }
+}
+
+@include describe("@mixin font-family") {
+
+  @include it("sets the font family using the map's value when the argument is a map key") {
+
+    @include assert() {
+
+      $fixture: (
+        some-font-family: '"Noto Sans", Arial, Helvetica, sans-serif',
+      );
+
+      @include output {
+        @include font-family(some-font-family, $fixture);
+      }
+
+      @include expect {
+        font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+        font-family: var(--font-some-font-family);
+      }
+
+    }
+
+  }
+
+  @include it("errors when the argument is not a map key") {
+
+    @include assert() {
+
+      $fixture: (one: two);
+
+      @include output {
+        @include font-family(non-existent-key, $fixture);
+      }
+
+      @include expect {
+        _error: "Font family key `non-existent-key` not found in map";
+      }
+
+    }
+
+  }
+
+}
+
+@include describe("@mixin label-content-typography") {
+
+  @include it("Errors if the color argument supplied is not found in the color map") {
+
+    @include assert() {
+
+      $fixture: (some-key: some-value);
+
+      @include output {
+        @include label-content-typography(not-a-color-map-key, true, $fixture);
+      }
+
+      @include expect {
+        _error: "Can't resolve `not-a-color-map-key` in the color map";
+      }
+
+    }
+
+  }
+
+  @include it("Sets the color to be the value of the key in the color map if the color argument supplied is found in the color map") {
+
+    @include assert() {
+
+      $fixture: (some-color: red);
+
+      @include output {
+        @include label-content-typography(some-color, true, $fixture);
+      }
+
+      @include contains {
+        color: red;
+      }
+
+    }
+
+  }
+
+}
+
+@include describe("@mixin heading-level-typography") {
+
+  $fixture-map: (
+    size-h1: 10px,
+    size-h2: 20px,
+    size-h3: 30px,
+    size-h4: 40px,
+    size-h5: 50px,
+    size-h6: 60px,
+    // invalid heading size in order to verify the mixin doesn't use it
+    size-h7: 70px,
+  );
+  $fixture-line-height: 24px;
+
+  @include it("sets the h1 font size when supplied level 1") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(1, $fixture-line-height, $fixture-map);
+      }
+
+      @include contains {
+        font-size: 10px;
+        font-size: var(--font-size-h1);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h1 font size when supplied level 2") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(2, $fixture-line-height, $fixture-map);
+      }
+
+      @include contains {
+        font-size: 20px;
+        font-size: var(--font-size-h2);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h1 font size when supplied level 3") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(3, $fixture-line-height, $fixture-map);
+      }
+
+      @include contains {
+        font-size: 30px;
+        font-size: var(--font-size-h3);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h1 font size when supplied level 4") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(4, $fixture-line-height, $fixture-map);
+      }
+
+      @include contains {
+        font-size: 40px;
+        font-size: var(--font-size-h4);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h5 font size when supplied level 5") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(5, $fixture-line-height, $fixture-map);
+      }
+
+      @include contains {
+        font-size: 50px;
+        font-size: var(--font-size-h5);
+      }
+
+    }
+
+  }
+
+  @include it("sets the h6 font size when supplied level 6") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(6, $fixture-line-height, $fixture-map);
+      }
+
+      @include contains {
+        font-size: 60px;
+        font-size: var(--font-size-h6);
+      }
+
+    }
+
+  }
+
+  @include it("errors if supplied a heading level argument not between 1 and 6 inclusive") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(7, $fixture-line-height, $fixture-map);
+      }
+
+      @include expect() {
+        _error: "Invalid heading level `7` supplied";
+      }
+
+    }
+
+  }
+
+  @include it("errors a valid headling level lacks a font size defninition in the map") {
+
+    @include assert() {
+
+      @include output {
+        @include heading-level-typography(1, $fixture-line-height, (size-h2: 20px));
+      }
+
+      @include expect() {
+        _error: "Font map is missing the definition of h1 font size";
+      }
+
+    }
+
+  }
+
+}
+
+@include describe("@mixin set-font-size-and-vertical-height") {
+
+  @include it("sets the font size when directly supplied") {
+
+    @include assert() {
+
+      @include output {
+        @include set-font-size-and-vertical-height(32px);
+      }
+
+      @include contains {
+        font-size: 32px;
+        font-size: 2rem;
+      }
+
+    }
+
+  }
+
+  @include it("sets the font size when supplied via the a map") {
+
+    @include assert() {
+
+      $fixture-map: (base-size: 16px);
+      $fixture-desired-height: 32px;
+
+      @include output {
+        @include set-font-size-and-vertical-height(base-size, $fixture-desired-height, $fixture-map);
+      }
+
+      @include contains {
+        font-size: 16px;
+        font-size: 1rem;
+        font-size: var(--font-base-size);
+      }
+
+    }
+
+  }
+
+  @include it("correctly calculates the line height in order to obtain the supplied vertical height, taking into account the font size when supplied directly") {
+
+    @include it("sets the font size when directly supplied") {
+
+      @include assert() {
+
+        @include output {
+          @include set-font-size-and-vertical-height(32px, 40px);
+        }
+
+        @include contains {
+          line-height: 1.25;
+        }
+
+      }
+
+    }
+
+  }
+
+  @include it("correctly calculates the line height in order to obtain the supplied vertical height, taking into account the font size when supplied via a map") {
+
+    @include assert() {
+
+      $fixture-map: (base-size: 16px);
+      $fixture-desired-height: 32px;
+
+      @include output {
+        @include set-font-size-and-vertical-height(base-size, $fixture-desired-height, $fixture-map);
+      }
+
+      @include contains {
+        line-height: 2;
+      }
+
+    }
+
+  }
+
+}
+
 @include describe("@mixin font-variant-position") {
 
   @include it("generates correct fallbacks with position 'sub'") {

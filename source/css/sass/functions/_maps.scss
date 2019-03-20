@@ -1,0 +1,16 @@
+@function get-value-from-map($map, $key) {
+
+  @if type_of($map) == "map" and map_has_key($map, $key) {
+    @return map_get($map, $key);
+  }
+
+  @return "[Not found]";
+}
+
+@function get-value-from-map-or-pass-through($map, $keyOrDefault) {
+  $value: get-value-from-map($map, $keyOrDefault);
+  @if $value == "[Not found]" {
+    $value: $keyOrDefault;
+  }
+  @return $value;
+}

@@ -1,5 +1,27 @@
-@import "../mixins/types";
 @import "../variables/font";
 
-$rem-baseline: $font-size-base;
+@function get-font-size($designation) {
+  @if map_has_key($font, $designation) {
+    @return map_get($font, $designation);
+  }
+
+  @error "Key #{$designation} not found in the $font map.";
+}
+
+@function is-a-px-number($candidate) {
+  $passed: type_of($candidate) == "number";
+  $passed: $passed and type_of($candidate / 1px);
+  $passed: $passed and unitless($candidate / 1px);
+  @return $passed;
+}
+
+@function is-a-rem-number($candidate) {
+  $passed: type_of($candidate) == "number";
+  $passed: $passed and type_of($candidate / 1rem);
+  $passed: $passed and unitless($candidate / 1rem);
+  @return $passed;
+}
+
+//$rem-baseline: $font-size-base;
+$rem-baseline: get-font-size(size-base);
 $rem-fallback: true;

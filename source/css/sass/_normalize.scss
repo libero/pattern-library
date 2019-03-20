@@ -2,6 +2,7 @@
 @import "mixins/typography";
 @import "variables/color";
 @import "vendor/normalize.css/normalize";
+@import "functions/colors";
 
 *,
 *:before,
@@ -15,39 +16,39 @@ body {
 }
 
 body {
-  background-color: $color-background;
-  color: $color-text-normal;
+  background-color: get-color(background);
+  color: get-color(normal);
   text-rendering: optimizeLegibility;
   @include body-typography();
 }
 
 h1 {
-  @include h1-typography();
+  @include heading-level-typography(1, 48px);
   @include h1-spacing();
 }
 
 h2 {
-  @include h2-typography();
+  @include heading-level-typography(1, 30px);
   @include h2-spacing();
 }
 
 h3 {
-  @include h3-typography();
+  @include heading-level-typography(3);
   @include h3-spacing();
 }
 
 h4 {
-  @include h4-typography();
+  @include heading-level-typography(4);
   @include h4-spacing();
 }
 
 h5 {
-  @include h5-typography();
+  @include heading-level-typography(5);
   @include h5-spacing();
 }
 
 h6 {
-  @include h6-typography();
+  @include heading-level-typography(6);
   @include h6-spacing();
 }
 
@@ -56,7 +57,7 @@ p {
 }
 
 a {
-  color: $color-primary-normal;
+  color: get-color(primary-normal);
   text-decoration: none;
 }
 

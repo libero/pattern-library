@@ -1,0 +1,6 @@
+@import "../variables/baselinegrid";
+@import "maps";
+
+@function get-baselinegrid-measure ($name, $map: $baselinegrid) {
+  @return get-value-from-map($map, $name);
+}
