@@ -66,10 +66,7 @@
   }
 }
 
-.content-grid__item {
-  grid-column: main;
-}
-
+.content-grid__item,
 .content-grid__item--main {
   grid-column: main;
 }
