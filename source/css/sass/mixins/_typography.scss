@@ -109,3 +109,17 @@
 @mixin label-tag-typography() {
   @include _label-typography($color-primary-normal);
 }
+
+@mixin hidden-link($hover-color: $color-primary-dark) {
+  color: inherit;
+  text-decoration: inherit;
+  all: inherit;
+
+  @supports (all: inherit) {
+    cursor: pointer;
+  }
+
+  &:hover {
+    color: $hover-color;
+  }
+}
