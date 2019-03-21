@@ -1,7 +1,8 @@
-{%- with list only -%}
-  {%- block list -%}
 
-    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-detail-tag']) }) -%}
+
+{%- with list only -%}
+
+    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta']) }) -%}
 
     <ul {%- include('atoms-attributes') -%}>
 
@@ -10,7 +11,7 @@
         {%- with item only -%}
           {%- block item -%}
 
-            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-detail-tag__item']) }) -%}
+            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__item']) }) -%}
 
             <li {%- include('atoms-attributes') -%}>
 
@@ -18,7 +19,7 @@
                 {%- block content -%}
 
                   {%- if attributes.href is defined -%}
-                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-detail-tag__link']) }) -%}
+                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__link']) }) -%}
                   {%- endif -%}
 
                   {%- include 'atoms-link' -%}
@@ -34,6 +35,4 @@
       {%- endfor -%}
 
     </ul>
-
-  {%- endblock list -%}
 {%- endwith -%}
