@@ -11,7 +11,12 @@
   @include label-content-typography($color: $color-text-secondary);
 
   &:after {
-    content: " ";
+    @include margin(0 5px);
+    content: " \00B7  ";
+    display: inline-block;
+    font-size: 150%;
+    position: relative;
+    top: 2px; // stylelint-disable-line csstools/use-logical
   }
 
   &:last-child:after {
