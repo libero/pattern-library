@@ -8,12 +8,12 @@
 .content-header {
   text-align: center;
   @include padding($baselinegrid-space-medium, block-start);
-  @include block-spacing($baselinegrid-space-medium);
+  @include block-spacing($end: $baselinegrid-space-medium);
   @include divider(block-end);
 }
 
 .content-header__title {
-  @include block-spacing($baselinegrid-space-medium);
+  @include block-spacing($end: $baselinegrid-space-medium);
 }
 
 .content-header__title--xx-short {

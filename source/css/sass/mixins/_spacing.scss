@@ -93,7 +93,7 @@
   @include padding(0, $dimension);
 }
 
-@mixin block-spacing($end: $baselinegrid-space-small, $start: 0) {
+@mixin block-spacing($start: 0, $end: $baselinegrid-space-small) {
   @include margin($start $end, block);
 }
 
@@ -106,19 +106,19 @@
 }
 
 @mixin h3-spacing() {
-  @include block-spacing($baselinegrid-space-extra_small);
+  @include block-spacing($end: $baselinegrid-space-extra_small);
 }
 
 @mixin h4-spacing() {
-  @include block-spacing($baselinegrid-space-extra_small);
+  @include block-spacing($end: $baselinegrid-space-extra_small);
 }
 
 @mixin h5-spacing() {
-  @include block-spacing($baselinegrid-space-extra_small);
+  @include block-spacing($end: $baselinegrid-space-extra_small);
 }
 
 @mixin h6-spacing() {
-  @include block-spacing($baselinegrid-space-extra_small);
+  @include block-spacing($end: $baselinegrid-space-extra_small);
 }
 
 @mixin list-style-none() {

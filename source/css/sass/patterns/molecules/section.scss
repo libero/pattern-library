@@ -2,5 +2,5 @@
 @import "../../variables/baselinegrid";
 
 .section__body {
-  @include block-spacing($baselinegrid-space-medium);
+  @include block-spacing($end: $baselinegrid-space-medium);
 }

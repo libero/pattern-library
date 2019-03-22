@@ -85,7 +85,7 @@ ol,
 ul {
   dd > &,
   li > & {
-    @include block-spacing(0);
+    @include block-spacing($end: 0);
   }
 }
 
@@ -98,7 +98,7 @@ dt {
   font-weight: bold;
 
   dd + & {
-    @include block-spacing($start: $baselinegrid-space-small, $end: 0);
+    @include block-spacing($baselinegrid-space-small, 0);
   }
 }
 
