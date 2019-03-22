@@ -36,43 +36,43 @@
       @include rem($space-type, $sizes);
     }
 
-  } @else if $dimension == "inline" {
+  } @else if $dimension == inline {
 
     @include _expect_at_most($sizes, 2, "More than two sizes supplied with 'inline' dimension") {
       @include logical-property($space-type, $dimension, $sizes);
     }
 
-  } @else if $dimension == "inline-start" {
+  } @else if $dimension == inline-start {
 
     @include _expect_single_value($sizes, "More than one size supplied with 'inline-start' dimension") {
       @include logical-property($space-type, $dimension, $sizes);
     }
 
-  } @else if $dimension == "inline-end" {
+  } @else if $dimension == inline-end {
 
     @include _expect_single_value($sizes, "More than one size supplied with 'inline-end' dimension") {
       @include logical-property($space-type, $dimension, $sizes);
     }
 
-  } @else if $dimension == "block" {
+  } @else if $dimension == block {
 
     @include _expect_at_most($sizes, 2, "More than two sizes supplied with 'block' dimension") {
       @include logical-property($space-type, $dimension, $sizes);
     }
 
-  } @else if $dimension == "block-start" {
+  } @else if $dimension == block-start {
 
     @include _expect_single_value($sizes, "More than one size supplied with 'block-start' dimension") {
       @include logical-property($space-type, $dimension, $sizes);
     }
 
-  } @else if $dimension == "block-end" {
+  } @else if $dimension == block-end {
 
     @include _expect_single_value($sizes, "More than one size supplied with 'block-end' dimension") {
       @include logical-property($space-type, $dimension, $sizes);
     }
 
-  } @else if index(("top", "bottom", "left", "right"), $dimension) {
+  } @else if index((top, bottom, left, right), $dimension) {
     @include _error("'#{$dimension}' is a physical dimension, use its logical equivilant");
   } @else {
     @include _error("Unknown dimension '#{$dimension}'");
@@ -123,5 +123,5 @@
 
 @mixin list-style-none() {
   list-style: none;
-  @include padding(0, "inline-start");
+  @include padding(0, inline-start);
 }

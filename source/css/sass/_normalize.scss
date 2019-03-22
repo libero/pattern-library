@@ -77,7 +77,7 @@ ul {
 }
 
 figure {
-  @include margin(0, "inline");
+  @include margin(0, inline);
 }
 
 dl,
@@ -103,7 +103,7 @@ dt {
 }
 
 dd {
-  @include margin(0, "inline-start");
+  @include margin(0, inline-start);
 }
 
 address,

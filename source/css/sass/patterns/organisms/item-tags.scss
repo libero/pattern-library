@@ -3,9 +3,9 @@
 @import "../../mixins/spacing";
 
 .item-tags {
-  @include padding($baselinegrid-space-medium, "block-start");
+  @include padding($baselinegrid-space-medium, block-start);
   @include block-spacing($baselinegrid-space-medium);
-  @include divider("block-start");
+  @include divider(block-start);
   text-align: center;
 
   @include mq($from: medium) {

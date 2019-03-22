@@ -58,7 +58,7 @@
 }
 
 @mixin inline-image {
-  @include margin(0.1em, "block-end");
+  @include margin(0.1em, block-end);
   @include max-block-size(1em);
   vertical-align: middle;
 }
