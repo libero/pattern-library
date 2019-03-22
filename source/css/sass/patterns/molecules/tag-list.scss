@@ -43,5 +43,5 @@
 }
 
 .tag-list__link {
-  @include hidden-link();
+  @include covert-link();
 }
