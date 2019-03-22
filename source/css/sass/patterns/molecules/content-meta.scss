@@ -4,7 +4,6 @@
 .content-meta {
   @include remove-bullets-unordered-list();
   @include blg-spacing("block-end", "small", "margin");
-  @include padding(0, "inline-start");
 }
 
 .content-meta__item {
