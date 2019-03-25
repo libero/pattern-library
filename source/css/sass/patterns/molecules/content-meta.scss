@@ -11,12 +11,10 @@
   @include label-content-typography();
 
   &:after {
-    @include margin(0.5em, inline);
-    content: "\2022";
+    content: "\a0\2022\a0";
   }
 
   &:last-child:after {
-    @include margin(0, inline);
     content: "";
   }
 }
