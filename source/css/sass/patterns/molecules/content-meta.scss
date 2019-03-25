@@ -1,25 +1,22 @@
-@import "../../mixins/sizes";
+@import "../../mixins/spacing";
 @import "../../mixins/typography";
 
 .content-meta {
-  @include remove-bullets-unordered-list();
-  @include blg-spacing("block-end", "small", "margin");
+  @include list-style-none();
+  @include body-spacing();
 }
 
 .content-meta__item {
-  display: inline;
-  @include label-content-typography($color: $color-text-secondary);
+  display: inline-block;
+  @include label-content-typography();
 
   &:after {
-    @include margin(0 5px);
-    content: " \00B7  ";
-    display: inline-block;
-    font-size: 150%;
-    position: relative;
-    top: 2px; // stylelint-disable-line csstools/use-logical
+    @include margin(0.5em, inline);
+    content: "\2022";
   }
 
   &:last-child:after {
+    @include margin(0, inline);
     content: "";
   }
 }
