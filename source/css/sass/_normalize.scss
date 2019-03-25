@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: ($font-size / 16px) * 100%;
+}
+
 html,
 body {
   @include block-size(100%);

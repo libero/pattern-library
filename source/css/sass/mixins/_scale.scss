@@ -1,0 +1,7 @@
+@import "../variables/font";
+@import "../vendor/modularscale-sass/stylesheets/modularscale";
+
+$modularscale: (
+  base: $font-size,
+  ratio: $major-second,
+);

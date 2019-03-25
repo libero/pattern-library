@@ -102,7 +102,7 @@
 }
 
 @mixin h2-spacing() {
-  @include block-spacing();
+  @include block-spacing($end: $baselinegrid-space-small * 0.875);
 }
 
 @mixin h3-spacing() {
