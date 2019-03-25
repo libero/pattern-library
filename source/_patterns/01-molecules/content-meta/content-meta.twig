@@ -1,38 +1,33 @@
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta']) }) -%}
 
+<ul {%- include('atoms-attributes') -%}>
 
-{%- with list only -%}
+  {%- for item in items -%}
 
-    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta']) }) -%}
+    {%- with item only -%}
+      {%- block item -%}
 
-    <ul {%- include('atoms-attributes') -%}>
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__item']) }) -%}
 
-      {%- for item in items -%}
+        <li {%- include('atoms-attributes') -%}>
 
-        {%- with item only -%}
-          {%- block item -%}
+          {%- with content only -%}
+            {%- block content -%}
 
-            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__item']) }) -%}
+              {%- if attributes.href is defined -%}
+                {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__link']) }) -%}
+              {%- endif -%}
 
-            <li {%- include('atoms-attributes') -%}>
+              {%- include 'atoms-link' -%}
 
-              {%- with content only -%}
-                {%- block content -%}
+            {%- endblock content -%}
+          {%- endwith -%}
 
-                  {%- if attributes.href is defined -%}
-                    {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__link']) }) -%}
-                  {%- endif -%}
+        </li>
 
-                  {%- include 'atoms-link' -%}
+      {%- endblock item -%}
+    {%- endwith -%}
 
-                {%- endblock content -%}
-              {%- endwith -%}
+  {%- endfor -%}
 
-            </li>
-
-          {%- endblock item -%}
-        {%- endwith -%}
-
-      {%- endfor -%}
-
-    </ul>
-{%- endwith -%}
+</ul>

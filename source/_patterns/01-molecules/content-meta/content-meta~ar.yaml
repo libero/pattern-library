@@ -1,25 +1,24 @@
-list:
-  attributes:
-    dir: rtl
-    lang: ar
-  items:
-    - content:
-        attributes:
-          href: '#'
-        text: أحمر
-    - content:
-        text: برتقالي
-    - content:
-        text: أصفر
-    - content:
-        attributes:
-          href: '#'
-        text: أخضر
-    - content:
-        attributes:
-          href: '#'
-        text: أزرق
-    - content:
-        text: نيلي
-    - content:
-        text: بنفسجي
+attributes:
+  dir: rtl
+  lang: ar
+items:
+  - content:
+      attributes:
+        href: '#'
+      text: أحمر
+  - content:
+      text: برتقالي
+  - content:
+      text: أصفر
+  - content:
+      attributes:
+        href: '#'
+      text: أخضر
+  - content:
+      attributes:
+        href: '#'
+      text: أزرق
+  - content:
+      text: نيلي
+  - content:
+      text: بنفسجي
