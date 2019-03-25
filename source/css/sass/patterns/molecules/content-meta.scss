@@ -25,10 +25,5 @@
 }
 
 .content-meta__link {
-  text-decoration: inherit;
-  @include label-content-typography($color: $color-text-secondary);
-
-  &:hover {
-    color: $color-primary-dark;
-  }
+  @include covert-link();
 }
