@@ -11,7 +11,7 @@
 }
 
 .tag-list__list {
-  list-style: none;
+  @include list-style-none();
   @include blg-spacing("block-end", "small", "margin");
   @include label-tag-typography();
   @include padding(0, "inline-start");
