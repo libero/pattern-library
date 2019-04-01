@@ -1,6 +1,7 @@
 @import "spacing";
 @import "types";
 @import "../functions/grid";
+@import "../variables/grid";
 
 @mixin base-grid($max-inline-size) {
   @include max-inline-size($max-inline-size);

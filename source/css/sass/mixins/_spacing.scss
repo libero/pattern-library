@@ -1,12 +1,9 @@
 @import "logical-properties";
-@import "validation";
+@import "media-query";
 @import "sizes";
 @import "types";
-@import "../functions/validation";
-@import "../mixins/media-query";
+@import "validation";
 @import "../variables/baselinegrid";
-@import "../variables/breakpoint";
-@import "../variables/grid";
 
 // Fallbacks for CSS logical properties contained within this mixin require the following treatment of HTML dir attributes:
 //  - document level: always specified, via the HTML element
@@ -97,28 +94,38 @@
   @include margin($start $end, block);
 }
 
+@function _calculate-spacing($block-size, $unit-size: $baselinegrid-space-small) {
+  $remaining: $unit-size - $block-size;
+
+  @if ($remaining > 0) {
+    @return $remaining;
+  }
+
+  @return $unit-size;
+}
+
 @mixin h1-spacing() {
-  @include block-spacing();
+  @include block-spacing($end: _calculate-spacing($baselinegrid-space-medium));
 }
 
 @mixin h2-spacing() {
-  @include block-spacing($end: $baselinegrid-space-small * 0.875);
+  @include block-spacing($end: _calculate-spacing(($baselinegrid-space-small + $baselinegrid-space-smallish) / 2, $baselinegrid-space-medium));
 }
 
 @mixin h3-spacing() {
-  @include block-spacing($end: $baselinegrid-space-extra_small);
+  @include block-spacing($end: _calculate-spacing($baselinegrid-space-small, $baselinegrid-space-medium));
 }
 
 @mixin h4-spacing() {
-  @include block-spacing($end: $baselinegrid-space-extra_small);
+  @include block-spacing($end: _calculate-spacing($baselinegrid-space-small, $baselinegrid-space-medium));
 }
 
 @mixin h5-spacing() {
-  @include block-spacing($end: $baselinegrid-space-extra_small);
+  @include block-spacing($end: _calculate-spacing($baselinegrid-space-small, $baselinegrid-space-medium));
 }
 
 @mixin h6-spacing() {
-  @include block-spacing($end: $baselinegrid-space-extra_small);
+  @include block-spacing($end: _calculate-spacing($baselinegrid-space-small, $baselinegrid-space-medium));
 }
 
 @mixin list-style-none() {

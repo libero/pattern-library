@@ -18,106 +18,106 @@
 }
 
 .content-header__title--xx-short {
-  @include rem(font-size, ms(9));
+  @include rem(font-size, scale(9));
 
   @include mq($from: small) {
-    @include rem(font-size, ms(10));
+    @include rem(font-size, scale(10));
   }
 }
 
 .content-header__title--x-short {
-  @include rem(font-size, ms(8));
+  @include rem(font-size, scale(8));
 
   @include mq($from: medium) {
-    @include rem(font-size, ms(9));
+    @include rem(font-size, scale(9));
   }
 
   @include mq($from: wide) {
-    @include rem(font-size, ms(10));
+    @include rem(font-size, scale(10));
   }
 }
 
 .content-header__title--short {
-  @include rem(font-size, ms(6));
+  @include rem(font-size, scale(6));
 
   @include mq($from: small) {
-    @include rem(font-size, ms(7));
+    @include rem(font-size, scale(7));
   }
 
   @include mq($from: medium) {
-    @include rem(font-size, ms(8));
+    @include rem(font-size, scale(8));
   }
 
   @include mq($from: wide) {
-    @include rem(font-size, ms(9));
+    @include rem(font-size, scale(9));
   }
 
   @include mq($from: x-wide) {
-    @include rem(font-size, ms(10));
+    @include rem(font-size, scale(10));
   }
 }
 
 .content-header__title--medium {
-  @include rem(font-size, ms(4));
+  @include rem(font-size, scale(4));
 
   @include mq($from: small) {
-    @include rem(font-size, ms(6));
+    @include rem(font-size, scale(6));
   }
 
   @include mq($from: medium) {
-    @include rem(font-size, ms(7));
+    @include rem(font-size, scale(7));
   }
 
   @include mq($from: wide) {
-    @include rem(font-size, ms(8));
+    @include rem(font-size, scale(8));
   }
 
   @include mq($from: x-wide) {
-    @include rem(font-size, ms(10));
+    @include rem(font-size, scale(10));
   }
 }
 
 .content-header__title--long {
-  @include rem(font-size, ms(2));
+  @include rem(font-size, scale(2));
 
   @include mq($from: small) {
-    @include rem(font-size, ms(4));
+    @include rem(font-size, scale(4));
   }
 
   @include mq($from: medium) {
-    @include rem(font-size, ms(7));
+    @include rem(font-size, scale(7));
   }
 
   @include mq($from: x-wide) {
-    @include rem(font-size, ms(8));
+    @include rem(font-size, scale(8));
   }
 
 }
 
 .content-header__title--x-long {
-  @include rem(font-size, ms(2));
+  @include rem(font-size, scale(2));
 
   @include mq($from: medium) {
-    @include rem(font-size, ms(4));
+    @include rem(font-size, scale(4));
   }
 
   @include mq($from: wide) {
-    @include rem(font-size, ms(4));
+    @include rem(font-size, scale(4));
   }
 
   @include mq($from: x-wide) {
-    @include rem(font-size, ms(6));
+    @include rem(font-size, scale(6));
   }
 }
 
 .content-header__title--xx-long {
-  @include rem(font-size, ms(1));
+  @include rem(font-size, scale(1));
 
   @include mq($from: small) {
-    @include rem(font-size, ms(2));
+    @include rem(font-size, scale(2));
   }
 
   @include mq($from: wide) {
-    @include rem(font-size, ms(4));
+    @include rem(font-size, scale(4));
   }
 }

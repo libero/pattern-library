@@ -1,6 +1,8 @@
+@import "mixins/decorations";
 @import "mixins/spacing";
 @import "mixins/typography";
 @import "variables/color";
+@import "variables/grid";
 @import "vendor/normalize.css/normalize";
 
 *,
@@ -15,7 +17,7 @@ html {
 
 html,
 body {
-  @include block-size(100%);
+  @include min-block-size(100%);
 }
 
 body {
@@ -80,6 +82,19 @@ ul {
   @include block-spacing();
 }
 
+b,
+code,
+kbd,
+strong {
+  line-height: 1;
+}
+
+hr {
+  border: 0;
+  @include divider(block-end);
+  @include block-spacing($end: $baselinegrid-space-small - $grid-divider_size);
+}
+
 figure {
   @include margin(0, inline);
 }
@@ -110,9 +125,12 @@ dd {
   @include margin(0, inline-start);
 }
 
-address,
+address {
+  @include set-font-size-and-line-height(scale(-3));
+}
+
 small {
-  @include small-typography();
+  @include rem(font-size, scale(-3));
 }
 
 sub {

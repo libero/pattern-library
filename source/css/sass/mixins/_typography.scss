@@ -7,8 +7,10 @@
 @import "scale";
 
 @mixin set-font-size-and-line-height($font-size, $block-size: $baselinegrid-space-small) {
-  @include rem(font-size, $font-size);
-  line-height: $block-size / $font-size;
+  @include rem((
+    font-size: $font-size,
+    line-height: $block-size,
+  ));
 }
 
 @mixin _heading-base-typography() {
@@ -18,44 +20,38 @@
 
 @mixin h1-typography() {
   @include _heading-base-typography();
-  @include set-font-size-and-line-height(ms(7), $baselinegrid-space-medium);
+  @include set-font-size-and-line-height(scale(7), $baselinegrid-space-medium);
 }
 
 @mixin h2-typography() {
   @include _heading-base-typography();
-  @include set-font-size-and-line-height(ms(4), ($baselinegrid-space-small + $baselinegrid-space-smallish) / 2);
+  @include set-font-size-and-line-height(scale(4), ($baselinegrid-space-small + $baselinegrid-space-smallish) / 2);
 }
 
 @mixin h3-typography() {
   @include _heading-base-typography();
-  @include set-font-size-and-line-height(ms(3));
+  @include set-font-size-and-line-height(scale(3));
 }
 
 @mixin h4-typography() {
   @include _heading-base-typography();
-  @include set-font-size-and-line-height(ms(2));
+  @include set-font-size-and-line-height(scale(2));
 }
 
 @mixin h5-typography() {
   @include _heading-base-typography();
-  @include set-font-size-and-line-height(ms(1));
+  @include set-font-size-and-line-height(scale(1));
 }
 
 @mixin h6-typography() {
   @include _heading-base-typography();
-  @include set-font-size-and-line-height(ms(0));
+  @include set-font-size-and-line-height(scale(0));
 }
 
 @mixin body-typography() {
   font-family: $font-primary;
-  @include set-font-size-and-line-height(ms(0));
+  @include set-font-size-and-line-height(scale(0));
   font-weight: normal;
-}
-
-@mixin small-typography() {
-  font-family: $font-primary;
-  font-style: normal;
-  @include set-font-size-and-line-height(ms(-3));
 }
 
 @mixin inline-image {
@@ -92,7 +88,7 @@
   color: $color;
   font-family: $font-secondary;
   font-weight: normal;
-  @include set-font-size-and-line-height(ms(-3));
+  @include set-font-size-and-line-height(scale(-3));
   letter-spacing: $font-letterspacing-label;
   @if $uppercase {
     text-transform: uppercase;
