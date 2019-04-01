@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c1bb0ca63a9b0d57ec8918165747c8b",
+    "content-hash": "a03dab9bb0372b62956a88b0b758fa41",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -425,6 +425,51 @@
                 "twig"
             ],
             "time": "2018-02-08T00:11:23+00:00"
+        },
+        {
+            "name": "pattern-lab/plugin-twig-extensions",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pattern-lab/plugin-php-twig-extensions.git",
+                "reference": "a773f37a12ebd5569e56be0a62094eebe9892ee1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pattern-lab/plugin-php-twig-extensions/zipball/a773f37a12ebd5569e56be0a62094eebe9892ee1",
+                "reference": "a773f37a12ebd5569e56be0a62094eebe9892ee1",
+                "shasum": ""
+            },
+            "require": {
+                "pattern-lab/core": "^2.0.0",
+                "php": ">=5.3.6",
+                "twig/extensions": "~1.2"
+            },
+            "type": "patternlab-plugin",
+            "autoload": {
+                "psr-0": {
+                    "PatternLab\\TwigExtensions": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dave Olsen",
+                    "email": "dmolsen@gmail.com",
+                    "homepage": "http://dmolsen.com",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "Twig Extensions for the PHP version of Pattern Lab",
+            "homepage": "http://patternlab.io",
+            "keywords": [
+                "pattern lab",
+                "twig"
+            ],
+            "time": "2016-05-19T02:02:14+00:00"
         },
         {
             "name": "pattern-lab/styleguidekit-assets-default",
@@ -1242,6 +1287,61 @@
             "time": "2018-07-26T11:19:56+00:00"
         },
         {
+            "name": "twig/extensions",
+            "version": "v1.5.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig-extensions.git",
+                "reference": "57873c8b0c1be51caa47df2cdb824490beb16202"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/57873c8b0c1be51caa47df2cdb824490beb16202",
+                "reference": "57873c8b0c1be51caa47df2cdb824490beb16202",
+                "shasum": ""
+            },
+            "require": {
+                "twig/twig": "^1.27|^2.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3.4",
+                "symfony/translation": "^2.7|^3.4"
+            },
+            "suggest": {
+                "symfony/translation": "Allow the time_diff output to be translated"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Twig_Extensions_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\Extensions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Common additional features for Twig that do not directly belong in core",
+            "keywords": [
+                "i18n",
+                "text"
+            ],
+            "time": "2018-12-05T18:34:18+00:00"
+        },
+        {
             "name": "twig/twig",
             "version": "v1.35.4",
             "source": {
@@ -1315,7 +1415,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2"
+        "php": "^7.2",
+        "ext-intl": "*"
     },
     "platform-dev": []
 }

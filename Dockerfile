@@ -57,10 +57,19 @@ RUN mkdir public source && \
 FROM php:7.2.12-cli-alpine AS build
 
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
+    apk add --no-cache \
+        icu-dev \
+    && \
+    docker-php-ext-install \
+        intl \
+    && \
     pecl install inotify && \
-    docker-php-ext-enable inotify && \
+    docker-php-ext-enable \
+        inotify \
+    && \
     rm -rf /tmp/pear/ && \
-    apk del .build-deps
+    apk del .build-deps && \
+    rm -rf /var/cache/apk/
 
 WORKDIR /app
 
