@@ -21,15 +21,16 @@
 }
 
 .tag-list__item {
-  display: inline;
+  display: inline-block;
   @include label-tag-typography();
 
   &:after {
-    content: ", ";
+    display: inline;
+    content: ",\a0";
   }
 
   &:lang(ar):after {
-    content: "، ";
+    content: "،\a0";
   }
 
   &:lang(ja):after {

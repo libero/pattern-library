@@ -14,7 +14,11 @@
 }
 
 .content-header__title {
-  @include block-spacing($end: $baselinegrid-space-medium);
+  @include block-spacing($end: $baselinegrid-space-small);
+
+  &:last-child {
+    @include block-spacing($end: $baselinegrid-space-medium);
+  }
 }
 
 .content-header__title--xx-short {
