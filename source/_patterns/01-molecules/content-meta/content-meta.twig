@@ -31,7 +31,6 @@
   {%- if date is defined -%}
     {%- set attributes = attributes|default({})|merge({class: []|merge(['content-meta__item']) }) -%}
     <li {%- include('atoms-attributes') -%}>{%- include 'atoms-date' -%}</li>
-
   {%- endif -%}
 
 </ul>
