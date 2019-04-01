@@ -1,7 +1,6 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta']) }) -%}
 
 <ul {%- include('atoms-attributes') -%}>
-
   {%- for item in items -%}
 
     {%- with item only -%}
@@ -10,7 +9,6 @@
         {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__item']) }) -%}
 
         <li {%- include('atoms-attributes') -%}>
-
           {%- with content only -%}
             {%- block content -%}
 
@@ -19,7 +17,6 @@
               {%- endif -%}
 
               {%- include 'atoms-link' -%}
-
             {%- endblock content -%}
           {%- endwith -%}
 
@@ -27,7 +24,11 @@
 
       {%- endblock item -%}
     {%- endwith -%}
-
   {%- endfor -%}
-
+  {%- if date is defined -%}
+    {%- set attributes = attributes|default({})|merge({class: []|merge(['content-meta__item']) }) -%}
+    <li {%- include('atoms-attributes') -%}>{%- include 'atoms-date' -%}</li>
+  {%- endif -%}
 </ul>
+
+
