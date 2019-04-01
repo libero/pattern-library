@@ -24,3 +24,4 @@ meta:
         aria-label: Issue number
       content:
         text: Issue 1
+  date: now
