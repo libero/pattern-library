@@ -1,8 +1,7 @@
-{%- from 'atoms-attributes' import attributes -%}
-{%- from 'atoms-includes' import include -%}
+{%- import 'atoms-html' as html -%}
 
-<h{{ level|default(1) }} {{- attributes(attributes|default({})) }}>
+<h{{ level|default(1) }} {{- html.attributes(attributes|default({})) }}>
 
-  {{- include(text) -}}
+  {{- html.content(text) -}}
 
 </h{{ level|default(1) }}>

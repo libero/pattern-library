@@ -1,8 +1,8 @@
-{%- from 'atoms-attributes' import attributes -%}
+{%- import 'atoms-html' as html -%}
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) -%}
 
-<header {{- attributes(attributes|default({})) }}>
+<header {{- html.attributes(attributes) }}>
 
   {%- block body -%}
 

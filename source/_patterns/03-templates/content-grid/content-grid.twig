@@ -1,4 +1,4 @@
-{%- from 'atoms-attributes' import attributes -%}
+{%- import 'atoms-html' as html -%}
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid']) }) -%}
 
@@ -11,7 +11,7 @@
   {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid--has-secondary']) }) -%}
 {%- endif -%}
 
-<{{ element|default('div') }} {{- attributes(attributes|default({})) }}>
+<{{ element|default('div') }} {{- html.attributes(attributes) }}>
 
   {%- for area in content -%}
     {%- with area only -%}
@@ -24,13 +24,12 @@
 
           {%- if content|default([])|length -%}
 
-            {%- from 'atoms-attributes' import attributes -%}
-            {%- from 'atoms-includes' import include -%}
+            {%- import 'atoms-html' as html -%}
 
             {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
 
-            <div {{- attributes(attributes|default({})) }}>
-              {{- include(content) -}}
+            <div {{- html.attributes(attributes) }}>
+              {{- html.content(content) -}}
             </div>
 
           {%- endif -%}
