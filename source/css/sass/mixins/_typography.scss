@@ -8,7 +8,7 @@
 
 @mixin set-font-size-and-line-height($font-size, $block-size: $baselinegrid-space-small) {
   @include rem(font-size, $font-size);
-  line-height: ceil(($block-size / $font-size) * 100000) / 100000;
+  line-height: $block-size / $font-size;
 }
 
 @mixin _heading-base-typography() {
