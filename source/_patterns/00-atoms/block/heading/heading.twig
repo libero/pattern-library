@@ -1,7 +1,3 @@
 {%- import 'atoms-html' as html -%}
 
-<h{{ level|default(1) }} {{- html.attributes(attributes|default({})) }}>
-
-  {{- html.content(text) -}}
-
-</h{{ level|default(1) }}>
+{{- html.element('h' ~ level|default(1), text, attributes|default({})) -}}

@@ -28,9 +28,7 @@
 
             {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
 
-            <div {{- html.attributes(attributes) }}>
-              {{- html.content(content) -}}
-            </div>
+            {{- html.element('div', content, attributes) -}}
 
           {%- endif -%}
 

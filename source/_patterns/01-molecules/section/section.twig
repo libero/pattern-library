@@ -29,9 +29,7 @@
 
       {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section__body']) }) -%}
 
-      <div {{- html.attributes(attributes) }}>
-        {{- html.content(content) -}}
-      </div>
+      {{- html.element('div', content, attributes) -}}
 
     {%- endblock -%}
 

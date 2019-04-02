@@ -1,11 +1,3 @@
 {%- import 'atoms-html' as html -%}
 
-{% spaceless %}
-
-  <sub {{- html.attributes(attributes|default({})) }}>
-
-    {{- html.content(text) -}}
-
-  </sub>
-
-{% endspaceless %}
+{{- html.element('sub', text, attributes|default({})) -}}

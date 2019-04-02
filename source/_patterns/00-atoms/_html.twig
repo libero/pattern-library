@@ -1,6 +1,22 @@
-{% macro content(content) %}
+{%- macro element(name, content, attributes = {}) -%}
 
-  {% import _self as html %}
+  {%- import _self as html -%}
+
+  {%- spaceless -%}
+
+    <{{ name }} {{- html.attributes(attributes) }}>
+
+      {{- html.content(content) -}}
+
+    </{{ name }}>
+
+  {%- endspaceless -%}
+
+{%- endmacro element -%}
+
+{%- macro content(content) -%}
+
+  {%- import _self as html -%}
 
   {%- if content.template is defined -%}
 
@@ -18,9 +34,9 @@
 
   {%- endif -%}
 
-{% endmacro content %}
+{%- endmacro content -%}
 
-{% macro attributes(attributes) %}
+{%- macro attributes(attributes) -%}
 
   {%- for name, value in attributes|default({}) if value is not same as(false) -%}
 
@@ -34,4 +50,4 @@
 
   {%- endfor -%}
 
-{% endmacro attributes %}
+{%- endmacro attributes -%}
