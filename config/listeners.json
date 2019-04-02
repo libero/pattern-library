@@ -2,6 +2,7 @@
     "listeners": [
         "\\PatternLab\\Twig\\PseudoPatternsListener",
         "\\PatternLab\\Twig\\StrictVariablesListener",
+        "\\PatternLab\\Twig\\TemplateListener",
         "\\PatternLab\\TwigExtensions\\PatternLabListener"
     ]
 }
