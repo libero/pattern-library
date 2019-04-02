@@ -1,16 +1,18 @@
+{%- from 'atoms-attributes' import attributes -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta']) }) -%}
 
-<ul {%- include('atoms-attributes') -%}>
-
+<ul {{- attributes(attributes|default({})) }}>
   {%- for item in items -%}
 
     {%- with item only -%}
       {%- block item -%}
 
+        {%- from 'atoms-attributes' import attributes -%}
+
         {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__item']) }) -%}
 
-        <li {%- include('atoms-attributes') -%}>
-
+        <li {{- attributes(attributes|default({})) }}>
           {%- with content only -%}
             {%- block content -%}
 

@@ -1,7 +1,10 @@
+{%- from 'atoms-attributes' import attributes -%}
+{%- from 'atoms-includes' import include -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['paragraph']) }) -%}
 
-<p {%- include 'atoms-attributes' -%}>
+<p {{- attributes(attributes) }}>
 
-  {%- include 'atoms-text' with {nodes: text} -%}
+  {{ include(text) }}
 
 </p>

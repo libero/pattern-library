@@ -1,6 +1,8 @@
+{%- from 'atoms-attributes' import attributes -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section']) }) -%}
 
-<section {%- include 'atoms-attributes' -%}>
+<section {{- attributes(attributes|default({})) }}>
 
   {%- with heading|default({}) only -%}
 
@@ -23,10 +25,13 @@
 
     {%- block content -%}
 
+      {%- from 'atoms-attributes' import attributes -%}
+      {%- from 'atoms-includes' import include -%}
+
       {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['section__body']) }) -%}
 
-      <div {%- include 'atoms-attributes' -%}>
-        {%- include 'atoms-text' with {nodes: content} -%}
+      <div {{- attributes(attributes|default({})) }}>
+        {{- include(content) -}}
       </div>
 
     {%- endblock -%}

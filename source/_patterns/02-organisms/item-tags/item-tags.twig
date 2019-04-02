@@ -1,6 +1,8 @@
+{%- from 'atoms-attributes' import attributes -%}
+
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['item-tags']) }) -%}
 
-<div {%- include('atoms-attributes') -%}>
+<div {{- attributes(attributes|default({})) }}>
 
   {%- block body -%}
 

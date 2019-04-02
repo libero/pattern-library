@@ -1,5 +1,8 @@
-<h{{ level|default(1) }} {%- include 'atoms-attributes' %}>
+{%- from 'atoms-attributes' import attributes -%}
+{%- from 'atoms-includes' import include -%}
 
-  {%- include 'atoms-text' with {nodes: text} only -%}
+<h{{ level|default(1) }} {{- attributes(attributes|default({})) }}>
+
+  {{- include(text) -}}
 
 </h{{ level|default(1) }}>

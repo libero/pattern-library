@@ -1,8 +1,11 @@
+{%- from 'atoms-attributes' import attributes -%}
+{%- from 'atoms-includes' import include -%}
+
 {% spaceless %}
 
-  <sub {%- include 'atoms-attributes' %}>
+  <sub {{- attributes(attributes|default({})) }}>
 
-    {%- include 'atoms-text' with {nodes: text} only -%}
+    {{- include(text) -}}
 
   </sub>
 
