@@ -2,4 +2,4 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['paragraph']) }) -%}
 
-{{- html.element('p', text, attributes|default({})) -}}
+{{- html.element('p', text, attributes) -}}
