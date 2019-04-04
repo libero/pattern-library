@@ -22,10 +22,6 @@ contentHeader:
             href: '#'
           text: Научная статья
       - attributes:
-          aria-label: Номер выпуска
-        content:
-          text: Номер 1
-      - attributes:
           aria-label: Дата публикации
         content:
           text:

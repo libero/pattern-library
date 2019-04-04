@@ -3,6 +3,17 @@ lang: ja
 contentHeader:
   contentTitle:
     text: 次の3名の早期キャリア研究者が旅行補助金を授与した
+  meta:
+    attributes:
+      aria-label: 出版物の詳細
+    items:
+      - attributes:
+          aria-label: 発行日
+        content:
+          text:
+            - template: atoms-date
+              arguments:
+                date: 2017-05-22
 
 body:
   - template: atoms-paragraph

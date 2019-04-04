@@ -22,8 +22,3 @@ items:
       text: نيلي
   - content:
       text: بنفسجي
-  - content:
-      text:
-        - template: atoms-date
-          arguments:
-            date: 2019-04-03

@@ -3,6 +3,17 @@ lang: ru
 contentHeader:
   contentTitle:
     text: Следующие три исследователя ранней карьеры получили гранты на поездки
+  meta:
+    attributes:
+      aria-label: Подробности публикации
+    items:
+      - attributes:
+          aria-label: Дата публикации
+        content:
+          text:
+            - template: atoms-date
+              arguments:
+                date: 2017-05-22
 
 body:
   - template: atoms-paragraph

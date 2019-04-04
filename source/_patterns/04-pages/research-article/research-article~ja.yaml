@@ -22,10 +22,6 @@ contentHeader:
             href: '#'
           text: 研究論文
       - attributes:
-          aria-label: 発行番号
-        content:
-          text: 第1号
-      - attributes:
           aria-label: 発行日
         content:
           text:

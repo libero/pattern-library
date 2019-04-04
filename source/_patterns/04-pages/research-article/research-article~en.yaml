@@ -20,10 +20,6 @@ contentHeader:
             href: '#'
           text: Research Article
       - attributes:
-          aria-label: Issue number
-        content:
-          text: Issue 1
-      - attributes:
           aria-label: Publication date
         content:
           text:

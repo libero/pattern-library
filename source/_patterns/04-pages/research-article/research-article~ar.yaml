@@ -23,10 +23,6 @@ contentHeader:
             href: '#'
           text: مقاله بحثيه
       - attributes:
-          aria-label: رقم الإصدار
-        content:
-          text: العدد ١
-      - attributes:
           aria-label: تاريخ النشر
         content:
           text:

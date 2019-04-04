@@ -21,8 +21,3 @@ items:
       text: 青
   - content:
       text: 紫
-  - content:
-      text:
-        - template: atoms-date
-          arguments:
-            date: 2018-12-18

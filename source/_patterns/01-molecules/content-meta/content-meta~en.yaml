@@ -19,8 +19,3 @@ items:
       text: Indigo
   - content:
       text: Violet
-  - content:
-      text:
-        - template: atoms-date
-          arguments:
-            date: 2019-04-03
