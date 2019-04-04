@@ -1,6 +1,6 @@
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['date-time']) }) -%}
+{%- set attributes = attributes|default({})|merge({datetime: date|date("Y-m-d")}) -%}
 {% spaceless %}
 
-  <time {%- include 'atoms-attributes' -%} datetime="{{ date|date("Y-m-d") }}">{{ date|localizeddate('long', 'none') }}</time>
+  <time {%- include 'atoms-attributes' %}>{{ date|localizeddate('long', 'none') }}</time>
 
 {% endspaceless %}
