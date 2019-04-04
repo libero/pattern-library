@@ -28,6 +28,7 @@ contentHeader:
             - template: atoms-date
               arguments:
                 date: 2018-12-18
+                format: medium
 
 body:
   - template: molecules-section

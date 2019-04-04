@@ -15,6 +15,7 @@ contentHeader:
             - template: atoms-date
               arguments:
                 date: 2017-05-22
+                format: medium
 
 body:
   - template: atoms-paragraph
