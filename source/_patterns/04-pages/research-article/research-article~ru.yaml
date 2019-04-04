@@ -25,6 +25,13 @@ contentHeader:
           aria-label: Номер выпуска
         content:
           text: Номер 1
+      - attributes:
+          aria-label: Дата публикации
+        content:
+          text:
+            - template: atoms-date
+              arguments:
+                date: 2018-12-18
 
 body:
   - template: molecules-section

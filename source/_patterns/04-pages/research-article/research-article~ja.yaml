@@ -25,6 +25,13 @@ contentHeader:
           aria-label: 発行番号
         content:
           text: 第1号
+      - attributes:
+          aria-label: 発行日
+        content:
+          text:
+            - template: atoms-date
+              arguments:
+                date: 2018-12-18
 
 body:
   - template: molecules-section

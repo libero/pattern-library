@@ -23,5 +23,7 @@ meta:
     - attributes:
         aria-label: Issue number
       content:
-        text: Issue 1
-  date: now
+        text:
+          - template: atoms-date
+            arguments:
+              date: 2018-12-18

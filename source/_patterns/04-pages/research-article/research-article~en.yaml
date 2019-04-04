@@ -23,7 +23,13 @@ contentHeader:
           aria-label: Issue number
         content:
           text: Issue 1
-    date: now
+      - attributes:
+          aria-label: Publication date
+        content:
+          text:
+            - template: atoms-date
+              arguments:
+                date: 2018-12-18
 
 body:
   - template: molecules-section
