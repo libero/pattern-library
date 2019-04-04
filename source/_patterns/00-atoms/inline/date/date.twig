@@ -4,7 +4,7 @@
 
   <time {%- include 'atoms-attributes' %}>
 
-    {{- date|localizeddate(format|default('long'), 'none', attributes.lang|default(lang ?? null)) -}}
+    <bdo>{{ date|localizeddate(format|default('long'), 'none', attributes.lang|default(lang ?? null)) }}</bdo>
 
   </time>
 
