@@ -1,5 +1,6 @@
 import babel from 'gulp-babel';
 import browserSync from 'browser-sync';
+import concat from 'gulp-concat';
 import del from 'del';
 import distributeConfig from './libero-config/bin/distributeConfig';
 import eslint from 'gulp-eslint';
@@ -165,7 +166,10 @@ const lintJs = () => {
 
 const transpileJs = () => {
   return gulp.src(config.files.src.js)
+    .pipe(sourcemaps.init())
     .pipe(babel())
+    .pipe(concat('all.js'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.dir.out.js));
 };
 
