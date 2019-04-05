@@ -1,6 +1,7 @@
 import browserSync from 'browser-sync';
 import del from 'del';
 import distributeConfig from './libero-config/bin/distributeConfig';
+import eslint from 'gulp-eslint';
 import flatten from 'gulp-flatten';
 import gulp from 'gulp';
 import minimist from 'minimist';
@@ -56,6 +57,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.out.css = `${config.exportRoot}/css`;
   config.dir.out.sass = `${config.dir.out.css}/sass`;
   config.dir.out.sassVendor = `${config.dir.out.css}/sass/vendor`;
+  config.dir.out.js = `${config.exportRoot}/js`;
   config.dir.out.images = `${config.exportRoot}/images`;
   config.dir.out.fonts = `${config.exportRoot}/fonts`;
   config.dir.out.templates = `${config.exportRoot}/templates`;
@@ -81,6 +83,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     `${config.dir.src.sass}/vendor/**/*.css`,
     `${config.dir.src.sass}/vendor/**/LICENSE.*`,
   ];
+  config.files.src.js = `${config.dir.src.js}/**/*.js`;
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
   config.files.src.templates = [
@@ -149,6 +152,15 @@ const compileCss = () =>
     .pipe(gulp.dest(config.dir.src.css));
 
 export const generateCss = gulp.series(cleanCss, compileCss);
+
+export const lintJs = () => {
+  // Fix in place
+  return gulp.src(config.files.src.js)
+    .pipe(eslint( { fix: true } ))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+    .pipe(gulp.dest(config.dir.src.js));
+};
 
 export const build = gulp.parallel(validateSass, generateCss);
 
