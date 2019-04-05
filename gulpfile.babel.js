@@ -175,7 +175,7 @@ const transpileJs = () => {
 
 export const buildJs = gulp.series(lintJs, transpileJs);
 
-export const build = gulp.parallel(validateSass, generateCss);
+export const build = gulp.parallel(validateSass, generateCss, buildJs);
 
 export const assemble = gulp.series(distributeSharedConfig, build);
 
