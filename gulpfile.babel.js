@@ -1,3 +1,4 @@
+import babel from 'gulp-babel';
 import browserSync from 'browser-sync';
 import del from 'del';
 import distributeConfig from './libero-config/bin/distributeConfig';
@@ -153,7 +154,7 @@ const compileCss = () =>
 
 export const generateCss = gulp.series(cleanCss, compileCss);
 
-export const lintJs = () => {
+const lintJs = () => {
   // Fix in place
   return gulp.src(config.files.src.js)
     .pipe(eslint( { fix: true } ))
@@ -161,6 +162,14 @@ export const lintJs = () => {
     .pipe(eslint.failAfterError())
     .pipe(gulp.dest(config.dir.src.js));
 };
+
+const transpileJs = () => {
+  return gulp.src(config.files.src.js)
+    .pipe(babel())
+    .pipe(gulp.dest(config.dir.out.js));
+};
+
+export const buildJs = gulp.series(lintJs, transpileJs);
 
 export const build = gulp.parallel(validateSass, generateCss);
 
