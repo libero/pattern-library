@@ -24,10 +24,11 @@ meta:
         aria-label: Publication date
       content:
         text:
-          - template: atoms-date
+          - template: atoms-time
             arguments:
-              date: 2018-12-18
-              format: medium
+              attributes:
+                datetime: '2010-04-05'
+              text: April 5, 2019
     - attributes:
         aria-label: Issue number
       content:

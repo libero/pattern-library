@@ -8,14 +8,12 @@
     },
     "require": {
         "php": "^7.2",
-        "ext-intl": "*",
         "henrikbjorn/lurker": "^1.2",
         "pattern-lab/core": "^2.0",
         "pattern-lab/patternengine-twig": "^2.0",
         "pattern-lab/styleguidekit-twig-default": "^3.0",
         "symfony/console": "^3.4",
-        "symfony/process": "^3.4",
-        "twig/extensions": "^1.5"
+        "symfony/process": "^3.4"
     },
     "scripts": {
         "post-install-cmd": [

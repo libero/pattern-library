@@ -25,10 +25,11 @@ contentHeader:
           aria-label: 発行日
         content:
           text:
-            - template: atoms-date
+            - template: atoms-time
               arguments:
-                date: 2018-12-18
-                format: medium
+                attributes:
+                  datetime: '2018-12-18'
+                text: 2018年12月18日
 
 body:
   - template: molecules-section

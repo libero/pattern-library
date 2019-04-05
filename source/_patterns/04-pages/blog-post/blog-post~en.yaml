@@ -9,10 +9,11 @@ contentHeader:
           aria-label: Publication date
         content:
           text:
-            - template: atoms-date
+            - template: atoms-time
               arguments:
-                date: 2017-05-22
-                format: medium
+                attributes:
+                  datetime: '2017-05-22'
+                text: May 22, 2017
 
 body:
   - template: atoms-paragraph

@@ -11,10 +11,11 @@ contentHeader:
           aria-label: 発行日
         content:
           text:
-            - template: atoms-date
+            - template: atoms-time
               arguments:
-                date: 2017-05-22
-                format: medium
+                attributes:
+                  datetime: '2017-05-22'
+                text: 2017年5月22日
 
 body:
   - template: atoms-paragraph

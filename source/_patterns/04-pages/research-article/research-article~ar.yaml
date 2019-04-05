@@ -26,10 +26,11 @@ contentHeader:
           aria-label: تاريخ النشر
         content:
           text:
-            - template: atoms-date
+            - template: atoms-time
               arguments:
-                date: 2018-12-18
-                format: medium
+                attributes:
+                  datetime: '2018-12-18'
+                text: ١٨/١٢/٢٠١٨
 
 body:
   - template: molecules-section

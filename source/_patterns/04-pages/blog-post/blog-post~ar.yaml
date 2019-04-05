@@ -12,10 +12,11 @@ contentHeader:
           aria-label: تاريخ النشر
         content:
           text:
-            - template: atoms-date
+            - template: atoms-time
               arguments:
-                date: 2017-05-22
-                format: medium
+                attributes:
+                  datetime: '2017-05-22'
+                text: ١٨/١٢/٢٠١٨
 
 body:
   - template: atoms-paragraph
