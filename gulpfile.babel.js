@@ -1,11 +1,11 @@
-import babel from 'gulp-babel';
 import browserSync from 'browser-sync';
-import concat from 'gulp-concat';
+import color from 'ansi-colors';
 import del from 'del';
 import distributeConfig from './libero-config/bin/distributeConfig';
 import eslint from 'gulp-eslint';
 import flatten from 'gulp-flatten';
 import gulp from 'gulp';
+import log from 'fancy-log';
 import minimist from 'minimist';
 import mocha from 'gulp-mocha';
 import postcss from 'gulp-postcss';
@@ -17,6 +17,31 @@ import sassGlob from 'gulp-sass-glob';
 import sourcemaps from 'gulp-sourcemaps';
 import stylelint from 'stylelint';
 import syntaxScss from 'postcss-scss';
+import webpack from 'webpack';
+
+// TODO: work out how to inject this file's config object properties for js into the webpack config
+import webpackConfig from './webpack.config.babel.js';
+
+function handleJsBuild(done) {
+  return (err, stats) => {
+    if (err) {
+      log('Error', err);
+      if (done) {
+        done();
+      }
+    } else {
+      Object.keys(stats.compilation.assets).forEach((key) => {
+        log('Webpack: output ', color.green(key));
+      });
+      log('Webpack: ', color.blue('finished ', stats.compilation.name));
+      if (done) {
+        done();
+      }
+    }
+  }
+}
+
+
 
 const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoot) => {
 
@@ -164,16 +189,12 @@ const lintJs = () => {
     .pipe(gulp.dest(config.dir.src.js));
 };
 
-const transpileJs = () => {
-  return gulp.src(config.files.src.js)
-    .pipe(sourcemaps.init())
-    .pipe(babel())
-    .pipe(concat('all.js'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(config.dir.out.js));
+const transpileAndBundleJs = (done) => {
+  // Adapted from https://stackoverflow.com/questions/33558396/gulp-webpack-or-just-webpack
+  webpack(webpackConfig).run(handleJsBuild(done));
 };
 
-export const buildJs = gulp.series(lintJs, transpileJs);
+export const buildJs = gulp.series(lintJs, transpileAndBundleJs);
 
 export const build = gulp.parallel(validateSass, generateCss, buildJs);
 

@@ -6,7 +6,8 @@ export default {
   entry: path.join(__dirname, 'source/js/main'),
 
   output: {
-    path: path.join(__dirname, 'dist-for-webpack-test'),
+    // TODO: This path should probably be supplied by Gulp, or at least derived from the same place as Gulp's
+    path: path.join(__dirname, 'export/js'),
     filename: '[name].bundle.js'
   },
 
