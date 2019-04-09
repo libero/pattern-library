@@ -1,7 +1,8 @@
 import path from 'path';
 
 export default {
-  mode: 'production',
+  mode: 'development',
+  // mode: 'production',
   entry: path.join(__dirname, 'source/js/main'),
 
   output: {
@@ -16,7 +17,18 @@ export default {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {
+                    "useBuiltIns": "usage",
+                    "corejs": 3,
+                  }
+                ]
+              ]
+            }
           }
         ]
       }
@@ -30,10 +42,7 @@ export default {
     usedExports: true
   },
 
-  stats: {
-    colors: true
-  },
-
+  stats: 'verbose',
   devtool: 'source-map'
 
 };
