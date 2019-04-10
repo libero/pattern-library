@@ -1,6 +1,6 @@
 {%- import 'atoms-html' as html -%}
 
-{%- spaceless -%}
+{% spaceless %}
 
   <sup {{- html.attributes(attributes|default({})) }}>
 
@@ -8,4 +8,4 @@
 
   </sup>
 
-{%- endspaceless -%}
+{% endspaceless %}

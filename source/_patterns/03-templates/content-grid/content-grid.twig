@@ -14,7 +14,7 @@
 <{{ element|default('div') }} {{- html.attributes(attributes) }}>
 
   {%- for area in content -%}
-    {%- with area only -%}
+    {%- with area|merge({html: html}) only -%}
 
       {%- block item -%}
 
@@ -24,11 +24,11 @@
 
           {%- if content|default([])|length -%}
 
-            {%- import 'atoms-html' as html -%}
-
             {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
 
-            {{- html.element('div', content, attributes) -}}
+            <div {{- html.attributes(attributes) }}>
+              {{- html.content(content) -}}
+            </div>
 
           {%- endif -%}
 

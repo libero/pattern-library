@@ -17,10 +17,8 @@
     {%- endblock title -%}
   {%- endwith -%}
 
-  {%- with list only -%}
+  {%- with list|merge({html: html}) only -%}
     {%- block list -%}
-
-      {%- import 'atoms-html' as html -%}
 
       {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__list']) }) -%}
 
@@ -32,10 +30,8 @@
 
         {%- for item in items -%}
 
-          {%- with item only -%}
+          {%- with item|merge({html: html}) only -%}
             {%- block item -%}
-
-              {%- import 'atoms-html' as html -%}
 
               {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list__item']) }) -%}
 
