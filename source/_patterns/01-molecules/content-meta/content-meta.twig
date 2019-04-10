@@ -11,6 +11,7 @@
         {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__item']) }) -%}
 
         <li {{- html.attributes(attributes) }}>
+
           {%- with content only -%}
             {%- block content -%}
 
