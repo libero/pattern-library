@@ -1,11 +1,28 @@
 {%- import 'atoms-html' as html -%}
 
-{%- if attributes|default({})|length -%}
+{%- spaceless -%}
 
-  {{- html.element(attributes.href is defined ? 'a' : 'span', text, attributes|default({})) -}}
+  {%- if attributes|default({}).href is defined -%}
 
-{%- else -%}
+    <a {{- html.attributes(attributes) }}>
 
-  {{- html.content(text) -}}
+      {{- html.content(text) -}}
 
-{%- endif -%}
+    </a>
+
+  {%- elseif attributes|default({})|length -%}
+
+    <span {{- html.attributes(attributes) }}>
+
+      {{- html.content(text) -}}
+
+    </span>
+
+  {%- else -%}
+
+    {{- html.content(text) -}}
+
+  {%- endif -%}
+
+{%- endspaceless -%}
+

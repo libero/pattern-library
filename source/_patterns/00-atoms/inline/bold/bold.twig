@@ -1,3 +1,11 @@
 {%- import 'atoms-html' as html -%}
 
-{{- html.element('b', text, attributes|default({})) -}}
+{%- spaceless -%}
+
+  <b {{- html.attributes(attributes|default({})) }}>
+
+    {{- html.content(text) -}}
+
+  </b>
+
+{%- endspaceless -%}

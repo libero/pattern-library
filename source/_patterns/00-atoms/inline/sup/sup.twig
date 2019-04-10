@@ -1,3 +1,11 @@
 {%- import 'atoms-html' as html -%}
 
-{{- html.element('sup', text, attributes|default({})) -}}
+{%- spaceless -%}
+
+  <sup {{- html.attributes(attributes|default({})) }}>
+
+    {{- html.content(text) -}}
+
+  </sup>
+
+{%- endspaceless -%}

@@ -2,4 +2,12 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['paragraph']) }) -%}
 
-{{- html.element('p', text, attributes) -}}
+{%- spaceless -%}
+
+  <p {{- html.attributes(attributes) }}>
+
+    {{- html.content(text) -}}
+
+  </p>
+
+{%- endspaceless -%}
