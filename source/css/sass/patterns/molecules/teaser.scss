@@ -1,6 +1,15 @@
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 
+.teaser-list {
+
+  .teaser {
+    @include divider(block-start);
+
+  }
+
+}
+
 .teaser__heading {
   @include block-spacing($start:$baselinegrid-space-extra_small, $end: $baselinegrid-space-extra_small);
 }
