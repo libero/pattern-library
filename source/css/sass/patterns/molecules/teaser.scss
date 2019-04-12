@@ -4,15 +4,27 @@
 .teaser-list {
 
   .teaser__header {
-    @include block-spacing($end: 0);
+    @include block-spacing($start: 0);
   }
 
-  .teaser-list__item:not(:first-child) {
-    @include divider(block-start);
+  .teaser-list__list {
+    @include padding(0, inline-start);
+  }
+
+  .teaser-list__item {
+    @include list-style-none();
+
+    &:not(:first-child) {
+      .teaser {
+        @include padding($baselinegrid-space-small, block-start);
+        @include divider(block-start);
+      }
+    }
+
   }
 
 }
 
 .teaser__heading {
-  @include block-spacing($start:$baselinegrid-space-extra_small, $end: $baselinegrid-space-extra_small);
+  @include block-spacing($start:0, $end: $baselinegrid-space-extra_small);
 }
