@@ -12,30 +12,37 @@ body:
           - content:
               href: '#'
               heading:
+                level: 4
                 text: A conserved morphogenetic mechanism for epidermal ensheathment of nociceptive sensory neurites
           - content:
               href: '#'
               heading:
+                level: 4
                 text: Spatiotemporal establishment of dense bacterial colonies growing on hard agar
           - content:
               href: '#'
               heading:
+                level: 4
                 text: Valence-encoding in the lateral habenula arises from the entopeduncular region
           - content:
               href: '#'
               heading:
+                level: 4
                 text: Importin-9 wraps around the H2A-H2B core to act as nuclear importer and histone chaperone
           - content:
               href: '#'
               heading:
+                level: 4
                 text: Membrane bridging by Munc13-1 is crucial for neurotransmitter release
           - content:
               href: '#'
               heading:
+                level: 4
                 text: The structure of the Ctf19c/CCAN from budding yeast
           - content:
               href: '#'
               heading:
+                level: 4
                 text:
                   - 'PUMILIO hyperactivity drives premature aging of '
                   - template: atoms-italic
@@ -45,14 +52,17 @@ body:
           - content:
               href: '#'
               heading:
+                level: 4
                 text: Mechanical instability and interfacial energy drive biofilm morphogenesis
           - content:
               href: '#'
               heading:
+                level: 4
                 text: Two distinct mechanisms target the autophagy-related E3 complex to the pre-autophagosomal structure
           - content:
               href: '#'
               heading:
+                level: 4
                 text: >-
                   Proteotoxicity from aberrant ribosome biogenesis compromises cell fitnesspendent synapse stabilization in the
                   mammalian brain
