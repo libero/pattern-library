@@ -3,9 +3,12 @@
 
 .teaser-list {
 
-  .teaser {
-    @include divider(block-start);
+  .teaser__header {
+    @include block-spacing($end: 0);
+  }
 
+  .teaser-list__item:not(:first-child) {
+    @include divider(block-start);
   }
 
 }
