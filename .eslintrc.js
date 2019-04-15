@@ -13,6 +13,5 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    "no-console": 0
   },
 };
