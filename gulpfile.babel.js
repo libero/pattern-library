@@ -6,6 +6,7 @@ import eslint from 'gulp-eslint';
 import flatten from 'gulp-flatten';
 import gulp from 'gulp';
 import log from 'fancy-log';
+import jest from 'gulp-jest';
 import minimist from 'minimist';
 import mocha from 'gulp-mocha';
 import postcss from 'gulp-postcss';
@@ -80,6 +81,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.src.js = `${config.sourceRoot}/js`;
 
   config.dir.test.sass = `${config.testRoot}/sass`;
+  config.dir.test.js = `${config.testRoot}/app`;
 
   config.dir.out.css = `${config.exportRoot}/css`;
   config.dir.out.sass = `${config.dir.out.css}/sass`;
@@ -194,7 +196,12 @@ const transpileAndBundleJs = (done) => {
   webpack(webpackConfig).run(handleJsBuild(done));
 };
 
-export const buildJs = gulp.series(lintJs, transpileAndBundleJs);
+const testJs = () => {
+  return gulp.src(config.dir.test.js)
+    .pipe(jest());
+};
+
+export const buildJs = gulp.series(lintJs, transpileAndBundleJs, testJs);
 
 export const build = gulp.parallel(validateSass, generateCss, buildJs);
 
