@@ -181,6 +181,8 @@ const compileCss = () =>
 
 export const generateCss = gulp.series(cleanCss, compileCss);
 
+export const buildCss = gulp.parallel(validateSass, generateCss);
+
 export const lintJs = () => {
   // Fix in place
   return gulp.src([config.files.src.js, `!${config.dir.src.js}/dist/**/*.js`])
@@ -203,7 +205,7 @@ const testJs = () => {
 
 export const buildJs = gulp.series(lintJs, transpileAndBundleJs, testJs);
 
-export const build = gulp.parallel(validateSass, generateCss, buildJs);
+export const build = gulp.parallel(buildCss, buildJs);
 
 export const assemble = gulp.series(distributeSharedConfig, build);
 
@@ -264,6 +266,8 @@ export default gulp.series(assemble, exportPatterns);
 const watchSass = () => gulp.watch(config.files.src.sass, build);
 
 const watchSassTests = () => gulp.watch(config.files.test.sass, build);
+
+const watchJs = () => gulp.watch(config.files.src.js, build);
 
 const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 
