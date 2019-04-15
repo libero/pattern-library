@@ -186,9 +186,8 @@ export const generateCss = gulp.series(cleanCss, compileCss);
 export const buildCss = gulp.parallel(validateSass, generateCss);
 
 export const lintJs = () => {
-  // Fix in place
   return gulp.src([config.files.src.js, `!${config.dir.src.js}/dist/**/*.js`])
-    .pipe(eslint( { fix: true } ))
+    .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
     .pipe(gulp.dest(config.dir.src.js));
@@ -268,6 +267,10 @@ export default gulp.series(assemble, exportPatterns);
 const watchSass = () => gulp.watch(config.files.src.sass, buildCss);
 
 const watchSassTests = () => gulp.watch(config.files.test.sass, buildCss);
+
+/*
+* Need somewhere to
+* */
 
 const watchJs = () => gulp.watch([config.files.src.js, config.files.test.js], buildJs);
 
