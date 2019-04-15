@@ -56,6 +56,6 @@
     "node": ">=10.12"
   },
   "scripts": {
-    "test": "jest"
+    "test": "gulp test"
   }
 }
