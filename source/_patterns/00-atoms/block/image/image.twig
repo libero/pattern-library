@@ -1,6 +1,6 @@
 {%- import 'atoms-html' as html -%}
 
-<picture>
+<picture {{- html.attributes(attributes|default({})) }}>
 
   {%- for source in sources|default([]) -%}
     <source {{- html.attributes(source) }}>
