@@ -10,3 +10,4 @@
 /vendor/
 /source/css/sass/variables/
 /source/js/derivedConfig.json
+/test/coverage/
