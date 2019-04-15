@@ -27,17 +27,14 @@ function handleJsBuild(done) {
   return (err, stats) => {
     if (err) {
       log('Error', err);
-      if (done) {
-        done();
-      }
-    } else {
-      Object.keys(stats.compilation.assets).forEach((key) => {
-        log('Webpack: output ', color.green(key));
-      });
-      log('Webpack: ', color.blue('finished ', stats.compilation.name));
-      if (done) {
-        done();
-      }
+      throw new Error(err);
+    }
+    Object.keys(stats.compilation.assets).forEach((key) => {
+      log('Webpack: output ', color.green(key));
+    });
+    log('Webpack: ', color.blue('finished ', stats.compilation.name));
+    if (done) {
+      done();
     }
   }
 }
@@ -187,7 +184,6 @@ export const generateCss = gulp.series(cleanCss, compileCss);
 export const lintJs = () => {
   // Fix in place
   return gulp.src([config.files.src.js, `!${config.dir.src.js}/dist/**/*.js`])
-  // return gulp.src(config.files.src.js)
     .pipe(eslint( { fix: true } ))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
