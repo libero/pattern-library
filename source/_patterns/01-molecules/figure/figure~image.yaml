@@ -1,0 +1,5 @@
+content:
+  template: atoms-image
+  arguments:
+    image:
+      src: https://picsum.photos/600/400
