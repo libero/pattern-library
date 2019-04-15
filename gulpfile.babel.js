@@ -253,6 +253,8 @@ export const exportPatterns = gulp.series(
   gulp.parallel(exportCss, exportSass, exportSassVendor, exportImages, exportFonts, exportTemplates, exportJs),
 );
 
+export const test = gulp.parallel(buildJs, validateSass);
+
 // Default
 
 export default gulp.series(assemble, exportPatterns);
