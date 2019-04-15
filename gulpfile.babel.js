@@ -79,6 +79,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.src.fonts = `${config.sourceRoot}/fonts`;
   config.dir.src.templates = `${config.sourceRoot}/_patterns`;
   config.dir.src.js = `${config.sourceRoot}/js`;
+  config.dir.src.jsMap = `${config.sourceRoot}/js`;
 
   config.dir.test.sass = `${config.testRoot}/sass`;
   config.dir.test.js = `${config.testRoot}/app`;
@@ -113,6 +114,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     `${config.dir.src.sass}/vendor/**/LICENSE.*`,
   ];
   config.files.src.js = `${config.dir.src.js}/**/*.js`;
+  config.files.src.jsMap = `${config.dir.src.jsMap}/**/*.js.map`;
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
   config.files.src.templates = [
@@ -182,9 +184,10 @@ const compileCss = () =>
 
 export const generateCss = gulp.series(cleanCss, compileCss);
 
-const lintJs = () => {
+export const lintJs = () => {
   // Fix in place
-  return gulp.src(config.files.src.js)
+  return gulp.src([config.files.src.js, `!${config.dir.src.js}/dist/**/*.js`])
+  // return gulp.src(config.files.src.js)
     .pipe(eslint( { fix: true } ))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
@@ -198,7 +201,8 @@ const transpileAndBundleJs = (done) => {
 
 const testJs = () => {
   return gulp.src(config.dir.test.js)
-    .pipe(jest());
+    // TODO: remove passWithNoTests once js work has started
+    .pipe(jest({ 'passWithNoTests': true}));
 };
 
 export const buildJs = gulp.series(lintJs, transpileAndBundleJs, testJs);
@@ -231,6 +235,10 @@ const exportFonts = () =>
   gulp.src(config.files.src.fonts)
     .pipe(gulp.dest(config.dir.out.fonts));
 
+const exportJs = () =>
+  gulp.src([config.files.src.js, config.files.src.jsMap])
+    .pipe(gulp.dest(config.dir.out.js));
+
 const exportTemplates = () =>
   gulp.src(config.files.src.templates)
     // Rename files to standard Twig usage
@@ -246,7 +254,7 @@ const exportTemplates = () =>
 
 export const exportPatterns = gulp.series(
   cleanExport,
-  gulp.parallel(exportCss, exportSass, exportSassVendor, exportImages, exportFonts, exportTemplates),
+  gulp.parallel(exportCss, exportSass, exportSassVendor, exportImages, exportFonts, exportTemplates, exportJs),
 );
 
 // Default

@@ -1,13 +1,12 @@
 import path from 'path';
 
 export default {
-  mode: 'development',
-  // mode: 'production',
-  entry: path.join(__dirname, 'source/js/main'),
+  mode: 'production',
+  entry: path.join(__dirname, 'source/js/app/main.js'),
 
   output: {
     // TODO: This path should probably be supplied by Gulp, or at least derived from the same place as Gulp's
-    path: path.join(__dirname, 'export/js'),
+    path: path.join(__dirname, 'source/js/dist'),
     filename: '[name].bundle.js'
   },
 
