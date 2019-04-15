@@ -124,6 +124,8 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     `${config.dir.src.js}/derivedConfig.json`,
   ];
 
+  config.files.test.js = `${config.dir.test.js}/**/*.spec.js`;
+
   config.files.test.sass = `${config.dir.test.sass}/**/*.spec.scss`;
   config.files.test.sassTestsEntryPoint = `${config.dir.test.sass}/test_sass.js`;
 
@@ -263,15 +265,15 @@ export default gulp.series(assemble, exportPatterns);
 
 // Watchers
 
-const watchSass = () => gulp.watch(config.files.src.sass, build);
+const watchSass = () => gulp.watch(config.files.src.sass, buildCss);
 
-const watchSassTests = () => gulp.watch(config.files.test.sass, build);
+const watchSassTests = () => gulp.watch(config.files.test.sass, buildCss);
 
-const watchJs = () => gulp.watch(config.files.src.js, build);
+const watchJs = () => gulp.watch([config.files.src.js, config.files.test.js], buildJs);
 
 const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 
-export const watch = gulp.parallel(watchSass, watchSassTests, watchSharedConfig);
+export const watch = gulp.parallel(watchSass, watchSassTests, watchJs, watchSharedConfig);
 
 // Server
 
