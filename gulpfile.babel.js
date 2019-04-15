@@ -111,6 +111,8 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     `${config.dir.src.sass}/vendor/**/LICENSE.*`,
   ];
   config.files.src.js = `${config.dir.src.js}/**/*.js`;
+  config.files.src.jsCompiled = `${config.dir.src.js}/dist/**/*.js`;
+  config.files.src.jsAuthored = [config.files.src.js, `!${config.files.src.jsCompiled}`];
   config.files.src.jsMap = `${config.dir.src.jsMap}/**/*.js.map`;
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
@@ -183,14 +185,11 @@ const compileCss = () =>
 
 export const generateCss = gulp.series(cleanCss, compileCss);
 
-export const buildCss = gulp.parallel(validateSass, generateCss);
-
 export const lintJs = () => {
   return gulp.src([config.files.src.js, `!${config.dir.src.js}/dist/**/*.js`])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
-    .pipe(gulp.dest(config.dir.src.js));
 };
 
 const transpileAndBundleJs = (done) => {
@@ -203,6 +202,8 @@ const testJs = () => {
     // TODO: remove passWithNoTests once js work has started
     .pipe(jest({ 'passWithNoTests': true}));
 };
+
+export const buildCss = gulp.series(validateSass, generateCss);
 
 export const buildJs = gulp.series(lintJs, transpileAndBundleJs, testJs);
 
@@ -268,11 +269,7 @@ const watchSass = () => gulp.watch(config.files.src.sass, buildCss);
 
 const watchSassTests = () => gulp.watch(config.files.test.sass, buildCss);
 
-/*
-* Need somewhere to
-* */
-
-const watchJs = () => gulp.watch([config.files.src.js, config.files.test.js], buildJs);
+export const watchJs = () => gulp.watch(config.files.src.jsAuthored.concat([config.files.test.js]), buildJs);
 
 const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 
