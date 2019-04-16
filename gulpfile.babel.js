@@ -127,6 +127,9 @@ const cleanSharedConfig = () => del(config.files.src.derivedConfigs);
 
 const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeConfig);
 
+
+// SASS / CSS tasks
+
 const lintSass = () => {
   if (!config.sass.linting) {
     console.info('Skipping sass:lint');
@@ -155,19 +158,22 @@ const validateSass = gulp.parallel(lintSass, testSass);
 
 const cleanCss = () => del(config.files.src.css);
 
-const compileCss = () =>
+const compileCss = () => {
   gulp.src(config.files.src.sassEntryPoint)
-    .pipe(sourcemaps.init())
-    .pipe(sassGlob())
-    .pipe(sass(config.sass.options).on('error', sass.logError))
-    .pipe(replace(/\.\.\/\.\.\/fonts\//g, '../fonts/'))
-    .pipe(rename(config.files.out.cssFilename))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(config.dir.src.css));
+      .pipe(sourcemaps.init())
+      .pipe(sassGlob())
+      .pipe(sass(config.sass.options).on('error', sass.logError))
+      .pipe(replace(/\.\.\/\.\.\/fonts\//g, '../fonts/'))
+      .pipe(rename(config.files.out.cssFilename))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(config.dir.src.css));
+};
 
 const generateCss = gulp.series(cleanCss, compileCss);
 
 const buildCss = gulp.series(validateSass, generateCss);
+
+// JavaScript tasks
 
 const lintJs = () => {
   return gulp.src([config.files.src.js, `!${config.dir.src.js}/dist/**/*.js`])
@@ -181,6 +187,10 @@ const testJs = () => {
              // TODO: remove passWithNoTests once js work has started
              .pipe(jest({ 'passWithNoTests': true}));
 };
+
+const validateJs = gulp.parallel(lintJs, testJs);
+
+const cleanJs = () => del([config.files.src.jsCompiled, config.files.src.jsMap]);
 
 const transpileAndBundleJs = (done) => {
   // Adapted from https://stackoverflow.com/questions/33558396/gulp-webpack-or-just-webpack
@@ -203,9 +213,11 @@ const transpileAndBundleJs = (done) => {
   webpack(webpackConfig).run(logBuild(done));
 };
 
-const validateJs = gulp.parallel(lintJs, testJs);
+const generateJs = gulp.series(cleanJs, transpileAndBundleJs);
 
-const buildJs = gulp.series(validateJs, transpileAndBundleJs);
+const buildJs = gulp.series(validateJs, generateJs);
+
+// Combined tasks
 
 const build = gulp.parallel(buildCss, buildJs);
 
@@ -303,5 +315,5 @@ export {
   exportPatterns,
   test,
   watch,
-  server
+  server,
 };
