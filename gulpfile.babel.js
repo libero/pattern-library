@@ -159,7 +159,7 @@ const validateSass = gulp.parallel(lintSass, testSass);
 const cleanCss = () => del(config.files.src.css);
 
 const compileCss = () => {
-  gulp.src(config.files.src.sassEntryPoint)
+  return gulp.src(config.files.src.sassEntryPoint)
       .pipe(sourcemaps.init())
       .pipe(sassGlob())
       .pipe(sass(config.sass.options).on('error', sass.logError))
