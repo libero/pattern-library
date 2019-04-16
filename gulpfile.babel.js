@@ -36,6 +36,27 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     },
   );
 
+  // SASS needs the locations:
+  // - where it's authored (src)
+  // - where it's exported to (export)
+  //
+  // CSS needs the locations:
+  // - where it's compiled to (compiled)
+  // - where it's copied to to drive pattern lab (out)
+  // - where it's exported to (export)
+  // - *special case: pattern-scaffolding.css must always be included in out and export. Suggests
+  //   that is should have its own static location and dedicated sass config property to isolate it
+  //
+  // JS needs the locations:
+  // - where it's authored (src)
+  // - where it's compiled to (compiled)
+  // - where it's copied to to drive pattern lab (out)
+  // - where it's exported to (export)
+  //
+  // For CSS and JS, could the location they're copied to to drive pattern lab be the location they're
+  // compiled to? No, I don't think so, we only want the pattern lab files to be replaced if the
+  // the respective file builds don't break.
+
   const config = {};
   config.environment = invocationOptions.environment;
   config.publicRoot = publicRoot;
@@ -48,6 +69,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.sass.options = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
 
   config.dir = {
+    export: {},
     src: {},
     test: {},
     out: {},
@@ -63,9 +85,12 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.test.sass = `${config.testRoot}/sass`;
   config.dir.test.js = `${config.testRoot}/js`;
 
-  config.dir.out.css = `${config.exportRoot}/css`;
-  config.dir.out.sass = `${config.dir.out.css}/sass`;
-  config.dir.out.sassVendor = `${config.dir.out.css}/sass/vendor`;
+  config.dir.out.compiledAssets = 'compiled-assets';
+  config.dir.out.compiledCss = `${config.dir.out.compiledAssets}/css`;
+
+  config.dir.export.css = `${config.exportRoot}/css`;
+  config.dir.export.sass = `${config.dir.export.css}/sass`;
+  config.dir.export.sassVendor = `${config.dir.export.css}/sass/vendor`;
   config.dir.out.js = `${config.exportRoot}/js`;
   config.dir.out.images = `${config.exportRoot}/images`;
   config.dir.out.fonts = `${config.exportRoot}/fonts`;
@@ -76,11 +101,9 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     test: {},
     out: {},
   };
-  config.files.src.css = [
-    `${config.dir.src.css}/**/*.css`,
-    `${config.dir.src.css}/**/*.map`,
-    `!${config.dir.src.css}/pattern-scaffolding.css`,
-    `!${config.dir.src.css}/sass/**/*`,
+  config.files.out.css = [
+    `${config.dir.out.compiledCss}/**/*.css`,
+    `${config.dir.out.compiledCss}/**/*.map`,
   ];
   config.files.src.sass = [
     `${config.dir.src.sass}/**/*.scss`,
@@ -157,7 +180,7 @@ const testSass = () => {
 
 const validateSass = gulp.parallel(lintSass, testSass);
 
-const cleanCss = () => del(config.files.src.css);
+const cleanCss = () => del(config.files.out.css.concat([config.dir.export.css]));
 
 const compileCss = () => {
   return gulp.src(config.files.src.sassEntryPoint)
@@ -167,7 +190,7 @@ const compileCss = () => {
       .pipe(replace(/\.\.\/\.\.\/fonts\//g, '../fonts/'))
       .pipe(rename(config.files.out.cssFilename))
       .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest(config.dir.src.css));
+      .pipe(gulp.dest(config.dir.out.compiledCss));
 };
 
 const generateCss = gulp.series(cleanCss, compileCss);
@@ -229,16 +252,16 @@ const assemble = gulp.series(distributeSharedConfig, build);
 const cleanExport = () => del(`${config.exportRoot}**/*`);
 
 const exportCss = () =>
-  gulp.src(config.files.src.css)
-    .pipe(gulp.dest(config.dir.out.css));
+  gulp.src(config.files.out.css)
+    .pipe(gulp.dest(config.dir.export.css));
 
 const exportSass = () =>
   gulp.src(config.files.src.sass)
-    .pipe(gulp.dest(config.dir.out.sass));
+    .pipe(gulp.dest(config.dir.export.sass));
 
 const exportSassVendor = () =>
   gulp.src(config.files.src.sassVendor)
-    .pipe(gulp.dest(config.dir.out.sassVendor));
+    .pipe(gulp.dest(config.dir.export.sassVendor));
 
 const exportImages = () =>
   gulp.src(config.files.src.images)
