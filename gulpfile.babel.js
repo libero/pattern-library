@@ -143,7 +143,7 @@ const config = buildConfig(process.argv, 'public', 'source', 'test', 'export');
 
 const cleanSharedConfig = () => del(config.files.src.derivedConfigs);
 
-export const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeConfig);
+const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeConfig);
 
 const lintSass = () => {
   if (!config.sass.linting) {
@@ -169,7 +169,7 @@ const testSass = () =>
   gulp.src(config.files.test.sassTestsEntryPoint)
     .pipe(mocha({reporter: 'spec'}));
 
-export const validateSass = gulp.parallel(lintSass, testSass);
+const validateSass = gulp.parallel(lintSass, testSass);
 
 const cleanCss = () => del(config.files.src.css);
 
@@ -183,9 +183,9 @@ const compileCss = () =>
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.dir.src.css));
 
-export const generateCss = gulp.series(cleanCss, compileCss);
+const generateCss = gulp.series(cleanCss, compileCss);
 
-export const lintJs = () => {
+const lintJs = () => {
   return gulp.src([config.files.src.js, `!${config.dir.src.js}/dist/**/*.js`])
     .pipe(eslint())
     .pipe(eslint.format())
@@ -203,13 +203,13 @@ const testJs = () => {
     .pipe(jest({ 'passWithNoTests': true}));
 };
 
-export const buildCss = gulp.series(validateSass, generateCss);
+const buildCss = gulp.series(validateSass, generateCss);
 
-export const buildJs = gulp.series(lintJs, transpileAndBundleJs, testJs);
+const buildJs = gulp.series(lintJs, transpileAndBundleJs, testJs);
 
-export const build = gulp.parallel(buildCss, buildJs);
+const build = gulp.parallel(buildCss, buildJs);
 
-export const assemble = gulp.series(distributeSharedConfig, build);
+const assemble = gulp.series(distributeSharedConfig, build);
 
 // Exporters
 
@@ -252,16 +252,12 @@ const exportTemplates = () =>
     .pipe(flatten({includeParents: false}))
     .pipe(gulp.dest(config.dir.out.templates));
 
-export const exportPatterns = gulp.series(
+const exportPatterns = gulp.series(
   cleanExport,
   gulp.parallel(exportCss, exportSass, exportSassVendor, exportImages, exportFonts, exportTemplates, exportJs),
 );
 
-export const test = gulp.parallel(buildJs, validateSass);
-
-// Default
-
-export default gulp.series(assemble, exportPatterns);
+const test = gulp.parallel(buildJs, validateSass);
 
 // Watchers
 
@@ -269,11 +265,11 @@ const watchSass = () => gulp.watch(config.files.src.sass, buildCss);
 
 const watchSassTests = () => gulp.watch(config.files.test.sass, buildCss);
 
-export const watchJs = () => gulp.watch(config.files.src.jsAuthored.concat([config.files.test.js]), buildJs);
+const watchJs = () => gulp.watch(config.files.src.jsAuthored.concat([config.files.test.js]), buildJs);
 
 const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 
-export const watch = gulp.parallel(watchSass, watchSassTests, watchJs, watchSharedConfig);
+const watch = gulp.parallel(watchSass, watchSassTests, watchJs, watchSharedConfig);
 
 // Server
 
@@ -296,4 +292,18 @@ const initialiseServer = done => {
   done();
 };
 
-export const server = gulp.series(initialiseServer, watchServer);
+const server = gulp.series(initialiseServer, watchServer);
+
+export default gulp.series(assemble, exportPatterns);
+
+export {
+  distributeSharedConfig,
+  buildCss,
+  buildJs,
+  build,
+  assemble,
+  exportPatterns,
+  test,
+  watch,
+  server
+};
