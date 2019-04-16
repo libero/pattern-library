@@ -267,7 +267,7 @@ const watchJs = () => gulp.watch(config.files.src.jsAuthored.concat([config.file
 
 const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 
-const watch = gulp.parallel(watchSass, watchSassTests, watchJs, watchSharedConfig);
+const watch = gulp.parallel(watchSass, watchJs, watchSharedConfig);
 
 // Server
 
