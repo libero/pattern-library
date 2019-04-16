@@ -23,24 +23,6 @@ import webpack from 'webpack';
 // TODO: work out how to inject this file's config object properties for js into the webpack config
 import webpackConfig from './webpack.config.babel.js';
 
-function handleJsBuild(done) {
-  return (err, stats) => {
-    if (err) {
-      log('Error', err);
-      throw new Error(err);
-    }
-    Object.keys(stats.compilation.assets).forEach((key) => {
-      log('Webpack: output', color.green(key));
-    });
-    log('Webpack:', color.blue('finished ', stats.compilation.name));
-    if (done) {
-      done();
-    }
-  }
-}
-
-
-
 const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoot) => {
 
   const invocationOptions = minimist(
@@ -194,7 +176,23 @@ const lintJs = () => {
 
 const transpileAndBundleJs = (done) => {
   // Adapted from https://stackoverflow.com/questions/33558396/gulp-webpack-or-just-webpack
-  webpack(webpackConfig).run(handleJsBuild(done));
+
+  function logBuild(done) {
+    return (err, stats) => {
+      if (err) {
+        log('Error', err);
+        done();
+      } else {
+        Object.getOwnPropertyNames(stats.compilation.assets).forEach((asset) => {
+          log('Webpack: output', color.green(asset));
+        });
+      }
+      log('Webpack:', color.blue('finished'));
+      done();
+    }
+  }
+
+  webpack(webpackConfig).run(logBuild(done));
 };
 
 const testJs = () => {
