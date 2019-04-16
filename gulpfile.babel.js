@@ -30,9 +30,9 @@ function handleJsBuild(done) {
       throw new Error(err);
     }
     Object.keys(stats.compilation.assets).forEach((key) => {
-      log('Webpack: output ', color.green(key));
+      log('Webpack: output', color.green(key));
     });
-    log('Webpack: ', color.blue('finished ', stats.compilation.name));
+    log('Webpack:', color.blue('finished ', stats.compilation.name));
     if (done) {
       done();
     }
