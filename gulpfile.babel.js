@@ -79,7 +79,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.src.jsMap = `${config.sourceRoot}/js`;
 
   config.dir.test.sass = `${config.testRoot}/sass`;
-  config.dir.test.js = `${config.testRoot}/app`;
+  config.dir.test.js = `${config.testRoot}/js`;
 
   config.dir.out.css = `${config.exportRoot}/css`;
   config.dir.out.sass = `${config.dir.out.css}/sass`;
