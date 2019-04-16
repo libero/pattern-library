@@ -167,11 +167,19 @@ const compileCss = () =>
 
 const generateCss = gulp.series(cleanCss, compileCss);
 
+const buildCss = gulp.series(validateSass, generateCss);
+
 const lintJs = () => {
   return gulp.src([config.files.src.js, `!${config.dir.src.js}/dist/**/*.js`])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
+};
+
+const testJs = () => {
+  return gulp.src(config.dir.test.js)
+             // TODO: remove passWithNoTests once js work has started
+             .pipe(jest({ 'passWithNoTests': true}));
 };
 
 const transpileAndBundleJs = (done) => {
@@ -195,15 +203,9 @@ const transpileAndBundleJs = (done) => {
   webpack(webpackConfig).run(logBuild(done));
 };
 
-const testJs = () => {
-  return gulp.src(config.dir.test.js)
-    // TODO: remove passWithNoTests once js work has started
-    .pipe(jest({ 'passWithNoTests': true}));
-};
+const validateJs = gulp.parallel(lintJs, testJs);
 
-const buildCss = gulp.series(validateSass, generateCss);
-
-const buildJs = gulp.series(lintJs, transpileAndBundleJs, testJs);
+const buildJs = gulp.series(validateJs, transpileAndBundleJs);
 
 const build = gulp.parallel(buildCss, buildJs);
 
