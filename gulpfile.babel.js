@@ -261,9 +261,7 @@ const test = gulp.parallel(buildJs, validateSass);
 
 // Watchers
 
-const watchSass = () => gulp.watch(config.files.src.sass, buildCss);
-
-const watchSassTests = () => gulp.watch(config.files.test.sass, buildCss);
+const watchSass = () => gulp.watch(config.files.src.sass.concat([config.files.test.sass]), buildCss);
 
 const watchJs = () => gulp.watch(config.files.src.jsAuthored.concat([config.files.test.js]), buildJs);
 
