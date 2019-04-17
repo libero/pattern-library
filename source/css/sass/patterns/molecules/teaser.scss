@@ -1,25 +1,22 @@
+@import "../../mixins/decorations";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
-@import "../../mixins/_decorations";
 
 .teaser-list__list {
+  @include list-style-none();
   @include padding(0, inline-start);
 }
 
 .teaser {
 
   .teaser-list__item:not(:last-child) & {
-    @include margin($baselinegrid-space-small, block-end);
     @include divider(block-end);
+    @include margin($baselinegrid-space-small, block-end);
   }
 
 }
 
-.teaser__header {
-  @include block-spacing($start: 0);
-}
-
 .teaser__heading {
-  @include block-spacing($start:0, $end: $baselinegrid-space-extra_small);
+  @include h4-spacing();
   @include h4-typography();
 }
