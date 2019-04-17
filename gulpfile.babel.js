@@ -42,7 +42,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   //
   // CSS needs the locations:
   // - where it's compiled to (compiled)
-  // - where it's copied to to drive pattern lab (out)
+  // - where it's copied to to drive pattern lab (public)
   // - where it's exported to (export)
   // - *special case: pattern-scaffolding.css must always be included in out and export. Suggests
   //   that is should have its own static location and dedicated sass config property to isolate it
@@ -50,7 +50,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   // JS needs the locations:
   // - where it's authored (src)
   // - where it's compiled to (compiled)
-  // - where it's copied to to drive pattern lab (out)
+  // - where it's copied to to drive pattern lab (public)
   // - where it's exported to (export)
   //
   // For CSS and JS, could the location they're copied to to drive pattern lab be the location they're
@@ -70,9 +70,10 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
 
   config.dir = {
     export: {},
+    out: {},
+    public: {},
     src: {},
     test: {},
-    out: {},
   };
   config.dir.src.css = `${config.sourceRoot}/css`;
   config.dir.src.sass = `${config.dir.src.css}/sass`;
@@ -88,6 +89,8 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.out.compiledAssets = 'compiled-assets';
   config.dir.out.compiledCss = `${config.dir.out.compiledAssets}/css`;
 
+  config.dir.public.css = `${config.publicRoot}/css`;
+
   config.dir.export.css = `${config.exportRoot}/css`;
   config.dir.export.sass = `${config.dir.export.css}/sass`;
   config.dir.export.sassVendor = `${config.dir.export.css}/sass/vendor`;
@@ -97,9 +100,9 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.out.templates = `${config.exportRoot}/templates`;
 
   config.files = {
+    out: {},
     src: {},
     test: {},
-    out: {},
   };
   config.files.out.css = [
     `${config.dir.out.compiledCss}/**/*.css`,
@@ -190,7 +193,8 @@ const compileCss = () => {
       .pipe(replace(/\.\.\/\.\.\/fonts\//g, '../fonts/'))
       .pipe(rename(config.files.out.cssFilename))
       .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest(config.dir.out.compiledCss));
+      .pipe(gulp.dest(config.dir.out.compiledCss))
+      .pipe(gulp.dest(config.dir.public.css));
 };
 
 const generateCss = gulp.series(cleanCss, compileCss);
