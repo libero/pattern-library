@@ -1,0 +1,8 @@
+@import "../../mixins/decorations";
+@import "../../mixins/spacing";
+@import "../../mixins/typography";
+
+.teaser-list__list {
+  @include list-style-none();
+  @include padding(0, inline-start);
+}

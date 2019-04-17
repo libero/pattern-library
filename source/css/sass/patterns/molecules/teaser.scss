@@ -2,11 +2,6 @@
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 
-.teaser-list__list {
-  @include list-style-none();
-  @include padding(0, inline-start);
-}
-
 .teaser {
 
   .teaser-list__item:not(:last-child) & {
