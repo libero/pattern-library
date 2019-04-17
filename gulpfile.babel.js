@@ -73,8 +73,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     src: {},
     test: {},
   };
-  config.dir.src.css = `${config.sourceRoot}/css`;
-  config.dir.src.sass = `${config.dir.src.css}/sass`;
+  config.dir.src.sass = `${config.sourceRoot}/sass`;
   config.dir.src.images = `${config.sourceRoot}/images`;
   config.dir.src.fonts = `${config.sourceRoot}/fonts`;
   config.dir.src.templates = `${config.sourceRoot}/_patterns`;
