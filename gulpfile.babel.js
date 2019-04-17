@@ -44,8 +44,6 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   // - where it's compiled to (compiled)
   // - where it's copied to to drive pattern lab (public)
   // - where it's exported to (export)
-  // - *special case: pattern-scaffolding.css must always be included in out and export. Suggests
-  //   that is should have its own static location and dedicated sass config property to isolate it
   //
   // JS needs the locations:
   // - where it's authored (src)
