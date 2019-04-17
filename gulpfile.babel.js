@@ -36,6 +36,9 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     },
   );
 
+  //
+  // ** DONE **
+  //
   // SASS needs the locations:
   // - where it's authored (src)
   // - where it's exported to (export)
@@ -45,15 +48,13 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   // - where it's copied to to drive pattern lab (public)
   // - where it's exported to (export)
   //
+  // ** TODO **
+  //
   // JS needs the locations:
   // - where it's authored (src)
   // - where it's compiled to (compiled)
   // - where it's copied to to drive pattern lab (public)
   // - where it's exported to (export)
-  //
-  // For CSS and JS, could the location they're copied to to drive pattern lab be the location they're
-  // compiled to? No, I don't think so, we only want the pattern lab files to be replaced if the
-  // the respective file builds don't break.
 
   const config = {};
   config.environment = invocationOptions.environment;
