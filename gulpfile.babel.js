@@ -9,6 +9,7 @@ import log from 'fancy-log';
 import jest from 'gulp-jest';
 import minimist from 'minimist';
 import mocha from 'gulp-mocha';
+import path from 'path';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
@@ -19,9 +20,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import stylelint from 'stylelint';
 import syntaxScss from 'postcss-scss';
 import webpack from 'webpack';
-
-// TODO: work out how to inject this file's config object properties for js into the webpack config
-import webpackConfig from './webpack.config.babel.js';
+import webpackConfigFactory from './webpack.config.babel.js';
 
 const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoot) => {
 
@@ -29,6 +28,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     invocationArgs, {
       default: {
         environment: 'production',
+        jsEntryPoint: 'main.js',
         sassEntryPoint: 'base.scss',
         cssOutFilename: 'all.css',
         'sass-lint': true,
@@ -117,6 +117,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     `${config.dir.src.sass}/vendor/**/LICENSE.*`,
   ];
   config.files.src.js = `${config.dir.src.js}/**/*.js`;
+  config.files.src.jsEntryPoint = `${config.dir.src.js}/app/${invocationOptions.jsEntryPoint}`;
   config.files.src.jsCompiled = `${config.dir.src.js}/dist/**/*.js`;
   config.files.src.jsAuthored = [config.files.src.js, `!${config.files.src.jsCompiled}`];
   config.files.src.jsMap = `${config.dir.src.jsMap}/**/*.js.map`;
@@ -138,6 +139,8 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.files.test.sassTestsEntryPoint = `${config.dir.test.sass}/test_sass.js`;
 
   config.files.out.cssFilename = invocationOptions.cssOutFilename;
+
+  config.webpack = webpackConfigFactory(config.environment, path.resolve(config.files.src.jsEntryPoint), path.resolve(`${config.dir.src.js}/dist`));
 
   return config;
 
@@ -236,7 +239,7 @@ const transpileAndBundleJs = (done) => {
     }
   }
 
-  webpack(webpackConfig).run(logBuild(done));
+  webpack(config.webpack).run(logBuild(done));
 };
 
 const generateJs = gulp.series(cleanJs, transpileAndBundleJs);

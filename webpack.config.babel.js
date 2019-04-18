@@ -1,48 +1,48 @@
-import path from 'path';
+export default (mode, entry, output) => {
 
-export default {
-  mode: 'production',
-  entry: path.join(__dirname, 'source/js/app/main.js'),
+  return {
+    mode,
+    entry,
 
-  output: {
-    // TODO: This path should probably be supplied by Gulp, or at least derived from the same place as Gulp's
-    path: path.join(__dirname, 'source/js/dist'),
-    filename: '[name].bundle.js'
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                [
-                  "@babel/preset-env",
-                  {
-                    "useBuiltIns": "usage",
-                    "corejs": 3,
-                  }
-                ]
-              ]
-            }
-          }
-        ]
-      }
-    ]
-  },
-
-  optimization: {
-    splitChunks: {
-      chunks: 'all'
+    output: {
+      path: output,
+      filename: '[name].bundle.js'
     },
-    usedExports: true
-  },
 
-  stats: 'verbose',
-  devtool: 'source-map'
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  [
+                    "@babel/preset-env",
+                    {
+                      "useBuiltIns": "usage",
+                      "corejs": 3,
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      },
+      usedExports: true
+    },
+
+    stats: 'verbose',
+    devtool: 'source-map'
+  };
 
 };
