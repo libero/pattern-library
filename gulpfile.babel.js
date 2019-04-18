@@ -57,6 +57,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.test.sass = `${config.testRoot}/sass`;
 
   config.dir.build.css = `${config.buildRoot}/css`;
+  config.dir.build.fonts = `${config.buildRoot}/fonts`;
   config.dir.build.meta = `${config.buildRoot}/_meta`;
   config.dir.build.patterns = `${config.buildRoot}/_patterns`;
 
@@ -99,6 +100,8 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   ];
   config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
   config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
+  config.files.src.meta = [`${config.dir.src.meta}/*`, `${config.dir.src.meta}/**/*`];
+  config.files.src.patterns = [`${config.dir.src.patterns}/*`, `${config.dir.src.patterns}/**/*`];
   config.files.src.templates = [
     `${config.dir.src.patterns}/**/*.twig`,
     `!${config.dir.src.patterns}/04-pages/**/*.twig`,
@@ -170,17 +173,21 @@ export const buildCss = gulp.parallel(validateSass, generateCss);
 
 // Patterns tasks
 
-const cleanLinks = () => del([config.dir.build.meta, config.dir.build.patterns]);
+const cleanLinks = () => del([config.dir.build.fonts, config.dir.build.meta, config.dir.build.patterns]);
+
+const linkFonts = () =>
+  gulp.src(config.files.src.fonts)
+    .pipe(gulp.dest(config.dir.build.fonts));
 
 const linkMeta = () =>
-  gulp.src(config.dir.src.meta + '/**/*')
+  gulp.src(config.files.src.meta)
     .pipe(gulp.dest(config.dir.build.meta));
 
 const linkPatterns = () =>
-  gulp.src(config.dir.src.patterns + '/**/*')
+  gulp.src(config.files.src.patterns)
     .pipe(gulp.dest(config.dir.build.patterns));
 
-const generateLinks = gulp.parallel(linkMeta, linkPatterns);
+const generateLinks = gulp.parallel(linkFonts, linkMeta, linkPatterns);
 
 export const buildLinks = gulp.series(cleanLinks, generateLinks);
 
@@ -218,7 +225,7 @@ const exportFonts = () =>
 
 const exportTemplates = () =>
   gulp.src(config.files.src.templates)
-  // Rename files to standard Twig usage
+    // Rename files to standard Twig usage
     .pipe(rename(path => {
       path.basename = path.basename.replace(/^_/, '');
       path.extname = '.html.twig';
