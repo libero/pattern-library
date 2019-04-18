@@ -97,6 +97,7 @@ body:
               arguments:
                 image:
                   src: https://iiif.elifesciences.org/lax/38827%2Felife-38827-fig1-v2.tif/full/617,/0/default.jpg
+                  alt: ''
                 sources:
                   - type: image/webp
                     srcset: https://iiif.elifesciences.org/lax/38827%2Felife-38827-fig1-v2.tif/full/1234,/0/default.webp 2x, https://iiif.elifesciences.org/lax/38827%2Felife-38827-fig1-v2.tif/full/617,/0/default.webp 1x
