@@ -50,6 +50,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.src.fonts = `${config.sourceRoot}/fonts`;
   config.dir.src.templates = `${config.sourceRoot}/_patterns`;
   config.dir.src.js = `${config.sourceRoot}/js`;
+  config.dir.src.php = `${config.sourceRoot}/php`;
 
   config.dir.test.sass = `${config.testRoot}/sass`;
 
@@ -59,6 +60,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.out.images = `${config.exportRoot}/images`;
   config.dir.out.fonts = `${config.exportRoot}/fonts`;
   config.dir.out.templates = `${config.exportRoot}/templates`;
+  config.dir.out.php = `${config.exportRoot}/php`;
 
   config.files = {
     src: {},
@@ -88,6 +90,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
     `${config.dir.src.templates}/**/*.twig`,
     `!${config.dir.src.templates}/04-pages/**/*.twig`,
   ];
+  config.files.src.php = `${config.dir.src.php}/**/*`;
   config.files.src.derivedConfigs = [
     `${config.dir.src.sass}/variables/**/*`,
     `${config.dir.src.js}/derivedConfig.json`,
@@ -191,9 +194,13 @@ const exportTemplates = () =>
     .pipe(flatten({includeParents: false}))
     .pipe(gulp.dest(config.dir.out.templates));
 
+const exportPhp = () =>
+  gulp.src(config.files.src.php)
+    .pipe(gulp.dest(config.dir.out.php));
+
 export const exportPatterns = gulp.series(
   cleanExport,
-  gulp.parallel(exportCss, exportSass, exportSassVendor, exportImages, exportFonts, exportTemplates),
+  gulp.parallel(exportCss, exportSass, exportSassVendor, exportImages, exportFonts, exportTemplates, exportPhp),
 );
 
 // Default

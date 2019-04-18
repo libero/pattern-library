@@ -1,6 +1,6 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid']) }) -%}
+{%- set classes = ['content-grid'] -%}
 
 {%- set hasSecondary = false -%}
 {%- for area in content if area.area|default('full') == 'secondary' and area.content|default([])|length -%}
@@ -8,8 +8,10 @@
 {%- endfor -%}
 
 {%- if hasSecondary -%}
-  {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid--has-secondary']) }) -%}
+  {%- set classes = classes|merge(['content-grid--has-secondary']) -%}
 {%- endif -%}
+
+{%- set attributes = {class: classes}|merge_recursive(attributes|default({})) -%}
 
 <{{ element|default('div') }} {{- html.attributes(attributes) }}>
 
@@ -18,13 +20,11 @@
 
       {%- block item -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__item']) }) -%}
-
         {%- if area is defined -%}
 
           {%- if content|default([])|length -%}
 
-            {%- set attributes = attributes|merge({class: attributes.class|merge(['content-grid__item--' ~ area]) }) -%}
+            {%- set attributes = {class: ['content-grid__item', 'content-grid__item--' ~ area]}|merge_recursive(attributes|default({})) -%}
 
             <div {{- html.attributes(attributes) }}>
               {{- html.content(content) -}}
@@ -36,7 +36,7 @@
 
           {%- with arguments|merge({_template: template}) only -%}
 
-            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-grid__item'])}) -%}
+            {%- set attributes = {class: 'content-grid__item'}|merge_recursive(attributes|default({})) -%}
 
             {%- include _template -%}
 

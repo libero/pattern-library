@@ -1,6 +1,6 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser']) }) -%}
+{%- set attributes = {class: 'teaser'}|merge_recursive(attributes|default({})) -%}
 
 <div {{- html.attributes(attributes) }}>
 
@@ -13,7 +13,7 @@
         {%- with heading|merge({text: {attributes: {href: href}, text: heading.text} }) only -%}
           {%- block heading -%}
 
-            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__heading']) }) -%}
+            {%- set attributes = {class: 'teaser__heading'}|merge_recursive(attributes|default({})) -%}
             {%- set level = level|default(3) -%}
 
             {%- include 'atoms-heading' -%}

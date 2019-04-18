@@ -1,6 +1,6 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) -%}
+{%- set attributes = {class: 'content-header'}|merge_recursive(attributes|default({})) -%}
 
 <header {{- html.attributes(attributes) }}>
 
@@ -38,7 +38,7 @@
           {% set lengthClass = 'xx-long' %}
         {% endif %}
 
-        {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title', 'content-header__title--' ~ lengthClass]) }) %}
+        {% set attributes = {class: ['content-header__title', 'content-header__title--' ~ lengthClass]}|merge_recursive(attributes|default({})) %}
         {% set level = 1 %}
 
         {% include 'atoms-heading' %}

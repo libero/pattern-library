@@ -1,6 +1,6 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta']) }) -%}
+{%- set attributes = {class: 'content-meta'}|merge_recursive(attributes|default({})) -%}
 
 <ul {{- html.attributes(attributes) }}>
   {%- for item in items -%}
@@ -8,7 +8,7 @@
     {%- with item|merge({html: html}) only -%}
       {%- block item -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__item']) }) -%}
+        {%- set attributes = {class: 'content-meta__item'}|merge_recursive(attributes|default({})) -%}
 
         <li {{- html.attributes(attributes) }}>
 
@@ -16,7 +16,7 @@
             {%- block content -%}
 
               {%- if attributes.href is defined -%}
-                {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-meta__link']) }) -%}
+                {%- set attributes = {class: 'content-meta__link'}|merge_recursive(attributes) -%}
               {%- endif -%}
 
               {%- include 'atoms-link' -%}

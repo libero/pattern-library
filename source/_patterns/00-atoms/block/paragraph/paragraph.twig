@@ -1,6 +1,6 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['paragraph']) }) -%}
+{%- set attributes = {class: 'paragraph'}|merge_recursive(attributes|default({})) -%}
 
 <p {{- html.attributes(attributes) }}>
 

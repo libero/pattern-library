@@ -1,6 +1,6 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list']) }) -%}
+{%- set attributes = {class: 'teaser-list'}|merge_recursive(attributes|default({})) -%}
 
 {%- if title.text is defined -%}
   {%- set title_id = title.attributes.id|default('heading' ~ random()) -%}
@@ -15,7 +15,7 @@
 
       {% if text is defined %}
 
-        {%- set attributes = attributes|default({})|merge({id: _id, class: attributes.class|default([])|merge(['teaser-list__title']) }) -%}
+        {%- set attributes = {id: _id, class: 'teaser-list__title'}|merge_recursive(attributes|default({})) -%}
         {%- include 'atoms-heading' with {level: level|default(2)} -%}
 
       {% endif %}
@@ -28,7 +28,7 @@
 
       {%- if items|default([])|length -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__list']) }) -%}
+        {%- set attributes = {class: 'teaser-list__list'}|merge_recursive(attributes|default({})) -%}
 
         <ol {{- html.attributes(attributes) }}>
 
@@ -37,7 +37,7 @@
             {%- with item|merge({html: html}) only -%}
               {%- block item -%}
 
-                {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser-list__item']) }) -%}
+                {%- set attributes = {class: 'teaser-list__item'}|merge_recursive(attributes|default({})) -%}
 
                 <li {{- html.attributes(attributes) }}>
 

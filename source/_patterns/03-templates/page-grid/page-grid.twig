@@ -1,6 +1,6 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid']) }) -%}
+{%- set attributes = {class: 'page-grid'}|merge_recursive(attributes|default({})) -%}
 
 <div {{- html.attributes(attributes) }}>
 
@@ -11,7 +11,7 @@
 
         {%- with arguments|merge({_template: template}) only -%}
 
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__start'])}) -%}
+          {%- set attributes = {class: ['page-grid__item', 'page-grid__start']}|merge_recursive(attributes|default({})) -%}
 
           {%- include _template -%}
 
@@ -27,7 +27,7 @@
 
       {%- with arguments|merge({_template: template}) only -%}
 
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__main']), role: 'main'}) -%}
+        {%- set attributes = {class: ['page-grid__item', 'page-grid__main'], role: 'main'}|merge_recursive(attributes|default({})) -%}
         {%- set element = "main" -%}
 
         {%- include _template -%}
@@ -44,7 +44,7 @@
 
         {%- with arguments|merge({_template: template}) only -%}
 
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['page-grid__item', 'page-grid__end'])}) -%}
+          {%- set attributes = {class: ['page-grid__item', 'page-grid__end']}|merge_recursive(attributes|default({})) -%}
 
           {%- include _template -%}
 
