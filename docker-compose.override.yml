@@ -5,7 +5,7 @@ services:
     build:
       context: .
       target: gulp
-    command: bash -c "npx gulp assemble --environment=development --sass-lint=${LINT_SASS} && npx gulp watch --environment=development --sass-lint=${LINT_SASS}"
+    command: bash -c "npx gulp assemble --environment=development --lint=${LINT} && npx gulp watch --environment=development --lint=${LINT}"
     restart: on-failure
     volumes:
       - ./build:/app/build

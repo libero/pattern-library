@@ -23,22 +23,21 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
         environment: 'production',
         sassEntryPoint: 'base.scss',
         cssOutFilename: 'all.css',
-        'sass-lint': true,
+        lint: true,
       },
     },
   );
 
   const config = {};
   config.environment = invocationOptions.environment;
+  config.lint = invocationOptions.lint !== 'false';
   config.publicRoot = publicRoot;
   config.sourceRoot = sourceRoot;
   config.testRoot = testRoot;
   config.exportRoot = exportRoot;
   config.buildRoot = buildRoot;
 
-  config.sass = {};
-  config.sass.linting = invocationOptions['sass-lint'] !== 'false';
-  config.sass.options = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
+  config.sass = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
 
   config.dir = {
     src: {},
@@ -120,8 +119,8 @@ export const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeC
 // Sass tasks
 
 const lintSass = () => {
-  if (!config.sass.linting) {
-    console.info('Skipping sass:lint');
+  if (!config.lint) {
+    console.info('Skipping lintSass');
     return Promise.resolve();
   }
 
@@ -151,7 +150,7 @@ const compileCss = () =>
   gulp.src(config.files.src.sassEntryPoint)
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
-    .pipe(sass(config.sass.options).on('error', sass.logError))
+    .pipe(sass(config.sass).on('error', sass.logError))
     .pipe(rename(config.files.build.cssFilename))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.dir.build.css));
