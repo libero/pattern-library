@@ -50,7 +50,7 @@ COPY composer.json \
     composer.lock \
     ./
 
-RUN mkdir public source && \
+RUN mkdir build public && \
     composer --no-interaction install --ignore-platform-reqs --classmap-authoritative --no-suggest --prefer-dist
 
 
@@ -72,7 +72,7 @@ COPY core/ core/
 COPY config/ config/
 COPY --from=composer /app/public/ public/
 COPY --from=composer /app/vendor/ vendor/
-COPY --from=gulp /app/source/ source/
+COPY --from=gulp /app/build/ build/
 
 RUN core/console --generate
 

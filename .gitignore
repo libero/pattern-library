@@ -1,13 +1,9 @@
 /.sass-cache/
+/build/
 /export/
 /node_modules/
 /pattern-library-*.tar.gz
 /public/
-/source/css/*.css
-/source/css/*.map
-/source/styleguide/
-/vendor/
 /source/sass/variables/
 /source/js/derivedConfig.json
-/test/coverage/
-/source/js/dist/
+/vendor/
