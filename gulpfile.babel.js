@@ -41,14 +41,13 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.sass.options = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
 
   config.dir = {
-    build: {},
-    export: {},
-    public: {},
     src: {},
     test: {},
+    build: {},
+    export: {},
   };
+
   config.dir.src.sass = `${config.sourceRoot}/sass`;
-  config.dir.src.images = `${config.sourceRoot}/images`;
   config.dir.src.fonts = `${config.sourceRoot}/fonts`;
   config.dir.src.patterns = `${config.sourceRoot}/patterns`;
   config.dir.src.meta = `${config.sourceRoot}/meta`;
@@ -61,8 +60,6 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.build.meta = `${config.buildRoot}/_meta`;
   config.dir.build.patterns = `${config.buildRoot}/_patterns`;
 
-  config.dir.public.css = `${config.publicRoot}/css`;
-
   config.dir.export.css = `${config.exportRoot}/css`;
   config.dir.export.sass = `${config.dir.export.css}/sass`;
   config.dir.export.sassVendor = `${config.dir.export.css}/sass/vendor`;
@@ -71,19 +68,11 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   config.dir.export.templates = `${config.exportRoot}/templates`;
 
   config.files = {
-    build: {},
-    export: {},
     src: {},
     test: {},
+    build: {},
   };
-  config.files.build.css = [
-    `${config.dir.build.css}/**/*.css`,
-    `${config.dir.build.css}/**/*.css.map`,
-  ];
-  config.files.build.patterns = [
-    `${config.dir.build.css}/*`,
-    `${config.dir.build.css}/**/*`,
-  ];
+
   config.files.src.sass = [
     `${config.dir.src.sass}/**/*.scss`,
     `!${config.dir.src.sass}/vendor/**/*`,
@@ -156,7 +145,7 @@ const testSass = () =>
 
 export const validateSass = gulp.parallel(lintSass, testSass);
 
-const cleanCss = () => del(config.files.build.css);
+const cleanCss = () => del(config.dir.build.css);
 
 const compileCss = () =>
   gulp.src(config.files.src.sassEntryPoint)
@@ -204,11 +193,11 @@ export const test = gulp.parallel(validateSass);
 const cleanExport = () => del(`${config.exportRoot}**/*`);
 
 const exportCss = () =>
-  gulp.src(config.files.build.css)
+  gulp.src(`${config.dir.build.css}/**/*`)
     .pipe(gulp.dest(config.dir.export.css));
 
 const exportSass = () =>
-  gulp.src(config.files.src.sass)
+  gulp.src(`${config.dir.build.sass}/**/*`)
     .pipe(gulp.dest(config.dir.export.sass));
 
 const exportSassVendor = () =>
@@ -247,7 +236,7 @@ export default gulp.series(assemble, exportPatterns);
 
 // Watchers
 
-const watchLinks = () => gulp.watch([config.dir.build.meta, config.dir.build.patterns], buildLinks);
+const watchLinks = () => gulp.watch([config.dir.src.fonts, config.dir.src.meta, config.dir.src.patterns], buildLinks);
 
 const watchSass = () => gulp.watch(config.files.src.sass.concat([config.files.test.sass]), buildCss);
 
