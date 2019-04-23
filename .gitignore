@@ -1,9 +1,5 @@
-/.sass-cache/
 /build/
-/export/
 /node_modules/
-/pattern-library-*.tar.gz
-/public/
 /source/sass/variables/
 /source/js/derivedConfig.json
 /vendor/
