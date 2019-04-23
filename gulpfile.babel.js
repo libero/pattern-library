@@ -196,7 +196,7 @@ const exportCss = () =>
     .pipe(gulp.dest(config.dir.export.css));
 
 const exportSass = () =>
-  gulp.src(`${config.dir.build.sass}/**/*`)
+  gulp.src(config.files.src.sass)
     .pipe(gulp.dest(config.dir.export.sass));
 
 const exportSassVendor = () =>
