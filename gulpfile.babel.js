@@ -47,6 +47,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   };
 
   config.dir.src.sass = `${config.sourceRoot}/sass`;
+  config.dir.src.sassVendor = `${config.dir.src.sass}/vendor`;
   config.dir.src.fonts = `${config.sourceRoot}/fonts`;
   config.dir.src.patterns = `${config.sourceRoot}/patterns`;
   config.dir.src.meta = `${config.sourceRoot}/meta`;
@@ -74,26 +75,20 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
 
   config.files.src.sass = [
     `${config.dir.src.sass}/**/*.scss`,
-    `!${config.dir.src.sass}/vendor/**/*`,
+    `!${config.dir.src.sassVendor}/**/*`,
   ];
   config.files.src.sassEntryPoint = `${config.dir.src.sass}/${invocationOptions.sassEntryPoint}`;
   config.files.src.sassVendor = [
-    `${config.dir.src.sass}/vendor/**/*.scss`,
-    `${config.dir.src.sass}/vendor/**/_*.scss`,
-    `${config.dir.src.sass}/vendor/**/*.css`,
-    `${config.dir.src.sass}/vendor/**/LICENSE.*`,
-    `${config.dir.src.sass}/vendor/**/license.*`,
-    `!${config.dir.src.sass}/vendor/modularscale-sass/libsass/**/*`,
-    `!${config.dir.src.sass}/vendor/modularscale-sass/test-compass/**/*`,
+    `${config.dir.src.sassVendor}/**/*.{css,scss}`,
+    `${config.dir.src.sassVendor}/**/_*.scss`,
+    `${config.dir.src.sassVendor}/**/{LICENSE,license}.*`,
+    `!${config.dir.src.sassVendor}/modularscale-sass/{libsass,test-compass}/**/*`,
   ];
-  config.files.src.images = [`${config.dir.src.images}/*`, `${config.dir.src.images}/**/*`];
-  config.files.src.fonts = [`${config.dir.src.fonts}/*`, `${config.dir.src.fonts}/**/*`];
-  config.files.src.meta = [`${config.dir.src.meta}/*`, `${config.dir.src.meta}/**/*`];
-  config.files.src.patterns = [`${config.dir.src.patterns}/*`, `${config.dir.src.patterns}/**/*`];
-  config.files.src.templates = [
-    `${config.dir.src.patterns}/**/*.twig`,
-    `!${config.dir.src.patterns}/04-pages/**/*.twig`,
-  ];
+  config.files.src.images = `${config.dir.src.images}/**/*`;
+  config.files.src.fonts = `${config.dir.src.fonts}/**/*`;
+  config.files.src.meta = `${config.dir.src.meta}/**/*`;
+  config.files.src.patterns = `${config.dir.src.patterns}/**/*`;
+  config.files.src.templates = `${config.dir.src.patterns}/!(04-pages)/**/*.twig`;
   config.files.src.derivedConfigs = [
     `${config.dir.src.sass}/variables/**/*`,
     `${config.dir.src.js}/derivedConfig.json`,
