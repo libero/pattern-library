@@ -311,7 +311,7 @@ export default gulp.series(assemble, exportPatterns);
 
 // Watchers
 
-const watchJs = () => gulp.watch(config.files.src.js, buildJs);
+const watchJs = () => gulp.watch([config.files.src.js, config.files.test.js], buildJs);
 
 const watchPatternLab = () => gulp.watch([config.dir.src.fonts, config.dir.src.meta, config.dir.src.patterns], buildPatternLab);
 
