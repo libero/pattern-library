@@ -40,13 +40,11 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   const config = {};
   config.environment = invocationOptions.environment;
   config.lint = invocationOptions.lint !== 'false';
-  config.lint = invocationOptions.lint !== 'false';
   config.sourceRoot = sourceRoot;
   config.testRoot = testRoot;
   config.buildRoot = buildRoot;
   config.exportRoot = `${config.buildRoot}/export`;
   config.publicRoot = `${config.buildRoot}/public`;
-  config.buildRoot = buildRoot;
 
   config.sass = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
 
@@ -101,12 +99,8 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.files.src.sassVendor = [
     `${config.dir.src.sassVendor}/**/*.{css,scss}`,
     `${config.dir.src.sassVendor}/**/_*.scss`,
-    `${config.dir.src.sass}/vendor/**/_*.scss`,
     `${config.dir.src.sassVendor}/**/{LICENSE,license}.*`,
     `!${config.dir.src.sassVendor}/modularscale-sass/{libsass,test-compass}/**/*`,
-    `${config.dir.src.sass}/vendor/**/license.*`,
-    `!${config.dir.src.sass}/vendor/modularscale-sass/libsass/**/*`,
-    `!${config.dir.src.sass}/vendor/modularscale-sass/test-compass/**/*`,
   ];
   config.files.src.js = `${config.dir.src.js}/**/*.js`;
   config.files.src.jsEntryPoint = `${config.dir.src.js}/${invocationOptions.jsEntryPoint}`;
@@ -132,7 +126,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
 
 };
 
-const config = buildConfig(process.argv, 'source', 'test', 'build', 'build');
+const config = buildConfig(process.argv, 'source', 'test', 'build');
 
 // Shared config tasks
 
@@ -162,10 +156,9 @@ const lintSass = () => {
     .pipe(postcss(processors, {syntax: syntaxScss}));
 };
 
-const testSass = () => {
-  return gulp.src(config.files.test.sassTestsEntryPoint)
+const testSass = () =>
+  gulp.src(config.files.test.sassTestsEntryPoint)
     .pipe(mocha({reporter: 'spec'}));
-};
 
 export const validateSass = gulp.parallel(lintSass, testSass);
 
@@ -198,11 +191,10 @@ const lintJs = () => {
     .pipe(eslint.failAfterError());
 };
 
-const testJs = () => {
-  return gulp.src(config.dir.test.js)
+const testJs = () =>
+  gulp.src(config.dir.test.js)
   // TODO: remove passWithNoTests once js work has started
     .pipe(jest({'passWithNoTests': true}));
-};
 
 export const validateJs = gulp.parallel(lintJs, testJs);
 
@@ -272,7 +264,7 @@ const exportCss = () =>
     .pipe(gulp.dest(config.dir.export.css));
 
 const exportSass = () =>
-  gulp.src(`${config.dir.build.sass}/**/*`)
+  gulp.src(config.files.src.sass)
     .pipe(gulp.dest(config.dir.export.sass));
 
 const exportSassVendor = () =>
