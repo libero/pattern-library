@@ -19,7 +19,7 @@ styleGuideExcludes:
 cacheBusterOn: 'true'
 exportDir: export
 publicDir: public
-sourceDir: build
+sourceDir: build/pattern-library
 defaultPattern: all
 defaultShowPatternInfo: false
 ishMinimum: '320'

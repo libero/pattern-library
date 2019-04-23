@@ -55,10 +55,11 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
 
   config.dir.test.sass = `${config.testRoot}/sass`;
 
-  config.dir.build.css = `${config.buildRoot}/css`;
-  config.dir.build.fonts = `${config.buildRoot}/fonts`;
-  config.dir.build.meta = `${config.buildRoot}/_meta`;
-  config.dir.build.patterns = `${config.buildRoot}/_patterns`;
+  config.dir.build.patternLibrary = `${config.buildRoot}/pattern-library`;
+  config.dir.build.css = `${config.dir.build.patternLibrary}/css`;
+  config.dir.build.fonts = `${config.dir.build.patternLibrary}/fonts`;
+  config.dir.build.meta = `${config.dir.build.patternLibrary}/_meta`;
+  config.dir.build.patterns = `${config.dir.build.patternLibrary}/_patterns`;
 
   config.dir.export.css = `${config.exportRoot}/css`;
   config.dir.export.sass = `${config.dir.export.css}/sass`;
