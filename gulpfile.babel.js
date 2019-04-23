@@ -2,6 +2,7 @@ import browserSync from 'browser-sync';
 import del from 'del';
 import distributeConfig from './libero-config/bin/distributeConfig';
 import flatten from 'gulp-flatten';
+import fs from 'fs';
 import gulp from 'gulp';
 import minimist from 'minimist';
 import mocha from 'gulp-mocha';
@@ -15,7 +16,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import stylelint from 'stylelint';
 import syntaxScss from 'postcss-scss';
 
-const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoot, buildRoot) => {
+const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
 
   const invocationOptions = minimist(
     invocationArgs, {
@@ -31,11 +32,11 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
   const config = {};
   config.environment = invocationOptions.environment;
   config.lint = invocationOptions.lint !== 'false';
-  config.publicRoot = publicRoot;
   config.sourceRoot = sourceRoot;
   config.testRoot = testRoot;
-  config.exportRoot = exportRoot;
   config.buildRoot = buildRoot;
+  config.exportRoot = `${config.buildRoot}/export`;
+  config.publicRoot = `${config.buildRoot}/public`;
 
   config.sass = config.environment === 'production' ? {outputStyle: 'compressed'} : null;
 
@@ -55,11 +56,15 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
 
   config.dir.test.sass = `${config.testRoot}/sass`;
 
-  config.dir.build.patternLibrary = `${config.buildRoot}/pattern-library`;
-  config.dir.build.css = `${config.dir.build.patternLibrary}/css`;
-  config.dir.build.fonts = `${config.dir.build.patternLibrary}/fonts`;
-  config.dir.build.meta = `${config.dir.build.patternLibrary}/_meta`;
-  config.dir.build.patterns = `${config.dir.build.patternLibrary}/_patterns`;
+  config.dir.build.src = `${config.buildRoot}/source`;
+  config.dir.build.css = `${config.dir.build.src}/css`;
+  config.dir.build.fonts = `${config.dir.build.src}/fonts`;
+  config.dir.build.meta = `${config.dir.build.src}/_meta`;
+  config.dir.build.patterns = `${config.dir.build.src}/_patterns`;
+  config.dir.build.stubs = [
+    `${config.dir.build.src}/_annotations`,
+    `${config.dir.build.src}/_data`,
+  ];
 
   config.dir.export.css = `${config.exportRoot}/css`;
   config.dir.export.sass = `${config.dir.export.css}/sass`;
@@ -104,7 +109,7 @@ const buildConfig = (invocationArgs, publicRoot, sourceRoot, testRoot, exportRoo
 
 };
 
-const config = buildConfig(process.argv, 'public', 'source', 'test', 'export', 'build');
+const config = buildConfig(process.argv, 'source', 'test', 'build');
 
 // Shared config tasks
 
@@ -155,29 +160,35 @@ export const generateCss = gulp.series(cleanCss, compileCss);
 
 export const buildCss = gulp.parallel(validateSass, generateCss);
 
-// Patterns tasks
+// Pattern Lab tasks
 
-const cleanLinks = () => del([config.dir.build.fonts, config.dir.build.meta, config.dir.build.patterns]);
+const cleanPatternLab = () => del([config.dir.build.fonts, config.dir.build.meta, config.dir.build.patterns].concat(config.dir.build.stubs));
 
-const linkFonts = () =>
+const patternLabFonts = () =>
   gulp.src(config.files.src.fonts)
     .pipe(gulp.dest(config.dir.build.fonts));
 
-const linkMeta = () =>
+const patternLabMeta = () =>
   gulp.src(config.files.src.meta)
     .pipe(gulp.dest(config.dir.build.meta));
 
-const linkPatterns = () =>
+const patternLabPatterns = () =>
   gulp.src(config.files.src.patterns)
     .pipe(gulp.dest(config.dir.build.patterns));
 
-const generateLinks = gulp.parallel(linkFonts, linkMeta, linkPatterns);
+const patternLabStubs = () =>
+  Promise.all(
+    config.dir.build.stubs
+      .map(path => fs.promises.mkdir(path, {recursive: true})),
+  );
 
-export const buildLinks = gulp.series(cleanLinks, generateLinks);
+const generatePatternLab = gulp.parallel(patternLabFonts, patternLabMeta, patternLabPatterns, patternLabStubs);
+
+export const buildPatternLab = gulp.series(cleanPatternLab, generatePatternLab);
 
 // Combined tasks
 
-export const build = gulp.parallel(buildCss, buildLinks);
+export const build = gulp.parallel(buildCss, buildPatternLab);
 
 export const assemble = gulp.series(distributeSharedConfig, build);
 
@@ -231,13 +242,13 @@ export default gulp.series(assemble, exportPatterns);
 
 // Watchers
 
-const watchLinks = () => gulp.watch([config.dir.src.fonts, config.dir.src.meta, config.dir.src.patterns], buildLinks);
+const watchPatternLab = () => gulp.watch([config.dir.src.fonts, config.dir.src.meta, config.dir.src.patterns], buildPatternLab);
 
 const watchSass = () => gulp.watch(config.files.src.sass.concat([config.files.test.sass]), buildCss);
 
 const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 
-export const watch = gulp.parallel(watchLinks, watchSass, watchSharedConfig);
+export const watch = gulp.parallel(watchPatternLab, watchSass, watchSharedConfig);
 
 // Server
 

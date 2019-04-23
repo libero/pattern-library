@@ -19,8 +19,8 @@ services:
     command: core/watch
     restart: on-failure
     volumes:
-      - ./build:/app/build:ro
-      - public:/app/public
+      - ./build/public:/app/build/public
+      - ./build/source:/app/build/source:ro
     depends_on:
       - watch-gulp
   ui:
@@ -32,9 +32,6 @@ services:
       - 8889:80
       - 3000:3000
     volumes:
-      - public:/app/public:ro
+      - ./build/public:/app/build/public:ro
     depends_on:
       - watch-build
-
-volumes:
-  public:
