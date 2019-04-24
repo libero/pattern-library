@@ -1,0 +1,21 @@
+@import "../../variables/color";
+@import "../../mixins/decorations";
+@import "../../variables/font";
+@import "../../mixins/spacing";
+@import "../../mixins/typography";
+
+figure {
+  font-family: $font-secondary;
+  @include set-font-size-and-line-height(13px);
+
+  img {
+    @include padding(12px,block-end);
+    @include padding(12px,inline);
+  }
+
+  .heading {
+    @include nospace();
+    @include set-font-size-and-line-height(13px);
+  }
+
+}
