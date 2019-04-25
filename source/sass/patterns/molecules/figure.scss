@@ -4,13 +4,13 @@
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 
-figure {
+.figure {
   font-family: $font-secondary;
   @include set-font-size-and-line-height(13px);
 
-  img {
-    @include padding(12px,block-end);
-    @include padding(12px,inline);
+  .picture {
+    @include block-spacing($end: $baselinegrid-space-extra_small);
+    @include margin(12px, inline);
   }
 
   .heading {

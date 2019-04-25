@@ -1,4 +1,5 @@
 {%- import 'atoms-html' as html -%}
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure']) }) -%}
 
 <figure {{- html.attributes(attributes|default({})) }}>
 
