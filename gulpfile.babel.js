@@ -247,7 +247,7 @@ const compileCss = () =>
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.dir.build.css));
 
-export const generateCss = gulp.series(gulp.parallel(cleanCss, buildFonts), compileCss);
+export const generateCss = gulp.parallel(cleanCss, compileCss);
 
 export const buildCss = gulp.series(validateSass, generateCss);
 
@@ -323,7 +323,7 @@ export const buildPatternLab = gulp.series(cleanPatternLab, generatePatternLab);
 
 // Combined tasks
 
-export const build = gulp.series(gulp.parallel(buildCss, buildJs), buildPatternLab);
+export const build = gulp.series(gulp.parallel(gulp.series(buildFonts, buildCss), buildJs), buildPatternLab);
 
 export const assemble = gulp.series(distributeSharedConfig, build);
 
@@ -385,15 +385,17 @@ export default gulp.series(assemble, exportPatterns);
 
 // Watchers
 
+const watchFonts = () => gulp.watch(config.files.src.fontsDefinition, gulp.series(buildFonts, gulp.parallel(buildCss, patternLabFonts)));
+
 const watchJs = () => gulp.watch([config.files.src.js, config.files.test.js], buildJs);
 
-const watchPatternLab = () => gulp.watch([config.dir.src.fonts, config.dir.src.meta, config.dir.src.patterns], buildPatternLab);
+const watchPatternLab = () => gulp.watch([config.dir.src.meta, config.dir.src.patterns], buildPatternLab);
 
-const watchSass = () => gulp.watch(config.files.src.sass.concat([config.files.test.sass, config.files.src.fontsDefinition, `!${config.dir.src.sassFonts}`]), buildCss);
+const watchSass = () => gulp.watch(config.files.src.sass.concat([config.files.test.sass, `!${config.dir.src.sassFonts}`]), buildCss);
 
 const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 
-export const watch = gulp.parallel(watchJs, watchPatternLab, watchSass, watchSharedConfig);
+export const watch = gulp.parallel(watchFonts, watchJs, watchPatternLab, watchSass, watchSharedConfig);
 
 // Server
 
