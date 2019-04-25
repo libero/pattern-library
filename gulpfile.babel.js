@@ -1,27 +1,36 @@
 import browserSync from 'browser-sync';
 import color from 'ansi-colors';
+import copy from 'recursive-copy';
 import del from 'del';
 import distributeConfig from './libero-config/bin/distributeConfig';
+import download from 'download';
 import eslint from 'gulp-eslint';
 import flatten from 'gulp-flatten';
-import fs from 'fs';
+import fontRanger from 'font-ranger/lib/font-ranger';
+import fs from 'fs-extra';
 import gulp from 'gulp';
 import log from 'fancy-log';
 import jest from 'gulp-jest';
+import Keyv from 'keyv';
+import KeyvFile from 'keyv-file';
 import minimist from 'minimist';
 import mocha from 'gulp-mocha';
 import path from 'path';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
+import replaceStream from 'replacestream';
 import reporter from 'postcss-reporter';
 import sass from 'gulp-sass';
 import sassGlob from 'gulp-sass-glob';
 import sourcemaps from 'gulp-sourcemaps';
 import stylelint from 'stylelint';
 import syntaxScss from 'postcss-scss';
+import tempWrite from 'temp-write';
+import url from 'url';
 import webpack from 'webpack';
 import webpackConfigFactory from './webpack.config.babel.js';
+import yaml from 'js-yaml';
 
 const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
 
@@ -56,6 +65,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   };
 
   config.dir.src.sass = `${config.sourceRoot}/sass`;
+  config.dir.src.sassFonts = `${config.dir.src.sass}/fonts`;
   config.dir.src.sassVendor = `${config.dir.src.sass}/vendor`;
   config.dir.src.fonts = `${config.sourceRoot}/fonts`;
   config.dir.src.patterns = `${config.sourceRoot}/patterns`;
@@ -65,6 +75,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.dir.test.sass = `${config.testRoot}/sass`;
   config.dir.test.js = `${config.testRoot}/js`;
 
+  config.dir.build.cache = `${config.buildRoot}/cache`;
   config.dir.build.src = `${config.buildRoot}/source`;
   config.dir.build.css = `${config.dir.build.src}/css`;
   config.dir.build.fonts = `${config.dir.build.src}/fonts`;
@@ -105,7 +116,11 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.files.src.js = `${config.dir.src.js}/**/*.js`;
   config.files.src.jsEntryPoint = `${config.dir.src.js}/${invocationOptions.jsEntryPoint}`;
   config.files.src.images = `${config.dir.src.images}/**/*`;
-  config.files.src.fonts = `${config.dir.src.fonts}/**/*`;
+  config.files.src.fontsDefinition = `${config.dir.src.fonts}/fonts.yaml`;
+  config.files.src.fonts = [
+    `${config.dir.src.fonts}/**/*`,
+    `!${config.files.src.fontsDefinition}`,
+  ];
   config.files.src.meta = `${config.dir.src.meta}/**/*`;
   config.files.src.patterns = `${config.dir.src.patterns}/**/*`;
   config.files.src.templates = `${config.dir.src.patterns}/!(04-pages)/**/*.twig`;
@@ -128,11 +143,70 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
 
 const config = buildConfig(process.argv, 'source', 'test', 'build');
 
+const httpCache = new Keyv({
+  store: new KeyvFile({
+    filename: `${config.dir.build.cache}/http.json`,
+  }),
+});
+
 // Shared config tasks
 
 const cleanSharedConfig = () => del(config.files.src.derivedConfigs);
 
 export const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeConfig);
+
+// Font tasks
+
+const cleanFonts = () => del(config.files.src.fonts.concat([config.dir.src.sassFonts]));
+
+const compileFonts = () => {
+  fs.ensureDirSync(config.dir.src.fonts);
+
+  const definitions = yaml.safeLoad(fs.readFileSync(config.files.src.fontsDefinition));
+
+  const files = definitions.fonts.reduce(
+    (carry, font) => {
+      font.files.forEach(file => {
+        const uri = url.resolve(definitions.base, file.path);
+        if (!(uri in carry)) {
+          carry[uri] = [];
+        }
+        carry[uri].push({
+          fontDisplay: 'fallback',
+          fontFamily: font.name,
+          fontStyle: file.style || 'normal',
+          fontWeight: file.weight || 400,
+          subsetMap: font.subsets,
+        });
+      });
+
+      return carry;
+    }, {},
+  );
+
+  const fontCache = `${config.dir.build.cache}/fonts`;
+  fs.removeSync(fontCache);
+
+  return Promise.all(Object.keys(files).map(uri =>
+    download(uri, {cache: httpCache})
+      .then(data => tempWrite(data, path.basename(uri)))
+      .then(fontFile => {
+        return Promise.all(files[uri].map(file => {
+          file.fontFile = fontFile;
+          file.outputFolder = fontCache;
+          return fontRanger(file);
+        }));
+      })))
+    .then(() => copy(fontCache, config.dir.src.sassFonts, {
+        filter: '*.css',
+        rename: basename => path.basename(basename, '.css') + `.scss`,
+        transform: () => replaceStream('url(\'', 'url(\'#{$fonts-path}/'),
+      },
+    ))
+    .then(() => copy(fontCache, config.dir.src.fonts, {filter: '*.woff2'}));
+};
+
+export const buildFonts = gulp.series(cleanFonts, compileFonts);
 
 // Sass tasks
 
@@ -173,9 +247,9 @@ const compileCss = () =>
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.dir.build.css));
 
-export const generateCss = gulp.series(cleanCss, compileCss);
+export const generateCss = gulp.series(gulp.parallel(cleanCss, buildFonts), compileCss);
 
-export const buildCss = gulp.parallel(validateSass, generateCss);
+export const buildCss = gulp.series(validateSass, generateCss);
 
 // JavaScript tasks
 
@@ -240,7 +314,7 @@ const patternLabPatterns = () =>
 const patternLabStubs = () =>
   Promise.all(
     config.dir.build.stubs
-      .map(path => fs.promises.mkdir(path, {recursive: true})),
+      .map(path => fs.ensureDir(path)),
   );
 
 const generatePatternLab = gulp.parallel(patternLabFonts, patternLabMeta, patternLabPatterns, patternLabStubs);
@@ -249,7 +323,7 @@ export const buildPatternLab = gulp.series(cleanPatternLab, generatePatternLab);
 
 // Combined tasks
 
-export const build = gulp.parallel(buildCss, buildJs, buildPatternLab);
+export const build = gulp.series(gulp.parallel(buildCss, buildJs), buildPatternLab);
 
 export const assemble = gulp.series(distributeSharedConfig, build);
 
@@ -315,7 +389,7 @@ const watchJs = () => gulp.watch([config.files.src.js, config.files.test.js], bu
 
 const watchPatternLab = () => gulp.watch([config.dir.src.fonts, config.dir.src.meta, config.dir.src.patterns], buildPatternLab);
 
-const watchSass = () => gulp.watch(config.files.src.sass.concat([config.files.test.sass]), buildCss);
+const watchSass = () => gulp.watch(config.files.src.sass.concat([config.files.test.sass, config.files.src.fontsDefinition, `!${config.dir.src.sassFonts}`]), buildCss);
 
 const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
 

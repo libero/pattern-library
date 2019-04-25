@@ -1,4 +1,6 @@
-@import "fonts";
+$fonts-path: "../fonts";
+
+@import "fonts/**/[^_]*.scss";
 @import "normalize";
 @import "grid";
 @import "patterns/**/[^_]*.scss";
