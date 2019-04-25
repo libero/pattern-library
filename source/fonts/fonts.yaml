@@ -32,5 +32,10 @@ fonts:
       *NotoSubsets
     files:
       - path: NotoSerif-Regular.ttf
+      - path: NotoSerif-Italic.ttf
+        style: italic
       - path: NotoSerif-SemiBold.ttf
         weight: 600
+      - path: NotoSerif-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
