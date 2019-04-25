@@ -8,7 +8,7 @@
   font-family: $font-secondary;
   @include set-font-size-and-line-height(13px);
 
-  .picture {
+  img {
     @include block-spacing($end: $baselinegrid-space-extra_small);
     @include margin(12px, inline);
   }
