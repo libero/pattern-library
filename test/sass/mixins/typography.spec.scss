@@ -1,4 +1,5 @@
 @import "../test";
+@import "../../../source/sass/functions/units";
 @import "../../../source/sass/mixins/typography";
 
 @include describe("@mixin font-variant-position") {
@@ -25,6 +26,28 @@
         }
       }
     }
+  }
+
+  @include describe("@mixin figure-caption-heading-typography") {
+
+    @include it("generates correct typography for figure headings") {
+
+      @include assert() {
+
+        @include output {
+          @include figure-caption-heading-typography();
+        }
+
+        @include expect {
+          font-family: $font-secondary;
+          font-size: 13px;
+          font-size: 0.8125rem;
+          line-height: strip-units($baselinegrid-space-small / 13);
+          font-weight: bold;
+        }
+      }
+    }
+
   }
 
   @include it("generates correct fallbacks with position 'super'") {
