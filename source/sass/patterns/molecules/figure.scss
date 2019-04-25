@@ -5,17 +5,16 @@
 @import "../../mixins/typography";
 
 .figure {
-  font-family: $font-secondary;
-  @include set-font-size-and-line-height(13px);
+  @include figure-caption-typography();
+}
 
-  img {
-    @include block-spacing($end: $baselinegrid-space-extra_small);
-    @include margin(12px, inline);
-  }
+.figure img {
+  @include block-spacing($end: $baselinegrid-space-extra_small);
+  @include margin(12px, inline);
+}
 
-  .heading {
-    @include nospace();
-    @include set-font-size-and-line-height(13px);
-  }
-
+.figure .heading {
+  @include figure-caption-typography();
+  @include nospace();
+  font-weight: bold;
 }

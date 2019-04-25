@@ -28,14 +28,14 @@
     }
   }
 
-  @include describe("@mixin figure-caption-heading-typography") {
+  @include describe("@mixin figure-caption-typography") {
 
-    @include it("generates correct typography for figure headings") {
+    @include it("generates correct typography for figure caption") {
 
       @include assert() {
 
         @include output {
-          @include figure-caption-heading-typography();
+          @include figure-caption-typography();
         }
 
         @include expect {
@@ -43,7 +43,6 @@
           font-size: 13px;
           font-size: 0.8125rem;
           line-height: strip-units($baselinegrid-space-small / 13);
-          font-weight: bold;
         }
       }
     }

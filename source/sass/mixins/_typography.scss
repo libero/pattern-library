@@ -112,10 +112,9 @@
   }
 }
 
-@mixin figure-caption-heading-typography() {
+@mixin figure-caption-typography() {
   font-family: $font-secondary;
   @include set-font-size-and-line-height(scale(-2));
-  font-weight: bold;
 }
 
 @mixin list-style-none() {
