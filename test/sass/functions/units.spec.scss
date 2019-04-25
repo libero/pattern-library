@@ -1,0 +1,16 @@
+@import "../test";
+@import "../../../source/sass/functions/units";
+
+
+@include describe("@function strip-units") {
+
+  @include it("returns a value stripped of its units") {
+
+    @include assert-equal(
+      strip-units(13px),
+      13
+    );
+
+  }
+
+}
