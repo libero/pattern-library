@@ -99,7 +99,7 @@ module.exports = {
       },
       font: {
         letterspacing: {
-          label_in_px: 0.256,
+          label_in_px: 1.005,
         },
       }
     },
@@ -109,7 +109,7 @@ module.exports = {
       + '$breakpoints-site-wide: 900;\n'
       + '$breakpoints-site-x_wide: 1400;\n'
       + '$breakpoints-site-xx_wide: 1600;\n'
-      + '$font-letterspacing-label: 0.26px;\n',
+      + '$font-letterspacing-label: 1.01px;\n',
 
   },
 
