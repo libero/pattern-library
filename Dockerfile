@@ -35,6 +35,7 @@ COPY --from=npm /app/node_modules/ node_modules/
 COPY test/ test/
 COPY source/ source/
 
+RUN npm run testConfig
 RUN npx gulp assemble
 
 
