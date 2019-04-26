@@ -8,7 +8,7 @@
   @include figure-caption-typography();
 }
 
-.figure img {
+.figure__image {
   @include block-spacing($end: $baselinegrid-space-extra_small);
   @include margin(12px, inline);
 }

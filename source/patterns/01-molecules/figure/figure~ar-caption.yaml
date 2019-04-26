@@ -7,6 +7,7 @@ content:
     image:
       src: https://picsum.photos/600/400
       alt: ''
+      class: 'figure__image'
 caption:
   heading:
     text: المسخ
