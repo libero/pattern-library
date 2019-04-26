@@ -253,7 +253,7 @@ export const build = gulp.parallel(buildCss, buildJs, buildPatternLab);
 
 export const assemble = gulp.series(distributeSharedConfig, build);
 
-export const test = gulp.parallel(validateJs, validateSass);
+export const test = gulp.series(assemble, gulp.parallel(validateJs, validateSass));
 
 // Exporters
 
