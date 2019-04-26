@@ -7,6 +7,8 @@ content:
       class: 'figure__image'
 caption:
   heading:
+    attributes:
+      class: ['figure__heading']
     text: The Metamorphosis
   content:
     - template: atoms-paragraph

@@ -10,6 +10,8 @@ content:
       class: 'figure__image'
 caption:
   heading:
+    attributes:
+      class: ['figure__heading']
     text: المسخ
   content:
     - template: atoms-paragraph

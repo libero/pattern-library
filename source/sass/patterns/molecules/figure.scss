@@ -13,7 +13,7 @@
   @include margin(12px, inline);
 }
 
-.figure .heading {
+.figure__heading {
   @include figure-caption-typography();
   @include nospace();
   font-weight: bold;
