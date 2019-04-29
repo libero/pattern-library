@@ -162,12 +162,12 @@ const cleanFonts = () => del(config.files.src.fonts.concat([config.dir.src.sassF
 const compileFonts = () => {
   fs.ensureDirSync(config.dir.src.fonts);
 
-  const definitions = yaml.safeLoad(fs.readFileSync(config.files.src.fontsDefinition));
+  const fonts = yaml.safeLoad(fs.readFileSync(config.files.src.fontsDefinition));
 
-  const files = definitions.fonts.reduce(
+  const files = fonts.reduce(
     (carry, font) => {
       font.files.forEach(file => {
-        const uri = url.resolve(definitions.base, file.path);
+        const uri = url.resolve(font.base, file.path);
         if (!(uri in carry)) {
           carry[uri] = [];
         }
@@ -206,7 +206,22 @@ const compileFonts = () => {
     .then(() => copy(fontCache, config.dir.src.fonts, {filter: '*.woff2'}));
 };
 
-export const buildFonts = gulp.series(cleanFonts, compileFonts);
+const compileFontLicenses = () => {
+  fs.ensureDirSync(config.dir.src.fonts);
+
+  const fonts = yaml.safeLoad(fs.readFileSync(config.files.src.fontsDefinition));
+
+  const licenses = fonts.reduce((licenses, font) => licenses.add(url.resolve(font.base, font.license)), new Set());
+
+  return Promise.all([...licenses].map(uri =>
+    download(uri, {cache: httpCache})
+      .then(data => data.toString()),
+  ))
+    .then(licenses => [...new Set(licenses)])
+    .then(licenses => fs.promises.writeFile(`${config.dir.src.fonts}/LICENSE`, licenses.join('\n\n\n\n\n---\n\n\n\n\n\n')));
+};
+
+export const buildFonts = gulp.series(cleanFonts, gulp.parallel(compileFonts, compileFontLicenses));
 
 // Sass tasks
 
