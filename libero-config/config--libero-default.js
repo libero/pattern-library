@@ -50,7 +50,7 @@ config.data.color.attention = Color('#cf0c4e');
 config.data.color.warning = Color('#e65100');
 
 config.data.font = { letterspacing: {} };
-config.data.font.primary = '"Noto Serif", "Noto Sans", serif';
+config.data.font.primary = '"Noto Serif", serif';
 config.data.font.secondary = '"Noto Sans", Arial, Helvetica, sans-serif';
 config.data.font.monospace = '"Courier 10 Pitch", Courier, monospace';
 config.data.font.size_in_px = 16;

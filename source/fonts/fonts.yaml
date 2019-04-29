@@ -20,7 +20,8 @@
     - path: NotoSans-SemiBoldItalic.ttf
       weight: 600
       style: italic
-- <<: *NotoFont
+- &NotoArabic
+  <<: *NotoFont
   subsets:
     arabic:
       - U+0600-06FF # Arabic
@@ -39,3 +40,9 @@
     - path: NotoSerif-SemiBoldItalic.ttf
       weight: 600
       style: italic
+- <<: *NotoArabic
+  name: Noto Serif
+  files:
+    - path: NotoNaskhArabic-Regular.ttf
+    - path: NotoNaskhArabic-Bold.ttf # No semi-bold available
+      weight: 600
