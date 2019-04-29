@@ -23,8 +23,8 @@ FROM node AS gulp
 WORKDIR /app
 
 RUN apt-get update && apt-get install --yes --no-install-recommends \
-        python-pip \
-    && pip --no-cache-dir install \
+        python3-pip \
+    && pip3 --no-cache-dir install \
         brotli \
         fonttools \
     && rm -rf /var/lib/apt/lists/*
