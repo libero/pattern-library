@@ -2,12 +2,14 @@
 @import "../../mixins/typography";
 
 .figure {
+  @include block-spacing($end: $baselinegrid-space-medium);
   @include figure-caption-typography();
 }
 
 .figure__image {
   @include block-spacing($end: $baselinegrid-space-extra_small);
   @include margin(12px, inline);
+  border: 1px solid $color-text-dividers;
 }
 
 .figure__heading {
