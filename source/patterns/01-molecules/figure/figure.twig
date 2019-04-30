@@ -3,10 +3,12 @@
 
 <figure {{- html.attributes(attributes|default({})) }}>
 
-  {%- with {content: content, html: html} only -%}
+  {%- with content.arguments|merge({_template: content.template, _html: html}) only -%}
     {%- block content -%}
 
-      {{- html.content(content) -}}
+      {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure__asset']) }) %}
+
+      {%- include _template -%}
 
     {%- endblock content -%}
   {%- endwith -%}
