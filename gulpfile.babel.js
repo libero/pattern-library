@@ -76,6 +76,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.dir.test.js = `${config.testRoot}/js`;
 
   config.dir.build.cache = `${config.buildRoot}/cache`;
+  config.dir.build.fontCache = `${config.dir.build.cache}/fonts`;
   config.dir.build.src = `${config.buildRoot}/source`;
   config.dir.build.css = `${config.dir.build.src}/css`;
   config.dir.build.fonts = `${config.dir.build.src}/fonts`;
@@ -157,11 +158,9 @@ export const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeC
 
 // Font tasks
 
-const cleanFonts = () => del(config.files.src.fonts.concat([config.dir.src.sassFonts]));
+const cleanFonts = () => del(config.files.src.fonts.concat([config.dir.build.fontCache, config.dir.src.sassFonts]));
 
-const compileFonts = () => {
-  fs.ensureDirSync(config.dir.src.fonts);
-
+const compileFontFiles = () => {
   const fonts = yaml.safeLoad(fs.readFileSync(config.files.src.fontsDefinition));
 
   const files = fonts.reduce(
@@ -184,32 +183,27 @@ const compileFonts = () => {
     }, {},
   );
 
-  const fontCache = `${config.dir.build.cache}/fonts`;
-  fs.removeSync(fontCache);
-
   return Promise.all(Object.keys(files).map(uri =>
     download(uri, {cache: httpCache})
       .then(data => tempWrite(data, path.basename(uri)))
       .then(fontFile => {
         return Promise.all(files[uri].map(file => {
           file.fontFile = fontFile;
-          file.outputFolder = fontCache;
+          file.outputFolder = config.dir.build.fontCache;
           return fontRanger(file);
         }))
           .finally(() => fs.promises.unlink(fontFile));
       })))
-    .then(() => copy(fontCache, config.dir.src.sassFonts, {
+    .then(() => copy(config.dir.build.fontCache, config.dir.src.sassFonts, {
         filter: '*.css',
         rename: basename => path.basename(basename, '.css') + `.scss`,
         transform: () => replaceStream('url(\'', 'url(\'#{$fonts-path}/'),
       },
     ))
-    .then(() => copy(fontCache, config.dir.src.fonts, {filter: '*.woff2'}));
+    .then(() => copy(config.dir.build.fontCache, config.dir.src.fonts, {filter: '*.woff2'}));
 };
 
 const compileFontLicenses = () => {
-  fs.ensureDirSync(config.dir.src.fonts);
-
   const fonts = yaml.safeLoad(fs.readFileSync(config.files.src.fontsDefinition));
 
   const licenses = fonts.reduce((licenses, font) => licenses.add(url.resolve(font.base, font.license)), new Set());
@@ -222,7 +216,9 @@ const compileFontLicenses = () => {
     .then(licenses => fs.promises.writeFile(`${config.dir.src.fonts}/LICENSE`, licenses.join('\n\n\n\n\n---\n\n\n\n\n\n')));
 };
 
-export const buildFonts = gulp.series(cleanFonts, gulp.parallel(compileFonts, compileFontLicenses));
+const compileFonts = gulp.parallel(compileFontFiles, compileFontLicenses);
+
+export const buildFonts = gulp.series(cleanFonts, compileFonts);
 
 // Sass tasks
 
@@ -263,7 +259,7 @@ const compileCss = () =>
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.dir.build.css));
 
-export const generateCss = gulp.parallel(cleanCss, compileCss);
+export const generateCss = gulp.series(cleanCss, compileCss);
 
 export const buildCss = gulp.series(validateSass, generateCss);
 
