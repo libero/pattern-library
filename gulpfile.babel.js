@@ -39,8 +39,6 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
       default: {
         environment: 'production',
         jsEntryPoint: 'main.js',
-        sassEntryPoint: 'base.scss',
-        cssOutFilename: 'all.css',
         lint: true,
       },
     },
@@ -107,7 +105,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
     `${config.dir.src.sass}/**/*.scss`,
     `!${config.dir.src.sassVendor}/**/*`,
   ];
-  config.files.src.sassEntryPoint = `${config.dir.src.sass}/${invocationOptions.sassEntryPoint}`;
+  config.files.src.sassEntryPoints = `${config.dir.src.sass}/*.scss`;
   config.files.src.sassVendor = [
     `${config.dir.src.sassVendor}/**/*.{css,scss}`,
     `${config.dir.src.sassVendor}/**/_*.scss`,
@@ -251,11 +249,10 @@ export const validateSass = gulp.parallel(lintSass, testSass);
 const cleanCss = () => del(config.dir.build.css);
 
 const compileCss = () =>
-  gulp.src(config.files.src.sassEntryPoint)
+  gulp.src(config.files.src.sassEntryPoints)
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass(config.sass).on('error', sass.logError))
-    .pipe(rename(config.files.build.cssFilename))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.dir.build.css));
 
