@@ -195,7 +195,8 @@ const compileFonts = () => {
           file.fontFile = fontFile;
           file.outputFolder = fontCache;
           return fontRanger(file);
-        }));
+        }))
+          .finally(() => fs.promises.unlink(fontFile));
       })))
     .then(() => copy(fontCache, config.dir.src.sassFonts, {
         filter: '*.css',
