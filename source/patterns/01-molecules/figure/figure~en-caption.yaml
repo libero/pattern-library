@@ -4,11 +4,9 @@ content:
     image:
       src: https://picsum.photos/600/400
       alt: ''
-      class: 'figure__image'
 caption:
   heading:
     attributes:
-      class: ['figure__heading']
     text: The Metamorphosis
   content:
     - template: atoms-paragraph

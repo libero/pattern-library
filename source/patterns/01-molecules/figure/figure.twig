@@ -7,7 +7,7 @@
     {%- block content -%}
 
       {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure__asset']) }) %}
-
+      {%- set image = image|default({})|merge({class: image.class|default([])|merge(['figure__image']) }) -%}
       {%- include _template -%}
 
     {%- endblock content -%}
@@ -17,10 +17,13 @@
 
     {%- with caption|merge({html: html}) only -%}
       {%- block caption -%}
-
+        {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure__caption']) }) %}
         <figcaption {{- html.attributes(attributes|default({})) }}>
 
           {%- with heading|default({}) only -%}
+
+            {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure__heading']) }) %}
+
             {%- block captionHeading -%}
 
               {%- if text is defined -%}
@@ -35,6 +38,7 @@
           {%- endwith -%}
 
           {%- with {content: content|default([]), html: html} only -%}
+
             {%- block captionContent -%}
 
               {%- if content|length -%}

@@ -1,19 +1,32 @@
+@import "../../variables/breakpoint";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 
 .figure {
   @include block-spacing($end: $baselinegrid-space-medium);
-  @include figure-caption-typography();
 }
 
 .figure__image {
-  @include block-spacing($end: $baselinegrid-space-extra_small);
+  @include block-spacing($start: $baselinegrid-space-extra_small, $end: $baselinegrid-space-extra_small);
   @include margin(12px, inline);
   border: 1px solid $color-text-dividers;
+  display: block;
+
 }
 
 .figure__heading {
-  @include figure-caption-typography();
-  @include nospace();
-  font-weight: bold;
+  @include caption-typography();
+}
+
+.figure__caption {
+  @include caption-typography();
+  @include margin(12px, inline);
+}
+
+@media only screen and (min-width: #{($breakpoint-site-x_small)}) {
+
+  .figure__caption {
+    @include nospace();
+  }
+
 }
