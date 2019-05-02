@@ -1,5 +1,4 @@
 @import "../test";
-@import "../../../source/sass/functions/units";
 @import "../../../source/sass/mixins/typography";
 
 @include describe("@mixin font-variant-position") {
@@ -28,21 +27,21 @@
     }
   }
 
-  @include describe("@mixin figure-caption-typography") {
+  @include describe("@mixin caption-typography") {
 
     @include it("generates correct typography for figure caption") {
 
       @include assert() {
 
         @include output {
-          @include figure-caption-typography();
+          @include caption-typography();
         }
 
         @include expect {
           font-family: $font-secondary;
           font-size: 13px;
           font-size: 0.8125rem;
-          line-height: strip-units($baselinegrid-space-small / 13);
+          line-height: 1.84615;
         }
       }
     }
