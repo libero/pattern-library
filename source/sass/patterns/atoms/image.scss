@@ -1,0 +1,6 @@
+.image {
+  @include padding($baselinegrid-space-extra_small, block);
+  @include padding(12px, inline);
+  border: 1px solid $color-text-dividers;
+  display: block;
+}

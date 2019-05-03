@@ -6,7 +6,6 @@ content:
       alt: ''
 caption:
   heading:
-    attributes:
     text: The Metamorphosis
   content:
     - template: atoms-paragraph

@@ -3,18 +3,11 @@
 @import "../../mixins/typography";
 
 .figure {
-  @include block-spacing($end: $baselinegrid-space-medium);
-}
-
-.figure__image {
-  @include block-spacing($start: $baselinegrid-space-extra_small, $end: $baselinegrid-space-extra_small);
-  @include margin(12px, inline);
-  border: 1px solid $color-text-dividers;
-  display: block;
-
+  @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
 }
 
 .figure__heading {
+  @include block-spacing($end: 0);
   @include caption-typography();
 }
 
@@ -23,10 +16,10 @@
   @include margin(12px, inline);
 }
 
-@media only screen and (min-width: #{($breakpoint-site-x_small)}) {
+@include mq($from: medium) {
 
   .figure__caption {
-    @include nospace();
+    @include margin(0, inline);
   }
 
 }

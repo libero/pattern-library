@@ -9,7 +9,6 @@ content:
       alt: ''
 caption:
   heading:
-    attributes:
     text: المسخ
   content:
     - template: atoms-paragraph

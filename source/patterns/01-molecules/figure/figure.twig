@@ -7,7 +7,7 @@
     {%- block content -%}
 
       {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure__asset']) }) %}
-      {%- set image = image|default({})|merge({class: image.class|default([])|merge(['figure__image']) }) -%}
+
       {%- include _template -%}
 
     {%- endblock content -%}
