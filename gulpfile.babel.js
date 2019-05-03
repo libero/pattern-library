@@ -164,6 +164,7 @@ const compileFontFiles = () => {
 
   const files = fonts.reduce(
     (carry, font) => {
+      console.info(`Font: ${font}`);
       font.files.forEach(file => {
         const uri = url.resolve(font.base, file.path);
         if (!(uri in carry)) {
