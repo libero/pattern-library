@@ -8,3 +8,7 @@ services:
     image: libero/pattern-library:${IMAGE_TAG:-master}
     ports:
       - 8889:80
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE
