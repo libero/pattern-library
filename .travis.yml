@@ -10,6 +10,7 @@ env:
         - IMAGE_TAG=$TRAVIS_COMMIT
 
 script:
+    - ./build.sh
     - docker-compose --file docker-compose.yml --file docker-compose.ci.yml build
     - .travis/smoke-test.sh
     - docker-compose --file docker-compose.yml --file docker-compose.ci.yml run gulp npx mocha ./test/libero-config
