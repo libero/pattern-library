@@ -190,9 +190,9 @@ const compileFontFiles = () => {
           file.fontFile = fontFile;
           file.outputFolder = config.dir.build.fontCache;
           return () => fontRanger(file);
-        }))
+        }), {maxInProgress: 3})
           .finally(() => fs.promises.unlink(fontFile));
-      })), {maxInProgress: 3})
+      })), {maxInProgress: 2})
     .then(() => copy(config.dir.build.fontCache, config.dir.src.sassFonts, {
         filter: '*.css',
         rename: basename => path.basename(basename, '.css') + `.scss`,
