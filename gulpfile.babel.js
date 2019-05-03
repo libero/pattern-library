@@ -27,6 +27,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import stylelint from 'stylelint';
 import syntaxScss from 'postcss-scss';
 import tempWrite from 'temp-write';
+import * as Throttle from 'promise-parallel-throttle';
 import url from 'url';
 import webpack from 'webpack';
 import webpackConfigFactory from './webpack.config.babel.js';
@@ -181,17 +182,17 @@ const compileFontFiles = () => {
     }, {},
   );
 
-  return Promise.all(Object.keys(files).map(uri =>
+  return Throttle.all(Object.keys(files).map(uri => () =>
     download(uri, {cache: httpCache})
       .then(data => tempWrite(data, path.basename(uri)))
       .then(fontFile => {
-        return Promise.all(files[uri].map(file => {
+        return Throttle.all(files[uri].map(file => {
           file.fontFile = fontFile;
           file.outputFolder = config.dir.build.fontCache;
-          return fontRanger(file);
+          return () => fontRanger(file);
         }))
           .finally(() => fs.promises.unlink(fontFile));
-      })))
+      })), {maxInProgress: 3})
     .then(() => copy(config.dir.build.fontCache, config.dir.src.sassFonts, {
         filter: '*.css',
         rename: basename => path.basename(basename, '.css') + `.scss`,
