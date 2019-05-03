@@ -24,7 +24,6 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install --yes --no-install-recommends \
         python-pip \
-        strace \
     && pip --no-cache-dir install \
         brotli \
         fonttools \
@@ -42,50 +41,50 @@ COPY --from=npm /app/node_modules/ node_modules/
 COPY test/ test/
 COPY source/ source/
 
-#RUN npx gulp assemble
+RUN npx gulp assemble
+
+
+
 #
+# Stage: Composer install
 #
+FROM composer:1.7.3 as composer
+
+COPY core/ core/
+COPY config/ config/
+COPY composer.json \
+    composer.lock \
+    ./
+
+RUN composer --no-interaction install --ignore-platform-reqs --classmap-authoritative --no-suggest --prefer-dist
+
+
+
 #
-##
-## Stage: Composer install
-##
-#FROM composer:1.7.3 as composer
+# Stage: Generate pattern library
 #
-#COPY core/ core/
-#COPY config/ config/
-#COPY composer.json \
-#    composer.lock \
-#    ./
+FROM php:7.2.12-cli-alpine AS build
+
+RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
+    pecl install inotify && \
+    docker-php-ext-enable inotify && \
+    rm -rf /tmp/pear/ && \
+    apk del .build-deps
+
+WORKDIR /app
+
+COPY core/ core/
+COPY config/ config/
+COPY --from=composer /app/vendor/ vendor/
+COPY --from=gulp /app/build/source/ build/source/
+
+RUN core/console --generate
+
+
+
 #
-#RUN composer --no-interaction install --ignore-platform-reqs --classmap-authoritative --no-suggest --prefer-dist
+# Stage: Serve pattern library
 #
-#
-#
-##
-## Stage: Generate pattern library
-##
-#FROM php:7.2.12-cli-alpine AS build
-#
-#RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS && \
-#    pecl install inotify && \
-#    docker-php-ext-enable inotify && \
-#    rm -rf /tmp/pear/ && \
-#    apk del .build-deps
-#
-#WORKDIR /app
-#
-#COPY core/ core/
-#COPY config/ config/
-#COPY --from=composer /app/vendor/ vendor/
-#COPY --from=gulp /app/build/source/ build/source/
-#
-#RUN core/console --generate
-#
-#
-#
-##
-## Stage: Serve pattern library
-##
 FROM nginx:1.15.7-alpine AS ui
 
 COPY --from=build /app/build/public/ /usr/share/nginx/html/
