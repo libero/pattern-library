@@ -6,10 +6,8 @@ use PatternLab\Config;
 use PatternLab\Listener;
 use PatternLab\PatternEngine\Twig\TwigUtil;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
-use Symfony\Component\Asset\Context\NullContext;
+use Symfony\Component\Asset\PackageInterface;
 use Symfony\Component\Asset\Packages;
-use Symfony\Component\Asset\PathPackage;
-use Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy;
 
 final class AssetListener extends Listener
 {
@@ -20,17 +18,18 @@ final class AssetListener extends Listener
 
     public function onTwigPatternLoaderCustomize()
     {
-        $package = new PathPackage(
-            '/',
-            new StaticVersionStrategy(Config::getOption('cacheBuster')),
-            new class extends NullContext
+        $package = new class implements PackageInterface
+        {
+            public function getVersion($path)
             {
-                public function getBasePath()
-                {
-                    return '../..';
-                }
+                return Config::getOption('cacheBuster');
             }
-        );
+
+            public function getUrl($path)
+            {
+                return "../../{$path}?{$this->getVersion($path)}";
+            }
+        };
 
         TwigUtil::getInstance()->addExtension(new AssetExtension(new Packages($package)));
     }
