@@ -8,7 +8,7 @@
     @include assert() {
 
       @include output {
-        @include divider("inline");
+        @include border("inline");
       }
 
       @include expect {
@@ -26,7 +26,7 @@
     @include assert() {
 
       @include output {
-        @include divider("inline-start");
+        @include border("inline-start");
       }
 
       @include expect {
@@ -52,7 +52,7 @@
     @include assert() {
 
       @include output {
-        @include divider("inline-end");
+        @include border("inline-end");
       }
 
       @include expect {
@@ -78,7 +78,7 @@
     @include assert() {
 
       @include output {
-        @include divider("block");
+        @include border("block");
       }
 
       @include expect {
@@ -96,7 +96,7 @@
     @include assert() {
 
       @include output {
-        @include divider("block-start");
+        @include border("block-start");
       }
 
       @include expect {
@@ -113,7 +113,7 @@
     @include assert() {
 
       @include output {
-        @include divider("block-end");
+        @include border("block-end");
       }
 
       @include expect {
@@ -130,7 +130,7 @@
     @include assert() {
 
       @include output {
-        @include divider("top");
+        @include border("top");
       }
 
       @include contains {
@@ -142,7 +142,7 @@
     @include assert() {
 
       @include output {
-        @include divider("foo");
+        @include border("foo");
       }
 
       @include contains {

@@ -2,7 +2,7 @@
 @import "../variables/color";
 @import "../variables/grid";
 
-@mixin divider($dimension) {
+@mixin border($dimension) {
 
   @if index((inline, inline-start, inline-end, block, block-start, block-end), $dimension) {
     @include logical-property(border, $dimension, ($grid-divider_size solid $color-text-dividers,), $to-rem: false);
