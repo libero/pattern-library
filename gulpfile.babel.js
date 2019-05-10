@@ -15,6 +15,7 @@ import Keyv from 'keyv';
 import KeyvFile from 'keyv-file';
 import minimist from 'minimist';
 import mocha from 'gulp-mocha';
+import os from 'os';
 import path from 'path';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
@@ -182,6 +183,8 @@ const compileFontFiles = () => {
     }, {},
   );
 
+  const maxInProgress = Math.ceil(os.totalmem() / 1024 / 1024 / 1024);
+
   return Throttle.all(Object.keys(files).map(uri => () =>
     download(uri, {cache: httpCache})
       .then(data => tempWrite(data, path.basename(uri)))
@@ -190,9 +193,9 @@ const compileFontFiles = () => {
           file.fontFile = fontFile;
           file.outputFolder = config.dir.build.fontCache;
           return () => fontRanger(file);
-        }))
+        }, {maxInProgress}))
           .finally(() => fs.promises.unlink(fontFile));
-      })), {maxInProgress: 3})
+      })), {maxInProgress})
     .then(() => copy(config.dir.build.fontCache, config.dir.src.sassFonts, {
         filter: '*.css',
         rename: basename => path.basename(basename, '.css') + `.scss`,
