@@ -164,9 +164,7 @@ const compileFontFiles = () => {
 
   const files = fonts.reduce(
     (carry, font) => {
-      console.info(`Font: ${font}`);
       font.files.forEach(file => {
-        console.info(`Font file: ${file.path}`);
         const uri = url.resolve(font.base, file.path);
         if (!(uri in carry)) {
           carry[uri] = [];
@@ -192,9 +190,9 @@ const compileFontFiles = () => {
           file.fontFile = fontFile;
           file.outputFolder = config.dir.build.fontCache;
           return () => fontRanger(file);
-        }), {maxInProgress: 1})
+        }))
           .finally(() => fs.promises.unlink(fontFile));
-      })), {maxInProgress: 1})
+      })), {maxInProgress: 3})
     .then(() => copy(config.dir.build.fontCache, config.dir.src.sassFonts, {
         filter: '*.css',
         rename: basename => path.basename(basename, '.css') + `.scss`,

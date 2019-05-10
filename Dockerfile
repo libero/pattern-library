@@ -22,12 +22,9 @@ FROM node AS gulp
 
 WORKDIR /app
 
-RUN apt-get update \
-    && apt-get install --yes --no-install-recommends \
-        python3 \
-    && wget https://bootstrap.pypa.io/get-pip.py \
-    && python3 get-pip.py \
-    && pip --no-cache-dir install \
+RUN apt-get update && apt-get install --yes --no-install-recommends \
+        python3-pip \
+    && pip3 --no-cache-dir install \
         brotli \
         fonttools \
     && rm -rf /var/lib/apt/lists/*
