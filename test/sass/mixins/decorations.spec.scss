@@ -1,7 +1,7 @@
 @import "../test";
 @import "../../../source/sass/mixins/decorations";
 
-@include describe("@mixin divider") {
+@include describe("@mixin border") {
 
   @include it("generates correct fallbacks for dimension 'inline'") {
 
@@ -119,6 +119,22 @@
       @include expect {
         border-bottom: 1px solid rgb(224, 224, 224);
         border-block-end: 1px solid rgb(224, 224, 224);
+      }
+
+    }
+
+  }
+
+  @include it("may not have a dimension") {
+
+    @include assert() {
+
+      @include output {
+        @include border();
+      }
+
+      @include expect {
+        border: 1px solid rgb(224, 224, 224);
       }
 
     }
