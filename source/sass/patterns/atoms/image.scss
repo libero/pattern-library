@@ -3,6 +3,7 @@
 @import "../../variables/image";
 
 .image {
+  @include margin($baselinegrid-space-extra_small, block);
   @include padding($baselinegrid-space-extra_small, block);
   @include padding($image-inline-spacing, inline);
   border: 1px solid $color-text-dividers;

@@ -22,11 +22,11 @@
 
           {%- with heading|default({}) only -%}
 
-            {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure__heading']) }) %}
-
             {%- block captionHeading -%}
 
               {%- if text is defined -%}
+
+                {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure__heading']) }) %}
 
                 {%- set level = level|default(2) -%}
 

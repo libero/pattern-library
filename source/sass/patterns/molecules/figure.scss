@@ -16,9 +16,9 @@
   @include margin(12px, inline);
 }
 
-@include mq($from: medium) {
+.figure__caption {
 
-  .figure__caption {
+  @include mq($from: medium) {
     @include margin(0, inline);
   }
 
