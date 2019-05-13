@@ -1,6 +1,7 @@
 @import "../../variables/breakpoint";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
+@import "../../variables/baselinegrid.scss";
 
 .figure {
   @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
@@ -17,9 +18,7 @@
 }
 
 .figure__caption {
-
   @include mq($from: medium) {
     @include margin(0, inline);
   }
-
 }
