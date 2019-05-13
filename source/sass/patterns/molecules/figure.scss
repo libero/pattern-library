@@ -14,7 +14,7 @@
 
 .figure__caption {
   @include caption-typography();
-  @include margin(12px, inline);
+  @include margin($image-inline-spacing, inline);
 }
 
 .figure__caption {
