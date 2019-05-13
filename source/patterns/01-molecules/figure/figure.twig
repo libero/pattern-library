@@ -3,7 +3,7 @@
 
 <figure {{- html.attributes(attributes|default({})) }}>
 
-  {%- with content.arguments|merge({_template: content.template, _html: html}) only -%}
+  {%- with content.arguments|merge({_template: content.template}) only -%}
     {%- block content -%}
 
       {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure__asset']) }) %}
@@ -38,7 +38,6 @@
           {%- endwith -%}
 
           {%- with {content: content|default([]), html: html} only -%}
-
             {%- block captionContent -%}
 
               {%- if content|length -%}

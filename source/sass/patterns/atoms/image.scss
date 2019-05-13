@@ -4,7 +4,7 @@
 
 .image {
   @include margin($baselinegrid-space-extra_small, block);
-  @include padding($baselinegrid-space-extra_small, block);
+  @include block-spacing($start: 0, $end: $baselinegrid-space-extra_small);
   @include padding($image-inline-spacing, inline);
   border: 1px solid $color-text-dividers;
   display: block;
