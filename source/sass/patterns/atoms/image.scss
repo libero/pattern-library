@@ -1,12 +1,12 @@
-@import "../../variables/baselinegrid.scss";
-@import "../../variables/color.scss";
+@import "../../variables/baselinegrid";
+@import "../../variables/color";
 @import "../../variables/image";
 
 .image {
   @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
   @include border();
   @include padding($image-inline-spacing, inline);
-  @include padding($image-inline-spacing, block);
+  @include padding($baselinegrid-space-extra_small, block);
   display: block;
 
   .figure__asset & {
