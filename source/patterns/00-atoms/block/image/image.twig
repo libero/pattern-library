@@ -7,7 +7,9 @@
       <source {{- html.attributes(source) }}>
     {%- endfor -%}
 
-    <img {{- html.attributes(image) }}>
+  {%- set image = image|default({})|merge({class: image.class|default([])|merge(['image']) }) -%}
+
+  <img {{- html.attributes(image) }}>
 
   </picture>
 {%- endset -%}
