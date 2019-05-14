@@ -1,6 +1,8 @@
 @import "../../variables/baselinegrid";
 @import "../../variables/color";
+@import "../../mixins/decorations.scss";
 @import "../../variables/image";
+@import "../../mixins/spacing.scss";
 
 .image {
   @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
