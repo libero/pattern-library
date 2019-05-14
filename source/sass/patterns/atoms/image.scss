@@ -3,9 +3,13 @@
 @import "../../variables/image";
 
 .image {
-  @include margin($baselinegrid-space-extra_small, block);
-  @include block-spacing($start: 0, $end: $baselinegrid-space-extra_small);
+  @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
+  @include border();
   @include padding($image-inline-spacing, inline);
-  border: 1px solid $color-text-dividers;
+  @include padding($image-inline-spacing, block);
   display: block;
+
+  .figure__asset & {
+    @include block-spacing($start: 0, $end: $baselinegrid-space-extra_small);
+  }
 }
