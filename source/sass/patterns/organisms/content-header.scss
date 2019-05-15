@@ -11,6 +11,7 @@
   @include padding($baselinegrid-space-medium, block-start);
   @include block-spacing($end: $baselinegrid-space-medium - $grid-divider_size);
   @include border(block-end);
+  position: relative;
 }
 
 .content-header__title {
@@ -124,4 +125,44 @@
   @include mq($from: wide) {
     @include rem(font-size, scale(4));
   }
+}
+
+.content-header__download_link {
+  float: inline-end;
+  position: absolute;
+  inset-inline-end: 7%;
+  inset-block-start: 24px;
+
+  @include mq($from: x-wide) {
+    right: 14%; // stylelint-disable-line csstools/use-logical
+    top: 14px; // stylelint-disable-line csstools/use-logical
+
+    @supports (inset-inline-end: 14%) or (inset-block-start: 14px) {
+      inset-inline-end: 14%;
+      inset-block-start: 14px;
+    }
+
+  }
+
+  @include mq($from: x-wide) {
+    right: 42px; // stylelint-disable-line csstools/use-logical
+
+    @supports (inset-inline-end: 42px) {
+      inset-inline-end: 42px;
+    }
+  }
+
+  .content-header--image & {
+
+    @include mq($from: x-wide) {
+      inset-inline-end: 16px;
+    }
+
+  }
+
+  .content-header--image & {
+    inset-inline-end: 12px;
+    inset-block-start: $baselinegrid-space-extra-small;
+  }
+
 }
