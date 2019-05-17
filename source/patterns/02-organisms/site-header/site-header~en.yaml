@@ -1,5 +1,4 @@
 logo:
-  attributes:
-    href: '#'
-  image:
-    alt: 'Libero logo'
+  href: '#'
+  alt: 'Libero logo'
+  src: 'images/logo.svg'

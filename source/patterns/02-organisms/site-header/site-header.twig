@@ -4,21 +4,21 @@
 
 <header {{- html.attributes(attributes) }}>
 
-  {%- block body -%}
-
-    {%- set logo = logo|default({})|merge({html: html}) -%}
+    {%- set logo = logo|default({})|merge({src: logo.src|default('images/logo.svg'), alt: logo.alt|default('Site logo')}) -%}
 
     {%- with logo only -%}
-      {%- block logo -%}
 
-        {%- set image = image|default({})|merge({src: asset('images/logo.svg')}) -%}
-        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['site-header__logo']) }) -%}
+          {%- if href is defined -%}
 
-        {%- include 'atoms-image' -%}
+            <a href="{{ href }}">
+              <img src="{{ asset(src) }}" alt="{{ alt }}" />
+            </a>
+          {%- else -%}
 
-      {%- endblock logo -%}
+            <img src="{{ asset(src) }}" alt="{{ alt }}" />
+
+          {%- endif -%}
+
     {%- endwith -%}
-
-  {%- endblock -%}
 
 </header>
