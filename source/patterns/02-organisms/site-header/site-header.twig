@@ -4,7 +4,7 @@
 
 <header {{- html.attributes(attributes) }}>
 
-    {%- set logo = logo|default({})|merge({src: logo.src|default('images/logo.svg'), alt: logo.alt|default('Site logo')}) -%}
+    {%- set logo = logo|default({})|merge({src: logo.src|default('images/libero-logo.svg'), alt: logo.alt|default('Site logo')}) -%}
 
     {%- with logo only -%}
 
