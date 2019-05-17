@@ -24,6 +24,17 @@
 
   {%- for name, value in attributes|default({}) if value is not same as(false) -%}
 
+    {# Run srcset paths through asset() #}
+    {# TODO: work out a way to do this with less logic in the template layer #}
+    {%- if name == 'srcset' -%}
+      {%- set clauses = value|split(',') -%}
+        {%- for i in range(0, clauses|length, 2) -%}
+          {# FIX: How to do this in Twig?#}
+          {%- set clauses[i] = {{ asset(clauses[i])  }} -%}
+        {%- endfor -%}
+        {%- set value = clauses|join(',') -%}
+    {%- endif -%}
+
     {{- ' ' ~ name -}}
 
     {%- if value is iterable -%}

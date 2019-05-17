@@ -5,3 +5,4 @@ logo:
   href: '#'
   image:
     alt: 'شعار مجاني'
+    srcset: 'fish 100px, whale 2000px'
