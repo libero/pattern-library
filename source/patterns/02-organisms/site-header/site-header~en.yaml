@@ -1,3 +1,4 @@
 logo:
   href: '#'
-  alt: 'Libero logo'
+  image:
+    alt: 'Libero logo'

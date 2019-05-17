@@ -3,4 +3,5 @@ attributes:
   lang: ar
 logo:
   href: '#'
-  alt: 'شعار مجاني'
+  image:
+    alt: 'شعار مجاني'

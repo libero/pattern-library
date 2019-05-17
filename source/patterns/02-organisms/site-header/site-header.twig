@@ -4,20 +4,26 @@
 
 <header {{- html.attributes(attributes) }}>
 
-    {%- set logo = logo|default({})|merge({src: logo.src|default('images/libero-logo.svg'), alt: logo.alt|default('Site logo')}) -%}
+    {%- set logo = logo|default({}) -%}
+    {%- with logo -%}
 
-    {%- with logo only -%}
+        {%- set href = logo.href|default('') -%}
+        {%- set image = logo.image|default({})|merge({src: asset(logo.image.src|default('images/libero-logo.svg')), alt: logo.image.alt|default('Site logo')}) -%}
 
-          {%- if href is defined -%}
+      {%- block logo -%}
+          {%- if href is defined and href|length > 0 -%}
 
             <a href="{{ href }}">
-              <img src="{{ asset(src) }}" alt="{{ alt }}" />
+              <img {{- html.attributes(image) }} />
             </a>
+
           {%- else -%}
 
-            <img src="{{ asset(src) }}" alt="{{ alt }}" />
+              <img {{- html.attributes(image) }} />
 
           {%- endif -%}
+
+      {%- endblock -%}
 
     {%- endwith -%}
 
