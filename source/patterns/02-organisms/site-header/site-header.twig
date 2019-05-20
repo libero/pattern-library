@@ -14,12 +14,12 @@
           {%- if href is defined and href|length > 0 -%}
 
             <a href="{{ href }}">
-              <img {{- html.attributes(image) }} />
+              <img {{- html.attributes(image) }} class="site-header__image"/>
             </a>
 
           {%- else -%}
 
-              <img {{- html.attributes(image) }} />
+              <img {{- html.attributes(image) }} class="site-header__image" />
 
           {%- endif -%}
       {%- endblock -%}
