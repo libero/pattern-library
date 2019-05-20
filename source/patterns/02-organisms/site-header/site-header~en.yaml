@@ -2,4 +2,3 @@ logo:
   href: '#'
   image:
     alt: 'Libero logo'
-    srcset: 'example-small.png 100px, example-large.png 2000px'
