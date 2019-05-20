@@ -132,3 +132,24 @@
   list-style: none;
   @include padding(0, inline-start);
 }
+
+@mixin inset-inline($start: null, $end: null) {
+  left: $start; // stylelint-disable-line csstools/use-logical
+  right: $end; // stylelint-disable-line csstools/use-logical
+
+  @supports (inset-inline-start: $start) {
+    inset-inline-start: $start;
+    inset-inline-end: $end;
+  }
+
+}
+
+@mixin inset-block($start: null, $end: null) {
+  top: $start; // stylelint-disable-line csstools/use-logical
+  bottom: $end; // stylelint-disable-line csstools/use-logical
+
+  @supports (inset-block-start: $start) {
+    inset-block-start: $start;
+    inset-block-end: $end;
+  }
+}
