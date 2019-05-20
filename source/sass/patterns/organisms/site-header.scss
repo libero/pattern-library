@@ -1,4 +1,6 @@
 @import "../../mixins/grid";
+@import "../../mixins/sizes";
+@import "../../mixins/spacing";
 
 .site-header {
   @include margin(6px auto 0);
