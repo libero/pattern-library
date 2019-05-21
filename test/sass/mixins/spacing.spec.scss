@@ -2539,3 +2539,55 @@
   }
 
 }
+
+@include describe("@mixin inset-inline") {
+
+  @include it("generates css logical properties for left and right positioning and fallbacks") {
+
+    @include assert() {
+
+      @include output {
+        @include inset-inline($start: 10px, $end: 20px);
+      }
+
+      @include expect {
+        left: 10px;
+        right: 20px;
+
+        @supports (inset-inline-start: 10px) {
+          inset-inline-start: 10px;
+          inset-inline-end: 20px;
+        }
+
+      }
+
+    }
+
+  }
+}
+
+@include describe("@mixin inset-block") {
+
+  @include it("generates css logical properties for top and bottom positioning and fallbacks") {
+
+    @include assert() {
+
+      @include output {
+        @include inset-block($start: 10px, $end: 20px);
+      }
+
+      @include expect {
+        top: 10px;
+        bottom: 20px;
+
+        @supports (inset-block-start: 10px) {
+          inset-block-start: 10px;
+          inset-block-end: 20px;
+        }
+
+      }
+
+    }
+
+  }
+}
