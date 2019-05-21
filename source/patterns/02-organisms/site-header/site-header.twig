@@ -11,17 +11,11 @@
         {%- set image = logo.image|default({})|merge({src: asset(logo.image.src|default('images/libero-logo.svg')), alt: logo.image.alt|default('Site logo')}) -%}
 
       {%- block logo -%}
-          {%- if href is defined and href|length > 0 -%}
 
-            <a href="{{ href }}">
-              <img {{- html.attributes(image) }} class="site-header__image"/>
-            </a>
+        <a href="{{ href }}">
+          <img {{- html.attributes(image) }} class="site-header__image"/>
+        </a>
 
-          {%- else -%}
-
-              <img {{- html.attributes(image) }} class="site-header__image" />
-
-          {%- endif -%}
       {%- endblock -%}
 
     {%- endwith -%}
