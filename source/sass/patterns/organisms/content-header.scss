@@ -142,17 +142,4 @@
     @include inset-inline($end: 42px);
   }
 
-  .content-header--image & {
-
-    @include mq($from: x-wide) {
-      @include inset-inline($end: 16px);
-    }
-
-  }
-
-  .content-header--image & {
-    @include inset-inline($end: 12px);
-    @include inset-block($start: $baselinegrid-space-extra-small);
-  }
-
 }

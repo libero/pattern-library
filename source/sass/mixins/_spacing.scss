@@ -134,6 +134,7 @@
 }
 
 @mixin inset-inline($start: null, $end: null) {
+
   left: $start; // stylelint-disable-line csstools/use-logical
   right: $end; // stylelint-disable-line csstools/use-logical
 
