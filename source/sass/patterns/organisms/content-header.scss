@@ -140,21 +140,12 @@
 
   @include mq($from: x-wide) {
     @include inset-inline($end: 42px);
-
-    @supports (inset-inline-end: 42px) {
-      @include inset-inline($end: 42px);
-    }
   }
 
   .content-header--image & {
 
     @include mq($from: x-wide) {
       @include inset-inline($end: 16px);
-
-      @supports (inset-inline-end: 16px) {
-        @include inset-inline($end: 16px);
-      }
-
     }
 
   }
