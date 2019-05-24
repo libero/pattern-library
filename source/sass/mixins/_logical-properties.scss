@@ -45,18 +45,25 @@
   }
 }
 
+@function _get-property-prefix($property-name, $dimension) {
+  $physical: (top, right, bottom, left);
+  @if $property-name == inset and index($physical, $dimension) {
+    @return null;
+  }
+  @return "#{$property-name}-";
+}
+
 @function _property-name($parts, $dimension) {
   @if (length($parts) == 0 or $parts == "") {
     @return $dimension;
   }
 
   @if (length($parts) == 1) {
-    @return "#{$parts}-#{$dimension}";
+    @return "#{_get-property-prefix($parts, $dimension)}#{$dimension}";
   }
 
-  @return "#{nth($parts, 1)}-#{$dimension}-#{nth($parts, 2)}";
+  @return "#{_get-property-prefix(nth($parts, 1), $dimension)}#{$dimension}-#{nth($parts, 2)}";
 }
-
 @mixin logical-property($property-name, $dimension, $arguments, $to-rem: true) {
 
   @if length($property-name) > 2 {
