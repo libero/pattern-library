@@ -133,38 +133,6 @@
   @include padding(0, inline-start);
 }
 
-@mixin inset-inline($start: null, $end: null) {
-
-  left: $start; // stylelint-disable-line csstools/use-logical
-  right: $end; // stylelint-disable-line csstools/use-logical
-
-  @if ($start) {
-    @supports (inset-inline-start: $start) {
-      inset-inline-start: $start;
-    }
-  }
-
-  @if ($end) {
-    @supports (inset-inline-end: $end) {
-      inset-inline-end: $end;
-    }
-  }
-
-}
-
-@mixin inset-block($start: null, $end: null) {
-  top: $start; // stylelint-disable-line csstools/use-logical
-  bottom: $end; // stylelint-disable-line csstools/use-logical
-
-  @if ($start) {
-    @supports (inset-block-start: $start) {
-      inset-block-start: $start;
-    }
-  }
-
-  @if ($end) {
-    @supports (inset-block-end: $end) {
-      inset-block-end: $end;
-    }
-  }
+@mixin inset($sizes, $dimension: "") {
+  @include _spacing($sizes, inset, $dimension);
 }

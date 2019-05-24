@@ -128,18 +128,18 @@
 }
 
 .content-header__download_link {
-  @include inset-inline($end: 7%);
-  @include inset-block($start: 24px);
+  @include inset(7%, inline-end);
+  @include inset(24px, block-start);
   float: inline-end;
   position: absolute;
 
   @include mq($from: x-wide) {
-    @include inset-inline($end: 14%);
-    @include inset-block($start: 14px);
+    @include inset(14%, inline-end);
+    @include inset(14px, block-start);
   }
 
   @include mq($from: x-wide) {
-    @include inset-inline($end: 42px);
+    @include inset(42px, inline-end);
   }
 
 }
