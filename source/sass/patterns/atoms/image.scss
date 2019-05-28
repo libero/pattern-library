@@ -10,3 +10,8 @@
   @include padding($baselinegrid-space-extra_small $image-inline-spacing);
   display: block;
 }
+
+.image__image {
+  display: block;
+  width: 100%;
+}

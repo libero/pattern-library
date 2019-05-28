@@ -23,7 +23,5 @@
 }
 
 .figure__asset {
-  .image {
-    @include block-spacing($start: 0, $end: $baselinegrid-space-extra_small);
-  }
+  @include block-spacing($end: $baselinegrid-space-extra_small);
 }
