@@ -1,20 +1,33 @@
-@import "../../mixins/grid";
 @import "../../mixins/media-query";
 @import "../../mixins/sizes";
 @import "../../mixins/spacing";
 
 .site-header {
-  @include margin(6px auto 0);
-  @include max-inline-size($grid-max_width);
+  display: flex;
+  @include min-block-size(59px);
+  @include block-spacing($start: 8px, $end: 7px);
+  @include margin(18px, inline);
+  align-items: center;
+
+  @include mq($from: wide) {
+    @include min-block-size(95px);
+  }
+
+  &.content-grid__item {
+    grid-column: full;
+
+    @include mq($from: wide) {
+      grid-column: main;
+      @include margin(0, inline);
+    }
+  }
 }
 
 .site-header__image {
-  box-sizing: content-box;
-  @include block-size(28px);
-  @include inline-size(28px);
-  @include padding(6px, inline);
+  display: block;
+  @include block-size(32px);
 
-  @include mq($from: x-wide) {
-    @include padding(0, inline-start);
+  @include mq($from: wide) {
+    @include block-size(60px);
   }
 }
