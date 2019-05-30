@@ -275,7 +275,7 @@ export const buildVariables = () => {
     .then(variables => fs.promises.writeFile(config.files.build.variables, variables));
 };
 
-export const buildCss = gulp.series(/*validateSass, */gulp.parallel(generateCss, buildVariables));
+export const buildCss = gulp.series(validateSass, gulp.parallel(generateCss, buildVariables));
 
 // JavaScript tasks
 
