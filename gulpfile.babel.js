@@ -123,6 +123,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.files.src.js = `${config.dir.src.js}/**/*.js`;
   config.files.src.jsEntryPoint = `${config.dir.src.js}/${invocationOptions.jsEntryPoint}`;
   config.files.src.images = `${config.dir.src.images}/**/*`;
+  config.files.src.imagesExportable = [config.files.src.images, `!${config.dir.src.images}/local`, `!${config.dir.src.images}/local/**/*`];
   config.files.src.favicon = `${config.dir.src.images}/libero-logo.svg`;
   config.files.src.fontsDefinition = `${config.dir.src.fonts}/fonts.yaml`;
   config.files.src.fonts = [
@@ -387,7 +388,7 @@ const exportSassVendor = () =>
     .pipe(gulp.dest(config.dir.export.sassVendor));
 
 const exportImages = () =>
-  gulp.src(`${config.dir.build.images}/**/*`)
+  gulp.src(config.files.src.imagesExportable)
     .pipe(gulp.dest(config.dir.export.images));
 
 const exportFavicon = () =>
