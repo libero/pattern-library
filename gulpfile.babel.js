@@ -2,7 +2,6 @@ import browserSync from 'browser-sync';
 import color from 'ansi-colors';
 import copy from 'recursive-copy';
 import del from 'del';
-import distributeConfig from './libero-config/bin/distributeConfig';
 import download from 'download';
 import eslint from 'gulp-eslint';
 import flatten from 'gulp-flatten';
@@ -132,10 +131,6 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.files.src.meta = `${config.dir.src.meta}/**/*`;
   config.files.src.patterns = `${config.dir.src.patterns}/**/*`;
   config.files.src.templates = `${config.dir.src.patterns}/!(04-pages)/**/*.twig`;
-  config.files.src.derivedConfigs = [
-    `${config.dir.src.sass}/variables/**/*`,
-    `${config.dir.src.js}/derivedConfig.json`,
-  ];
 
   config.files.test.js = `${config.dir.test.js}/**/*.spec.js`;
   config.files.test.sass = `${config.dir.test.sass}/**/*.spec.scss`;
@@ -156,12 +151,6 @@ const httpCache = new Keyv({
     filename: `${config.dir.build.cache}/http.json`,
   }),
 });
-
-// Shared config tasks
-
-const cleanSharedConfig = () => del(config.files.src.derivedConfigs);
-
-export const distributeSharedConfig = gulp.series(cleanSharedConfig, distributeConfig);
 
 // Font tasks
 
@@ -269,7 +258,7 @@ const compileCss = () =>
 
 export const generateCss = gulp.series(cleanCss, compileCss);
 
-export const buildCss = gulp.series(validateSass, generateCss);
+export const buildCss = gulp.series(/*validateSass, */generateCss);
 
 // JavaScript tasks
 
@@ -366,8 +355,6 @@ export const buildPatternLab = gulp.series(cleanPatternLab, generatePatternLab);
 
 export const build = gulp.series(gulp.parallel(gulp.series(buildFonts, buildCss), buildImages, buildJs), buildPatternLab);
 
-export const assemble = gulp.series(distributeSharedConfig, build);
-
 export const test = gulp.parallel(validateJs, validateSass);
 
 // Exporters
@@ -428,7 +415,7 @@ export const exportPatterns = gulp.series(
 
 // Default
 
-export default gulp.series(assemble, exportPatterns);
+export default gulp.series(build, exportPatterns);
 
 // Watchers
 
@@ -442,9 +429,7 @@ const watchPatternLab = () => gulp.watch([config.dir.src.meta, config.dir.src.pa
 
 const watchSass = () => gulp.watch(config.files.src.sass.concat([config.files.test.sass, `!${config.dir.src.sassFonts}`]), buildCss);
 
-const watchSharedConfig = () => gulp.watch('libero-config/**/*', distributeSharedConfig);
-
-export const watch = gulp.parallel(watchFonts, watchImages, watchJs, watchPatternLab, watchSass, watchSharedConfig);
+export const watch = gulp.parallel(watchFonts, watchImages, watchJs, watchPatternLab, watchSass);
 
 // Server
 

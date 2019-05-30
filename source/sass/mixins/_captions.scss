@@ -1,0 +1,12 @@
+@import "scale";
+@import "typography";
+@import "../settings/typography";
+
+$caption-font: $font-alternative !default;
+$caption-size: scale(-2) !default;
+$caption-block-size: $text-block-size !default;
+
+@mixin caption-typography() {
+  font-family: $caption-font;
+  @include set-font-size-and-line-height($caption-size, $caption-block-size);
+}

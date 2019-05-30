@@ -1,0 +1,66 @@
+@import "baseline";
+@import "../mixins/scale";
+
+//----------------------------------------------------------------------------------------------------------------------
+// Font stacks
+
+$font-serif: Noto Serif, serif !default;
+$font-sans: Noto Sans, Arial, Helvetica, sans-serif !default;
+$font-monospace: Courier 10 Pitch, Courier, monospace !default;
+
+$font-primary: $font-serif !default;
+$font-alternative: $font-sans !default;
+$font-code: $font-monospace !default;
+
+//----------------------------------------------------------------------------------------------------------------------
+// Font weights
+
+$font-weight-thin: 100 !default;
+$font-weight-extra-light: 200 !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semi-bold: 600 !default;
+$font-weight-bold: 700 !default;
+$font-weight-extra-bold: 800 !default;
+$font-weight-black: 900 !default;
+
+//----------------------------------------------------------------------------------------------------------------------
+// Body text
+
+$text-font: $font-primary !default;
+$text-size: scale(0) !default;
+$text-small-size: scale(-3) !default;
+$text-block-size: $baseline-unit-small !default;
+$text-small-block-size: $text-block-size !default;
+$text-weight: $font-weight-normal !default;
+
+//----------------------------------------------------------------------------------------------------------------------
+// Headings
+
+$headings-font: $font-alternative !default;
+$headings-weight: $font-weight-semi-bold !default;
+
+$h1-size: scale(7) !default;
+$h1-block-size: $baseline-unit-medium !default;
+$h1-spacing: calculate-spacing($h1-block-size) !default;
+
+$h2-size: scale(4) !default;
+$h2-block-size: ($baseline-unit-small + $baseline-unit-smallish) / 2 !default;
+$h2-spacing: calculate-spacing($h2-block-size, $baseline-unit-medium) !default;
+
+$h3-size: scale(3) !default;
+$h3-block-size: $baseline-unit-small !default;
+$h3-spacing: calculate-spacing($h3-block-size, $baseline-unit-medium) !default;
+
+$h4-size: scale(2) !default;
+$h4-block-size: $baseline-unit-small !default;
+$h4-spacing: calculate-spacing($h4-block-size, $baseline-unit-medium) !default;
+
+$h5-size: scale(1) !default;
+$h5-block-size: $baseline-unit-small !default;
+$h5-spacing: calculate-spacing($h5-block-size, $baseline-unit-medium) !default;
+
+$h6-size: scale(0) !default;
+$h6-block-size: $baseline-unit-small !default;
+$h6-spacing: calculate-spacing($h6-block-size, $baseline-unit-medium) !default;

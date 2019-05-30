@@ -1,9 +1,14 @@
-@import "../../mixins/sizes";
+@import "../../mixins/labels";
+@import "../../mixins/overflow";
+@import "../../mixins/spacing";
 @import "../../mixins/typography";
-@import "../../variables/baselinegrid";
+@import "../../settings/baseline";
+
+$tag-list-block-spacing: $baseline-unit-small !default;
+$tag-list-covert-link: true !default;
 
 .tag-list {
-  @include block-spacing();
+  @include block-spacing($end: $tag-list-block-spacing);
 }
 
 .tag-list__title {
@@ -42,6 +47,8 @@
   }
 }
 
-.tag-list__link {
-  @include covert-link();
+@if $tag-list-covert-link == true {
+  .tag-list__link {
+    @include covert-link();
+  }
 }

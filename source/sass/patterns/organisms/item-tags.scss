@@ -1,13 +1,19 @@
-@import "../../mixins/decorations";
+@import "../../mixins/border";
 @import "../../mixins/media-query";
 @import "../../mixins/spacing";
-@import "../../variables/baselinegrid";
-@import "../../variables/grid";
+@import "../../settings/baseline";
+
+$item-tags-block-spacing: $baseline-unit-medium !default;
+$item-tags-divider: true !default;
 
 .item-tags {
-  @include padding($baselinegrid-space-medium - $grid-divider_size, block-start);
-  @include block-spacing($end: $baselinegrid-space-medium);
-  @include border(block-start);
+  @include block-spacing($end: $item-tags-block-spacing);
+  @if $item-tags-divider {
+    @include padding($baseline-unit-medium - $border-width, block-start);
+    @include border(block-start);
+  } @else {
+    @include padding($baseline-unit-medium, block-start);
+  }
   text-align: center;
 
   @include mq($from: medium) {

@@ -1,13 +1,12 @@
+@import "sizes";
 @import "spacing";
-@import "types";
-@import "../functions/grid";
-@import "../variables/grid";
+@import "../settings/layout";
 
 @mixin base-grid($max-inline-size) {
   @include max-inline-size($max-inline-size);
   @include block-spacing($end: 0);
   @include margin(auto, inline);
-  @include padding($grid-column_gap, inline);
+  @include padding($grid-column-gap, inline);
   box-sizing: content-box;
 
   @supports (display: grid) and (--custom: property) {

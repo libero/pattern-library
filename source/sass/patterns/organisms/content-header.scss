@@ -1,23 +1,34 @@
 @import "../../functions/types";
-@import "../../mixins/scale";
-@import "../../mixins/decorations";
+@import "../../mixins/border";
 @import "../../mixins/media-query";
+@import "../../mixins/scale";
 @import "../../mixins/spacing";
-@import "../../variables/baselinegrid";
-@import "../../variables/grid";
+@import "../../settings/baseline";
+
+$content-header-block-spacing: $baseline-unit-small !default;
+$content-header-divider: true !default;
 
 .content-header {
   text-align: center;
-  @include padding($baselinegrid-space-small, block-start);
-  @include block-spacing($end: $baselinegrid-space-medium - $grid-divider_size);
-  @include border(block-end);
+  @include block-spacing($end: $content-header-block-spacing);
+
+  @if $content-header-divider == true {
+    @include padding($content-header-block-spacing ($content-header-block-spacing - $baseline-unit-small - $border-width), block);
+    @include border(block-end);
+  } @else {
+    @include padding($content-header-block-spacing, block);
+  }
+
+  :last-child {
+    @include margin(0, block-end);
+  }
 }
 
 .content-header__title {
-  @include block-spacing($end: $baselinegrid-space-small);
+  @include block-spacing($end: $baseline-unit-small);
 
   &:last-child {
-    @include block-spacing($end: $baselinegrid-space-medium);
+    @include block-spacing($end: $baseline-unit-small);
   }
 }
 
@@ -56,7 +67,7 @@
     @include rem(font-size, scale(9));
   }
 
-  @include mq($from: x-wide) {
+  @include mq($from: extra-wide) {
     @include rem(font-size, scale(10));
   }
 }
@@ -76,7 +87,7 @@
     @include rem(font-size, scale(8));
   }
 
-  @include mq($from: x-wide) {
+  @include mq($from: extra-wide) {
     @include rem(font-size, scale(10));
   }
 }
@@ -92,7 +103,7 @@
     @include rem(font-size, scale(7));
   }
 
-  @include mq($from: x-wide) {
+  @include mq($from: extra-wide) {
     @include rem(font-size, scale(8));
   }
 
@@ -109,7 +120,7 @@
     @include rem(font-size, scale(4));
   }
 
-  @include mq($from: x-wide) {
+  @include mq($from: extra-wide) {
     @include rem(font-size, scale(6));
   }
 }

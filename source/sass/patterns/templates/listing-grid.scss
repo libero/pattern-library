@@ -1,7 +1,7 @@
 @import "../../functions/grid";
 @import "../../mixins/grid";
 @import "../../mixins/media-query";
-@import "../../variables/grid";
+@import "../../settings/layout";
 
 .listing-grid {
   --primary-column-width: #{get-overall-width($grid-main_column_count)};
@@ -11,7 +11,7 @@
   grid-template-columns: [full-start] 1fr [main-start] var(--primary-column-width) [main-end] 1fr [full-end];
   grid-column-gap: var(--GRID-COLUMN-GAP);
 
-  @include mq($from: x-wide) {
+  @include mq($from: extra-wide) {
     $primary-column-count: floor($grid-main_column_count * 0.7);
     $indent-column-count: floor(($grid-main_column_count - $primary-column-count) / 2);
     --primary-column-width: #{get-overall-width($primary-column-count)};
@@ -26,7 +26,7 @@
     ". primary   ."
     ". secondary .";
 
-  @include mq($from: x-wide) {
+  @include mq($from: extra-wide) {
     $primary-column-count: floor($grid-main_column_count * 0.7);
     $secondary-column-count: $grid-main_column_count - $primary-column-count;
     --primary-column-width: #{get-overall-width($primary-column-count)};

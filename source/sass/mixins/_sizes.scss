@@ -1,5 +1,4 @@
 @import "logical-properties";
-@import "types";
 @import "validation";
 
 @mixin block-size($size) {
@@ -43,15 +42,5 @@
 @mixin min-inline-size($size) {
   @include _expect_single_value($size) {
     @include _constrain-inline-size($size, min);
-  }
-}
-
-@mixin truncate-with-ellipsis() {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  &:lang(zh-Hant-HK) {
-    text-overflow: "⋯";
   }
 }

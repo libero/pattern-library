@@ -14,7 +14,7 @@
   @include inline-size(28px);
   @include padding(6px, inline);
 
-  @include mq($from: x-wide) {
+  @include mq($from: extra-wide) {
     @include padding(0, inline-start);
   }
 }

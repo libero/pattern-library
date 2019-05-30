@@ -1,0 +1,28 @@
+$color-blue: rgb(2, 135, 207) !default;
+$color-black: rgb(33, 33, 33) !default;
+$color-green: rgb(98, 159, 67) !default;
+$color-orange: rgb(230, 81, 0) !default;
+$color-red: rgb(207, 12, 78) !default;
+$color-white: rgb(255, 255, 255) !default;
+
+$color-primary-normal: $color-blue !default;
+$color-primary-light: lighten($color-primary-normal, 10%) !default;
+$color-primary-dark: darken($color-primary-normal, 4%) !default;
+$color-text-normal: $color-black !default;
+$color-text-reverse: $color-white !default;
+$color-text-secondary: rgb(136, 136, 136) !default;
+$color-text-secondary__reverse: rgb(158, 158, 158) !default;
+$color-text-placeholder: rgb(189, 189, 189) !default;
+$color-text-dividers: rgb(224, 224, 224) !default;
+$color-text-dividers__reverse: rgb(97, 97, 97) !default;
+$color-text-ui_background: rgb(255, 255, 255) !default;
+$color-text-ui_background_hue: rgb(245, 245, 245) !default;
+$color-text-ui_code: rgb(247, 247, 247) !default;
+$color-text-ui_background__reverse: $color-black !default;
+$color-text-ui_background_hue__reverse: rgb(51, 51, 51) !default;
+$color-background: $color-white !default;
+$color-information: $color-blue !default;
+$color-success: $color-green !default;
+$color-success_dark: darken($color-success, 4%) !default;
+$color-attention: $color-red !default;
+$color-warning: $color-orange !default;

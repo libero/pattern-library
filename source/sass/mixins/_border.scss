@@ -1,13 +1,16 @@
-@import "../mixins/logical-properties";
-@import "../variables/color";
-@import "../variables/grid";
+@import "logical-properties";
+@import "../settings/colors";
+
+$border-color: $color-text-dividers !default;
+$border-style: solid !default;
+$border-width: 1px !default;
 
 @mixin border($dimension: null) {
 
   @if index((inline, inline-start, inline-end, block, block-start, block-end), $dimension) {
-    @include logical-property(border, $dimension, ($grid-divider_size solid $color-text-dividers,), $to-rem: false);
+    @include logical-property(border, $dimension, ($border-width $border-style $border-color,), $to-rem: false);
   } @else if $dimension == null {
-    border: $grid-divider_size solid $color-text-dividers;
+    border: $border-width $border-style $border-color;
   } @else if index((top, bottom, left, right), $dimension) {
     @include _error("'#{$dimension}' is a physical dimension, use its logical equivilant");
   } @else {

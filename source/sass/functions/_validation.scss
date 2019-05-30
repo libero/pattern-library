@@ -1,6 +1,6 @@
-$_is-test: false !default;
+$is-test: false !default;
 
-@function _error($message, $capture: $_is-test) {
+@function _error($message, $capture: $is-test) {
   @if $capture {
     @return $message;
   }

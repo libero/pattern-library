@@ -1,14 +1,14 @@
-@import "../variables/breakpoint";
-@import "../variables/font";
+@import "../settings/baseline";
+@import "../settings/layout";
 
-$mq-base-font-size: $font-size;
+$breakpoints: (
+  small: $breakpoint-small,
+  medium: $breakpoint-medium,
+  wide: $breakpoint-wide,
+  extra-wide: $breakpoint-extra-wide,
+) !default;
 
-$mq-breakpoints: (
-  x-small: $breakpoint-site-x_small,
-  small: $breakpoint-site-small,
-  medium: $breakpoint-site-medium,
-  wide: $breakpoint-site-wide,
-  x-wide: $breakpoint-site-x_wide,
-);
+$mq-base-font-size: $scale-base;
+$mq-breakpoints: $breakpoints;
 
 @import "../vendor/sass-mq/mq";

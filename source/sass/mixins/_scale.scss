@@ -1,6 +1,16 @@
-@import "../variables/font";
+@import "../settings/baseline";
 @import "../vendor/modularscale-sass/stylesheets/modularscale";
 
 @function scale($value: 0) {
-  @return round(ms-function($value, $font-size, $major-second));
+  @return round(ms-function($value, $scale-base, $scale-ratio));
+}
+
+@function calculate-spacing($block-size, $unit-size: $baseline-unit-small) {
+  $remaining: $unit-size - $block-size;
+
+  @if ($remaining > 0) {
+    @return $remaining;
+  }
+
+  @return $unit-size;
 }

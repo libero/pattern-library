@@ -1,55 +1,50 @@
-@import "../mixins/types";
-@import "../variables/baselinegrid";
-@import "../variables/color";
-@import "../variables/font";
-@import "spacing";
-@import "utilities";
 @import "scale";
+@import "spacing";
+@import "types";
+@import "utilities";
+@import "../settings/baseline";
+@import "../settings/colors";
+@import "../settings/typography";
 
-@mixin set-font-size-and-line-height($font-size, $block-size: $baselinegrid-space-small) {
+@mixin set-font-size-and-line-height($font-size, $block-size: $text-block-size) {
   @include rem(font-size, $font-size);
   line-height: $block-size / $font-size;
 }
 
-@mixin _heading-base-typography() {
-  font-family: $font-secondary;
-  font-weight: 600;
+@mixin _heading-typography($font-size, $block-size) {
+  font-family: $headings-font;
+  font-weight: $headings-weight;
+  @include set-font-size-and-line-height($font-size, $block-size);
 }
 
 @mixin h1-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height(scale(7), $baselinegrid-space-medium);
+  @include _heading-typography($h1-size, $h1-block-size);
 }
 
 @mixin h2-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height(scale(4), ($baselinegrid-space-small + $baselinegrid-space-smallish) / 2);
+  @include _heading-typography($h2-size, $h2-block-size);
 }
 
 @mixin h3-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height(scale(3));
+  @include _heading-typography($h3-size, $h3-block-size);
 }
 
 @mixin h4-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height(scale(2));
+  @include _heading-typography($h4-size, $h4-block-size);
 }
 
 @mixin h5-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height(scale(1));
+  @include _heading-typography($h5-size, $h5-block-size);
 }
 
 @mixin h6-typography() {
-  @include _heading-base-typography();
-  @include set-font-size-and-line-height(scale(0));
+  @include _heading-typography($h6-size, $h6-block-size);
 }
 
 @mixin body-typography() {
-  font-family: $font-primary;
-  @include set-font-size-and-line-height(scale(0));
-  font-weight: normal;
+  font-family: $text-font;
+  font-weight: $text-weight;
+  @include set-font-size-and-line-height($text-size, $text-block-size);
 }
 
 @mixin inline-image {
@@ -82,25 +77,6 @@
   }
 }
 
-@mixin _label-typography($color, $uppercase: true) {
-  color: $color;
-  font-family: $font-secondary;
-  font-weight: normal;
-  @include set-font-size-and-line-height(scale(-3));
-  letter-spacing: $font-letterspacing-label;
-  @if $uppercase {
-    text-transform: uppercase;
-  }
-}
-
-@mixin label-content-typography($color: $color-text-secondary, $uppercase: true) {
-  @include _label-typography($color, $uppercase);
-}
-
-@mixin label-tag-typography() {
-  @include _label-typography($color-primary-normal);
-}
-
 @mixin covert-link($hover-color: $color-primary-dark) {
   @include inherit-all($ensure: color text-decoration) {
     cursor: pointer;
@@ -110,15 +86,4 @@
   &:hover {
     color: $hover-color;
   }
-}
-
-@mixin caption-typography() {
-  font-family: $font-secondary;
-  @include set-font-size-and-line-height(scale(-2));
-}
-
-@mixin list-style-none() {
-  @include padding(0, inline-start);
-  // Overflow auto is so the bullet will be still read from a screen reader and will push the bullet off screen
-  overflow: auto;
 }

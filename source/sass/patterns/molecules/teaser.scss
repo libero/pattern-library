@@ -1,12 +1,13 @@
-@import "../../mixins/decorations";
+@import "../../mixins/border";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
+@import "../../settings/baseline";
 
 .teaser {
 
   .teaser-list__item:not(:last-child) & {
     @include border(block-end);
-    @include block-spacing($end: $baselinegrid-space-small - $grid-divider_size);
+    @include block-spacing($end: $baseline-unit-small - $border-width);
   }
 
 }

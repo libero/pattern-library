@@ -1,0 +1,31 @@
+@import "typography";
+@import "../settings/colors";
+@import "../settings/typography";
+
+$label-font: $font-alternative !default;
+$label-letter-spacing: 0.5px !default;
+$label-uppercase: true !default;
+$label-content-color: $color-text-secondary !default;
+$label-tag-color: $color-primary-normal !default;
+$label-size: $text-small-size !default;
+$label-block-size: $text-small-block-size !default;
+$label-weight: $text-weight !default;
+
+@mixin _label-typography($color) {
+  color: $color;
+  font-family: $label-font;
+  font-weight: $label-weight;
+  @include set-font-size-and-line-height($label-size, $label-block-size);
+  letter-spacing: $label-letter-spacing;
+  @if $label-uppercase {
+    text-transform: uppercase;
+  }
+}
+
+@mixin label-content-typography() {
+  @include _label-typography($label-content-color);
+}
+
+@mixin label-tag-typography() {
+  @include _label-typography($label-tag-color);
+}
