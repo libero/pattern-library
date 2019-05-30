@@ -6,20 +6,37 @@
 .site-header {
   @include margin(0 auto);
   @include padding(8px 7px, block);
-  @include padding(18px, inline-start);
-  @include block-size(59px);
   @include max-inline-size($grid-max_width);
   display: flex;
   align-items: center;
+
+  @include block-size(59px);
+
+  @include mq($from: medium) {
+    @include block-size(95px);
+  }
+
 }
 
 // TODO: parametise logo image size at different breakpoints. Work out how to handle portrait / landscape. Implement with CSS custom properties.
 .site-header__logo_link {
   @include block-size(24px); // Image height
+
+  @include mq($from: medium) {
+    @include block-size(36px); // Image height
+  }
 }
 
 .site-header__image {
-  @include block-size(24px);  // Image height
-  @include max-block-size(44px);
   box-sizing: content-box;
+  @include max-block-size(44px);
+
+  @include block-size(24px);  // Image height
+  @include padding(18px, inline-start);
+
+  @include mq($from: medium) {
+    @include block-size(36px); // Image height
+    @include padding(7vw, inline-start);
+  }
+
 }
