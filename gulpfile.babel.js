@@ -24,6 +24,7 @@ import replace from 'gulp-replace';
 import replaceStream from 'replacestream';
 import reporter from 'postcss-reporter';
 import sass from 'gulp-sass';
+import * as sassExtract from 'sass-extract';
 import sassGlob from 'gulp-sass-glob';
 import sharp from 'sharp';
 import sourcemaps from 'gulp-sourcemaps';
@@ -32,9 +33,13 @@ import syntaxScss from 'postcss-scss';
 import tempWrite from 'temp-write';
 import * as Throttle from 'promise-parallel-throttle';
 import url from 'url';
+import util from 'util';
 import webpack from 'webpack';
 import webpackConfigFactory from './webpack.config.babel.js';
 import yaml from 'js-yaml';
+
+require('sass-extract/lib/plugins/compact');
+require('sass-extract/lib/plugins/serialize');
 
 const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
 
@@ -137,6 +142,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.files.test.sassTestsEntryPoint = `${config.dir.test.sass}/test_sass.js`;
 
   config.files.build.favicon = `${config.dir.build.src}/favicon.ico`;
+  config.files.build.variables = `${config.buildRoot}/variables.json`;
 
   config.webpack = webpackConfigFactory(config.environment, path.resolve(config.files.src.jsEntryPoint), path.resolve(config.dir.build.js));
 
@@ -258,7 +264,18 @@ const compileCss = () =>
 
 export const generateCss = gulp.series(cleanCss, compileCss);
 
-export const buildCss = gulp.series(/*validateSass, */generateCss);
+export const buildVariables = () => {
+  const file = `${config.dir.src.sass}/settings.scss`;
+  const compileOptions = {file, includePaths: [path.dirname(file), config.dir.src.sassVendor]};
+  const extractOptions = {plugins: ['compact', 'serialize']};
+
+  return util.promisify(sass.compiler.render)(compileOptions)
+    .then(rendered => sassExtract.extract(rendered, {compileOptions, extractOptions}))
+    .then(variables => JSON.stringify(variables.global, null, 2) + '\n')
+    .then(variables => fs.promises.writeFile(config.files.build.variables, variables));
+};
+
+export const buildCss = gulp.series(/*validateSass, */gulp.parallel(generateCss, buildVariables));
 
 // JavaScript tasks
 

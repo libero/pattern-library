@@ -53,6 +53,7 @@
     "promise-parallel-throttle": "^3.3.0",
     "recursive-copy": "^2.0.10",
     "replacestream": "^4.0.3",
+    "sass-extract": "^2.1.0",
     "sass-mq": "^5.0.0",
     "sass-rem": "^2.0.1",
     "sass-true": "^4.0.0",
