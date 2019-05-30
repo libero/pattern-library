@@ -4,17 +4,22 @@
 @import "../../mixins/spacing";
 
 .site-header {
-  @include margin(6px auto 0);
+  @include margin(0 auto);
+  @include padding(8px 7px, block);
+  @include padding(18px, inline-start);
+  @include block-size(59px);
   @include max-inline-size($grid-max_width);
+  display: flex;
+  align-items: center;
+}
+
+// TODO: parametise logo image size at different breakpoints. Work out how to handle portrait / landscape. Implement with CSS custom properties.
+.site-header__logo_link {
+  @include block-size(24px); // Image height
 }
 
 .site-header__image {
+  @include block-size(24px);  // Image height
+  @include max-block-size(44px);
   box-sizing: content-box;
-  @include block-size(28px);
-  @include inline-size(28px);
-  @include padding(6px, inline);
-
-  @include mq($from: x-wide) {
-    @include padding(0, inline-start);
-  }
 }
