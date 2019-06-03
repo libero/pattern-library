@@ -2,6 +2,7 @@
 @import "../../mixins/media-query";
 @import "../../mixins/sizes";
 @import "../../mixins/spacing";
+@import "../../variables/color";
 @import "../../variables/siteHeader";
 
 @mixin _custom-property-fallback() {
@@ -37,6 +38,16 @@
 
 .site-header__logo_link {
   line-height: 0;
+  display: flex;
+  align-items: center;
+
+  &:after {
+    background-color: $color-text-dividers;
+    content: "";
+    @include inline-size(1px);
+    @include block-size(24px);
+  }
+
 }
 
 .site-header__image {
