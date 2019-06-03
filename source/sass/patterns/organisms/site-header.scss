@@ -5,34 +5,51 @@
 @import "../../variables/color";
 @import "../../variables/siteHeader";
 
-@mixin _custom-property-fallback() {
-  @include block-size($siteHeader-logo-block_size__default);
-  @include max-block-size($siteHeader-logo-max_block_size__default);
-  @include max-inline-size($siteHeader-logo-max_inline_size__default);
-  @include padding($siteHeader-logo-inline_space__default, inline);
+@mixin _custom-property-fallback--site-header {
+  @include block-size($siteHeader-block_size__default);
   @include mq($from: medium) {
-    @include block-size($siteHeader-logo-block_size__medium);
-    @include max-block-size($siteHeader-logo-max_block_size__medium);
-    @include max-inline-size($siteHeader-logo-max_inline_size__medium);
-    @include padding($siteHeader-logo-inline_space__medium, inline);
+    @include block-size($siteHeader-block_size__medium);
+  }
+}
+
+@mixin _custom-property-fallback--site-header-image($calculated) {
+  @include block-size($siteHeader-image-block_size__default);
+  @include max-block-size(map_get($calculated, max-block-size--default));
+  @include padding($siteHeader-image-inline_space__default, inline);
+  @include mq($from: medium) {
+    @include block-size($siteHeader-image-block_size__medium);
+    @include max-block-size(map_get($calculated, max-block-size--medium));
+    @include padding($siteHeader-image-inline_space__medium, inline);
   }
   @include mq($from: x-wide) {
-    @include padding($siteHeader-logo-inline_start_space__x_wide, inline-start);
+    @include padding($siteHeader-image-inline_start_space__x_wide, inline-start);
+  }
+}
+
+@mixin _custom-property-fallback($selector, $args: ()) {
+  $_selector: nth(simple-selectors($selector), 1);
+  @if $_selector == ".site-header" {
+    @include _custom-property-fallback--site-header();
+  } @else if $_selector == ".site-header__image" {
+    @include _custom-property-fallback--site-header-image($args);
   }
 }
 
 .site-header {
+
+  --block-size: #{$siteHeader-block_size__default};
+  @include mq($from: medium) {
+    --block-size: #{$siteHeader-block_size__medium};
+  }
+
   @include margin(0 auto);
-  @include padding(8px 7px, block);
+  @include padding($siteHeader-block_start_margin $siteHeader-block_end_margin, block);
   @include max-inline-size($grid-max_width);
   display: flex;
   align-items: center;
 
-  @include block-size(59px);
-
-  @include mq($from: medium) {
-    @include block-size(95px);
-  }
+  @include _custom-property-fallback(&);
+  @include block-size(var(--block-size));
 
 }
 
@@ -54,29 +71,29 @@
 
   box-sizing: content-box;
 
-  @include _custom-property-fallback();
+  $_inviolate-space: $siteHeader-block_start_margin + $siteHeader-block_end_margin + $grid-divider_size;
+  $_max-block-size--default: $siteHeader-block_size__default - $_inviolate-space;
+  $_max-block-size--medium: $siteHeader-block_size__medium - $_inviolate-space;
 
-  --logo-block-size: #{$siteHeader-logo-block_size__default};
-  --logo-max-block-size: #{$siteHeader-logo-max_block_size__default};
-  --logo-max-inline-size: #{$siteHeader-logo-max_inline_size__default};
-  --logo-inline-end-space: #{$siteHeader-logo-inline_space__default};
-  --logo-inline-start-space: var(--logo-inline-end-space);
+  @include _custom-property-fallback(&, (max-block-size--default: $_max-block-size--default, max-block-size--medium: $_max-block-size--medium));
+
+  --block-size: #{$siteHeader-image-block_size__default};
+  --max-block-size: #{$_max-block-size--default};
+  --inline-end-space: #{$siteHeader-image-inline_space__default};
+  --inline-start-space: var(--inline-end-space);
   @include mq($from: medium) {
-    --logo-block-size: #{$siteHeader-logo-block_size__medium};
-    --logo-max-block-size: #{$siteHeader-logo-max_block_size__medium};
-    --logo-max-inline-size: #{$siteHeader-logo-max_inline_size__medium};
-    --logo-inline-end-space: #{$siteHeader-logo-inline_space__medium};
+    --block-size: #{$siteHeader-image-block_size__medium};
+    --max-block-size: #{$_max-block-size--medium};
+    --inline-end-space: #{$siteHeader-image-inline_space__medium};
   }
   @include mq($from: x-wide) {
-    --logo-inline-start-space: #{$siteHeader-logo-inline_start_space__x_wide};
+    --inline-start-space: #{$siteHeader-image-inline_start_space__x_wide};
   }
 
   @supports (--name: value) {
-    @include block-size(var(--logo-block-size));
-    @include max-block-size(var(--logo-max-block-size));
-    @include max-inline-size(var(--logo-max-inline-size));
-    @include padding(var(--logo-inline-start-space) var(--logo-inline-end-space), inline);
-
+    @include block-size(var(--block-size));
+    @include max-block-size(var(--max-block-size));
+    @include padding(var(--inline-start-space) var(--inline-end-space), inline);
   }
 
 }
