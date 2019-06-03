@@ -183,7 +183,8 @@ These guidelines govern the use of custom properties in this codebase:
       font-size: var(--font-size);
            
     }
-    ``` 
+    ```
+    For more complex situations, it's recommended to define a local mixin called `_custom-property-fallback` in the same file and put all fallbacks in there. When more than one fallback set is required within a file, pass arguments to enable selection of the appropriate one.  
  
 ### Margins
 
