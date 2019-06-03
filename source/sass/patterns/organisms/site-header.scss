@@ -5,14 +5,14 @@
 @import "../../variables/siteHeader";
 
 @mixin _custom-property-fallback() {
-  @include block-size($siteHeader-logo-block_size_default);
-  @include max-block-size($siteHeader-logo-max_block_size_default);
-  @include max-inline-size($siteHeader-logo-max_inline_size_default);
-  @include padding($siteHeader-logo-inline_start_space_default, inline-start);
+  @include block-size($siteHeader-logo-block_size__default);
+  @include max-block-size($siteHeader-logo-max_block_size__default);
+  @include max-inline-size($siteHeader-logo-max_inline_size__default);
+  @include padding($siteHeader-logo-inline_start_space__default, inline-start);
   @include mq($from: medium) {
-    @include block-size($siteHeader-logo-block_size_medium);
-    @include max-block-size($siteHeader-logo-max_block_size_medium);
-    @include max-inline-size($siteHeader-logo-max_inline_size_medium);
+    @include block-size($siteHeader-logo-block_size__medium);
+    @include max-block-size($siteHeader-logo-max_block_size__medium);
+    @include max-inline-size($siteHeader-logo-max_inline_size__medium);
     @include padding($siteHeader-logo-inline_start_space__medium, inline-start);
   }
   @include mq($from: x-wide) {
@@ -44,14 +44,14 @@
   box-sizing: content-box;
   @include _custom-property-fallback();
 
-  --logo-block-size: #{$siteHeader-logo-block_size_default};
-  --logo-max-block-size: #{$siteHeader-logo-max_block_size_default};
-  --logo-max-inline-size: #{$siteHeader-logo-max_inline_size_default};
-  --logo-inline-start-space: #{$siteHeader-logo-inline_start_space_default};
+  --logo-block-size: #{$siteHeader-logo-block_size__default};
+  --logo-max-block-size: #{$siteHeader-logo-max_block_size__default};
+  --logo-max-inline-size: #{$siteHeader-logo-max_inline_size__default};
+  --logo-inline-start-space: #{$siteHeader-logo-inline_start_space__default};
   @include mq($from: medium) {
-    --logo-block-size: #{$siteHeader-logo-block_size_medium};
-    --logo-max-block-size: #{$siteHeader-logo-max_block_size_medium};
-    --logo-max-inline-size: #{$siteHeader-logo-max_inline_size_medium};
+    --logo-block-size: #{$siteHeader-logo-block_size__medium};
+    --logo-max-block-size: #{$siteHeader-logo-max_block_size__medium};
+    --logo-max-inline-size: #{$siteHeader-logo-max_inline_size__medium};
     --logo-inline-start-space: #{$siteHeader-logo-inline_start_space__medium};
   }
   @include mq($from: x-wide) {

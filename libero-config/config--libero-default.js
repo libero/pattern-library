@@ -62,13 +62,13 @@ config.data.image = { inline: {} };
 config.data.image.inline.spacing_in_px = config.data.baselinegrid.space.extra_small_in_px;
 
 config.data.siteHeader = { logo: {} };
-config.data.siteHeader.logo.block_size_default_in_px = 24;
-config.data.siteHeader.logo.block_size_medium_in_px = 36;
-config.data.siteHeader.logo.max_block_size_default_in_px = 44;
-config.data.siteHeader.logo.max_block_size_medium_in_px = 80;
-config.data.siteHeader.logo.max_inline_size_default_in_px = 36;
-config.data.siteHeader.logo.max_inline_size_medium_in_px = 60;
-config.data.siteHeader.logo.inline_start_space_default_in_px = 18;
+config.data.siteHeader.logo.block_size__default_in_px = 24;
+config.data.siteHeader.logo.block_size__medium_in_px = 36;
+config.data.siteHeader.logo.max_block_size__default_in_px = 44;
+config.data.siteHeader.logo.max_block_size__medium_in_px = 80;
+config.data.siteHeader.logo.max_inline_size__default_in_px = 36;
+config.data.siteHeader.logo.max_inline_size__medium_in_px = 60;
+config.data.siteHeader.logo.inline_start_space__default_in_px = 18;
 config.data.siteHeader.logo.inline_start_space__medium_in_px = 36;
 config.data.siteHeader.logo.inline_start_space__x_wide = 0;
 
