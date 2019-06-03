@@ -2,6 +2,7 @@
 @import "../../mixins/media-query";
 @import "../../mixins/sizes";
 @import "../../mixins/spacing";
+@import "../../variables/siteHeader";
 
 .site-header {
   @include margin(0 auto);
@@ -19,22 +20,46 @@
 }
 
 .site-header__logo_link {
+  line-height: 0;
+}
 
-  // TODO: set logo image size at different breakpoints via config. Work out how to handle portrait / landscape.
+.site-header__image {
 
-  --logo-image-height: 24px;
+  box-sizing: content-box;
+
+  --logo-block-size: #{$siteHeader-logo-block_size_default};
+  --logo-max-block-size: #{$siteHeader-logo-max_block_size_default};
+  --logo-max-inline-size: #{$siteHeader-logo-max_inline_size_default};
+  --logo-inline-start-space: #{$siteHeader-logo-inline_start_space_default};
   @include mq($from: medium) {
-    --logo-image-height: 36px;
+    --logo-block-size: #{$siteHeader-logo-block_size_medium};
+    --logo-max-block-size: #{$siteHeader-logo-max_block_size_medium};
+    --logo-max-inline-size: #{$siteHeader-logo-max_inline_size_medium};
+    --logo-inline-start-space: #{$siteHeader-logo-inline_start_space__medium};
+  }
+  @include mq($from: x-wide) {
+    --logo-inline-start-space: #{$siteHeader-logo-inline_start_space__x_wide};
   }
 
-  @include block-size(var(--logo-image-height));
+  @include max-block-size($siteHeader-logo-max_block_size_default);
+  @include block-size($siteHeader-logo-block_size_default);
+  @include max-inline-size($siteHeader-logo-max_inline_size_default);
+  @include padding($siteHeader-logo-inline_start_space_default, inline-start);
+  @include mq($from: medium) {
+    @include max-block-size($siteHeader-logo-max_block_size_medium);
+    @include block-size($siteHeader-logo-block_size_medium);
+    @include max-inline-size($siteHeader-logo-max_inline_size_medium);
+    @include padding($siteHeader-logo-inline_start_space__medium, inline-start);
+  }
+  @include mq($from: x-wide) {
+    @include padding(0, inline-start);
+  }
 
-  .site-header__image {
-    box-sizing: content-box;
-    @include max-block-size(44px);
-
-    @include block-size(var(--logo-image-height));
-    @include padding(18px, inline-start);
+  @supports (--name: value) {
+    @include max-block-size(var(--logo-max-block-size));
+    @include block-size(var(--logo-block-size));
+    @include max-inline-size(var(--logo-max-inline-size));
+    @include padding(var(--logo-inline-start-space), inline-start);
 
   }
 
