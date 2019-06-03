@@ -68,8 +68,8 @@ config.data.siteHeader.logo.max_block_size__default_in_px = 44;
 config.data.siteHeader.logo.max_block_size__medium_in_px = 80;
 config.data.siteHeader.logo.max_inline_size__default_in_px = 36;
 config.data.siteHeader.logo.max_inline_size__medium_in_px = 60;
-config.data.siteHeader.logo.inline_start_space__default_in_px = 18;
-config.data.siteHeader.logo.inline_start_space__medium_in_px = 36;
+config.data.siteHeader.logo.inline_space__default_in_px = 18;
+config.data.siteHeader.logo.inline_space__medium_in_px = 36;
 config.data.siteHeader.logo.inline_start_space__x_wide = 0;
 
 // Specify the top level properties to be distributed to layers (sass, js & templates)
