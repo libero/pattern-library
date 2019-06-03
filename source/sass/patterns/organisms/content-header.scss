@@ -130,7 +130,6 @@
 .content-header__download_link {
   @include inset(7%, inline-end);
   @include inset(24px, block-start);
-  @include float(inline-end);
   position: absolute;
 
   @include mq($from: x-wide) {

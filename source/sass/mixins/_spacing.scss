@@ -136,23 +136,3 @@
 @mixin inset($sizes, $dimension: "") {
   @include _spacing($sizes, inset, $dimension);
 }
-
-@mixin float($dimension: "") {
-
-  @if $dimension == inline-start {
-    float: left; // stylelint-disable-line csstools/use-logical
-
-    @supports(float: inline-start) {
-      float: $dimension;
-    }
-  }
-
-  @if $dimension == inline-end {
-    float: right; // stylelint-disable-line csstools/use-logical
-
-    @supports(float: inline-end) {
-      float: $dimension;
-    }
-  }
-
-}
