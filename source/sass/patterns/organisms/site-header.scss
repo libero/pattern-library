@@ -5,13 +5,13 @@
 @import "../../variables/siteHeader";
 
 @mixin _custom-property-fallback() {
-  @include max-block-size($siteHeader-logo-max_block_size_default);
   @include block-size($siteHeader-logo-block_size_default);
+  @include max-block-size($siteHeader-logo-max_block_size_default);
   @include max-inline-size($siteHeader-logo-max_inline_size_default);
   @include padding($siteHeader-logo-inline_start_space_default, inline-start);
   @include mq($from: medium) {
-    @include max-block-size($siteHeader-logo-max_block_size_medium);
     @include block-size($siteHeader-logo-block_size_medium);
+    @include max-block-size($siteHeader-logo-max_block_size_medium);
     @include max-inline-size($siteHeader-logo-max_inline_size_medium);
     @include padding($siteHeader-logo-inline_start_space__medium, inline-start);
   }
@@ -59,8 +59,8 @@
   }
 
   @supports (--name: value) {
-    @include max-block-size(var(--logo-max-block-size));
     @include block-size(var(--logo-block-size));
+    @include max-block-size(var(--logo-max-block-size));
     @include max-inline-size(var(--logo-max-inline-size));
     @include padding(var(--logo-inline-start-space), inline-start);
 
