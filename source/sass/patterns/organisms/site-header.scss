@@ -45,8 +45,13 @@
   @include margin(0 auto);
   @include padding($siteHeader-block_start_margin $siteHeader-block_end_margin, block);
   @include max-inline-size($grid-max_width);
-  display: flex;
-  align-items: center;
+
+  position: relative;
+  @supports (display:flex) {
+    position: static;
+    display: flex;
+    align-items: center;
+  }
 
   @include _custom-property-fallback(&);
   @include block-size(var(--block-size));
@@ -54,15 +59,38 @@
 }
 
 .site-header__logo_link {
+
   line-height: 0;
-  display: flex;
-  align-items: center;
+
+  // TODO: use @mixin inset() from https://github.com/libero/pattern-library/pull/98 once it makes it into the main branch
+  block-start: calc(50% - #{$siteHeader-image-block_size__default} / 2);
+  @include mq($from: medium) {
+    block-start: calc(50% - #{$siteHeader-image-block_size__medium} / 2);
+  }
+
+  position: relative;
+  @supports (display:flex) {
+    position: static;
+    display: flex;
+    align-items: center;
+  }
 
   &:after {
     background-color: $color-text-dividers;
     content: "";
-    @include inline-size(1px);
+    display: inline-block;
+    // Prevent expression in rem to stop rounding down to 0 width in IE
+    @include inline-size(1px, false);
     @include block-size(24px);
+
+    @include mq($from: medium) {
+      position: relative;
+      // TODO: use @mixin inset() when available
+      block-start: -6px;
+    }
+    @supports (display: flex) {
+      position: static;
+    }
   }
 
 }
