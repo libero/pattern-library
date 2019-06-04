@@ -13,6 +13,8 @@ contentHeader:
           text: Evolutionary Biology
       - content:
           text: Plant Biology
+      - content:
+          text: Neuroscience
   meta:
     attributes:
       aria-label: Publication details
