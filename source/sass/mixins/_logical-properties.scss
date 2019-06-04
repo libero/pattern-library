@@ -197,6 +197,11 @@
     @include _maybe-rem($to-rem, _property-name($property-name, height), $arguments);
     #{_property-name($property-name, block-size)}: _maybe-rem($to-rem, $arguments);
 
+  } @else if $dimension == null and length($arguments) == 4 {
+    #{_property-name($property-name, inline)}: _maybe-rem($to-rem, (nth($arguments, 2) nth($arguments, 4)));
+    #{_property-name($property-name, block)}: _maybe-rem($to-rem, (nth($arguments, 1) nth($arguments, 3)));
+  } @else if $dimension == null and length($arguments) != 4 {
+    @include _error("Must provide 4 arguments if not supplying a dimension but found #{length($arguments)} arguments");
   } @else if index((top, bottom, left, right, width, height), $dimension) {
     @include _error("'#{$dimension}' is a physical dimension, use its logical equivilant");
   } @else {
