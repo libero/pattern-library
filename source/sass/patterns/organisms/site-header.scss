@@ -43,7 +43,7 @@
   }
 
   @include margin(0 auto);
-  @include padding($siteHeader-block_start_margin $siteHeader-block_end_margin, block);
+  @include padding($siteHeader-block_start_space $siteHeader-block_end_space, block);
   @include max-inline-size($grid-max_width);
 
   position: relative;
@@ -99,7 +99,7 @@
 
   box-sizing: content-box;
 
-  $_inviolate-space: $siteHeader-block_start_margin + $siteHeader-block_end_margin + $grid-divider_size;
+  $_inviolate-space: $siteHeader-block_start_space + $siteHeader-block_end_space + $grid-divider_size;
   $_max-block-size--default: $siteHeader-block_size__default - $_inviolate-space;
   $_max-block-size--medium: $siteHeader-block_size__medium - $_inviolate-space;
 
