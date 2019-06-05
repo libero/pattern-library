@@ -97,7 +97,8 @@
 
 }
 
-.site-header__image {
+//.site-header__image {
+.site-header__logo_link {
 
   box-sizing: content-box;
 
@@ -128,7 +129,12 @@
     @include padding(0, block);
     @include block-size(var(--block-size));
     @include max-block-size(var(--max-block-size));
-    @include padding(var(--inline-start-space) var(--inline-end-space), inline);
+    @include margin(var(--inline-start-space) var(--inline-end-space), inline);
   }
 
+}
+
+.site-header__image {
+  @include inline-size(100%);
+  @include block-size(100%);
 }
