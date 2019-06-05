@@ -81,12 +81,12 @@
     display: inline-block;
     // Prevent expression in rem to stop rounding down to 0 width in IE
     @include inline-size($grid-divider_size, false);
-    @include block-size(24px);
+    @include block-size($siteHeader-image-block_size__default);
 
     @include mq($from: medium) {
       position: relative;
       // TODO: use @mixin inset() when available
-      block-start: -6px;
+      block-start: #{$siteHeader-image-block_size__default / 4};
     }
     @supports (display: flex) {
       position: static;
