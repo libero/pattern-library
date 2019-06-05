@@ -80,7 +80,7 @@
     content: "";
     display: inline-block;
     // Prevent expression in rem to stop rounding down to 0 width in IE
-    @include inline-size(1px, false);
+    @include inline-size($grid-divider_size, false);
     @include block-size(24px);
 
     @include mq($from: medium) {
