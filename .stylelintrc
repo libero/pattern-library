@@ -4,8 +4,7 @@
     "./export/css/sass/**/*",
     "./source/sass/fonts/**/*",
     "./source/sass/variables/**/*",
-    "./source/sass/vendor/**/*",
-    "./test/sass/**/*"
+    "./source/sass/vendor/**/*"
   ],
   "plugins": [
     "stylelint-use-logical"

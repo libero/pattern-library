@@ -1,6 +1,8 @@
 @import "../test";
 @import "../../../source/sass/mixins/spacing";
 
+/* stylelint-disable csstools/use-logical  */
+
 @include describe("@mixin padding") {
 
   @include it("generates correct fallbacks with a single zero value and no dimension") {
@@ -306,7 +308,7 @@
         html[dir][dir] & {
           padding-inline-start: 16rem;
           padding-inline-end: 3rem;
-          }
+        }
         padding-top: 0;
         padding-bottom: 128px;
         padding-bottom: 8rem;
