@@ -103,7 +103,11 @@
   $_max-block-size--default: $siteHeader-block_size__default - $_inviolate-space;
   $_max-block-size--medium: $siteHeader-block_size__medium - $_inviolate-space;
 
-  @include _custom-property-fallback(&, (max-block-size--default: $_max-block-size--default, max-block-size--medium: $_max-block-size--medium));
+  $_fallback-args: (
+    max-block-size--default: $_max-block-size--default,
+    max-block-size--medium: $_max-block-size--medium
+  );
+  @include _custom-property-fallback(&, $_fallback-args);
 
   --block-size: #{$siteHeader-image-block_size__default};
   --max-block-size: #{$_max-block-size--default};
