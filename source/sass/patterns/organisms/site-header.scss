@@ -12,19 +12,22 @@
   }
 }
 
-@mixin _custom-property-fallback--site-header-image($calculated) {
+@mixin _custom-property-fallback--site-header-link($calculated) {
+
   @include block-size($siteHeader-image-block_size__default);
   @include max-block-size(map_get($calculated, max-block-size--default));
-  @include padding($siteHeader-image-inline_space__default, inline);
+  @include inline-size($siteHeader-image-inline_size__default);
+  @include margin($siteHeader-image-inline_space__default, inline);
   @include padding(($siteHeader-block_size__default - $siteHeader-block_start_space - $siteHeader-image-block_size__default) / 2, block-start);
   @include mq($from: medium) {
     @include block-size($siteHeader-image-block_size__medium);
     @include max-block-size(map_get($calculated, max-block-size--medium));
-    @include padding($siteHeader-image-inline_space__medium, inline);
+    @include inline-size($siteHeader-image-inline_size__medium);
+    @include margin($siteHeader-image-inline_space__medium, inline);
     @include padding(($siteHeader-block_size__medium - $siteHeader-block_start_space - $siteHeader-image-block_size__medium) / 2, block-start);
   }
   @include mq($from: x-wide) {
-    @include padding($siteHeader-image-inline_start_space__x_wide, inline-start);
+    @include margin($siteHeader-image-inline_start_space__x_wide, inline-start);
   }
 }
 
@@ -32,8 +35,8 @@
   $_selector: nth(simple-selectors($selector), 1);
   @if $_selector == ".site-header" {
     @include _custom-property-fallback--site-header();
-  } @else if $_selector == ".site-header__image" {
-    @include _custom-property-fallback--site-header-image($args);
+  } @else if $_selector == ".site-header__logo_link" {
+    @include _custom-property-fallback--site-header-link($args);
   }
 }
 
@@ -62,44 +65,7 @@
 
 .site-header__logo_link {
 
-  line-height: 0;
-
-  // TODO: use @mixin inset() from https://github.com/libero/pattern-library/pull/98 once it makes it into the main branch
-  block-start: calc(50% - #{$siteHeader-image-block_size__default} / 2);
-  @include mq($from: medium) {
-    block-start: calc(50% - #{$siteHeader-image-block_size__medium} / 2);
-  }
-
-  position: relative;
-  @supports (display:flex) {
-    position: static;
-    display: flex;
-    align-items: center;
-  }
-
-  &:after {
-    background-color: $color-text-dividers;
-    content: "";
-    display: inline-block;
-    // Prevent expression in rem to stop rounding down to 0 width in IE
-    @include inline-size($grid-divider_size, false);
-    @include block-size($siteHeader-image-block_size__default);
-
-    @include mq($from: medium) {
-      position: relative;
-      // TODO: use @mixin inset() when available
-      block-start: #{$siteHeader-image-block_size__default / 4};
-    }
-    @supports (display: flex) {
-      position: static;
-    }
-  }
-
-}
-
-//.site-header__image {
-.site-header__logo_link {
-
+  display: block;
   box-sizing: content-box;
 
   $_inviolate-space: $siteHeader-block_start_space + $siteHeader-block_end_space + $grid-divider_size;
@@ -114,11 +80,13 @@
 
   --block-size: #{$siteHeader-image-block_size__default};
   --max-block-size: #{$_max-block-size--default};
+  --inline-size: #{$siteHeader-image-inline_size__default};
   --inline-end-space: #{$siteHeader-image-inline_space__default};
   --inline-start-space: var(--inline-end-space);
   @include mq($from: medium) {
     --block-size: #{$siteHeader-image-block_size__medium};
     --max-block-size: #{$_max-block-size--medium};
+    --inline-size: #{$siteHeader-image-inline_size__medium};
     --inline-end-space: #{$siteHeader-image-inline_space__medium};
   }
   @include mq($from: x-wide) {
@@ -128,6 +96,7 @@
   @supports (--name: value) {
     @include padding(0, block);
     @include block-size(var(--block-size));
+    @include inline-size(var(--inline-size));
     @include max-block-size(var(--max-block-size));
     @include margin(var(--inline-start-space) var(--inline-end-space), inline);
   }
