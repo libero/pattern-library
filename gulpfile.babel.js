@@ -326,7 +326,7 @@ const compileImages = () =>
     .pipe(imagemin())
     .pipe(gulp.dest(config.dir.build.images));
 
-export const generateImages = gulp.series(cleanImages, compileImages);
+const generateImages = gulp.series(cleanImages, compileImages);
 
 const generateFavicon = () =>
   sharp(config.files.src.favicon)
