@@ -19,16 +19,6 @@
 
 .tag-list__list--single-line {
   @include truncate-with-ellipsis();
-  width: calc(100% - 2 * 7%);
-
-  @include mq($from: wide) {
-    width: calc(100% - 2 * 14%);
-  }
-
-  @include mq($from: x-wide) {
-    width: calc(100% - 2 * 3%);
-  }
-
 }
 
 .tag-list__item {

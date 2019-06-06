@@ -128,10 +128,13 @@
 }
 
 .content-header__download_link {
-  float: right; // stylelint-disable-line csstools/use-logical
-  @include inset(7%, inline-end);
+  @include inset(0, inline-end);
   @include inset(24px, block-start);
   position: absolute;
+
+  @include mq($from: medium) {
+    @include inset(14px, block-start);
+  }
 
   @include mq($from: x-wide) {
     @include inset(3%, inline-end);
