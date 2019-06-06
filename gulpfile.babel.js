@@ -123,7 +123,6 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.files.src.js = `${config.dir.src.js}/**/*.js`;
   config.files.src.jsEntryPoint = `${config.dir.src.js}/${invocationOptions.jsEntryPoint}`;
   config.files.src.images = `${config.dir.src.images}/**/*`;
-  config.files.src.imagesExportable = [config.files.src.images, `!${config.dir.src.images}/local`, `!${config.dir.src.images}/local/**/*`];
   config.files.src.favicon = `${config.dir.src.images}/libero-logo.svg`;
   config.files.src.fontsDefinition = `${config.dir.src.fonts}/fonts.yaml`;
   config.files.src.fonts = [
@@ -143,6 +142,8 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.files.test.sassTestsEntryPoint = `${config.dir.test.sass}/test_sass.js`;
 
   config.files.build.favicon = `${config.dir.build.src}/favicon.ico`;
+  config.files.build.imagesExportable = [`${config.dir.build.images}/**/*`, `!${config.dir.build.images}/local`, `!${config.dir.build.images}/local/**/*`];
+
 
   config.webpack = webpackConfigFactory(config.environment, path.resolve(config.files.src.jsEntryPoint), path.resolve(config.dir.build.js));
 
@@ -325,7 +326,7 @@ const compileImages = () =>
     .pipe(imagemin())
     .pipe(gulp.dest(config.dir.build.images));
 
-const generateImages = gulp.series(cleanImages, compileImages);
+export const generateImages = gulp.series(cleanImages, compileImages);
 
 const generateFavicon = () =>
   sharp(config.files.src.favicon)
@@ -373,7 +374,7 @@ export const test = gulp.parallel(validateJs, validateSass);
 
 // Exporters
 
-const cleanExport = () => del(`${config.exportRoot}**/*`);
+export const cleanExport = () => del(`${config.exportRoot}**/*`);
 
 const exportCss = () =>
   gulp.src(`${config.dir.build.css}/**/*`)
@@ -388,7 +389,7 @@ const exportSassVendor = () =>
     .pipe(gulp.dest(config.dir.export.sassVendor));
 
 const exportImages = () =>
-  gulp.src(config.files.src.imagesExportable)
+  gulp.src(config.files.build.imagesExportable)
     .pipe(gulp.dest(config.dir.export.images));
 
 const exportFavicon = () =>
