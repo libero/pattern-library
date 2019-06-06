@@ -68,6 +68,19 @@
     @include assert() {
 
       @include output {
+        @include padding(32px 32px);
+      }
+
+      @include expect {
+        padding: 32px;
+        padding: 2rem;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
         @include padding(32px 48px);
       }
 
@@ -106,6 +119,32 @@
   }
 
   @include it("generates correct fallbacks with three non-zero values and no dimension") {
+
+    @include assert() {
+
+      @include output {
+        @include padding(32px 32px 32px);
+      }
+
+      @include expect {
+        padding: 32px;
+        padding: 2rem;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include padding(32px 48px 32px);
+      }
+
+      @include expect {
+        padding: 32px 48px;
+        padding: 2rem 3rem;
+      }
+
+    }
 
     @include assert() {
 
@@ -275,7 +314,7 @@
       }
 
       @include expect {
-        padding: 0 0 0;
+        padding: 0;
       }
 
     }
@@ -293,27 +332,20 @@
       @include expect {
         html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
-          padding-left: 256px;
-          padding-left: 16rem;
-          padding-right: 48px;
-          padding-right: 3rem;
+          padding: 0 48px 128px 256px;
+          padding: 0 3rem 8rem 16rem;
         }
         html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
-          padding-right: 256px;
-          padding-right: 16rem;
-          padding-left: 48px;
-          padding-left: 3rem;
+          padding: 0 256px 128px 48px;
+          padding: 0 16rem 8rem 3rem;
         }
         html[dir][dir] & {
+          padding-block-start: 0;
+          padding-block-end: 8rem;
           padding-inline-start: 16rem;
           padding-inline-end: 3rem;
-        }
-        padding-top: 0;
-        padding-bottom: 128px;
-        padding-bottom: 8rem;
-        padding-block-start: 0;
-        padding-block-end: 8rem;
+          }
       }
 
     }
@@ -327,22 +359,18 @@
       @include expect {
         html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
-          padding-left: 16em;
-          padding-right: 3em;
+          padding: 0 3em 8em 16em;
         }
         html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
-          padding-right: 16em;
-          padding-left: 3em;
+          padding: 0 16em 8em 3em;
         }
         html[dir][dir] & {
+          padding-block-start: 0;
+          padding-block-end: 8em;
           padding-inline-start: 16em;
           padding-inline-end: 3em;
         }
-        padding-top: 0;
-        padding-bottom: 8em;
-        padding-block-start: 0;
-        padding-block-end: 8em;
       }
 
     }
@@ -356,27 +384,20 @@
       @include expect {
         html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
-          padding-left: 256px;
-          padding-left: 16rem;
-          padding-right: 48px;
-          padding-right: 3rem;
+          padding: 0 48px 128px 256px;
+          padding: 0 3rem 8rem 16rem;
         }
         html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
-          padding-right: 256px;
-          padding-right: 16rem;
-          padding-left: 48px;
-          padding-left: 3rem;
+          padding: 0 256px 128px 48px;
+          padding: 0 16rem 8rem 3rem;
         }
         html[dir][dir] & {
+          padding-block-start: 0;
+          padding-block-end: 8rem;
           padding-inline-start: 16rem;
           padding-inline-end: 3rem;
         }
-        padding-top: 0;
-        padding-bottom: 128px;
-        padding-bottom: 8rem;
-        padding-block-start: 0;
-        padding-block-end: 8rem;
       }
     }
 
@@ -1292,6 +1313,19 @@
     @include assert() {
 
       @include output {
+        @include margin(32px 32px);
+      }
+
+      @include expect {
+        margin: 32px;
+        margin: 2rem;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
         @include margin(32px 48px);
       }
 
@@ -1330,6 +1364,32 @@
   }
 
   @include it("generates correct fallbacks with three non-zero values and no dimension") {
+
+    @include assert() {
+
+      @include output {
+        @include margin(32px 32px 32px);
+      }
+
+      @include expect {
+        margin: 32px;
+        margin: 2rem;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include margin(32px 48px 32px);
+      }
+
+      @include expect {
+        margin: 32px 48px;
+        margin: 2rem 3rem;
+      }
+
+    }
 
     @include assert() {
 
@@ -1499,7 +1559,7 @@
       }
 
       @include expect {
-        margin: 0 0 0;
+        margin: 0;
       }
 
     }
@@ -1517,27 +1577,20 @@
       @include expect {
         html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
-          margin-left: 256px;
-          margin-left: 16rem;
-          margin-right: 48px;
-          margin-right: 3rem;
+          margin: 0 48px 128px 256px;
+          margin: 0 3rem 8rem 16rem;
         }
         html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
-          margin-right: 256px;
-          margin-right: 16rem;
-          margin-left: 48px;
-          margin-left: 3rem;
+          margin: 0 256px 128px 48px;
+          margin: 0 16rem 8rem 3rem;
         }
         html[dir][dir] & {
+          margin-block-start: 0;
+          margin-block-end: 8rem;
           margin-inline-start: 16rem;
           margin-inline-end: 3rem;
         }
-        margin-top: 0;
-        margin-bottom: 128px;
-        margin-bottom: 8rem;
-        margin-block-start: 0;
-        margin-block-end: 8rem;
       }
 
     }
@@ -1551,22 +1604,18 @@
       @include expect {
         html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
-          margin-left: 16em;
-          margin-right: 3em;
+          margin: 0 3em 8em 16em;
         }
         html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
-          margin-right: 16em;
-          margin-left: 3em;
+          margin: 0 16em 8em 3em;
         }
         html[dir][dir] & {
+          margin-block-start: 0;
+          margin-block-end: 8em;
           margin-inline-start: 16em;
           margin-inline-end: 3em;
         }
-        margin-top: 0;
-        margin-bottom: 8em;
-        margin-block-start: 0;
-        margin-block-end: 8em;
       }
 
     }
@@ -1580,27 +1629,20 @@
       @include expect {
         html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
-          margin-left: 256px;
-          margin-left: 16rem;
-          margin-right: 48px;
-          margin-right: 3rem;
+          margin: 0 48px 128px 256px;
+          margin: 0 3rem 8rem 16rem;
         }
         html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
-          margin-right: 256px;
-          margin-right: 16rem;
-          margin-left: 48px;
-          margin-left: 3rem;
+          margin: 0 256px 128px 48px;
+          margin: 0 16rem 8rem 3rem;
         }
         html[dir][dir] & {
+          margin-block-start: 0;
+          margin-block-end: 8rem;
           margin-inline-start: 16rem;
           margin-inline-end: 3rem;
         }
-        margin-top: 0;
-        margin-bottom: 128px;
-        margin-bottom: 8rem;
-        margin-block-start: 0;
-        margin-block-end: 8rem;
       }
     }
 
