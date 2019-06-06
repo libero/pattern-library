@@ -22,7 +22,7 @@
 }
 
 .tag-list__item {
-  display: inline-block;
+  display: inline;
   @include label-tag-typography();
 
   &:after {
