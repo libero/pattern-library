@@ -1,6 +1,8 @@
 @import "../test";
 @import "../../../source/sass/mixins/logical-properties";
 
+/* stylelint-disable csstools/use-logical  */
+
 @include describe("@mixin logical-property") {
 
   @include it("generates correct fallbacks for the dimension 'inline'") {
