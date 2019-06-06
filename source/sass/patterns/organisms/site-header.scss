@@ -17,13 +17,11 @@
   @include block-size($siteHeader-image-block_size__default);
   @include max-block-size(map_get($calculated, max-block-size--default));
   @include inline-size($siteHeader-image-inline_size__default);
-  @include margin($siteHeader-image-inline_space__default, inline);
   @include padding(($siteHeader-block_size__default - $siteHeader-block_start_space - $siteHeader-image-block_size__default) / 2, block-start);
   @include mq($from: medium) {
     @include block-size($siteHeader-image-block_size__medium);
     @include max-block-size(map_get($calculated, max-block-size--medium));
     @include inline-size($siteHeader-image-inline_size__medium);
-    @include margin($siteHeader-image-inline_space__medium, inline);
     @include padding(($siteHeader-block_size__medium - $siteHeader-block_start_space - $siteHeader-image-block_size__medium) / 2, block-start);
   }
   @include mq($from: x-wide) {
