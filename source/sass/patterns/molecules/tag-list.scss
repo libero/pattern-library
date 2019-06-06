@@ -2,6 +2,7 @@
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 @import "../../variables/baselinegrid";
+@import "../../variables/contentHeader";
 
 .tag-list {
   @include block-spacing();
@@ -19,6 +20,18 @@
 
 .tag-list__list--single-line {
   @include truncate-with-ellipsis();
+
+  --width: calc(100% - #{$contentHeader-downloadIcon-width__default});
+  width: calc(100% - #{$contentHeader-downloadIcon-width__default});
+  @include mq($from: medium) {
+    --width: 100%;
+    width: 100%;
+  }
+
+  @supports (--name: value) {
+    width: var(--width);
+  }
+
 }
 
 .tag-list__item {

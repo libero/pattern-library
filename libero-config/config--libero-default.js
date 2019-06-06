@@ -59,9 +59,12 @@ config.data.font.monospace = '"Courier 10 Pitch", Courier, monospace';
 config.data.font.size_in_px = 16;
 config.data.font.letterspacing.label_in_px = 0.5;
 
+config.data.contentHeader = { downloadIcon: {} };
+config.data.contentHeader.downloadIcon.width__default_in_px = 20;
+
 // Specify the top level properties to be distributed to layers (sass, js & templates)
 config.layerAllocations = {
-  sass: ['baselinegrid', 'breakpoint', 'color', 'font', 'grid', 'image'],
+  sass: ['baselinegrid', 'breakpoint', 'color', 'font', 'grid', 'image', 'contentHeader'],
   js: ['breakpoint'],
   // template: ['breakpoint']
 };
