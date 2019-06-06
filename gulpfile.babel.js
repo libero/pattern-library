@@ -374,7 +374,7 @@ export const test = gulp.parallel(validateJs, validateSass);
 
 // Exporters
 
-export const cleanExport = () => del(`${config.exportRoot}**/*`);
+const cleanExport = () => del(`${config.exportRoot}**/*`);
 
 const exportCss = () =>
   gulp.src(`${config.dir.build.css}/**/*`)
