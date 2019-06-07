@@ -7,6 +7,9 @@ siteHeader:
       alt: 'Либеро логотип'
 
 contentHeader:
+  downloadIconLink:
+    attributes:
+      href: '#'
   contentTitle:
     text: Неожиданный некарпеллитный эпигиновый цветок из китайской юры
   categories:

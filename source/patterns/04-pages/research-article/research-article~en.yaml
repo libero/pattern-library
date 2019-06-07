@@ -1,8 +1,10 @@
 siteHeader:
   logo:
     href: '#'
-
 contentHeader:
+  downloadIconLink:
+    attributes:
+      href: '#'
   contentTitle:
     text: An unexpected noncarpellate epigynous flower from the Jurassic of China
   categories:

@@ -8,6 +8,9 @@ siteHeader:
       alt: 'شعار مجاني'
 
 contentHeader:
+  downloadIconLink:
+    attributes:
+      href: '#'
   contentTitle:
     text: زهرة غير منتجة غير منتجة من العصر الجوراسي في الصين
   categories:

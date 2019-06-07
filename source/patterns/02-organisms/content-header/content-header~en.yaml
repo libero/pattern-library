@@ -1,2 +1,5 @@
 contentTitle:
   text: Content title
+downloadIconLink:
+  attributes:
+    href: '#'

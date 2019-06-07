@@ -1,5 +1,7 @@
-attributes:
-  dir: rtl
-  lang: ar
+dir: rtl
+lang: ar
 contentTitle:
   text: عنوان المحتوى
+downloadIconLink:
+  attributes:
+    href: '#'

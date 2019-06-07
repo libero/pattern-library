@@ -2,3 +2,6 @@ attributes:
   lang: ja
 contentTitle:
   text: コンテンツのタイトル
+downloadIconLink:
+  attributes:
+    href: '#'

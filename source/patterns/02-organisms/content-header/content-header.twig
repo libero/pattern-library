@@ -16,7 +16,11 @@
       {%- endblock categories -%}
     {%- endwith -%}
 
-    <a href="" class="content-header__download_link">
+
+      {%- if downloadIconLink is defined -%}
+        <a href="{{ downloadIconLink.attributes.href }}" class="content-header__download_link">
+      {%- endif -%}
+
       <picture>
         <source srcset="/images/download-full.svg" type="image/svg+xml" media="(min-width: 45.625em)">
         <img src="/images/download.svg" class="content-header__download_icon" alt="Download icon">
