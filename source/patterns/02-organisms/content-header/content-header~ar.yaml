@@ -1,5 +1,6 @@
-dir: rtl
-lang: ar
+attributes:
+  dir: rtl
+  lang: ar
 contentTitle:
   text: عنوان المحتوى
 downloadIconLink:
