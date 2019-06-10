@@ -33,3 +33,13 @@ meta:
         aria-label: Issue number
       content:
         text: Issue 1
+authors:
+  attributes:
+    aria-label: Authors of this article
+  items:
+    - name: author 1
+      url: '#'
+    - name: author 2
+    - name: author 3
+      url: '#'
+

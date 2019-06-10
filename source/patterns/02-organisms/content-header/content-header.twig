@@ -57,6 +57,34 @@
       {%- endblock meta -%}
     {%- endwith -%}
 
-  {%- endblock -%}
+    {%- if authors is defined -%}
+        {%- block authors -%}
+          {%- if authors.items|default([])|length -%}
 
+            {%- set attributes = authors.attributes|default({}) -%}
+              <ol {{- html.attributes(attributes) -}}>
+                {%- with authors -%}
+                  {%- for author in items -%}
+                    <li>
+                      {%- if author.url is defined -%}
+                        <a href="{{ author.url }}">{{ author.name }}</a>
+                      {%- else -%}
+                        {{ author.name }}
+                      {%- endif -%}
+
+                        {%- if not loop.last -%}
+                          <span aria-hidden="true">,</span>
+                        {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                {%- endwith -%}
+              </ol>
+
+          {%- endif -%}
+        {%- endblock authors -%}
+    {%- endif -%}
+
+  {%- endblock body -%}
 </header>
+
+
