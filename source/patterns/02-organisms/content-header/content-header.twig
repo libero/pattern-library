@@ -85,9 +85,9 @@
 
               {%- set attributes = authors.affiliations.attributes|default({}) -%}
               <ol {{- html.attributes(attributes) -}}>
-                {%- with authors -%}
-                  {%- for item in affiliations.items -%}
-                  <li>{{ item.name }}</li>
+                {%- with authors.affiliations -%}
+                  {%- for affiliation in items -%}
+                  <li>{{ affiliation.name }}</li>
                   {%- endfor -%}
                 {%- endwith -%}
               </ol>
