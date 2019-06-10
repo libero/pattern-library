@@ -42,4 +42,10 @@ authors:
     - name: author 2
     - name: author 3
       url: '#'
+  affiliations:
+    attributes:
+      aria-label: 'Author affiliations'
+    items:
+      - name: affiliation 1
+      - name: affiliation 2
 
