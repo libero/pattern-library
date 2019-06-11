@@ -3924,12 +3924,19 @@
       }
 
       @include expect {
-        float: left;
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          float: left;
+        }
+
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          float: right;
+        }
+
         float: inline-start;
       }
-
     }
-
   }
 
   @include it("generates correct value for float right or css logical property inline-end") {
@@ -3941,10 +3948,18 @@
       }
 
       @include expect {
-        float: right;
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          float: right;
+        }
+
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          float: left;
+        }
+
         float: inline-end;
       }
-
     }
 
   }

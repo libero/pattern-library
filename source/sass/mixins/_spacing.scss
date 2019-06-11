@@ -140,11 +140,31 @@
 @mixin float($dimension: "") {
 
   @if $dimension == inline-start {
-    float: left; // stylelint-disable-line csstools/use-logical
-    float: $dimension;
+    html[dir="ltr"] &:not([dir]),
+    &[dir="ltr"] {
+      float: left; // stylelint-disable-line csstools/use-logical
+    }
+
+    html[dir="rtl"] &:not([dir]),
+    &[dir="rtl"] {
+      float: right; // stylelint-disable-line csstools/use-logical
+    }
+
+    float: inline-start;
+
   } @else if $dimension == inline-end {
-    float: right; // stylelint-disable-line csstools/use-logical
-    float: $dimension;
+    html[dir="ltr"] &:not([dir]),
+    &[dir="ltr"] {
+      float: right; // stylelint-disable-line csstools/use-logical
+    }
+
+    html[dir="rtl"] &:not([dir]),
+    &[dir="rtl"] {
+      float: left; // stylelint-disable-line csstools/use-logical
+    }
+
+    float: inline-end;
+
   } @else if index((inherit,initial,unset,none), $dimension) {
     float: $dimension;
   } @else if length($dimension) > 1 {
