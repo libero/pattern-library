@@ -2,7 +2,7 @@
 @import "../../mixins/scale";
 @import "../../mixins/decorations";
 @import "../../mixins/media-query";
-@import "../../mixins/spacing";
+@import "../../mixins/positioning";
 @import "../../variables/baselinegrid";
 @import "../../variables/grid";
 
@@ -130,8 +130,8 @@
 .content-header__download_link {
   @include inset(0, inline-end);
   @include inset(24px, block);
-  position: absolute;
-  float: inline-end;
+  //position: absolute;
+  @include float(inline-end);
 
   @include mq($from: medium) {
     @include inset(14px, block-start);
