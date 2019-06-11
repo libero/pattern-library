@@ -129,8 +129,9 @@
 
 .content-header__download_link {
   @include inset(0, inline-end);
-  @include inset(24px, block-start);
+  @include inset(24px, block);
   position: absolute;
+  float: inline-end;
 
   @include mq($from: medium) {
     @include inset(14px, block-start);
@@ -138,6 +139,17 @@
 
   @include mq($from: x-wide) {
     @include inset(3%, inline-end);
+  }
+
+  --width: #{$contentHeader-downloadIcon-width__default};
+  width: #{$contentHeader-downloadIcon-width__default};
+  @include mq($from: medium) {
+    --width: #{$contentHeader-downloadIcon-width__medium};
+    width: #{$contentHeader-downloadIcon-width__medium};
+  }
+
+  @supports (--name: value) {
+    width: var(--width);
   }
 
 }

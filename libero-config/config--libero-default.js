@@ -61,6 +61,7 @@ config.data.font.letterspacing.label_in_px = 0.5;
 
 config.data.contentHeader = { downloadIcon: {} };
 config.data.contentHeader.downloadIcon.width__default_in_px = 20;
+config.data.contentHeader.downloadIcon.width__medium_in_px = 44;
 
 // Specify the top level properties to be distributed to layers (sass, js & templates)
 config.layerAllocations = {
