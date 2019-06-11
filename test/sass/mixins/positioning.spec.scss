@@ -1237,7 +1237,9 @@
           float: right;
         }
 
-        float: inline-start;
+        html[dir][dir] & {
+          float: inline-start;
+        }
       }
     }
   }
@@ -1261,7 +1263,9 @@
           float: left;
         }
 
-        float: inline-end;
+        html[dir][dir] & {
+          float: inline-end;
+        }
       }
     }
 

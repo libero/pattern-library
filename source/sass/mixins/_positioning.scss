@@ -17,7 +17,9 @@
       float: right; // stylelint-disable-line csstools/use-logical
     }
 
-    float: inline-start;
+    html[dir][dir] & {
+      float: inline-start;
+    }
 
   } @else if $dimension == inline-end {
     html[dir="ltr"] &:not([dir]),
@@ -30,7 +32,9 @@
       float: left; // stylelint-disable-line csstools/use-logical
     }
 
-    float: inline-end;
+    html[dir][dir] & {
+      float: inline-end;
+    }
 
   } @else if index((inherit,initial,unset,none), $dimension) {
     float: $dimension;
