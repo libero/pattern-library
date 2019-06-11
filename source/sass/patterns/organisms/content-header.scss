@@ -128,7 +128,7 @@
 }
 
 .content-header__author_info_list {
-  list-style: none;
+  @include list-style-none();
 }
 
 .content-header__author_info_item {
