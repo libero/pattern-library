@@ -52,9 +52,9 @@
 
         {%- if items|default([])|length -%}
 
-          <ol {{- html.attributes(attributes|default({})) -}}>
+          <ol {{- html.attributes(attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__author_list']) })) -}}>
             {%- for author in items -%}
-              <li>
+              <li class="content-header__author">
                 {%- with author only -%}
                   {%- block author -%}
                     {%- include 'atoms-link' -%}

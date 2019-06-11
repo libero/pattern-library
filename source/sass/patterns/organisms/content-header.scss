@@ -3,6 +3,7 @@
 @import "../../mixins/decorations";
 @import "../../mixins/media-query";
 @import "../../mixins/spacing";
+@import "../../mixins/typography";
 @import "../../variables/baselinegrid";
 @import "../../variables/grid";
 
@@ -124,4 +125,26 @@
   @include mq($from: wide) {
     @include rem(font-size, scale(4));
   }
+}
+
+.content-header__author_list {
+  list-style: none;
+}
+
+.content-header__author {
+  display: inline-block;
+  font-family: $font-secondary;
+  @include set-font-size-and-line-height($font-size);
+  @include comma-separator();
+
+  & > a:link,
+  & > a:visited {
+    color: $color-text-normal;
+  }
+
+  & > a:hover,
+  & > a:active {
+    color: $color-primary-normal;
+  }
+
 }
