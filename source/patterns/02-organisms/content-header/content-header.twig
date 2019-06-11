@@ -47,6 +47,50 @@
 
     {%- endwith -%}
 
+    {%- with authors|default({})|merge({html: html}) only -%}
+      {%- block authors -%}
+
+        {%- if items|default([])|length -%}
+
+          <ol {{- html.attributes(attributes|default({})) -}}>
+            {%- for author in items -%}
+              <li>
+                {%- with author only -%}
+                  {%- block author -%}
+                    {%- include 'atoms-link' -%}
+                  {%- endblock author -%}
+                {%- endwith -%}
+              </li>
+            {%- endfor -%}
+          </ol>
+
+        {%- endif -%}
+
+      {%- endblock authors -%}
+    {%- endwith -%}
+
+    {%- with affiliations|default({})|merge({html: html}) only -%}
+      {%- block affiliations -%}
+
+        {%- if items|default([])|length -%}
+
+          <ol {{- html.attributes(attributes|default({})) -}}>
+            {%- for affiliation in items -%}
+              <li>
+                {%- with affiliation only -%}
+                  {%- block affiliation -%}
+                    {%- include 'atoms-link' -%}
+                  {%- endblock affiliation -%}
+                {%- endwith -%}
+              </li>
+            {%- endfor -%}
+          </ol>
+
+        {%- endif -%}
+
+      {%- endblock affiliations -%}
+    {%- endwith -%}
+
     {%- with meta|default({}) only -%}
       {%- block meta -%}
 
@@ -57,48 +101,5 @@
       {%- endblock meta -%}
     {%- endwith -%}
 
-    {%- if authors is defined -%}
-      {%- block authors -%}
-        {%- if authors.items|default([])|length -%}
-
-          {%- set attributes = authors.attributes|default({}) -%}
-          <ol {{- html.attributes(attributes) -}}>
-            {%- with authors -%}
-              {%- for author in items -%}
-                <li>
-                  {%- if author.url is defined -%}
-                    <a href="{{ author.url }}">{{ author.name }}</a>
-                  {%- else -%}
-                    {{ author.name }}
-                  {%- endif -%}
-
-                    {%- if not loop.last -%}
-                      <span aria-hidden="true">,</span>
-                    {%- endif -%}
-                </li>
-              {%- endfor -%}
-            {%- endwith -%}
-          </ol>
-
-          {%- if authors.affiliations is defined -%}
-            {%- if authors.affiliations.items|default([])|length -%}
-
-              {%- set attributes = authors.affiliations.attributes|default({}) -%}
-              <ol {{- html.attributes(attributes) -}}>
-                {%- with authors.affiliations -%}
-                  {%- for affiliation in items -%}
-                  <li>{{ affiliation.name }}</li>
-                  {%- endfor -%}
-                {%- endwith -%}
-              </ol>
-            {%- endif -%}
-          {%- endif -%}
-
-        {%- endif -%}
-      {%- endblock authors -%}
-    {%- endif -%}
-
   {%- endblock body -%}
 </header>
-
-

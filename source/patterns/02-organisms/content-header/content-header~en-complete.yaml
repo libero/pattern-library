@@ -37,15 +37,16 @@ authors:
   attributes:
     aria-label: Authors of this article
   items:
-    - name: author 1
-      url: '#'
-    - name: author 2
-    - name: author 3
-      url: '#'
-  affiliations:
-    attributes:
-      aria-label: 'Author affiliations'
-    items:
-      - name: affiliation 1
-      - name: affiliation 2
-
+    - attributes:
+        href: '#'
+      text: Author 1
+    - text: Author 2
+    - attributes:
+        href: '#'
+      text: Author 3
+affiliations:
+  attributes:
+    aria-label: Author affiliations
+  items:
+    - text: Affiliation 1
+    - text: Affiliation 2
