@@ -32,6 +32,23 @@ contentHeader:
                 attributes:
                   datetime: '2018-12-18'
                 text: Dec 18, 2018
+  authors:
+    attributes:
+      aria-label: Authors of this article
+    items:
+      - attributes:
+          href: '#'
+        text: Author 1
+      - text: Author 2
+      - attributes:
+          href: '#'
+        text: Author 3
+  affiliations:
+    attributes:
+      aria-label: Author affiliations
+    items:
+      - text: Affiliation 1
+      - text: Affiliation 2
 
 body:
   - template: molecules-section
