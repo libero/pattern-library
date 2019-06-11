@@ -1335,22 +1335,6 @@
 
   }
 
-  @include it("generates error if float has no value") {
-
-    @include assert() {
-
-      @include output {
-        @include float();
-      }
-
-      @include expect {
-        _error: "has no dimension";
-      }
-
-    }
-
-  }
-
   @include it("generates error if float value has incorrect value") {
 
     @include assert() {

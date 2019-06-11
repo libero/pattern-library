@@ -1,41 +1,13 @@
+@import "logical-properties";
 @import "spacing";
 
 @mixin inset($sizes, $dimension: "") {
   @include _spacing($sizes, inset, $dimension);
 }
 
-@mixin float($dimension: "") {
-
-  @if $dimension == inline-start {
-    html[dir="ltr"] &:not([dir]),
-    &[dir="ltr"] {
-      float: left; // stylelint-disable-line csstools/use-logical
-    }
-
-    html[dir="rtl"] &:not([dir]),
-    &[dir="rtl"] {
-      float: right; // stylelint-disable-line csstools/use-logical
-    }
-
-    html[dir][dir] & {
-      float: inline-start;
-    }
-
-  } @else if $dimension == inline-end {
-    html[dir="ltr"] &:not([dir]),
-    &[dir="ltr"] {
-      float: right; // stylelint-disable-line csstools/use-logical
-    }
-
-    html[dir="rtl"] &:not([dir]),
-    &[dir="rtl"] {
-      float: left; // stylelint-disable-line csstools/use-logical
-    }
-
-    html[dir][dir] & {
-      float: inline-end;
-    }
-
+@mixin float($dimension) {
+  @if index((inline-start, inline-end), $dimension) {
+    @include logical-property(float, $dimension);
   } @else if index((inherit,initial,unset,none), $dimension) {
     float: $dimension;
   } @else if length($dimension) > 1 {

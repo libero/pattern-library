@@ -64,10 +64,33 @@
 
   @return "#{_get-property-prefix(nth($parts, 1), $dimension)}#{$dimension}-#{nth($parts, 2)}";
 }
-@mixin logical-property($property-name, $dimension, $arguments, $to-rem: true) {
+@mixin logical-property($property-name, $dimension, $arguments: (), $to-rem: true) {
 
   @if length($property-name) > 2 {
     @include _error("Expected at most two property name parts");
+  } @else if $property-name == float {
+
+    @if $dimension == inline-start {
+      @include _when-left-to-right() {
+        float: left; // stylelint-disable-line csstools/use-logical
+      }
+      @include _when-right-to-left() {
+        float: right; // stylelint-disable-line csstools/use-logical
+      }
+      @include _when-logical() {
+        float: $dimension;
+      }
+    } @else if $dimension == inline-end {
+      @include _when-left-to-right() {
+        float: right; // stylelint-disable-line csstools/use-logical
+      }
+      @include _when-right-to-left() {
+        float: left; // stylelint-disable-line csstools/use-logical
+      }
+      @include _when-logical() {
+        float: $dimension;
+      }
+    }
   } @else if $dimension == inline {
 
     @if type-of($arguments) == "list" and length($arguments) > 1 {
