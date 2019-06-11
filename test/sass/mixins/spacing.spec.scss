@@ -3912,3 +3912,169 @@
   }
 
 }
+
+@include describe("@mixin float") {
+
+  @include it("generates correct value for float left or css logical property inline-start") {
+
+    @include assert() {
+
+      @include output {
+        @include float(inline-start);
+      }
+
+      @include expect {
+        float: left;
+        float: inline-start;
+      }
+
+    }
+
+  }
+
+  @include it("generates correct value for float right or css logical property inline-end") {
+
+    @include assert() {
+
+      @include output {
+        @include float(inline-end);
+      }
+
+      @include expect {
+        float: right;
+        float: inline-end;
+      }
+
+    }
+
+  }
+
+  @include it("generates correct value for float none") {
+
+    @include assert() {
+
+      @include output {
+        @include float(none);
+      }
+
+      @include expect {
+        float: none;
+      }
+
+    }
+
+  }
+
+  @include it("generates correct value for float inherit") {
+
+    @include assert() {
+
+      @include output {
+        @include float(inherit);
+      }
+
+      @include expect {
+        float: inherit;
+      }
+
+    }
+
+  }
+
+  @include it("generates correct value for float initial") {
+
+    @include assert() {
+
+      @include output {
+        @include float(initial);
+      }
+
+      @include expect {
+        float: initial;
+      }
+
+    }
+
+  }
+
+  @include it("generates correct value for float unset") {
+
+    @include assert() {
+
+      @include output {
+        @include float(unset);
+      }
+
+      @include expect {
+        float: unset;
+      }
+
+    }
+
+  }
+
+  @include it("generates error if float has no value") {
+
+    @include assert() {
+
+      @include output {
+        @include float();
+      }
+
+      @include expect {
+        _error: "has no dimension";
+      }
+
+    }
+
+  }
+
+  @include it("generates error if float value has incorrect value") {
+
+    @include assert() {
+
+      @include output {
+        @include float(inline-middle);
+      }
+
+      @include expect {
+        _error: "has unknown dimension 'inline-middle'";
+      }
+
+    }
+
+  }
+
+  @include it("generates error if float value has more than one value") {
+
+    @include assert() {
+
+      @include output {
+        @include float(""inline-end", "inline-start"");
+      }
+
+      @include expect {
+        _error: "has more than one dimension";
+      }
+
+    }
+
+  }
+
+  @include it("generates error if float is a physical dimension, use its logical equivilant") {
+
+    @include assert() {
+
+      @include output {
+        @include float(left);
+      }
+
+      @include expect {
+        _error: "'left' is a physical dimension, use its logical equivilant";
+      }
+
+    }
+
+  }
+
+}
