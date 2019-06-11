@@ -52,9 +52,9 @@
 
         {%- if items|default([])|length -%}
 
-          <ol {{- html.attributes(attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__author_list']) })) -}}>
+          <ol {{- html.attributes(attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__author_info_list']) })) -}}>
             {%- for author in items -%}
-              <li class="content-header__author">
+              <li class="content-header__author_info_item content-header__author_info_item--author">
                 {%- with author only -%}
                   {%- block author -%}
                     {%- include 'atoms-link' -%}
@@ -74,9 +74,9 @@
 
         {%- if items|default([])|length -%}
 
-          <ol {{- html.attributes(attributes|default({})) -}}>
+          <ol {{- html.attributes(attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__author_info_list']) })) -}}>
             {%- for affiliation in items -%}
-              <li>
+              <li class="content-header__author_info_item content-header__author_info_item--affiliation">
                 {%- with affiliation only -%}
                   {%- block affiliation -%}
                     {%- include 'atoms-link' -%}

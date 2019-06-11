@@ -127,14 +127,13 @@
   }
 }
 
-.content-header__author_list {
+.content-header__author_info_list {
   list-style: none;
 }
 
-.content-header__author {
+.content-header__author_info_item {
   display: inline-block;
   font-family: $font-secondary;
-  @include set-font-size-and-line-height($font-size);
   @include comma-separator();
 
   & > a:link,
@@ -146,5 +145,12 @@
   & > a:active {
     color: $color-primary-normal;
   }
+}
 
+.content-header__author_info_item--author {
+  @include set-font-size-and-line-height($font-size);
+}
+
+.content-header__author_info_item--affiliation {
+  @include set-font-size-and-line-height(scale(-1));
 }
