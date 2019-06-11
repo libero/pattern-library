@@ -2,3 +2,20 @@ attributes:
   lang: ja
 contentTitle:
   text: コンテンツのタイトル
+authors:
+  attributes:
+    aria-label: この記事の著者
+  items:
+    - attributes:
+        href: '#'
+      text: 著者1
+    - text: 著者2
+    - attributes:
+        href: '#'
+      text: 著者3
+affiliations:
+  attributes:
+    aria-label: 著者所属
+  items:
+    - text: 所属1
+    - text: 所属2

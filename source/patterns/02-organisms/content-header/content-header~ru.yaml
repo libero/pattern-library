@@ -1,0 +1,22 @@
+attributes:
+  lang: ru
+contentTitle:
+  text: Неожиданный некарпеллитный эпигиновый цветок из китайской юры
+authors:
+  attributes:
+    aria-label: Авторы этой статьи
+  items:
+    - attributes:
+        href: '#'
+      text: Автор 1
+    - text: Автор 2
+    - attributes:
+        href: '#'
+      text: Автор 3
+affiliations:
+  attributes:
+    aria-label: Авторская принадлежность
+  items:
+    - text: Принадлежность 1
+    - text: Принадлежность 2
+
