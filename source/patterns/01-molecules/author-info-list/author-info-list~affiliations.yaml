@@ -1,0 +1,14 @@
+attributes:
+  aria-label: Author affiliations
+items:
+  - content:
+      attributes:
+        class: ['content-header__author_info_item--affiliation']
+      link:
+        text: Affiliation 1
+
+  - content:
+      attributes:
+        class: ['content-header__author_info_item--affiliation']
+      link:
+        text: Affiliation 2

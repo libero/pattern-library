@@ -17,6 +17,47 @@ contentHeader:
           text: Эволюционная биология
       - content:
           text: Биология растений
+  authors:
+    attributes:
+      aria-label: Авторы этой статьи
+    items:
+      - content:
+          attributes:
+            class: ['content-header__author_info_item--author']
+          link:
+            attributes:
+              href: '#'
+            text: Автор 1
+
+      - content:
+          attributes:
+            class: ['content-header__author_info_item--author']
+          link:
+            text: Автор 2
+
+      - content:
+          attributes:
+            class: ['content-header__author_info_item--author']
+          link:
+            attributes:
+              href: '#'
+            text: Автор 3
+
+  affiliations:
+    attributes:
+      aria-label: Авторская принадлежность
+    items:
+      - content:
+          attributes:
+            class: ['content-header__author_info_item--affiliation']
+          link:
+            text: Принадлежность 1
+
+      - content:
+          attributes:
+            class: ['content-header__author_info_item--affiliation']
+          link:
+            text: Принадлежность 2
   meta:
     attributes:
       aria-label: Подробности публикации
@@ -36,24 +77,6 @@ contentHeader:
                 attributes:
                   datetime: '2018-12-18'
                 text: 18 дек. 2018 г.
-
-  authors:
-    attributes:
-      aria-label: Авторы этой статьи
-    items:
-      - attributes:
-          href: '#'
-        text: Автор 1
-      - text: Автор 2
-      - attributes:
-          href: '#'
-        text: Автор 3
-  affiliations:
-    attributes:
-      aria-label: Авторская принадлежность
-    items:
-      - text: Принадлежность 1
-      - text: Принадлежность 2
 
 body:
   - template: molecules-section

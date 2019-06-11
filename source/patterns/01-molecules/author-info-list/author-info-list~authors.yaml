@@ -1,0 +1,24 @@
+attributes:
+  aria-label: Authors of this article
+items:
+  - content:
+      attributes:
+        class: ['content-header__author_info_item--author']
+      link:
+        attributes:
+          href: '#'
+        text: Author 1
+
+  - content:
+      attributes:
+        class: ['content-header__author_info_item--author']
+      link:
+        text: Author 2
+
+  - content:
+      attributes:
+        class: ['content-header__author_info_item--author']
+      link:
+        attributes:
+          href: '#'
+        text: Author 3

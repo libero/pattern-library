@@ -47,45 +47,21 @@
 
     {%- endwith -%}
 
-    {%- with authors|default({})|merge({html: html}) only -%}
+    {%- with authors|default({}) only -%}
       {%- block authors -%}
 
         {%- if items|default([])|length -%}
-
-          <ol {{- html.attributes(attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__author_info_list']) })) -}}>
-            {%- for author in items -%}
-              <li class="content-header__author_info_item content-header__author_info_item--author">
-                {%- with author only -%}
-                  {%- block author -%}
-                    {%- include 'atoms-link' -%}
-                  {%- endblock author -%}
-                {%- endwith -%}
-              </li>
-            {%- endfor -%}
-          </ol>
-
+          {%- include 'molecules-author-info-list' -%}
         {%- endif -%}
 
       {%- endblock authors -%}
     {%- endwith -%}
 
-    {%- with affiliations|default({})|merge({html: html}) only -%}
+    {%- with affiliations|default({}) only -%}
       {%- block affiliations -%}
 
         {%- if items|default([])|length -%}
-
-          <ol {{- html.attributes(attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__author_info_list']) })) -}}>
-            {%- for affiliation in items -%}
-              <li class="content-header__author_info_item content-header__author_info_item--affiliation">
-                {%- with affiliation only -%}
-                  {%- block affiliation -%}
-                    {%- include 'atoms-link' -%}
-                  {%- endblock affiliation -%}
-                {%- endwith -%}
-              </li>
-            {%- endfor -%}
-          </ol>
-
+          {%- include 'molecules-author-info-list' -%}
         {%- endif -%}
 
       {%- endblock affiliations -%}
