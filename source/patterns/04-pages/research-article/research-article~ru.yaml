@@ -39,21 +39,21 @@ contentHeader:
 
   authors:
     attributes:
-      aria-label: مؤلفو هذا المقال
+      aria-label: Авторы этой статьи
     items:
       - attributes:
           href: '#'
-        text: المؤلف 1
-      - text: المؤلف 2
+        text: Автор 1
+      - text: Автор 2
       - attributes:
           href: '#'
-        text: المؤلف 3
+        text: Автор 3
   affiliations:
     attributes:
-      aria-label: الكاتب الانتماءات
+      aria-label: Авторская принадлежность
     items:
-      - text: الانتماء 1
-      - text: الانتماء 2
+      - text: Принадлежность 1
+      - text: Принадлежность 2
 
 body:
   - template: molecules-section
