@@ -2972,7 +2972,7 @@
       }
 
       @include expect {
-        inset: 0 0 0;
+        inset: 0;
       }
 
     }
@@ -2988,8 +2988,24 @@
       }
 
       @include expect {
-        inset: 0 48px 128px 256px;
-        inset: 0 3rem 8rem 16rem;
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          inset: 0 48px 128px 256px;
+          inset: 0 3rem 8rem 16rem;
+        }
+
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          inset: 0 256px 128px 48px;
+          inset: 0 16rem 8rem 3rem;
+        }
+
+        html[dir][dir] & {
+          inset-block-start: 0;
+          inset-block-end: 8rem;
+          inset-inline-start: 16rem;
+          inset-inline-end: 3rem;
+        }
       }
 
     }
@@ -3001,7 +3017,22 @@
       }
 
       @include expect {
-        inset: 0 3em 8em 16em;
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          inset: 0 3em 8em 16em;
+        }
+
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          inset: 0 16em 8em 3em;
+        }
+
+        html[dir][dir] & {
+          inset-block-start: 0;
+          inset-block-end: 8em;
+          inset-inline-start: 16em;
+          inset-inline-end: 3em;
+        }
       }
 
     }
@@ -3013,8 +3044,24 @@
       }
 
       @include expect {
-        inset: 0 48px 128px 256px;
-        inset: 0 3rem 8rem 16rem;
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          inset: 0 48px 128px 256px;
+          inset: 0 3rem 8rem 16rem;
+        }
+
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          inset: 0 256px 128px 48px;
+          inset: 0 16rem 8rem 3rem;
+        }
+
+        html[dir][dir] & {
+          inset-block-start: 0;
+          inset-block-end: 8rem;
+          inset-inline-start: 16rem;
+          inset-inline-end: 3rem;
+        }
       }
 
     }
@@ -3026,7 +3073,7 @@
       }
 
       @include expect {
-        inset: 0 0 0 0;
+        inset: 0;
       }
 
     }
