@@ -24,8 +24,8 @@
   --inline-size: calc(100% - #{$contentHeader-downloadIcon-inline_size__default});
   @include inline-size(calc(100% - #{$contentHeader-downloadIcon-inline_size__default}));
   @include mq($from: medium) {
-    --inline-size: 100%;
-    @include inline-size(100%);
+    --inline-size: calc(100% - #{$contentHeader-downloadIcon-inline_size__medium});
+    @include inline-size(calc(100% - #{$contentHeader-downloadIcon-inline_size__medium}));
   }
 
   @supports (--name: value) {
