@@ -2,5 +2,10 @@ attributes:
   aria-label: Author affiliations
   class: ['inline-list--small']
 items:
-  - text: Affiliation 1
-  - text: Affiliations 2
+  - content:
+      link:
+        text: Affiliation 1
+
+  - content:
+      link:
+        text: Affiliation 2

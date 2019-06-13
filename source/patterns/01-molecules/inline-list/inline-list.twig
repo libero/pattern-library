@@ -5,12 +5,14 @@
 <ol {{- html.attributes(attributes) -}}>
   {%- for item in items -%}
 
-    {%- with item|merge({html: html}) only -%}
-      {%- set attributes = attributes|default({}) -%}
+    {%- with item.content|merge({html: html}) only -%}
+      {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['inline-list__item']) }) -%}
       <li {{- html.attributes(attributes) -}}>
-        {%- block item -%}
-          {%- include 'atoms-link' -%}
-        {%- endblock item -%}
+        {%- with link only -%}
+          {%- block link -%}
+            {%- include 'atoms-link' -%}
+          {%- endblock link -%}
+        {%- endwith -%}
       </li>
     {%- endwith -%}
   {%- endfor -%}
