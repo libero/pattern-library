@@ -5,4 +5,5 @@ contentTitle:
   text: عنوان المحتوى
 downloadIconLink:
   attributes:
+    dir: rtl
     href: '#'
