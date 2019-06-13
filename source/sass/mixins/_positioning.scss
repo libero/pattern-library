@@ -8,13 +8,11 @@
 @mixin float($dimension) {
   @if index((inline-start, inline-end), $dimension) {
     @include logical-property(float, $dimension);
-  } @else if index((inherit,initial,unset,none), $dimension) {
+  } @else if index((inherit, initial, unset, none), $dimension) {
     float: $dimension;
   } @else if length($dimension) > 1 {
     @include _error("has more than one dimension");
-  } @else if $dimension == "" {
-    @include _error("has no dimension");
-  } @else if index((left,right), $dimension) {
+  } @else if index((left, right), $dimension) {
     @include _error("'#{$dimension}' is a physical dimension, use its logical equivilant");
   } @else {
     @include _error("has unknown dimension '#{$dimension}'");
