@@ -18,6 +18,8 @@ contentHeader:
           text: Plant Biology
       - content:
           text: Neuroscience
+      - content:
+          text: Structural Biology and Molecular Biophysics
   meta:
     attributes:
       aria-label: Publication details

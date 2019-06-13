@@ -29,11 +29,11 @@
 .tag-list__list--single-line {
   @include truncate-with-ellipsis();
 
-  --inline-size: calc(100vw - 2 * var(--GRID-EDGE-SPACE) - #{$contentHeader-downloadIcon-inline_size__default});
-  @include inline-size(calc(100vw - 2 * #{$grid-edge_space-medium} - #{$contentHeader-downloadIcon-inline_size__default}));
+  --inline-size: calc(100vw - (2 * (var(--GRID-EDGE-SPACE) + #{$contentHeader-downloadIcon-inline_size__default})));
+  @include inline-size(calc(100vw - (2 * (#{$grid-edge_space-medium} + #{$contentHeader-downloadIcon-inline_size__default}))));
   @include mq($from: medium) {
-    --inline-size: calc(100vw - 2 * var(--GRID-EDGE-SPACE) - #{$contentHeader-downloadIcon-inline_size__medium});
-    @include inline-size(calc(100vw - 2 * #{$grid-edge_space-large} - #{$contentHeader-downloadIcon-inline_size__medium}));
+    --inline-size: calc(100vw - (2 * (var(--GRID-EDGE-SPACE) + #{$contentHeader-downloadIcon-inline_size__medium})));
+    @include inline-size(calc(100vw - (2 * (#{$grid-edge_space-large} + #{$contentHeader-downloadIcon-inline_size__medium}))));
   }
 
   @supports (--name: value) {
