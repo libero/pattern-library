@@ -7,6 +7,12 @@
 
 .tag-list {
   @include block-spacing();
+
+  .content-header & {
+    display: flex;
+    justify-content: space-around;
+  }
+
 }
 
 .tag-list__title {
@@ -17,6 +23,7 @@
 .tag-list__list {
   @include list-style-none();
   @include label-tag-typography();
+  @include margin(0, block-end);
 }
 
 .tag-list__list--single-line {
