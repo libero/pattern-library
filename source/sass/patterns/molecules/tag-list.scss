@@ -21,15 +21,15 @@
 .tag-list__list--single-line {
   @include truncate-with-ellipsis();
 
-  --width: calc(100% - #{$contentHeader-downloadIcon-width__default});
-  width: calc(100% - #{$contentHeader-downloadIcon-width__default});
+  --inline-size: calc(100% - #{$contentHeader-downloadIcon-inline_size__default});
+  @include inline-size(calc(100% - #{$contentHeader-downloadIcon-inline_size__default}));
   @include mq($from: medium) {
-    --width: 100%;
-    width: 100%;
+    --inline-size: 100%;
+    @include inline-size(100%);
   }
 
   @supports (--name: value) {
-    width: var(--width);
+    @include inline-size(var(--inline-size));
   }
 
 }
