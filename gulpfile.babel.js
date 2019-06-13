@@ -253,7 +253,7 @@ const lintSass = () => {
     .pipe(postcss(processors, {syntax: syntaxScss}));
 };
 
-export const testSass = () =>
+const testSass = () =>
   gulp.src(config.files.test.sassTestsEntryPoint)
     .pipe(mocha({reporter: 'spec'}));
 
