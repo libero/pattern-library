@@ -1,0 +1,10 @@
+attributes:
+  aria-label: Authors of this article
+items:
+  - attributes:
+      href: '#'
+    text: Author 1
+  - text: Author 2
+  - attributes:
+      href: '#'
+    text: Author 3

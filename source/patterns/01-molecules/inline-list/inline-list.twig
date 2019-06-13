@@ -1,0 +1,17 @@
+{%- import 'atoms-html' as html -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['inline-list']) }) -%}
+
+<ol {{- html.attributes(attributes) -}}>
+  {%- for item in items -%}
+
+    {%- with item|merge({html: html}) only -%}
+      {%- set attributes = attributes|default({}) -%}
+      <li {{- html.attributes(attributes) -}}>
+        {%- block item -%}
+          {%- include 'atoms-link' -%}
+        {%- endblock item -%}
+      </li>
+    {%- endwith -%}
+  {%- endfor -%}
+</ol>
