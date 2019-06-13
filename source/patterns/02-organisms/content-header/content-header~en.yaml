@@ -3,3 +3,4 @@ contentTitle:
 downloadIconLink:
   attributes:
     href: '#'
+    aria-label: Download the PDF for this article

@@ -10,6 +10,7 @@ contentHeader:
   downloadIconLink:
     attributes:
       href: '#'
+      aria-label: この記事のPDFをダウンロードする
   contentTitle:
     text: 中国のジュラ紀からの予期せぬ非虫歯の蔓延した花
   categories:

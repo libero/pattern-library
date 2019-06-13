@@ -5,3 +5,4 @@ contentTitle:
 downloadIconLink:
   attributes:
     href: '#'
+    aria-label: この記事のPDFをダウンロードする

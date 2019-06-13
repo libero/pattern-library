@@ -7,3 +7,4 @@ downloadIconLink:
   attributes:
     dir: rtl
     href: '#'
+    aria-label: قم بتنزيل ملف PDF لهذا المقال
