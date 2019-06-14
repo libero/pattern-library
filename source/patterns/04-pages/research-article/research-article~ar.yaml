@@ -43,23 +43,43 @@ contentHeader:
       aria-label: مؤلفو هذا المقال
     items:
       - content:
-          attributes:
-            href: '#'
-          text: المؤلف 1
+          text: جابر عادل
       - content:
-          text: المؤلف 2
+          text: مؤمن ياسر
       - content:
-          attributes:
-            href: '#'
-          text: المؤلف 3
+          text: هشام عادل
+      - content:
+          text: مروة عبدالمنعم
+      - content:
+          text: مي حسين
+      - content:
+          text: نهي محمود
+      - content:
+          text: مروة عبدالمنعم
+      - content:
+          text: عبير الروقي
+      - content:
+          text: وليد النفيسة
+      - content:
+          text: سلطان الكاف
+      - content:
+          text: رنا الروقي
   affiliations:
     attributes:
       aria-label: الكاتب الانتماءات
     items:
       - content:
-          text: الانتماء 1
+          text: الأكاديمية الصينية للعلوم ، الصين
       - content:
-          text: الانتماء 2
+          text: جامعة فيجو ، اسبانيا
+      - content:
+          text: حدائق بريسبان النباتية ، أستراليا
+      - content:
+          text: جامعة فوجيان للزراعة والغابات ، الصين
+      - content:
+          text: المسح الجيولوجي الصيني ، الصين
+      - content:
+          text: جامعة نانجينغ العادية ، الصين
 
 body:
   - template: molecules-section
