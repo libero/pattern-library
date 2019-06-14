@@ -43,8 +43,12 @@
 }
 
 .tag-list__item {
-  display: inline;
   @include label-tag-typography();
+  display: inline-block;
+
+  .tag-list__list--single-line & {
+    display: inline;
+  }
 
   &:after {
     display: inline;
