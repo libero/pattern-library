@@ -2,6 +2,10 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['inline-list']) }) -%}
 
+{%- if small|default(false) -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['inline-list--small']) }) -%}
+{%- endif -%}
+
 <ol {{- html.attributes(attributes) }}>
 
   {%- for item in items -%}
