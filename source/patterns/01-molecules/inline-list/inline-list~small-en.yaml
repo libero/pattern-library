@@ -3,9 +3,6 @@ attributes:
   class: ['inline-list--small']
 items:
   - content:
-      link:
-        text: Affiliation 1
-
+      text: Affiliation 1
   - content:
-      link:
-        text: Affiliation 2
+      text: Affiliation 2
