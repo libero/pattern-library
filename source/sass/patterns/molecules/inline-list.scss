@@ -16,7 +16,7 @@
     @include comma-separator();
   }
 
-  .inline-list--semi-colon-separated & {
+  .inline-list--alternative-separators & {
     &:after {
       content: ";\a0";
     }
