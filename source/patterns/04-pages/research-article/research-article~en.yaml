@@ -47,6 +47,7 @@ contentHeader:
             href: '#'
           text: Author 3
   affiliations:
+    semiColonSeparated: true
     attributes:
       aria-label: Author affiliations
     items:
