@@ -1,0 +1,36 @@
+@import "../../mixins/typography";
+
+.inline-list {
+  @include list-style-none();
+  font-family: $font-secondary;
+}
+
+.inline-list__item {
+  display: inline-block;
+  font-family: $font-secondary;
+
+  .inline-list--small & {
+    @include set-font-size-and-line-height(scale(-1));
+  }
+
+  .inline-list & {
+    @include comma-separator();
+  }
+
+  .inline-list--semi-colon-separated & {
+    &:after {
+      content: ";\a0";
+    }
+  }
+
+}
+
+.inline-list__link:link,
+.inline-list__link:visited {
+  color: $color-text-normal;
+}
+
+.inline-list__link:hover,
+.inline-list__link:active {
+  color: $color-primary-normal;
+}
