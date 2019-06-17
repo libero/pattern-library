@@ -37,24 +37,43 @@ contentHeader:
       aria-label: Authors of this article
     items:
       - content:
-          attributes:
-            href: '#'
-          text: Author 1
+          text: Andrea Campbell
       - content:
-          text: Author 2
+          text: Raymond Clark
       - content:
-          attributes:
-            href: '#'
-          text: Author 3
+          text: Harry Stanley
+      - content:
+          text: Rebecca Hicks
+      - content:
+          text: Rose Silva
+      - content:
+          text: Ashley Moreno
+      - content:
+          text: Diana Ramos
+      - content:
+          text: Kathleen Jacobs
+      - content:
+          text: Judy Willis
+      - content:
+          text: Helen Walters
+      - content:
+          text: Lisa Lawson
   affiliations:
-    semiColonSeparated: true
     attributes:
       aria-label: Author affiliations
     items:
       - content:
-          text: Affiliation 1
+          text: Chinese Academy of Sciences, China
       - content:
-          text: Affiliation 2
+          text: Universidad de Vigo, Spain
+      - content:
+          text: Brisbane Botanical Gardens Mt Coot-tha, Australia
+      - content:
+          text: Fujian Agriculture and Forestry University, China
+      - content:
+          text: China Geological Survey, China
+      - content:
+          text: Nanjing Normal University, China
 
 body:
   - template: molecules-section
