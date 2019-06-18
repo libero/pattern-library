@@ -126,7 +126,6 @@
 @mixin list-separator($separator: default) {
   @if $separator == default {
     &:after {
-      display: inline;
       content: ",\a0";
     }
 
