@@ -123,18 +123,24 @@
   overflow-x: auto;
 }
 
-@mixin comma-separator() {
-  &:after {
-    display: inline;
-    content: ",\a0";
-  }
+@mixin list-separator($separator: default) {
+  @if $separator == default {
+    &:after {
+      display: inline;
+      content: ",\a0";
+    }
 
-  &:lang(ar):after {
-    content: "،\a0";
-  }
+    &:lang(ar):after {
+      content: "،\a0";
+    }
 
-  &:lang(ja):after {
-    content: "、";
+    &:lang(ja):after {
+      content: "、";
+    }
+  } @else if $separator == alternative {
+    &:after {
+      content: ";\a0";
+    }
   }
 
   &:last-child:after {

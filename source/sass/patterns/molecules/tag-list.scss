@@ -23,7 +23,7 @@
 .tag-list__item {
   display: inline-block;
   @include label-tag-typography();
-  @include comma-separator();
+  @include list-separator();
 }
 
 .tag-list__link {

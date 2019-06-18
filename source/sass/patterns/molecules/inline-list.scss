@@ -14,13 +14,11 @@
   font-family: $font-secondary;
 
   .inline-list & {
-    @include comma-separator();
+    @include list-separator();
   }
 
   .inline-list--alternative-separators & {
-    &:after {
-      content: ";\a0";
-    }
+    @include list-separator(alternative);
   }
 
 }
