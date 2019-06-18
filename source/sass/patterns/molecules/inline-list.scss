@@ -5,13 +5,13 @@
   overflow-y: hidden;
 }
 
+.inline-list--small {
+  @include set-font-size-and-line-height(scale(-1));
+}
+
 .inline-list__item {
   display: inline-block;
   font-family: $font-secondary;
-
-  .inline-list--small & {
-    @include set-font-size-and-line-height(scale(-1));
-  }
 
   .inline-list & {
     @include comma-separator();
