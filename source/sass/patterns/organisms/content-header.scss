@@ -133,7 +133,6 @@
   @include inset(0, inline-end);
   @include inset($baselinegrid-space-small, block-start);
   position: absolute;
-  @include float(inline-end);
 
   @include mq($from: medium) {
     @include inset(14px, block-start);

@@ -4,18 +4,3 @@
 @mixin inset($sizes, $dimension: "") {
   @include _spacing($sizes, inset, $dimension);
 }
-
-@mixin float($dimension) {
-  @if index((inline-start, inline-end), $dimension) {
-    @include logical-property(float, $dimension);
-  } @else if index((inherit, initial, unset, none), $dimension) {
-    float: $dimension;
-  } @else if length($dimension) > 1 {
-    @include _error("has more than one dimension");
-  } @else if index((left, right), $dimension) {
-    @include _error("'#{$dimension}' is a physical dimension, use its logical equivilant");
-  } @else {
-    @include _error("has unknown dimension '#{$dimension}'");
-  }
-
-}

@@ -70,29 +70,6 @@
 
   @if length($property-name) > 2 {
     @include _error("Expected at most two property name parts");
-  } @else if $property-name == float {
-
-    @if $dimension == inline-start {
-      @include _when-left-to-right() {
-        float: left;
-      }
-      @include _when-right-to-left() {
-        float: right;
-      }
-      @include _when-logical() {
-        float: $dimension;
-      }
-    } @else if $dimension == inline-end {
-      @include _when-left-to-right() {
-        float: right;
-      }
-      @include _when-right-to-left() {
-        float: left;
-      }
-      @include _when-logical() {
-        float: $dimension;
-      }
-    }
   } @else if $dimension == inline {
 
     @if type-of($arguments) == "list" and length($arguments) > 1 {
