@@ -138,12 +138,12 @@
       content: "、";
     }
   } @else if $separator == alternative {
-    &:after {
+    html[lang][lang] &:after {
       content: ";\a0";
     }
   }
 
-  &:last-child:after {
+  html[lang][lang] &:last-child:after {
     content: "";
   }
 }
