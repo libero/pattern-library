@@ -1,6 +1,8 @@
 @import "types";
 @import "validation";
 
+// stylelint-disable csstools/use-logical
+
 @mixin _when-left-to-right {
   html[dir="ltr"] &:not([dir]),
   &[dir="ltr"] {
@@ -72,20 +74,20 @@
 
     @if $dimension == inline-start {
       @include _when-left-to-right() {
-        float: left; // stylelint-disable-line csstools/use-logical
+        float: left;
       }
       @include _when-right-to-left() {
-        float: right; // stylelint-disable-line csstools/use-logical
+        float: right;
       }
       @include _when-logical() {
         float: $dimension;
       }
     } @else if $dimension == inline-end {
       @include _when-left-to-right() {
-        float: right; // stylelint-disable-line csstools/use-logical
+        float: right;
       }
       @include _when-right-to-left() {
-        float: left; // stylelint-disable-line csstools/use-logical
+        float: left;
       }
       @include _when-logical() {
         float: $dimension;
