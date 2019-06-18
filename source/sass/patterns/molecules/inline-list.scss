@@ -25,12 +25,6 @@
 
 }
 
-.inline-list__link:link,
-.inline-list__link:visited {
-  color: $color-text-normal;
-}
-
-.inline-list__link:hover,
-.inline-list__link:active {
-  color: $color-primary-normal;
+.inline-list__link {
+  @include covert-link();
 }
