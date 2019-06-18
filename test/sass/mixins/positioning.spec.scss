@@ -14,6 +14,10 @@
       }
 
       @include expect {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         inset: 0;
       }
 
@@ -30,6 +34,14 @@
       }
 
       @include expect {
+        top: 16px;
+        top: 1rem;
+        right: 16px;
+        right: 1rem;
+        bottom: 16px;
+        bottom: 1rem;
+        left: 16px;
+        left: 1rem;
         inset: 16px;
         inset: 1rem;
       }
@@ -43,6 +55,10 @@
       }
 
       @include expect {
+        top: 1em;
+        right: 1em;
+        bottom: 1em;
+        left: 1em;
         inset: 1em;
       }
 
@@ -55,6 +71,14 @@
       }
 
       @include expect {
+        top: 16px;
+        top: 1rem;
+        right: 16px;
+        right: 1rem;
+        bottom: 16px;
+        bottom: 1rem;
+        left: 16px;
+        left: 1rem;
         inset: 16px;
         inset: 1rem;
       }
@@ -72,6 +96,14 @@
       }
 
       @include expect {
+        top: 32px;
+        top: 2rem;
+        right: 48px;
+        right: 3rem;
+        bottom: 32px;
+        bottom: 2rem;
+        left: 48px;
+        left: 3rem;
         inset: 32px 48px;
         inset: 2rem 3rem;
       }
@@ -85,6 +117,10 @@
       }
 
       @include expect {
+        top: 2em;
+        right: 3em;
+        bottom: 2em;
+        left: 3em;
         inset: 2em 3em;
       }
 
@@ -97,6 +133,14 @@
       }
 
       @include expect {
+        top: 32px;
+        top: 2rem;
+        right: 48px;
+        right: 3rem;
+        bottom: 32px;
+        bottom: 2rem;
+        left: 48px;
+        left: 3rem;
         inset: 32px 48px;
         inset: 2rem 3rem;
       }
@@ -114,6 +158,14 @@
       }
 
       @include expect {
+        top: 32px;
+        top: 2rem;
+        right: 48px;
+        right: 3rem;
+        bottom: 64px;
+        bottom: 4rem;
+        left: 48px;
+        left: 3rem;
         inset: 32px 48px 64px;
         inset: 2rem 3rem 4rem;
       }
@@ -127,6 +179,10 @@
       }
 
       @include expect {
+        top: 2em;
+        right: 3em;
+        bottom: 4em;
+        left: 3em;
         inset: 2em 3em 4em;
       }
 
@@ -139,6 +195,14 @@
       }
 
       @include expect {
+        top: 32px;
+        top: 2rem;
+        right: 48px;
+        right: 3rem;
+        bottom: 64px;
+        bottom: 4rem;
+        left: 48px;
+        left: 3rem;
         inset: 32px 48px 64px;
         inset: 2rem 3rem 4rem;
       }
@@ -156,6 +220,12 @@
       }
 
       @include expect {
+        top: 0;
+        right: 48px;
+        right: 3rem;
+        bottom: 0;
+        left: 48px;
+        left: 3rem;
         inset: 0 48px;
         inset: 0 3rem;
       }
@@ -169,6 +239,12 @@
       }
 
       @include expect {
+        top: 48px;
+        top: 3rem;
+        right: 0;
+        bottom: 48px;
+        bottom: 3rem;
+        left: 0;
         inset: 48px 0;
         inset: 3rem 0;
       }
@@ -182,6 +258,10 @@
       }
 
       @include expect {
+        top: 0;
+        right: 3em;
+        bottom: 0;
+        left: 3em;
         inset: 0 3em;
       }
 
@@ -194,6 +274,12 @@
       }
 
       @include expect {
+        top: 0;
+        right: 48px;
+        right: 3rem;
+        bottom: 0;
+        left: 48px;
+        left: 3rem;
         inset: 0 48px;
         inset: 0 3rem;
       }
@@ -211,6 +297,13 @@
       }
 
       @include expect {
+        top: 0;
+        right: 48px;
+        right: 3rem;
+        bottom: 128px;
+        bottom: 8rem;
+        left: 48px;
+        left: 3rem;
         inset: 0 48px 128px;
         inset: 0 3rem 8rem;
       }
@@ -224,6 +317,12 @@
       }
 
       @include expect {
+        top: 48px;
+        top: 3rem;
+        right: 0;
+        bottom: 128px;
+        bottom: 8rem;
+        left: 0;
         inset: 48px 0 128px;
         inset: 3rem 0 8rem;
       }
@@ -237,6 +336,13 @@
       }
 
       @include expect {
+        top: 48px;
+        top: 3rem;
+        right: 128px;
+        right: 8rem;
+        bottom: 0;
+        left: 128px;
+        left: 8rem;
         inset: 48px 128px 0;
         inset: 3rem 8rem 0;
       }
@@ -250,6 +356,10 @@
       }
 
       @include expect {
+        top: 3em;
+        right: 0;
+        bottom: 8em;
+        left: 0;
         inset: 3em 0 8em;
       }
 
@@ -262,6 +372,12 @@
       }
 
       @include expect {
+        top: 48px;
+        top: 3rem;
+        right: 0;
+        bottom: 128px;
+        bottom: 8rem;
+        left: 0;
         inset: 48px 0 128px;
         inset: 3rem 0 8rem;
       }
@@ -275,6 +391,10 @@
       }
 
       @include expect {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         inset: 0;
       }
 
@@ -293,14 +413,24 @@
       @include expect {
         html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
-          inset: 0 48px 128px 256px;
-          inset: 0 3rem 8rem 16rem;
+          top: 0;
+          right: 48px;
+          right: 3rem;
+          bottom: 128px;
+          bottom: 8rem;
+          left: 256px;
+          left: 16rem;
         }
 
         html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
-          inset: 0 256px 128px 48px;
-          inset: 0 16rem 8rem 3rem;
+          top: 0;
+          right: 256px;
+          right: 16rem;
+          bottom: 128px;
+          bottom: 8rem;
+          left: 48px;
+          left: 3rem;
         }
 
         html[dir][dir] & {
@@ -322,12 +452,18 @@
       @include expect {
         html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
-          inset: 0 3em 8em 16em;
+          top: 0;
+          right: 3em;
+          bottom: 8em;
+          left: 16em;
         }
 
         html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
-          inset: 0 16em 8em 3em;
+          top: 0;
+          right: 16em;
+          bottom: 8em;
+          left: 3em;
         }
 
         html[dir][dir] & {
@@ -349,14 +485,24 @@
       @include expect {
         html[dir="ltr"] &:not([dir]),
         &[dir="ltr"] {
-          inset: 0 48px 128px 256px;
-          inset: 0 3rem 8rem 16rem;
+          top: 0;
+          right: 48px;
+          right: 3rem;
+          bottom: 128px;
+          bottom: 8rem;
+          left: 256px;
+          left: 16rem;
         }
 
         html[dir="rtl"] &:not([dir]),
         &[dir="rtl"] {
-          inset: 0 256px 128px 48px;
-          inset: 0 16rem 8rem 3rem;
+          top: 0;
+          right: 256px;
+          right: 16rem;
+          bottom: 128px;
+          bottom: 8rem;
+          left: 48px;
+          left: 3rem;
         }
 
         html[dir][dir] & {
@@ -376,6 +522,10 @@
       }
 
       @include expect {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         inset: 0;
       }
 
