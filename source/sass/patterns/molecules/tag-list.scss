@@ -28,7 +28,7 @@
 
 .tag-list__list--single-line {
   @include truncate-with-ellipsis();
-  $_exclusion-zone: 1em;
+  $_exclusion-zone: 2rem;
   --inline-size: calc(100vw - #{$_exclusion-zone} - (2 * (var(--GRID-EDGE-SPACE) + #{$contentHeader-downloadIcon-inline_size__default})));
   @include inline-size(calc(100vw - #{$_exclusion-zone} - (2 * (#{$grid-edge_space-medium} + #{$contentHeader-downloadIcon-inline_size__default}))));
   @include mq($from: medium) {
