@@ -2,7 +2,6 @@ attributes:
   lang: ja
 contentTitle:
   text: コンテンツのタイトル
-downloadIconLink:
-  attributes:
-    href: '#'
-    aria-label: この記事のPDFをダウンロードする
+download:
+  href: '#'
+  aria-label: この記事のPDFをダウンロードする

@@ -47,9 +47,9 @@
 
     {%- endwith -%}
 
-    {%- if downloadIconLink is defined -%}
-      {%- with downloadIconLink|merge({html: html}) only -%}
-        {%- set attributes = attributes|default({})|merge({href: attributes.href, class: attributes.class|default([])|merge(['content-header__download_link']) }) -%}
+    {%- if download is defined -%}
+      {%- set attributes = download|merge({class: download.class|default([])|merge(['content-header__download_link']) }) -%}
+      {%- with download|merge({html: html, attributes: attributes}) only -%}
         <a {{ html.attributes(attributes) }}>
           <picture>
             <source srcset="{{asset('images/download-full.svg')}}" type="image/svg+xml" media="(min-width: 45.625em)">
