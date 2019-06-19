@@ -2,7 +2,6 @@
 
 .inline-list {
   @include list-style-none();
-  font-family: $font-secondary;
   overflow-y: hidden;
 }
 
