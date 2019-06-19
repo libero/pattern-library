@@ -143,6 +143,10 @@
       html[lang][lang] &:after {
         content: ";\a0";
       }
+
+      html[lang] &:lang(ar):after {
+        content: "\61b\a0";
+      }
     }
 
     html[lang][lang] &:last-child:after {
