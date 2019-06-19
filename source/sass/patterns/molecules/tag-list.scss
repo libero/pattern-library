@@ -7,12 +7,6 @@
 
 .tag-list {
   @include block-spacing();
-
-  .content-header & {
-    display: flex;
-    justify-content: space-around;
-  }
-
 }
 
 .tag-list__title {
@@ -28,18 +22,6 @@
 
 .tag-list__list--single-line {
   @include truncate-with-ellipsis();
-  $_exclusion-zone: 2rem;
-  --inline-size: calc(100vw - #{$_exclusion-zone} - (2 * (var(--GRID-EDGE-SPACE) + #{$contentHeader-downloadIcon-inline_size__default})));
-  @include inline-size(calc(100vw - #{$_exclusion-zone} - (2 * (#{$grid-edge_space-medium} + #{$contentHeader-downloadIcon-inline_size__default}))));
-  @include mq($from: medium) {
-    --inline-size: calc(100vw - #{$_exclusion-zone} - (2 * (var(--GRID-EDGE-SPACE) + #{$contentHeader-downloadIcon-inline_size__medium})));
-    @include inline-size(calc(100vw - #{$_exclusion-zone} - (2 * (#{$grid-edge_space-large} + #{$contentHeader-downloadIcon-inline_size__medium}))));
-  }
-
-  @supports (--name: value) {
-    @include inline-size(var(--inline-size));
-  }
-
 }
 
 .tag-list__item {
