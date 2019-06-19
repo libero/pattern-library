@@ -110,7 +110,7 @@
         &:lang(ja):after {
           content: "、";
         }
-        html[lang][lang] &:last-child:after {
+        html[lang] &:last-child:after {
           content: "";
         }
       }
@@ -134,7 +134,7 @@
         &:lang(ja):after {
           content: "、";
         }
-        html[lang][lang] &:last-child:after {
+        html[lang] &:last-child:after {
           content: "";
         }
       }
@@ -151,7 +151,7 @@
       }
 
       @include expect {
-        html[lang][lang] &:after {
+        html[lang] &:after {
           content: ";\a0";
         }
         html[lang] &:lang(ar):after {

@@ -139,18 +139,24 @@
       &:lang(ja):after {
         content: "、";
       }
+
+      html[lang] &:last-child:after {
+        content: "";
+      }
+
     } @else if $separator == alternative {
-      html[lang][lang] &:after {
+      html[lang] &:after {
         content: ";\a0";
       }
 
       html[lang] &:lang(ar):after {
         content: "\61b\a0";
       }
-    }
 
-    html[lang][lang] &:last-child:after {
-      content: "";
+      html[lang][lang] &:last-child:after {
+        content: "";
+      }
+
     }
 
   }
