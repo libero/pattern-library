@@ -26,27 +26,11 @@
 
 .tag-list__item {
   @include label-tag-typography();
+  @include list-separator();
   display: inline-block;
 
   .tag-list__list--single-line & {
     display: inline;
-  }
-
-  &:after {
-    display: inline;
-    content: ",\a0";
-  }
-
-  &:lang(ar):after {
-    content: "،\a0";
-  }
-
-  &:lang(ja):after {
-    content: "、";
-  }
-
-  &:last-child:after {
-    content: "";
   }
 }
 
