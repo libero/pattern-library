@@ -6,14 +6,18 @@
 
   {%- block body -%}
 
-    {%- with categories|default({}) only -%}
+    {%- with {categories: categories|default({}), html: html} only -%}
       {%- block categories -%}
 
-        <div class="content-header__categories">
-          {%- if items|default([])|length -%}
-            {%- include 'molecules-tag-list' with {list: _context|merge({singleLine: true})} only -%}
-          {%- endif -%}
-        </div>
+        {%- if categories.items|default([])|length -%}
+
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__categories']) }) -%}
+
+          <div {{ html.attributes(attributes) }}>
+            {%- include 'molecules-tag-list' with {list: categories|merge({singleLine: true})} only -%}
+          </div>
+
+        {%- endif -%}
 
       {%- endblock categories -%}
     {%- endwith -%}
