@@ -139,21 +139,21 @@
       content: "、";
     }
 
-    html[lang] &:last-child:after {
+    &:last-child:after {
       content: "";
     }
 
   } @else if $separator == alternative {
 
-    html[lang] &:after {
+    &:after {
       content: ";\a0";
     }
 
-    html[lang] &:lang(ar):after {
+    &:lang(ar):after {
       content: "\61b\a0";
     }
 
-    html[lang][lang] &:last-child:after {
+    &:last-child:after {
       content: "";
     }
 
