@@ -42,7 +42,6 @@
         bottom: 1rem;
         left: 16px;
         left: 1rem;
-        inset: 16px;
         inset: 1rem;
       }
 
@@ -79,7 +78,6 @@
         bottom: 1rem;
         left: 16px;
         left: 1rem;
-        inset: 16px;
         inset: 1rem;
       }
 
@@ -104,7 +102,6 @@
         bottom: 2rem;
         left: 48px;
         left: 3rem;
-        inset: 32px 48px;
         inset: 2rem 3rem;
       }
 
@@ -141,7 +138,6 @@
         bottom: 2rem;
         left: 48px;
         left: 3rem;
-        inset: 32px 48px;
         inset: 2rem 3rem;
       }
 
@@ -166,7 +162,6 @@
         bottom: 4rem;
         left: 48px;
         left: 3rem;
-        inset: 32px 48px 64px;
         inset: 2rem 3rem 4rem;
       }
 
@@ -203,7 +198,6 @@
         bottom: 4rem;
         left: 48px;
         left: 3rem;
-        inset: 32px 48px 64px;
         inset: 2rem 3rem 4rem;
       }
 
@@ -226,7 +220,6 @@
         bottom: 0;
         left: 48px;
         left: 3rem;
-        inset: 0 48px;
         inset: 0 3rem;
       }
 
@@ -245,7 +238,6 @@
         bottom: 48px;
         bottom: 3rem;
         left: 0;
-        inset: 48px 0;
         inset: 3rem 0;
       }
 
@@ -280,7 +272,6 @@
         bottom: 0;
         left: 48px;
         left: 3rem;
-        inset: 0 48px;
         inset: 0 3rem;
       }
 
@@ -304,7 +295,6 @@
         bottom: 8rem;
         left: 48px;
         left: 3rem;
-        inset: 0 48px 128px;
         inset: 0 3rem 8rem;
       }
 
@@ -323,7 +313,6 @@
         bottom: 128px;
         bottom: 8rem;
         left: 0;
-        inset: 48px 0 128px;
         inset: 3rem 0 8rem;
       }
 
@@ -343,7 +332,6 @@
         bottom: 0;
         left: 128px;
         left: 8rem;
-        inset: 48px 128px 0;
         inset: 3rem 8rem 0;
       }
 
@@ -378,7 +366,6 @@
         bottom: 128px;
         bottom: 8rem;
         left: 0;
-        inset: 48px 0 128px;
         inset: 3rem 0 8rem;
       }
 
@@ -434,10 +421,8 @@
         }
 
         html[dir][dir] & {
-          inset-block-start: 0;
-          inset-block-end: 8rem;
-          inset-inline-start: 16rem;
-          inset-inline-end: 3rem;
+          inset-block: 0 8rem;
+          inset-inline: 16rem 3rem;
         }
       }
 
@@ -467,10 +452,8 @@
         }
 
         html[dir][dir] & {
-          inset-block-start: 0;
-          inset-block-end: 8em;
-          inset-inline-start: 16em;
-          inset-inline-end: 3em;
+          inset-block: 0 8em;
+          inset-inline: 16em 3em;
         }
       }
 
@@ -506,10 +489,8 @@
         }
 
         html[dir][dir] & {
-          inset-block-start: 0;
-          inset-block-end: 8rem;
-          inset-inline-start: 16rem;
-          inset-inline-end: 3rem;
+          inset-block: 0 8rem;
+          inset-inline: 16rem 3rem;
         }
       }
 
@@ -642,8 +623,7 @@
         }
 
         html[dir][dir] & {
-          inset-inline-start: 1rem;
-          inset-inline-end: 2rem;
+          inset-inline: 1rem 2rem;
         }
       }
 
@@ -668,8 +648,7 @@
         }
 
         html[dir][dir] & {
-          inset-inline-start: 1em;
-          inset-inline-end: 2em;
+          inset-inline: 1em 2em;
         }
       }
 
@@ -698,8 +677,7 @@
         }
 
         html[dir][dir] & {
-          inset-inline-start: 1rem;
-          inset-inline-end: 2rem;
+          inset-inline: 1rem 2rem;
         }
       }
 
@@ -742,8 +720,7 @@
         }
 
         html[dir][dir] & {
-          inset-inline-start: 0;
-          inset-inline-end: 2rem;
+          inset-inline: 0 2rem;
         }
       }
 
@@ -770,8 +747,7 @@
         }
 
         html[dir][dir] & {
-          inset-inline-start: 1rem;
-          inset-inline-end: 0;
+          inset-inline: 1rem 0;
         }
       }
 
@@ -1124,8 +1100,7 @@
         top: 1rem;
         bottom: 32px;
         bottom: 2rem;
-        inset-block-start: 1rem;
-        inset-block-end: 2rem;
+        inset-block: 1rem 2rem;
       }
 
     }
@@ -1139,8 +1114,7 @@
       @include expect {
         top: 1em;
         bottom: 2em;
-        inset-block-start: 1em;
-        inset-block-end: 2em;
+        inset-block: 1em 2em;
       }
 
     }
@@ -1156,8 +1130,7 @@
         top: 1rem;
         bottom: 32px;
         bottom: 2rem;
-        inset-block-start: 1rem;
-        inset-block-end: 2rem;
+        inset-block: 1rem 2rem;
       }
 
     }
