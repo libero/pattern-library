@@ -1,8 +1,6 @@
 @import "types";
 @import "validation";
 
-// stylelint-disable csstools/use-logical
-
 @mixin _when-left-to-right {
   html[dir="ltr"] &:not([dir]),
   &[dir="ltr"] {
