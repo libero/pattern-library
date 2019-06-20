@@ -1,6 +1,7 @@
 siteHeader:
   logo:
     href: '#'
+
 contentHeader:
   download:
     href: '#'
@@ -15,10 +16,6 @@ contentHeader:
           text: Evolutionary Biology
       - content:
           text: Plant Biology
-      - content:
-          text: Neuroscience
-      - content:
-          text: Structural Biology and Molecular Biophysics
   meta:
     attributes:
       aria-label: Publication details

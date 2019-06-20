@@ -21,14 +21,6 @@ contentHeader:
           text: علم الأحياء التطوري
       - content:
           text: علم الأحياء النباتية
-      - content:
-          text: علم الأحياء التطوري
-      - content:
-          text: علم الأحياء النباتية
-      - content:
-          text: علم الأحياء التطوري
-      - content:
-          text: علم الأحياء النباتية
   meta:
     attributes:
       aria-label: تفاصيل المنشور

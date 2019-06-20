@@ -50,7 +50,7 @@
 @function _get-property-prefix($property-name, $dimension) {
   $physical: (top, right, bottom, left);
   @if $property-name == inset and index($physical, $dimension) {
-    @return null;
+    @return "";
   }
   @return "#{$property-name}-";
 }
@@ -66,7 +66,8 @@
 
   @return "#{_get-property-prefix(nth($parts, 1), $dimension)}#{$dimension}-#{nth($parts, 2)}";
 }
-@mixin logical-property($property-name, $dimension, $arguments: (), $to-rem: true) {
+
+@mixin logical-property($property-name, $dimension, $arguments, $to-rem: true) {
 
   @if length($property-name) > 2 {
     @include _error("Expected at most two property name parts");
@@ -210,7 +211,7 @@
 
     @if length($property-name) > 1 {
       @include _error("Expected a single property name");
-    } @else if not index(margin padding inset, $property-name) {
+    } @else if not index(inset margin padding, $property-name) {
       @include _error("Can't combine block and inline for '#{$property-name}'");
     } @else {
 
@@ -221,25 +222,32 @@
         $inlineStart: if(length($arguments) == 4, nth($arguments, 4), $inlineEnd);
 
         @if $blockStart == $blockEnd and $blockStart == $inlineStart and $blockStart == $inlineEnd {
+
           @if $property-name == inset {
-            @include _maybe-rem($to-rem, (top: $blockStart, right: $blockStart, bottom: $blockStart, left: $blockStart, inset: $blockStart));
+            @include _maybe-rem($to-rem, (top: $blockStart, right: $blockStart, bottom: $blockStart, left: $blockStart));
+            @include _maybe-rem($to-rem, inset, $blockStart);
           } @else {
             @include _maybe-rem($to-rem, $property-name, $blockStart);
           }
+
         } @else if $blockStart == $blockEnd and $inlineStart == $inlineEnd {
+
           @if $property-name == inset {
             @include _maybe-rem($to-rem, (top: $blockStart, right: $inlineStart, bottom: $blockStart, left: $inlineStart));
             @include _maybe-rem($to-rem, inset, $blockStart $inlineStart);
           } @else {
             @include _maybe-rem($to-rem, $property-name, $blockStart $inlineStart);
           }
+
         } @else if $inlineStart == $inlineEnd {
+
           @if $property-name == inset {
             @include _maybe-rem($to-rem, (top: $blockStart, right: $inlineStart, bottom: $blockEnd, left: $inlineStart));
             @include _maybe-rem($to-rem, inset, $blockStart $inlineStart $blockEnd);
           } @else {
             @include _maybe-rem($to-rem, $property-name, $blockStart $inlineEnd $blockEnd);
           }
+
         } @else {
 
           @include _when-left-to-right() {
