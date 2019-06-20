@@ -124,41 +124,41 @@
 }
 
 @mixin list-separator($separator: default) {
-  @if not index(default alternative, $separator) {
-    @include _error("Unknown list separator '#{$separator}'");
-  } @else {
-    @if $separator == default {
-      &:after {
-        content: ",\a0";
-      }
 
-      &:lang(ar):after {
-        content: "،\a0";
-      }
+  @if $separator == default {
 
-      &:lang(ja):after {
-        content: "、";
-      }
-
-      html[lang] &:last-child:after {
-        content: "";
-      }
-
-    } @else if $separator == alternative {
-      html[lang] &:after {
-        content: ";\a0";
-      }
-
-      html[lang] &:lang(ar):after {
-        content: "\61b\a0";
-      }
-
-      html[lang][lang] &:last-child:after {
-        content: "";
-      }
-
+    &:after {
+      content: ",\a0";
     }
 
+    &:lang(ar):after {
+      content: "،\a0";
+    }
+
+    &:lang(ja):after {
+      content: "、";
+    }
+
+    html[lang] &:last-child:after {
+      content: "";
+    }
+
+  } @else if $separator == alternative {
+
+    html[lang] &:after {
+      content: ";\a0";
+    }
+
+    html[lang] &:lang(ar):after {
+      content: "\61b\a0";
+    }
+
+    html[lang][lang] &:last-child:after {
+      content: "";
+    }
+
+  } @else {
+    @include _error("Unknown list separator '#{$separator}'");
   }
 
 }
