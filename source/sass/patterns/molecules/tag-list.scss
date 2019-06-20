@@ -7,6 +7,9 @@
 
 .tag-list {
   @include block-spacing();
+  display: table;
+  table-layout: fixed;
+  width: 100%;
 }
 
 .tag-list__title {
