@@ -53,12 +53,14 @@
 
       {%- set download = download|merge({class: download.class|default([])|merge(['content-header__download_link']) }) -%}
 
-      <a {{ html.attributes(download) }}>
-        <picture>
-          <source srcset="{{ asset('images/download-full.svg') }}" type="image/svg+xml" media="(min-width: 45.625em)">
-          <img src="{{ asset('images/download.svg') }}" class="content-header__download_icon" alt="">
-        </picture>
-      </a>
+      <div class="content-header__download">
+        <a {{ html.attributes(download) }}>
+          <picture>
+            <source srcset="{{ asset('images/download-full.svg') }}" type="image/svg+xml" media="(min-width: 45.625em)">
+            <img src="{{ asset('images/download.svg') }}" class="content-header__download_icon" alt="">
+          </picture>
+        </a>
+      </div>
 
     {%- endif -%}
 

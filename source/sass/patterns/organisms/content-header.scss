@@ -131,21 +131,28 @@
 }
 
 .content-header__categories {
-  @include margin(rem($contentHeader-downloadIcon-inline_size__default) + 1rem, inline);
+  @include margin(1.5 * $contentHeader-downloadIcon-inline_size__default, inline);
 
   @include mq($from: medium) {
-    @include margin(rem($contentHeader-downloadIcon-inline_size__medium) + 2rem, inline);
+    @include margin(1.5 * $contentHeader-downloadIcon-inline_size__medium, inline);
   }
 }
 
-.content-header__download_link {
+.content-header__download {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: absolute;
+  @include block-size($baselinegrid-space-small * 3);
+  @include inset(0, block-start);
   @include inset(0, inline-end);
-  @include inset($baselinegrid-space-small, block-start);
+}
+
+.content-header__download_icon {
+  display: block;
   @include inline-size($contentHeader-downloadIcon-inline_size__default);
 
   @include mq($from: medium) {
-    @include inset(14px, block-start);
     @include inline-size($contentHeader-downloadIcon-inline_size__medium);
   }
 }
