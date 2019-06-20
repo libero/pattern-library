@@ -49,20 +49,26 @@
 
     {%- endwith -%}
 
-    {%- if download is defined -%}
+    {%- with {download: download|default({}), html: html} only -%}
+      {%- block download -%}
 
-      {%- set download = download|merge({class: download.class|default([])|merge(['content-header__download_link']) }) -%}
+        {%- if download.href is defined -%}
 
-      <div class="content-header__download">
-        <a {{ html.attributes(download) }}>
-          <picture>
-            <source srcset="{{ asset('images/download-full.svg') }}" type="image/svg+xml" media="(min-width: 45.625em)">
-            <img src="{{ asset('images/download.svg') }}" class="content-header__download_icon" alt="">
-          </picture>
-        </a>
-      </div>
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__download']) }) -%}
 
-    {%- endif -%}
+          <div {{ html.attributes(attributes) }}>
+            <a {{ html.attributes(download) }}>
+              <picture>
+                <source srcset="{{ asset('images/download-full.svg') }}" type="image/svg+xml" media="(min-width: 45.625em)">
+                <img src="{{ asset('images/download.svg') }}" class="content-header__download_icon" alt="">
+              </picture>
+            </a>
+          </div>
+
+        {%- endif -%}
+
+      {%- endblock download -%}
+    {%- endwith -%}
 
     {%- with authors|default({}) only -%}
       {%- block authors -%}
