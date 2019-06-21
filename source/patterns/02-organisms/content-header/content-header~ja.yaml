@@ -3,8 +3,9 @@ attributes:
 contentTitle:
   text: コンテンツのタイトル
 download:
-  href: '#'
-  aria-label: この記事のPDFをダウンロードする
+  link:
+    href: '#'
+  alt: この記事のPDFをダウンロードする
 authors:
   attributes:
     aria-label: この記事の著者

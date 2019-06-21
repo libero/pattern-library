@@ -8,8 +8,9 @@ siteHeader:
 
 contentHeader:
   download:
-    href: '#'
-    aria-label: Скачать PDF для этой статьи
+    link:
+      href: '#'
+    alt: Скачать PDF для этой статьи
   contentTitle:
     text: Неожиданный некарпеллитный эпигиновый цветок из китайской юры
   categories:

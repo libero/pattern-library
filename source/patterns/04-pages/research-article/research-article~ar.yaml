@@ -9,8 +9,9 @@ siteHeader:
 
 contentHeader:
   download:
-    href: '#'
-    aria-label: قم بتنزيل ملف PDF لهذا المقال
+    link:
+      href: '#'
+    alt: قم بتنزيل ملف PDF لهذا المقال
   contentTitle:
     text: زهرة غير منتجة غير منتجة من العصر الجوراسي في الصين
   categories:
