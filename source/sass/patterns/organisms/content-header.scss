@@ -144,10 +144,6 @@
   @include inset(0, inline-end);
   @include block-spacing($start: $baselinegrid-space-small, $end: 0);
 
-  @include mq($from: medium) {
-    @include block-spacing($start: $baselinegrid-space-extra_small, $end: 0);
-  }
-
   @supports (display: flex) {
     display: flex;
     @include block-size($baselinegrid-space-small * 3);
