@@ -139,13 +139,23 @@
 }
 
 .content-header__download {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   position: absolute;
-  @include block-size($baselinegrid-space-small * 3);
   @include inset(0, block-start);
   @include inset(0, inline-end);
+  @include block-spacing($start: $baselinegrid-space-small, $end: 0);
+
+  @include mq($from: medium) {
+    @include block-spacing($start: $baselinegrid-space-extra_small, $end: 0);
+  }
+
+  @supports (display: flex) {
+    display: flex;
+    @include block-size($baselinegrid-space-small * 3);
+    @include block-spacing($end: 0);
+  }
+
+  flex-direction: column;
+  justify-content: center;
 }
 
 .content-header__download_icon {
