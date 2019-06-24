@@ -26,21 +26,14 @@ $_info-bars: (
   color: $color-text-reverse;
   font-family: $font-secondary;
   font-weight: 600;
+  text-align: center;
   @include set-font-size-and-line-height(scale(-1));
   @include padding($baselinegrid-space-extra_small $_info-bar-gutter);
-  text-align: center;
 
   a {
     color: inherit;
     text-decoration: underline;
   }
-}
-
-.info-bar__text {
-  background-position: 0 50%;
-  background-repeat: no-repeat;
-  display: inline-block;
-  @include padding($_info-bar-inline-offset-with-image, inline-start);
 }
 
 @each $info-bar in $_info-bars {
@@ -52,8 +45,10 @@ $_info-bars: (
     $image: map-get($info-bar, image);
     @if $image {
       & .info-bar__text {
-        background-image: url("../images/#{map_get($image, file)}");
-        background-size: #{map_get($image, inline-size)};
+        // Comes into play when the image is taller than the text
+        display: inline-block;
+        background: url("../images/#{map_get($image, file)}") 0 center/#{map_get($image, inline-size)} no-repeat;
+        @include padding($_info-bar-inline-offset-with-image, inline-start);
       }
     } @else {
       & .info-bar__text {
