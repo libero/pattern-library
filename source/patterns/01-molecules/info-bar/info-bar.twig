@@ -7,15 +7,7 @@
     {%- set infoBar = infoBar|default({})|merge({content: content|default({}), html: html}) -%}
     {%- with infoBar only -%}
       {%- block infoBar -%}
-        {% spaceless %}
-
-          <span class="info-bar__text">
-            {% for item in content %}
-              {{ html.content(item) }}
-            {% endfor %}
-          </span>
-
-        {% endspaceless %}
+         <span class="info-bar__text">{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>
       {%- endblock -%}
     {%- endwith -%}
   </div>
