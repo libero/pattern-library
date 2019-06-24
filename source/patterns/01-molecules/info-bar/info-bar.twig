@@ -1,0 +1,21 @@
+{%- import 'atoms-html' as html -%}
+
+{%- set type = type|default('info') -%}
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['info-bar', 'info-bar--' ~ type]) }) -%}
+
+  <div {{- html.attributes(attributes) }}>
+    {%- set infoBar = infoBar|default({})|merge({content: content|default({}), html: html}) -%}
+    {%- with infoBar only -%}
+      {%- block infoBar -%}
+        {% spaceless %}
+
+          <span class="info-bar__text">
+            {%- for item in content -%}
+              {{ html.content(item) }}
+            {%- endfor -%}
+          </span>
+
+        {% endspaceless %}
+      {%- endblock -%}
+    {%- endwith -%}
+  </div>

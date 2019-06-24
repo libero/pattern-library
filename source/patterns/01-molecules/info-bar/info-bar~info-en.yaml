@@ -1,0 +1,12 @@
+type: info
+content:
+  - text: 'General information including '
+  - link:
+      template: atoms-link
+      arguments:
+        attributes:
+          href: '#'
+        text: a link
+  - text: .
+
+
