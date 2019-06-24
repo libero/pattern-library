@@ -5,9 +5,11 @@
 
   <div {{- html.attributes(attributes) }}>
     {%- set infoBar = infoBar|default({})|merge({content: content|default({}), html: html}) -%}
-    {%- with infoBar only -%}
-      {%- block infoBar -%}
-         <span class="info-bar__text">{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>
-      {%- endblock -%}
-    {%- endwith -%}
+    {%- if infobar.content|length -%}
+      {%- with infoBar.content only -%}
+        {%- block infoBar -%}
+           <span class="info-bar__text">{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>
+        {%- endblock -%}
+      {%- endwith -%}
+    {%- endif -%}
   </div>
