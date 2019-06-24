@@ -1,0 +1,10 @@
+type: correction
+content:
+  - text: 'This is a correction notice; read the '
+  - link:
+      template: atoms-link
+      arguments:
+        attributes:
+          href: '#'
+        text: corrected article
+  - text: .
