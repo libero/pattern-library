@@ -10,9 +10,9 @@
         {% spaceless %}
 
           <span class="info-bar__text">
-            {%- for item in content -%}
+            {% for item in content %}
               {{ html.content(item) }}
-            {%- endfor -%}
+            {% endfor %}
           </span>
 
         {% endspaceless %}
