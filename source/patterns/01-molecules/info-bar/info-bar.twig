@@ -4,7 +4,7 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['info-bar', 'info-bar--' ~ type]) }) -%}
 
   <div {{- html.attributes(attributes) }}>
-    {%- set infoBar = infoBar|default({})|merge({content: content|default({}), html: html}) -%}
+    {%- set infoBar = infoBar|default({})|merge({content: content|default([]), html: html}) -%}
     {%- if infobar.content|length -%}
       {%- with infoBar.content only -%}
         {%- block infoBar -%}
