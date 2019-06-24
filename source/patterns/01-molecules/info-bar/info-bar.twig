@@ -5,7 +5,7 @@
 
   <div {{- html.attributes(attributes) }}>
     {%- set infoBar = infoBar|default({})|merge({content: content|default([]), html: html}) -%}
-    {%- if infobar.content|length -%}
+    {%- if infoBar.content|length -%}
       {%- with infoBar.content only -%}
         {%- block infoBar -%}
            <span class="info-bar__text">{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>
