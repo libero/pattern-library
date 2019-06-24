@@ -1,4 +1,5 @@
 @import "../../mixins/labels";
+@import "../../mixins/lists";
 @import "../../mixins/overflow";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
@@ -9,6 +10,9 @@ $tag-list-covert-link: true !default;
 
 .tag-list {
   @include block-spacing($end: $tag-list-block-spacing);
+  display: table;
+  table-layout: fixed;
+  width: 100%;
 }
 
 .tag-list__title {
@@ -19,6 +23,7 @@ $tag-list-covert-link: true !default;
 .tag-list__list {
   @include list-style-none();
   @include label-tag-typography();
+  @include block-spacing($end: 0);
 }
 
 .tag-list__list--single-line {
@@ -28,22 +33,10 @@ $tag-list-covert-link: true !default;
 .tag-list__item {
   display: inline-block;
   @include label-tag-typography();
+  @include list-separator();
 
-  &:after {
+  .tag-list__list--single-line & {
     display: inline;
-    content: ",\a0";
-  }
-
-  &:lang(ar):after {
-    content: "،\a0";
-  }
-
-  &:lang(ja):after {
-    content: "、";
-  }
-
-  &:last-child:after {
-    content: "";
   }
 }
 

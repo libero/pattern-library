@@ -1,26 +1,31 @@
 @import "../../functions/types";
 @import "../../mixins/border";
 @import "../../mixins/media-query";
+@import "../../mixins/positioning";
 @import "../../mixins/scale";
+@import "../../mixins/sizes";
 @import "../../mixins/spacing";
 @import "../../settings/baseline";
+@import "../../settings/typography";
 
-$content-header-block-spacing: $baseline-unit-small !default;
+$content-header-block-spacing: $baseline-unit-medium !default;
+$content-header-font: $font-alternative !default;
+$content-header-padding: $baseline-unit-small !default;
 $content-header-divider: true !default;
+$content-header-download-size: 20px !default;
+$content-header-download-size-medium: 44px !default;
 
 .content-header {
+  font-family: $content-header-font;
   text-align: center;
+  position: relative;
   @include block-spacing($end: $content-header-block-spacing);
 
   @if $content-header-divider == true {
-    @include padding($content-header-block-spacing ($content-header-block-spacing - $baseline-unit-small - $border-width), block);
+    @include padding($content-header-padding ($content-header-padding - $baseline-unit-small - $border-width), block);
     @include border(block-end);
   } @else {
-    @include padding($content-header-block-spacing, block);
-  }
-
-  :last-child {
-    @include margin(0, block-end);
+    @include padding($content-header-padding, block);
   }
 }
 
@@ -28,7 +33,7 @@ $content-header-divider: true !default;
   @include block-spacing($end: $baseline-unit-small);
 
   &:last-child {
-    @include block-spacing($end: $baseline-unit-small);
+    @include block-spacing($end: $baseline-unit-medium);
   }
 }
 
@@ -134,5 +139,38 @@ $content-header-divider: true !default;
 
   @include mq($from: wide) {
     @include rem(font-size, scale(4));
+  }
+}
+
+.content-header__categories {
+  @include margin(1.5 * $content-header-download-size, inline);
+
+  @include mq($from: medium) {
+    @include margin(1.5 * $content-header-download-size-medium, inline);
+  }
+}
+
+.content-header__download {
+  position: absolute;
+  @include inset(0, block-start);
+  @include inset(0, inline-end);
+  @include block-spacing($start: $baseline-unit-small, $end: 0);
+
+  @supports (display: flex) {
+    display: flex;
+    @include block-size($baseline-unit-small * 3);
+    @include block-spacing($end: 0);
+  }
+
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-header__download_icon {
+  display: block;
+  @include inline-size($content-header-download-size);
+
+  @include mq($from: medium) {
+    @include inline-size($content-header-download-size-medium);
   }
 }

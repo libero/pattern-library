@@ -1,0 +1,30 @@
+@import "../../mixins/lists";
+@import "../../mixins/scale";
+@import "../../mixins/typography";
+
+$inline-list-covert-link: true !default;
+$inline-list-font-size-small: scale(-1) !default;
+
+.inline-list {
+  @include list-style-none();
+  overflow-y: hidden;
+}
+
+.inline-list--small {
+  @include set-font-size-and-line-height($inline-list-font-size-small);
+}
+
+.inline-list__item {
+  display: inline;
+  @include list-separator();
+
+  .inline-list--alternative-separators & {
+    @include list-separator(alternative);
+  }
+}
+
+@if $inline-list-covert-link == true {
+  .inline-list__link {
+    @include covert-link();
+  }
+}

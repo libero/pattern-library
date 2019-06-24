@@ -142,6 +142,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   config.files.test.sassTestsEntryPoint = `${config.dir.test.sass}/test_sass.js`;
 
   config.files.build.favicon = `${config.dir.build.src}/favicon.ico`;
+  config.files.build.imagesExportable = [`${config.dir.build.images}/**/*`, `!${config.dir.build.images}/local`, `!${config.dir.build.images}/local/**/*`];
   config.files.build.variables = `${config.buildRoot}/variables.json`;
 
   config.webpack = webpackConfigFactory(config.environment, path.resolve(config.files.src.jsEntryPoint), path.resolve(config.dir.build.js));
@@ -391,7 +392,7 @@ const exportSassVendor = () =>
     .pipe(gulp.dest(config.dir.export.sassVendor));
 
 const exportImages = () =>
-  gulp.src(`${config.dir.build.images}/**/*`)
+  gulp.src(config.files.build.imagesExportable)
     .pipe(gulp.dest(config.dir.export.images));
 
 const exportFavicon = () =>
