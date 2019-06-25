@@ -1,3 +1,5 @@
+attributes:
+  lang: ja
 type: correction
 content:
   - text: 'これは訂正通知です; '
