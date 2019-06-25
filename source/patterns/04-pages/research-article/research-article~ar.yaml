@@ -11,15 +11,9 @@ infoBar:
   attributes:
     lang: ar
     dir: rtl
-  type: correction
+  type: info
   content:
-    - text: 'هذا هو إشعار التصحيح. '
-    - link:
-        template: atoms-link
-        arguments:
-          attributes:
-            href: '#'
-          text: المقال
+    - text: 'لمعلوماتك'
 
 contentHeader:
   download:

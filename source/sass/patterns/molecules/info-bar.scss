@@ -9,7 +9,6 @@ $_info-bar-image-offset: $font-size;
 $_info-bar-image-fudge-factor: 4px;
 $_info-bars: (
   (type: attention, background-color: $color-attention),
-  (type: correction, background-color: $color-attention),
   (type: info, background-color: $color-information),
   (type: success, background-color: $color-success),
   (type: warning, background-color: $color-warning),
