@@ -6,7 +6,7 @@
 
 $_info-bar-gutter: 8px;
 $_info-bar-image-offset: $font-size;
-$_info-bar-image-fudge-factor: 4px;
+$_info-bar-image-fudge-factor: #{$font-size / 4};
 $_info-bars: (
   (type: attention, background-color: $color-attention),
   (type: info, background-color: $color-information),
