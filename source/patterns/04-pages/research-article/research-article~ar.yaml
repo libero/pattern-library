@@ -7,6 +7,20 @@ siteHeader:
     image:
       alt: 'شعار مجاني'
 
+infoBar:
+  attributes:
+    lang: ar
+    dir: rtl
+  type: correction
+  content:
+    - text: 'هذا هو إشعار التصحيح. '
+    - link:
+        template: atoms-link
+        arguments:
+          attributes:
+            href: '#'
+          text: المقال
+
 contentHeader:
   download:
     link:
