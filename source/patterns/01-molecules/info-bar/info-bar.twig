@@ -12,27 +12,23 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['info-bar', 'info-bar--' ~ type]) }) -%}
 {%- set infoBar = infoBar|default({})|merge({type: type, image: imagePath[type], content: content|default([]), attributes: attributes, html: html}) -%}
 
-{%- if infoBar.content|length -%}
-  {%- with infoBar only -%}
-    {%- block infoBar -%}
-      <div {{- html.attributes(attributes) }}>
-        {% spaceless %}
+{%- with infoBar only -%}
+  {%- block infoBar -%}
+    <div {{- html.attributes(attributes) }}>
+      {% spaceless %}
 
-          <span class="info-bar__content">
+        <span class="info-bar__content">
 
-            {%- if image is defined -%}
-              {# no alt as decoration, not background image as background-position-inline not implemented anywhere #}
-               <img src="{{ image }}" class="info-bar__image" alt="" />
-            {%- endif  -%}
+          {%- if image is defined -%}
+            {# no alt as decoration, not background image as background-position-inline not implemented anywhere #}
+             <img src="{{ image }}" class="info-bar__image" alt="" />
+          {%- endif  -%}
 
-            <span>{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>
+          <span>{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>
 
-          </span>
+        </span>
 
-        {% endspaceless %}
-      </div >
-    {%- endblock -%}
-  {%- endwith -%}
-
-{%- endif -%}
-
+      {% endspaceless %}
+    </div >
+  {%- endblock -%}
+{%- endwith -%}
