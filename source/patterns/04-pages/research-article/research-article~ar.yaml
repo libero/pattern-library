@@ -10,7 +10,6 @@ siteHeader:
 infoBar:
   attributes:
     lang: ar
-    dir: rtl
   type: info
   content:
     - text: 'لمعلوماتك'
