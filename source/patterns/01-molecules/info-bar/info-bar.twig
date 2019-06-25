@@ -1,16 +1,40 @@
 {%- import 'atoms-html' as html -%}
 
+{%- set imagePath = {
+       attention: asset('images/attention.svg'),
+       correction: asset('images/corrected-article.svg'),
+       info: asset('images/info.svg'),
+       success: asset('images/success.svg'),
+       warning: null,
+} -%}
 {%- set type = type|default('info') -%}
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['info-bar', 'info-bar--' ~ type]) }) -%}
 
-{%- set infoBar = infoBar|default({})|merge({content: content|default([]), html: html}) -%}
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['info-bar', 'info-bar--' ~ type]) }) -%}
+{%- set infoBar = infoBar|default({})|merge({type: type, image: imagePath[type], content: content|default([]), attributes: attributes, html: html}) -%}
+
 {%- if infoBar.content|length -%}
-<div {{- html.attributes(attributes) }}>
   {%- with infoBar only -%}
     {%- block infoBar -%}
-       <span class="info-bar__text">{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>
+      <div {{- html.attributes(attributes) }}>
+        {% spaceless %}
+
+          <span class="info-bar__content">
+
+            {%- if image is defined -%}
+{#             no alt as image is only decoration: should be css background image but logical property background-position-inline not implemented anywhere #}
+               <img src="{{ image }}" class="info-bar__image" alt="" />
+            {%- endif  -%}
+
+            <span class="info-bar__text">
+              {%- for item in content -%}{{ html.content(item) }}{%- endfor -%}
+            </span>
+
+          </span>
+
+        {% endspaceless %}
+      </div >
     {%- endblock -%}
   {%- endwith -%}
-</div>
+
 {%- endif -%}
 

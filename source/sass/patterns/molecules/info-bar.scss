@@ -1,25 +1,26 @@
 @import "../../variables/color";
 @import "../../variables/font";
+@import "../../mixins/positioning";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 
 $_info-bar-gutter: 8px;
-$_info-bar-inline-offset-with-image: 28px;
+$_info-bar-image-offset: $font-size;
+$_info-bar-image-fudge-factor: 4px;
 $_info-bars: (
-  (type: attention, background-color: $color-attention, image: (file:"attention.svg", inline-size: 22px)),
-  (type: correction, background-color: $color-attention, image: (file:"corrected-article.svg", inline-size: 18px)),
-  (type: info, background-color: $color-information, image: (file: "info.svg", inline-size: 20px)),
-  (type: success, background-color: $color-success, image: (file: "success.svg", inline-size: 20px)),
-  (type: warning, background-color: $color-warning, image: null)
+  (type: attention, background-color: $color-attention),
+  (type: correction, background-color: $color-attention),
+  (type: info, background-color: $color-information),
+  (type: success, background-color: $color-success),
+  (type: warning, background-color: $color-warning),
 );
 
 @function _get-info-bar-background-color($map) {
-  $default: $color-attention;
   $supplied: map_get($map, background-color);
   @if $supplied {
     @return $supplied;
   }
-  @return $default;
+  @return $color-attention;
 }
 
 .info-bar {
@@ -27,8 +28,16 @@ $_info-bars: (
   font-family: $font-secondary;
   font-weight: 600;
   text-align: center;
+  position: relative;
   @include set-font-size-and-line-height(scale(-1));
   @include padding($baselinegrid-space-extra_small $_info-bar-gutter);
+
+  @supports (display: flex) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: static;
+  }
 
   a {
     color: inherit;
@@ -36,26 +45,25 @@ $_info-bars: (
   }
 }
 
-@each $info-bar in $_info-bars {
-
-  .info-bar--#{map-get($info-bar, type)} {
-
-    background-color: _get-info-bar-background-color($info-bar);
-
-    $image: map-get($info-bar, image);
-    @if $image {
-      & .info-bar__text {
-        // Comes into play when the image is taller than the text
-        display: inline-block;
-        background: url("../images/#{map_get($image, file)}") 0/#{map_get($image, inline-size)} no-repeat;
-        @include padding($_info-bar-inline-offset-with-image, inline-start);
-      }
-    } @else {
-      & .info-bar__text {
-        @include padding(0, inline-start);
-      }
-    }
-
+.info-bar__content {
+  @supports (display: flex) {
+    display: flex;
+    align-items: center;
   }
+}
 
+.info-bar__image {
+  @include padding($_info-bar-image-offset, inline-end);
+  position: relative;
+  @include inset($_info-bar-image-fudge-factor, block-start);
+
+  @supports (display: flex) {
+    position: static;
+  }
+}
+
+@each $info-bar in $_info-bars {
+  .info-bar--#{map-get($info-bar, type)} {
+    background-color: _get-info-bar-background-color($info-bar);
+  }
 }
