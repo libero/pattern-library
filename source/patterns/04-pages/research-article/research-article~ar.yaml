@@ -11,6 +11,7 @@ infoBar:
   attributes:
     lang: ar
   type: info
+  imagePath: '../../images/info.svg'
   content:
     - text: 'لمعلوماتك'
 

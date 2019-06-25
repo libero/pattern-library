@@ -1,3 +1,4 @@
 type: success
+imagePath: '../../images/success.svg'
 content:
   - text: Operation completed successfully.

@@ -1,15 +1,9 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set imagePath = {
-  attention: asset('images/attention.svg'),
-  info: asset('images/info.svg'),
-  success: asset('images/success.svg'),
-  warning: null,
-} -%}
 {%- set type = type|default('info') -%}
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['info-bar', 'info-bar--' ~ type]) }) -%}
-{%- set infoBar = infoBar|default({})|merge({type: type, image: imagePath[type], content: content|default([]), attributes: attributes, html: html}) -%}
+{%- set infoBar = infoBar|default({})|merge({type: type, imagePath: imagePath|default(''), content: content|default([]), attributes: attributes, html: html}) -%}
 
 {%- with infoBar only -%}
   {%- block infoBar -%}
@@ -18,9 +12,9 @@
 
         <span class="info-bar__content">
 
-          {%- if image is defined -%}
+          {%- if imagePath is defined -%}
             {# no alt as decoration, not background image as background-position-inline not implemented anywhere #}
-             <img src="{{ image }}" class="info-bar__image" alt="" />
+             <img src="{{ imagePath }}" class="info-bar__image" alt="" />
           {%- endif  -%}
 
           <span>{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>

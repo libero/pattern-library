@@ -1,3 +1,4 @@
 type: attention
+imagePath: '../../images/attention.svg'
 content:
   - text: Please complete the outstanding tasks.

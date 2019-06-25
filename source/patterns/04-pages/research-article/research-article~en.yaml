@@ -3,6 +3,7 @@ siteHeader:
     href: '#'
 infoBar:
   type: info
+  imagePath: '../../images/info.svg'
   content:
     - text: 'There is additional '
     - link:
