@@ -1,0 +1,12 @@
+attributes:
+  lang: ar
+  dir: rtl
+type: correction
+content:
+  - text: 'هذا هو إشعار التصحيح. '
+  - link:
+      template: atoms-link
+      arguments:
+        attributes:
+          href: '#'
+        text: المقال

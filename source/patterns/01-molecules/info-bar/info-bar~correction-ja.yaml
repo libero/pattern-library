@@ -1,0 +1,10 @@
+type: correction
+content:
+  - text: 'これは訂正通知です; '
+  - link:
+      template: atoms-link
+      arguments:
+        attributes:
+          href: '#'
+        text: 訂正した記事を読む
+  - text: .
