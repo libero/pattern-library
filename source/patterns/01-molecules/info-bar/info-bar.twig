@@ -25,9 +25,7 @@
                <img src="{{ image }}" class="info-bar__image" alt="" />
             {%- endif  -%}
 
-            <span class="info-bar__text">
-              {%- for item in content -%}{{ html.content(item) }}{%- endfor -%}
-            </span>
+            <span>{%- for item in content -%}{{ html.content(item) }}{%- endfor -%}</span>
 
           </span>
 

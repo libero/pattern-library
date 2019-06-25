@@ -27,16 +27,16 @@ $_info-bars: (
   color: $color-text-reverse;
   font-family: $font-secondary;
   font-weight: 600;
-  text-align: center;
-  position: relative;
   @include set-font-size-and-line-height(scale(-1));
   @include padding($baselinegrid-space-extra_small $_info-bar-gutter);
+  text-align: center;
+  position: relative;
 
   @supports (display: flex) {
+    position: static;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: static;
   }
 
   a {
@@ -54,8 +54,8 @@ $_info-bars: (
 
 .info-bar__image {
   @include padding($_info-bar-image-offset, inline-end);
-  position: relative;
   @include inset($_info-bar-image-fudge-factor, block-start);
+  position: relative;
 
   @supports (display: flex) {
     position: static;
