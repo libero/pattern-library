@@ -8,8 +8,6 @@ siteHeader:
       alt: 'شعار مجاني'
 
 infoBar:
-  attributes:
-    lang: ar
   type: info
   imagePath: '../../images/info.svg'
   content:
