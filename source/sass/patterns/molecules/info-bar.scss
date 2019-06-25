@@ -15,14 +15,6 @@ $_info-bars: (
   (type: warning, background-color: $color-warning),
 );
 
-@function _get-info-bar-background-color($map) {
-  $supplied: map_get($map, background-color);
-  @if $supplied {
-    @return $supplied;
-  }
-  @return $color-attention;
-}
-
 .info-bar {
   color: $color-text-reverse;
   font-family: $font-secondary;
@@ -53,7 +45,7 @@ $_info-bars: (
 }
 
 .info-bar__image {
-  @include padding($_info-bar-image-offset, inline-end);
+  @include margin($_info-bar-image-offset, inline-end);
   @include inset($_info-bar-image-fudge-factor, block-start);
   position: relative;
 
@@ -64,6 +56,6 @@ $_info-bars: (
 
 @each $info-bar in $_info-bars {
   .info-bar--#{map-get($info-bar, type)} {
-    background-color: _get-info-bar-background-color($info-bar);
+    background-color: map_get($info-bar, background-color) or $color-information;
   }
 }
