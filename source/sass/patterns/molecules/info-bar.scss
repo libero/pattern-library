@@ -46,6 +46,7 @@ $_info-bars: (
 .info-bar__image {
   @include margin($_info-bar-image-offset, inline-end);
   @include inset($_info-bar-image-fudge-factor, block-start);
+  @include max-block-size($baselinegrid-space-medium);
   position: relative;
 
   @supports (display: flex) {
