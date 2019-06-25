@@ -47,7 +47,7 @@ $_info-bars: (
       & .info-bar__text {
         // Comes into play when the image is taller than the text
         display: inline-block;
-        background: url("../images/#{map_get($image, file)}") 0 center/#{map_get($image, inline-size)} no-repeat;
+        background: url("../images/#{map_get($image, file)}") 0/#{map_get($image, inline-size)} no-repeat;
         @include padding($_info-bar-inline-offset-with-image, inline-start);
       }
     } @else {
