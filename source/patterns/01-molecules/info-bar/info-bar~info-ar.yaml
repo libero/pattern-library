@@ -1,0 +1,7 @@
+attributes:
+  lang: ar
+  dir: rtl
+type: info
+imagePath: '../../images/info.svg'
+content:
+  - text: أشياء للنظر فيها.
