@@ -198,13 +198,11 @@ Accessibility
 
 ### Screen Reader Observations
 
-#### Voiceover (Mac)**
+aria-label on `<a>` elements
 
-Download Link Icon
+We have noticed that Voiceover on Mac's does not read aria-labels in anchor tags `<a href="" arial-label="Voiceover ignores this on page load"></a>` in Safari when you load or reload the page. The only time it seems to read it out is if you tab to another piece of software or browser and then tab back to Safari.
 
-We have noticed that Voiceover does not read aria-labels in anchor tags `<a href="" arial-label="Voiceover"></a>` in Safari when you load or reload the page. The only time it seems to read it out is if you tab to another piece of software or browser and then tab back to Safari.
-
-To overcome this we have removed the aria-label from the anchor tag and put the label description into the image alt tag instead. This means the description gets read out consistently.
+When the link contains an image but no text (and so a description is essential), one work around is removing the anchor element's aria-label, and moving its descriptive text to the alt attribute.
 
 
 Getting help
