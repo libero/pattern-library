@@ -1,13 +1,11 @@
-@import "../../mixins/labels";
-@import "../../mixins/lists";
+@import "../../settings/color";
+@import "../../mixins/decorations";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
-@import "../../settings/colors";
 
 .teaser-list__title {
   @include block-spacing();
-  @include label-content-typography();
-  color: $color-text-normal;
+  @include label-content-typography($color-text-normal);
   @include set-font-size-and-line-height(scale(-1));
   font-weight: bold;
 }

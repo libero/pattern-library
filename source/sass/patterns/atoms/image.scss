@@ -1,17 +1,17 @@
-@import "../../mixins/border";
+@import "../../mixins/decorations";
 @import "../../mixins/spacing";
-@import "../../settings/baseline";
-
-$image-block-spacing: $baseline-unit-extra-small !default;
-$image-inline-spacing: $image-block-spacing !default;
+@import "../../settings/baselinegrid";
+@import "../../settings/color";
+@import "../../settings/image";
 
 .image {
-  @include block-spacing($start: $baseline-unit-medium, $end: $baseline-unit-medium);
+  @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
   @include border();
-  @include padding($image-block-spacing $image-inline-spacing);
+  @include padding($image-inline-spacing, inline);
+  @include padding($baselinegrid-space-extra_small, block);
   display: block;
 
   .figure__asset & {
-    @include block-spacing($start: 0, $end: $baseline-unit-extra-small);
+    @include block-spacing($start: 0, $end: $baselinegrid-space-extra_small);
   }
 }

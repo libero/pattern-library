@@ -27,6 +27,27 @@
     }
   }
 
+  @include describe("@mixin caption-typography") {
+
+    @include it("generates correct typography for figure caption") {
+
+      @include assert() {
+
+        @include output {
+          @include caption-typography();
+        }
+
+        @include expect {
+          font-family: $font-secondary;
+          font-size: 13px;
+          font-size: 0.8125rem;
+          line-height: 1.84615;
+        }
+      }
+    }
+
+  }
+
   @include it("generates correct fallbacks with position 'super'") {
 
     @include assert() {
@@ -66,3 +87,99 @@
   }
 
 }
+
+@include describe("@mixin list-separator") {
+
+  @include it("Provides the default separator correctly") {
+
+    @include assert() {
+
+      @include output {
+        @include list-separator(default);
+      }
+
+      @include expect {
+        &:after {
+          content: ",\a0";
+        }
+
+        &:lang(ar):after {
+          content: "،\a0";
+        }
+
+        &:lang(ja):after {
+          content: "、";
+        }
+
+        &:last-child:after {
+          content: "";
+        }
+      }
+    }
+
+    @include assert() {
+
+      @include output {
+        @include list-separator();
+      }
+
+      @include expect {
+        &:after {
+          content: ",\a0";
+        }
+
+        &:lang(ar):after {
+          content: "،\a0";
+        }
+
+        &:lang(ja):after {
+          content: "、";
+        }
+
+        &:last-child:after {
+          content: "";
+        }
+      }
+    }
+
+  }
+
+  @include it("Provides the alternative separator correctly") {
+
+    @include assert() {
+
+      @include output {
+        @include list-separator(alternative);
+      }
+
+      @include expect {
+        &:after {
+          content: ";\a0";
+        }
+
+        &:lang(ar):after {
+          content: "\61b\a0";
+        }
+
+        &:last-child:after {
+          content: "";
+        }
+      }
+    }
+
+  }
+
+  @include it("errors on invalid separators") {
+    @include assert() {
+
+      @include output {
+        @include list-separator("invalid");
+      }
+
+      @include expect {
+        _error: "Unknown list separator 'invalid'";
+      }
+    }
+  };
+
+};

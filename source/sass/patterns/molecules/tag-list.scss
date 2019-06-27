@@ -1,15 +1,12 @@
-@import "../../mixins/labels";
-@import "../../mixins/lists";
-@import "../../mixins/overflow";
+@import "../../mixins/sizes";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
-@import "../../settings/baseline";
-
-$tag-list-block-spacing: $baseline-unit-small !default;
-$tag-list-covert-link: true !default;
+@import "../../settings/baselinegrid";
+@import "../../settings/contentHeader";
+@import "../../settings/grid";
 
 .tag-list {
-  @include block-spacing($end: $tag-list-block-spacing);
+  @include block-spacing();
   display: table;
   table-layout: fixed;
   width: 100%;
@@ -40,8 +37,6 @@ $tag-list-covert-link: true !default;
   }
 }
 
-@if $tag-list-covert-link == true {
-  .tag-list__link {
-    @include covert-link();
-  }
+.tag-list__link {
+  @include covert-link();
 }

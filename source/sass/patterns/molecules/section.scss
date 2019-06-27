@@ -1,8 +1,6 @@
 @import "../../mixins/spacing";
-@import "../../settings/baseline";
-
-$section-body-block-spacing: $baseline-unit-medium !default;
+@import "../../settings/baselinegrid";
 
 .section__body {
-  @include block-spacing($end: $section-body-block-spacing);
+  @include block-spacing($end: $baselinegrid-space-medium);
 }

@@ -1,9 +1,8 @@
-@import "../mixins/border";
-@import "../mixins/sizes";
+@import "../mixins/decorations";
 @import "../mixins/spacing";
 @import "../mixins/typography";
-@import "../settings/colors";
-@import "../settings/typography";
+@import "../settings/color";
+@import "../settings/grid";
 @import "../vendor/normalize.css/normalize";
 
 *,
@@ -13,7 +12,7 @@
 }
 
 html {
-  font-size: ($text-size / 16px) * 100%;
+  font-size: ($font-size / 16px) * 100%;
 }
 
 html,
@@ -61,11 +60,6 @@ h6 {
   @include h6-spacing();
 }
 
-code,
-kbd {
-  font-family: $font-code;
-}
-
 address,
 article,
 aside,
@@ -101,7 +95,7 @@ strong {
 hr {
   border: 0;
   @include border(block-end);
-  @include block-spacing($end: $baseline-unit-small - $border-width);
+  @include block-spacing($end: $baselinegrid-space-small - $grid-divider_size);
 }
 
 figure {
@@ -123,10 +117,10 @@ a {
 }
 
 dt {
-  font-weight: $font-weight-bold;
+  font-weight: bold;
 
   dd + & {
-    @include block-spacing($baseline-unit-small, 0);
+    @include block-spacing($baselinegrid-space-small, 0);
   }
 }
 

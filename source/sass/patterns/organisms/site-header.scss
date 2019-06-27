@@ -1,28 +1,15 @@
-@import "../../mixins/border";
+@import "../../mixins/grid";
 @import "../../mixins/media-query";
 @import "../../mixins/sizes";
 @import "../../mixins/spacing";
-@import "../../settings/layout";
-
-$site-header-block-space-start: 8px !default;
-$site-header-block-space-end: 7px !default;
-$site-header-block-size: 60px !default;
-$site-header-block-size-medium: 96px !default;
-$site-header-max-width: $grid-max-width !default;
-
-$site-header-image-block-size: 27px !default;
-$site-header-image-block-size-medium: 36px !default;
-$site-header-image-inline-size: 21px !default;
-$site-header-image-inline-size-medium: 28px !default;
-$site-header-image-inline-space: 18px !default;
-$site-header-image-inline-space-medium: 36px !default;
-$site-header-image-inline-space-start-extra-wide: 0 !default;
+@import "../../settings/color";
+@import "../../settings/siteHeader";
 
 .site-header {
 
   @include margin(0 auto);
-  @include padding($site-header-block-space-start $site-header-block-space-end, block);
-  @include max-inline-size($site-header-max-width);
+  @include padding($siteHeader-block_start_space $siteHeader-block_end_space, block);
+  @include max-inline-size($grid-max_width);
 
   position: relative;
   @supports (display:flex) {
@@ -31,12 +18,12 @@ $site-header-image-inline-space-start-extra-wide: 0 !default;
     align-items: center;
   }
 
-  --block-size: #{$site-header-block-size};
-  @include block-size($site-header-block-size);
+  --block-size: #{$siteHeader-block_size__default};
+  @include block-size($siteHeader-block_size__default);
 
   @include mq($from: medium) {
-    --block-size: #{$site-header-block-size-medium};
-    @include block-size($site-header-block-size-medium);
+    --block-size: #{$siteHeader-block_size__medium};
+    @include block-size($siteHeader-block_size__medium);
   }
 
   @supports (--name: value) {
@@ -49,34 +36,34 @@ $site-header-image-inline-space-start-extra-wide: 0 !default;
   display: block;
   box-sizing: content-box;
 
-  $_inviolate-space: $site-header-block-space-start + $site-header-block-space-end + $border-width;
-  $_max-block-size--default: $site-header-block-size - $_inviolate-space;
-  $_max-block-size--medium: $site-header-block-size-medium - $_inviolate-space;
+  $_inviolate-space: $siteHeader-block_start_space + $siteHeader-block_end_space + $grid-divider_size;
+  $_max-block-size--default: $siteHeader-block_size__default - $_inviolate-space;
+  $_max-block-size--medium: $siteHeader-block_size__medium - $_inviolate-space;
 
-  --block-size: #{$site-header-image-block-size};
-  @include block-size($site-header-image-block-size);
+  --block-size: #{$siteHeader-image-block_size__default};
+  @include block-size($siteHeader-image-block_size__default);
   --max-block-size: #{$_max-block-size--default};
   @include max-block-size($_max-block-size--default);
-  --inline-size: #{$site-header-image-inline-size};
-  @include inline-size($site-header-image-inline-size);
-  --inline-end-space: #{$site-header-image-inline-space};
+  --inline-size: #{$siteHeader-image-inline_size__default};
+  @include inline-size($siteHeader-image-inline_size__default);
+  --inline-end-space: #{$siteHeader-image-inline_space__default};
   --inline-start-space: var(--inline-end-space);
-  @include padding(($site-header-block-size - $site-header-block-space-start - $site-header-image-block-size) / 2, block-start);
+  @include padding(($siteHeader-block_size__default - $siteHeader-block_start_space - $siteHeader-image-block_size__default) / 2, block-start);
 
   @include mq($from: medium) {
-    --block-size: #{$site-header-image-block-size-medium};
-    @include block-size($site-header-image-block-size-medium);
+    --block-size: #{$siteHeader-image-block_size__medium};
+    @include block-size($siteHeader-image-block_size__medium);
     --max-block-size: #{$_max-block-size--medium};
     @include max-block-size($_max-block-size--medium);
-    --inline-size: #{$site-header-image-inline-size-medium};
-    @include inline-size($site-header-image-inline-size-medium);
-    --inline-end-space: #{$site-header-image-inline-space-medium};
-    @include padding(($site-header-block_size-medium - $site-header-block-space-start - $site-header-image-block-size-medium) / 2, block-start);
+    --inline-size: #{$siteHeader-image-inline_size__medium};
+    @include inline-size($siteHeader-image-inline_size__medium);
+    --inline-end-space: #{$siteHeader-image-inline_space__medium};
+    @include padding(($siteHeader-block_size__medium - $siteHeader-block_start_space - $siteHeader-image-block_size__medium) / 2, block-start);
   }
 
-  @include mq($from: extra-wide) {
-    --inline-start-space: #{$site-header-image-inline-space-start-extra-wide};
-    @include margin($site-header-image-inline-space-start-extra-wide, inline-start);
+  @include mq($from: x-wide) {
+    --inline-start-space: #{$siteHeader-image-inline_start_space__x_wide};
+    @include margin($siteHeader-image-inline_start_space__x_wide, inline-start);
   }
 
   @supports (--name: value) {
@@ -90,7 +77,7 @@ $site-header-image-inline-space-start-extra-wide: 0 !default;
 }
 
 .site-header__image {
-  box-sizing: content-box;
+  display: block;
   @include inline-size(100%);
   @include block-size(100%);
 }

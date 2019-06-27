@@ -1,9 +1,6 @@
-@import "../../mixins/border";
+@import "../../mixins/decorations";
 @import "../../mixins/grid";
-@import "../../settings/layout";
-
-$page-grid-start-divider: true !default;
-$page-grid-end-divider: true !default;
+@import "../../settings/grid";
 
 .page-grid {
   @include base-grid($grid-max_width);
@@ -15,9 +12,7 @@ $page-grid-end-divider: true !default;
 
 .page-grid__start {
   grid-row: start;
-  @if $page-grid-start-divider {
-    @include border(block-end);
-  }
+  @include border(block-end);
 }
 
 .page-grid__main {
@@ -26,7 +21,5 @@ $page-grid-end-divider: true !default;
 
 .page-grid__end {
   grid-row: end;
-  @if $page-grid-end-divider {
-    @include border(block-start);
-  }
+  @include border(block-start);
 }

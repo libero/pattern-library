@@ -1,11 +1,11 @@
-@import "../../mixins/captions";
-@import "../../mixins/media-query";
 @import "../../mixins/spacing";
-@import "../../settings/baseline";
-@import "../../settings/layout";
+@import "../../mixins/typography";
+@import "../../settings/baselinegrid";
+@import "../../settings/breakpoint";
+@import "../../settings/image";
 
 .figure {
-  @include block-spacing($start: $baseline-unit-medium, $end: $baseline-unit-medium);
+  @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
 }
 
 .figure__heading {

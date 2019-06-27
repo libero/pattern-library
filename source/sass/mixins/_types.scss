@@ -1,7 +1,7 @@
-@import "scale";
+@import "../settings/font";
 @import "../vendor/sass-rem/rem";
 
-$rem-baseline: $scale-base;
+$rem-baseline: $font-size;
 $rem-fallback: true;
 
 // Overridden to apply https://github.com/pierreburel/sass-rem/pull/12

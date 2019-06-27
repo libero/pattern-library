@@ -1,50 +1,55 @@
-@import "scale";
+@import "../mixins/types";
+@import "../settings/baselinegrid";
+@import "../settings/color";
+@import "../settings/font";
 @import "spacing";
-@import "types";
 @import "utilities";
-@import "../settings/baseline";
-@import "../settings/colors";
-@import "../settings/typography";
+@import "scale";
 
-@mixin set-font-size-and-line-height($font-size, $block-size: $text-block-size) {
+@mixin set-font-size-and-line-height($font-size, $block-size: $baselinegrid-space-small) {
   @include rem(font-size, $font-size);
   line-height: $block-size / $font-size;
 }
 
-@mixin _heading-typography($font-size, $block-size) {
-  font-family: $headings-font;
-  font-weight: $headings-weight;
-  @include set-font-size-and-line-height($font-size, $block-size);
+@mixin _heading-base-typography() {
+  font-family: $font-secondary;
+  font-weight: 600;
 }
 
 @mixin h1-typography() {
-  @include _heading-typography($h1-size, $h1-block-size);
+  @include _heading-base-typography();
+  @include set-font-size-and-line-height(scale(7), $baselinegrid-space-medium);
 }
 
 @mixin h2-typography() {
-  @include _heading-typography($h2-size, $h2-block-size);
+  @include _heading-base-typography();
+  @include set-font-size-and-line-height(scale(4), ($baselinegrid-space-small + $baselinegrid-space-smallish) / 2);
 }
 
 @mixin h3-typography() {
-  @include _heading-typography($h3-size, $h3-block-size);
+  @include _heading-base-typography();
+  @include set-font-size-and-line-height(scale(3));
 }
 
 @mixin h4-typography() {
-  @include _heading-typography($h4-size, $h4-block-size);
+  @include _heading-base-typography();
+  @include set-font-size-and-line-height(scale(2));
 }
 
 @mixin h5-typography() {
-  @include _heading-typography($h5-size, $h5-block-size);
+  @include _heading-base-typography();
+  @include set-font-size-and-line-height(scale(1));
 }
 
 @mixin h6-typography() {
-  @include _heading-typography($h6-size, $h6-block-size);
+  @include _heading-base-typography();
+  @include set-font-size-and-line-height(scale(0));
 }
 
 @mixin body-typography() {
-  font-family: $text-font;
-  font-weight: $text-weight;
-  @include set-font-size-and-line-height($text-size, $text-block-size);
+  font-family: $font-primary;
+  @include set-font-size-and-line-height(scale(0));
+  font-weight: normal;
 }
 
 @mixin inline-image {
@@ -77,6 +82,25 @@
   }
 }
 
+@mixin _label-typography($color, $uppercase: true) {
+  color: $color;
+  font-family: $font-secondary;
+  font-weight: normal;
+  @include set-font-size-and-line-height(scale(-3));
+  letter-spacing: $font-letterspacing-label;
+  @if $uppercase {
+    text-transform: uppercase;
+  }
+}
+
+@mixin label-content-typography($color: $color-text-secondary, $uppercase: true) {
+  @include _label-typography($color, $uppercase);
+}
+
+@mixin label-tag-typography() {
+  @include _label-typography($color-primary-normal);
+}
+
 @mixin covert-link($hover-color: $color-primary-dark) {
   @include inherit-all($ensure: color text-decoration) {
     cursor: pointer;
@@ -86,4 +110,55 @@
   &:hover {
     color: $hover-color;
   }
+}
+
+@mixin caption-typography() {
+  font-family: $font-secondary;
+  @include set-font-size-and-line-height(scale(-2));
+}
+
+@mixin list-style-none() {
+  @include padding(0, inline-start);
+  // Overflow auto is so the bullet will be still read from a screen reader and will push the bullet off screen
+  overflow-x: auto;
+}
+
+@mixin list-separator($separator: default) {
+
+  @if $separator == default {
+
+    &:after {
+      content: ",\a0";
+    }
+
+    &:lang(ar):after {
+      content: "،\a0";
+    }
+
+    &:lang(ja):after {
+      content: "、";
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+
+  } @else if $separator == alternative {
+
+    &:after {
+      content: ";\a0";
+    }
+
+    &:lang(ar):after {
+      content: "\61b\a0";
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+
+  } @else {
+    @include _error("Unknown list separator '#{$separator}'");
+  }
+
 }

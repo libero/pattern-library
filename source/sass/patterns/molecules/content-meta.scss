@@ -1,14 +1,9 @@
-@import "../../mixins/labels";
-@import "../../mixins/lists";
 @import "../../mixins/spacing";
-
-$content-meta-block-spacing: $baseline-unit-small !default;
-$content-meta-covert-link: true !default;
-$content-meta-separator: "\2022" !default;
+@import "../../mixins/typography";
 
 .content-meta {
   @include list-style-none();
-  @include block-spacing($end: $content-meta-block-spacing);
+  @include block-spacing();
 }
 
 .content-meta__item {
@@ -16,7 +11,7 @@ $content-meta-separator: "\2022" !default;
   @include label-content-typography();
 
   &:after {
-    content: "\a0#{$content-meta-separator}\a0";
+    content: "\a0\2022\a0";
   }
 
   &:last-child:after {
@@ -24,8 +19,6 @@ $content-meta-separator: "\2022" !default;
   }
 }
 
-@if $content-meta-covert-link == true {
-  .content-meta__link {
-    @include covert-link();
-  }
+.content-meta__link {
+  @include covert-link();
 }

@@ -1,39 +1,27 @@
 @import "../../functions/types";
-@import "../../mixins/border";
+@import "../../mixins/scale";
+@import "../../mixins/decorations";
 @import "../../mixins/media-query";
 @import "../../mixins/positioning";
-@import "../../mixins/scale";
-@import "../../mixins/sizes";
 @import "../../mixins/spacing";
-@import "../../settings/baseline";
-@import "../../settings/typography";
-
-$content-header-block-spacing: $baseline-unit-medium !default;
-$content-header-font: $font-alternative !default;
-$content-header-padding: $baseline-unit-small !default;
-$content-header-divider: true !default;
-$content-header-download-size: 20px !default;
-$content-header-download-size-medium: 44px !default;
+@import "../../settings/baselinegrid";
+@import "../../settings/contentHeader";
+@import "../../settings/grid";
 
 .content-header {
-  font-family: $content-header-font;
+  font-family: $font-secondary;
   text-align: center;
+  @include padding($baselinegrid-space-small, block-start);
+  @include block-spacing($end: $baselinegrid-space-medium - $grid-divider_size);
+  @include border(block-end);
   position: relative;
-  @include block-spacing($end: $content-header-block-spacing);
-
-  @if $content-header-divider == true {
-    @include padding($content-header-padding ($content-header-padding - $baseline-unit-small - $border-width), block);
-    @include border(block-end);
-  } @else {
-    @include padding($content-header-padding, block);
-  }
 }
 
 .content-header__title {
-  @include block-spacing($end: $baseline-unit-small);
+  @include block-spacing($end: $baselinegrid-space-small);
 
   &:last-child {
-    @include block-spacing($end: $baseline-unit-medium);
+    @include block-spacing($end: $baselinegrid-space-medium);
   }
 }
 
@@ -72,7 +60,7 @@ $content-header-download-size-medium: 44px !default;
     @include rem(font-size, scale(9));
   }
 
-  @include mq($from: extra-wide) {
+  @include mq($from: x-wide) {
     @include rem(font-size, scale(10));
   }
 }
@@ -92,7 +80,7 @@ $content-header-download-size-medium: 44px !default;
     @include rem(font-size, scale(8));
   }
 
-  @include mq($from: extra-wide) {
+  @include mq($from: x-wide) {
     @include rem(font-size, scale(10));
   }
 }
@@ -108,7 +96,7 @@ $content-header-download-size-medium: 44px !default;
     @include rem(font-size, scale(7));
   }
 
-  @include mq($from: extra-wide) {
+  @include mq($from: x-wide) {
     @include rem(font-size, scale(8));
   }
 
@@ -125,7 +113,7 @@ $content-header-download-size-medium: 44px !default;
     @include rem(font-size, scale(4));
   }
 
-  @include mq($from: extra-wide) {
+  @include mq($from: x-wide) {
     @include rem(font-size, scale(6));
   }
 }
@@ -143,10 +131,10 @@ $content-header-download-size-medium: 44px !default;
 }
 
 .content-header__categories {
-  @include margin(1.5 * $content-header-download-size, inline);
+  @include margin(1.5 * $contentHeader-downloadIcon-inline_size__default, inline);
 
   @include mq($from: medium) {
-    @include margin(1.5 * $content-header-download-size-medium, inline);
+    @include margin(1.5 * $contentHeader-downloadIcon-inline_size__medium, inline);
   }
 }
 
@@ -154,11 +142,11 @@ $content-header-download-size-medium: 44px !default;
   position: absolute;
   @include inset(0, block-start);
   @include inset(0, inline-end);
-  @include block-spacing($start: $baseline-unit-small, $end: 0);
+  @include block-spacing($start: $baselinegrid-space-small, $end: 0);
 
   @supports (display: flex) {
     display: flex;
-    @include block-size($baseline-unit-small * 3);
+    @include block-size($baselinegrid-space-small * 3);
     @include block-spacing($end: 0);
   }
 
@@ -168,9 +156,9 @@ $content-header-download-size-medium: 44px !default;
 
 .content-header__download_icon {
   display: block;
-  @include inline-size($content-header-download-size);
+  @include inline-size($contentHeader-downloadIcon-inline_size__default);
 
   @include mq($from: medium) {
-    @include inline-size($content-header-download-size-medium);
+    @include inline-size($contentHeader-downloadIcon-inline_size__medium);
   }
 }
