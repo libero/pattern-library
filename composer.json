@@ -8,6 +8,7 @@
     },
     "require": {
         "php": "^7.2",
+        "daverandom/exceptional-json": "^1.0",
         "henrikbjorn/lurker": "^1.2",
         "pattern-lab/core": "^2.0",
         "pattern-lab/patternengine-twig": "^2.0",

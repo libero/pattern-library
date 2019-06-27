@@ -1,6 +1,7 @@
 {
     "listeners": [
         "\\PatternLab\\Twig\\AssetListener",
+        "\\PatternLab\\Twig\\LiberoGlobalListener",
         "\\PatternLab\\Twig\\PseudoPatternsListener",
         "\\PatternLab\\Twig\\StrictVariablesListener"
     ]
