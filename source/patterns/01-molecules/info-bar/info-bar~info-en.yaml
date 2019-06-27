@@ -1,3 +1,4 @@
 type: info
-imagePath: '../../images/info-bar/info.svg'
+image:
+  src: ../../images/info-bar/info.svg
 content: Things for consideration.

@@ -4,7 +4,8 @@ siteHeader:
 
 infoBar:
   type: info
-  imagePath: '../../images/info-bar/info.svg'
+  image:
+    src: ../../images/info-bar/info.svg
   content:
     - text: 'There is additional '
     - template: atoms-link

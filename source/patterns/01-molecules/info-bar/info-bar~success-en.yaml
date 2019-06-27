@@ -1,3 +1,4 @@
 type: success
-imagePath: '../../images/info-bar/success.svg'
+image:
+  src: ../../images/info-bar/success.svg
 content: Operation completed successfully.

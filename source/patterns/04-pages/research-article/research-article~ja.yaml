@@ -8,7 +8,8 @@ siteHeader:
 
 infoBar:
   type: info
-  imagePath: '../../images/info-bar/info.svg'
+  image:
+    src: ../../images/info-bar/info.svg
   content:
     - text: 追加の
     - template: atoms-link

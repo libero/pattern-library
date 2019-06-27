@@ -2,5 +2,6 @@ attributes:
   lang: ar
   dir: rtl
 type: info
-imagePath: '../../images/info-bar/info.svg'
+image:
+  src: ../../images/info-bar/info.svg
 content: أشياء للنظر فيها.

@@ -6,9 +6,8 @@
 
   <div class="info-bar__content">
 
-    {%- if imagePath is defined -%}
-      {# no alt as decoration, not background image as background-position-inline not implemented anywhere #}
-      <img src="{{ imagePath }}" class="info-bar__image" alt="">
+    {%- if image.src is defined -%}
+      <img {{- html.attributes(image|merge({alt: image.alt|default(''), class: image.class|default([])|merge(['info-bar__image'])})) }}>
     {%- endif -%}
 
     <span>{{- html.content(content) -}}</span>
