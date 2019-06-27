@@ -4,14 +4,10 @@
 
 <div {{- html.attributes(attributes) }}>
 
-  <div class="info-bar__content">
+  {%- if image.src is defined -%}
+    <img {{- html.attributes(image|merge({alt: image.alt|default(''), class: image.class|default([])|merge(['info-bar__image'])})) }}>
+  {%- endif -%}
 
-    {%- if image.src is defined -%}
-      <img {{- html.attributes(image|merge({alt: image.alt|default(''), class: image.class|default([])|merge(['info-bar__image'])})) }}>
-    {%- endif -%}
-
-    <span>{{- html.content(content) -}}</span>
-
-  </div>
+  <span>{{- html.content(content) -}}</span>
 
 </div>

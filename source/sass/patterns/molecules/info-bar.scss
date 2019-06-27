@@ -42,13 +42,6 @@ $_info-bars: (
   }
 }
 
-.info-bar__content {
-  @supports (display: flex) {
-    display: flex;
-    align-items: center;
-  }
-}
-
 .info-bar__image {
   @include margin(0 $_info-bar-image-offset, inline);
   @include inset($_info-bar-image-fudge-factor, block-start);
