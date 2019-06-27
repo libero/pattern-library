@@ -31,8 +31,7 @@ $_info-bars: (
   }
 
   a {
-    color: inherit;
-    text-decoration: underline;
+    @include subtle-link();
   }
 }
 
