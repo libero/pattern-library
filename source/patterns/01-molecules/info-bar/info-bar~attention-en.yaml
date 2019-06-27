@@ -1,4 +1,3 @@
 type: attention
-imagePath: '../../images/attention.svg'
-content:
-  - text: Please complete the outstanding tasks.
+imagePath: '../../images/info-bar/attention.svg'
+content: Please complete the outstanding tasks.

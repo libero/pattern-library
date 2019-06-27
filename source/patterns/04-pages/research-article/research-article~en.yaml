@@ -1,19 +1,19 @@
 siteHeader:
   logo:
     href: '#'
+
 infoBar:
   type: info
-  imagePath: '../../images/info.svg'
+  imagePath: '../../images/info-bar/info.svg'
   content:
     - text: 'There is additional '
-    - link:
-        template: atoms-link
-        arguments:
-          attributes:
-            href: '#'
-          text:
-            interesting infomation
+    - template: atoms-link
+      arguments:
+        attributes:
+          href: '#'
+        text: interesting infomation
     - text: ' available.'
+
 contentHeader:
   download:
     link:

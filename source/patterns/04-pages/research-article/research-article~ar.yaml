@@ -9,9 +9,15 @@ siteHeader:
 
 infoBar:
   type: info
-  imagePath: '../../images/info.svg'
+  imagePath: '../../images/info-bar/info.svg'
   content:
-    - text: 'لمعلوماتك'
+    - text: 'هناك '
+    - template: atoms-link
+      arguments:
+        attributes:
+          href: '#'
+        text: معلومات إضافية مثيرة للاهتمام
+    - text: ' المتاحة.'
 
 contentHeader:
   download:

@@ -36,6 +36,12 @@ $_info-bars: (
   }
 }
 
+@each $info-bar in $_info-bars {
+  .info-bar--#{map-get($info-bar, type)} {
+    background-color: map_get($info-bar, background-color) or $color-information;
+  }
+}
+
 .info-bar__content {
   @supports (display: flex) {
     display: flex;
@@ -51,11 +57,5 @@ $_info-bars: (
 
   @supports (display: flex) {
     position: static;
-  }
-}
-
-@each $info-bar in $_info-bars {
-  .info-bar--#{map-get($info-bar, type)} {
-    background-color: map_get($info-bar, background-color) or $color-information;
   }
 }

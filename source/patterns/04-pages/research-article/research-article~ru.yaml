@@ -6,6 +6,18 @@ siteHeader:
     image:
       alt: 'Либеро логотип'
 
+infoBar:
+  type: info
+  imagePath: '../../images/info-bar/info.svg'
+  content:
+    - text: 'Доступна дополнительная '
+    - template: atoms-link
+      arguments:
+        attributes:
+          href: '#'
+        text: интересная информация
+    - text: .
+
 contentHeader:
   download:
     link:
