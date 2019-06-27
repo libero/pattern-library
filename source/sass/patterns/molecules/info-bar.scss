@@ -6,7 +6,6 @@
 
 $_info-bar-gutter: 8px;
 $_info-bar-image-offset: $font-size;
-$_info-bar-image-fudge-factor: #{$font-size / 4};
 $_info-bars: (
   (type: attention, background-color: $color-attention),
   (type: info, background-color: $color-information),
@@ -21,10 +20,8 @@ $_info-bars: (
   @include set-font-size-and-line-height(scale(-1));
   @include padding($baselinegrid-space-extra_small $_info-bar-gutter);
   text-align: center;
-  position: relative;
 
   @supports (display: flex) {
-    position: static;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,12 +39,12 @@ $_info-bars: (
 }
 
 .info-bar__image {
+  @include block-size($baselinegrid-space-small);
   @include margin(0 $_info-bar-image-offset, inline);
-  @include inset($_info-bar-image-fudge-factor, block-start);
-  @include max-block-size($baselinegrid-space-medium);
-  position: relative;
+  vertical-align: top;
 
   @supports (display: flex) {
-    position: static;
+    @include block-size(auto);
+    @include max-block-size($baselinegrid-space-medium);
   }
 }
