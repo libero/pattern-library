@@ -69,7 +69,6 @@
     "node": ">=10.12"
   },
   "scripts": {
-    "testConfig": "npx mocha ./test/libero-config",
-    "test": "npm testConfig && npx gulp test"
+    "test": "npx gulp test"
   }
 }
