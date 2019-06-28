@@ -24,7 +24,6 @@ import replace from 'gulp-replace';
 import replaceStream from 'replacestream';
 import reporter from 'postcss-reporter';
 import sass from 'gulp-sass';
-import * as sassExtract from 'sass-extract';
 import sassGlob from 'gulp-sass-glob';
 import sharp from 'sharp';
 import sourcemaps from 'gulp-sourcemaps';
@@ -32,9 +31,7 @@ import stylelint from 'stylelint';
 import syntaxScss from 'postcss-scss';
 import tempWrite from 'temp-write';
 import * as Throttle from 'promise-parallel-throttle';
-import {unflatten} from 'flat';
 import url from 'url';
-import util from 'util';
 import webpack from 'webpack';
 import webpackConfigFactory from './webpack.config.babel.js';
 import yaml from 'js-yaml';
@@ -133,7 +130,6 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
   ];
   config.files.src.meta = `${config.dir.src.meta}/**/*`;
   config.files.src.patterns = `${config.dir.src.patterns}/**/*`;
-  config.files.src.patternsGlobals = `${config.dir.src.patterns}/globals.scss`;
   config.files.src.templates = `${config.dir.src.patterns}/!(04-pages)/**/*.twig`;
 
   config.files.test.js = `${config.dir.test.js}/**/*.spec.js`;
@@ -142,7 +138,6 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
 
   config.files.build.favicon = `${config.dir.build.src}/favicon.ico`;
   config.files.build.imagesExportable = [`${config.dir.build.images}/**/*`, `!${config.dir.build.images}/local`, `!${config.dir.build.images}/local/**/*`];
-  config.files.build.patternsGlobals = `${config.dir.build.src}/_meta/globals.json`;
 
   config.webpack = webpackConfigFactory(config.environment, path.resolve(config.files.src.jsEntryPoint), path.resolve(config.dir.build.js));
 
@@ -264,26 +259,6 @@ const compileCss = () =>
 
 export const generateCss = gulp.series(cleanCss, compileCss);
 
-const buildVariables = (input, output) => {
-  const file = path.resolve(input);
-  const compileOptions = {file, includePaths: [path.dirname(file)]};
-
-  return util.promisify(sass.compiler.render)(compileOptions)
-    .then(rendered => sassExtract.extract(rendered, {compileOptions}))
-    .then(variables => variables.global)
-    .then(variables => Object.keys(variables)
-      .filter(key => variables[key].sources.includes(file))
-      .reduce((obj, key) => {
-        return {
-          ...obj,
-          [key.substr(1)]: variables[key].value,
-        };
-      }, {}))
-    .then(variables => unflatten(variables, {delimiter: '_'}))
-    .then(variables => JSON.stringify(variables, null, 2) + '\n')
-    .then(variables => fs.outputFileSync(output, variables));
-};
-
 export const buildCss = gulp.series(validateSass, generateCss);
 
 // JavaScript tasks
@@ -367,15 +342,13 @@ const patternLabPatterns = () =>
   gulp.src(config.files.src.patterns)
     .pipe(gulp.dest(config.dir.build.patterns));
 
-const patternLabPatternsGlobals = () => buildVariables(config.files.src.patternsGlobals, config.files.build.patternsGlobals);
-
 const patternLabStubs = () =>
   Promise.all(
     config.dir.build.stubs
       .map(path => fs.ensureDir(path)),
   );
 
-const generatePatternLab = gulp.parallel(patternLabFonts, patternLabMeta, patternLabPatterns, patternLabPatternsGlobals, patternLabStubs);
+const generatePatternLab = gulp.parallel(patternLabFonts, patternLabMeta, patternLabPatterns, patternLabStubs);
 
 export const buildPatternLab = gulp.series(cleanPatternLab, generatePatternLab);
 
@@ -436,13 +409,9 @@ const exportTemplates = () =>
     .pipe(flatten({includeParents: false}))
     .pipe(gulp.dest(config.dir.export.templates));
 
-const exportTemplatesGlobals = () =>
-  gulp.src(config.files.build.patternsGlobals)
-    .pipe(gulp.dest(config.dir.export.templates));
-
 export const exportPatterns = gulp.series(
   cleanExport,
-  gulp.parallel(exportCss, exportSass, exportSassVendor, exportImages, exportFavicon, exportFonts, exportTemplates, exportTemplatesGlobals, exportJs, exportJsSrc),
+  gulp.parallel(exportCss, exportSass, exportSassVendor, exportImages, exportFavicon, exportFonts, exportTemplates, exportJs, exportJsSrc),
 );
 
 // Default

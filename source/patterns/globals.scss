@@ -1,8 +1,0 @@
-@import "../sass/settings/breakpoint";
-@import "../sass/settings/font";
-
-$breakpoints_extra-small: ($breakpoint-site-x_small / $font-size) * 1em;
-$breakpoints_small: ($breakpoint-site-small / $font-size) * 1em;
-$breakpoints_medium: ($breakpoint-site-medium / $font-size) * 1em;
-$breakpoints_wide: ($breakpoint-site-wide / $font-size) * 1em;
-$breakpoints_extra-wide: ($breakpoint-site-x-wide / $font-size) * 1em;
