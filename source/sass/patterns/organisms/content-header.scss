@@ -5,8 +5,10 @@
 @import "../../mixins/positioning";
 @import "../../mixins/spacing";
 @import "../../settings/baselinegrid";
-@import "../../settings/contentHeader";
 @import "../../settings/grid";
+
+$contentHeader-downloadIcon-inline_size__default: 20px !default;
+$contentHeader-downloadIcon-inline_size__medium: 44px !default;
 
 .content-header {
   font-family: $font-secondary;

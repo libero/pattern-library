@@ -2,7 +2,8 @@
 @import "../../mixins/spacing";
 @import "../../settings/baselinegrid";
 @import "../../settings/color";
-@import "../../settings/image";
+
+$image-inline-spacing: 12px !default;
 
 .image {
   @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
