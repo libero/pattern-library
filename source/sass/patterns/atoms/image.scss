@@ -3,7 +3,7 @@
 @import "../../settings/baselinegrid";
 @import "../../settings/color";
 
-$image-inline-spacing: 12px !default;
+$image-inline-spacing: $baselinegrid-space-extra_small !default;
 
 .image {
   @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
