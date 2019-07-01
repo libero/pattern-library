@@ -6,12 +6,6 @@
 
 $_info-bar-gutter: 8px;
 $_info-bar-image-offset: $font-size;
-$_info-bars: (
-  (type: attention, background-color: $color-attention),
-  (type: info, background-color: $color-information),
-  (type: success, background-color: $color-success),
-  (type: warning, background-color: $color-warning),
-);
 
 .info-bar {
   color: $color-text-reverse;
@@ -32,10 +26,20 @@ $_info-bars: (
   }
 }
 
-@each $info-bar in $_info-bars {
-  .info-bar--#{map-get($info-bar, type)} {
-    background-color: map_get($info-bar, background-color) or $color-information;
-  }
+.info-bar--attention {
+  background-color: $color-attention;
+}
+
+.info-bar--info {
+  background-color: $color-information;
+}
+
+.info-bar--success {
+  background-color: $color-success;
+}
+
+.info-bar--warning {
+  background-color: $color-warning;
 }
 
 .info-bar__image {
