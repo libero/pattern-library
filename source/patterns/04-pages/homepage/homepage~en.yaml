@@ -55,7 +55,7 @@ body:
               details:
                 attributes:
                   aria-label: Authors of this article
-                text: Amber Wallace  et al.
+                text: Amber Wallace et al.
               categories:
                 attributes:
                   aria-label: Category listings that include this article
