@@ -2,7 +2,7 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser']) }) -%}
 
-<div {{- html.attributes(attributes) }}>
+<article {{- html.attributes(attributes) }}>
 
   {%- with {attributes: {class: []}} -%}
     {%- block header -%}
@@ -26,4 +26,4 @@
     {%- endblock header -%}
   {%- endwith -%}
 
-</div>
+</article>
