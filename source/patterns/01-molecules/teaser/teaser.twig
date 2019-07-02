@@ -37,7 +37,7 @@
             {%- block details -%}
 
               {%- if text is defined -%}
-                {%- include 'atoms-paragraph' -%}
+                {%- include 'atoms-paragraph' with {text: text, attributes: {class: ['teaser__authors']}} -%}
               {%- endif -%}
 
             {%- endblock details -%}
