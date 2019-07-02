@@ -245,6 +245,29 @@ body:
                         arguments:
                           text: G
                       - ) A slab almost fully covered with flowers. PB22228.
+  - template: molecules-section
+    arguments:
+      heading:
+        text: References
+      content:
+        template: organisms-reference-list
+        arguments:
+          items:
+            - content:
+                href: '#'
+                heading:
+                  level: 3
+                  text: Reference title 1
+            - content:
+                href: '#'
+                heading:
+                  level: 3
+                  text: Reference title 2
+            - content:
+                href: '#'
+                heading:
+                  level: 3
+                  text: Reference title 3
 
 tags:
   groups:
