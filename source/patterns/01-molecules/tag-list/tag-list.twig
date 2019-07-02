@@ -2,8 +2,8 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['tag-list']) }) -%}
 
-{%- if reducedStandoff|default(false) -%}
-  {%- set attributes = attributes|merge({class: attributes.class|merge(['tag-list--reduced-standoff']) }) -%}
+{%- if tall|default(false) -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['tag-list--tall']) }) -%}
 {%- endif -%}
 
 <div {{- html.attributes(attributes) }}>

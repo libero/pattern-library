@@ -14,7 +14,7 @@
           {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__categories']) }) -%}
 
           <div {{ html.attributes(attributes) }}>
-            {%- include 'molecules-tag-list' with {list: categories|merge({singleLine: true})} only -%}
+            {%- include 'molecules-tag-list' with {tall: true, list: categories|merge({singleLine: true})} only -%}
           </div>
 
         {%- endif -%}

@@ -11,7 +11,7 @@
       {%- with group only -%}
         {%- block group -%}
 
-          {%- include('molecules-tag-list') -%}
+          {%- include('molecules-tag-list') with {tall: true}-%}
 
         {%- endblock group -%}
       {%- endwith -%}
