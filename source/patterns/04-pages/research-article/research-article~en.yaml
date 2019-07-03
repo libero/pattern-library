@@ -314,7 +314,7 @@ body:
                   text: The Gymnosperms
                 authors:
                   attributes:
-                    aria-label: Authors of this article
+                    aria-label: Authors of this book
                   items:
                     - content:
                         attributes:
