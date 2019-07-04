@@ -5,14 +5,14 @@
 @import "../../settings/grid";
 
 .tag-list {
-  @include block-spacing($end: $baselinegrid-space-extra_small);
+  @include block-spacing();
   display: table;
   table-layout: fixed;
   width: 100%;
 }
 
-.tag-list--tall {
-  @include block-spacing();
+.tag-list--compact {
+  @include block-spacing($end: $baselinegrid-space-extra_small);
 }
 
 .tag-list__title {

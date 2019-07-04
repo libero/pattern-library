@@ -1,6 +1,5 @@
-tall: true
+compact: true
 list:
-  singleLine: true
   items:
     - content:
         attributes:
