@@ -9,6 +9,7 @@
     "require": {
         "php": "^7.2",
         "henrikbjorn/lurker": "^1.2",
+        "league/uri-parser": "^1.4",
         "pattern-lab/core": "^2.0",
         "pattern-lab/patternengine-twig": "^2.0",
         "pattern-lab/styleguidekit-twig-default": "^3.0",

@@ -6,8 +6,6 @@
 
 $siteHeader-image-block_size__default: 27px !default;
 $siteHeader-image-block_size__medium: 36px !default;
-$siteHeader-image-inline_size__default: 21px !default;
-$siteHeader-image-inline_size__medium: 28px !default;
 $siteHeader-image-inline_space__default: 18px !default;
 $siteHeader-image-inline_space__medium: 36px !default;
 $siteHeader-image-inline_start_space__x_wide: 0 !default;
@@ -55,8 +53,6 @@ $siteHeader-block_end_space: 7px !default;
   @include block-size($siteHeader-image-block_size__default);
   --max-block-size: #{$_max-block-size--default};
   @include max-block-size($_max-block-size--default);
-  --inline-size: #{$siteHeader-image-inline_size__default};
-  @include inline-size($siteHeader-image-inline_size__default);
   --inline-end-space: #{$siteHeader-image-inline_space__default};
   --inline-start-space: var(--inline-end-space);
   @include padding(($siteHeader-block_size__default - $siteHeader-block_start_space - $siteHeader-image-block_size__default) / 2, block-start);
@@ -66,8 +62,6 @@ $siteHeader-block_end_space: 7px !default;
     @include block-size($siteHeader-image-block_size__medium);
     --max-block-size: #{$_max-block-size--medium};
     @include max-block-size($_max-block-size--medium);
-    --inline-size: #{$siteHeader-image-inline_size__medium};
-    @include inline-size($siteHeader-image-inline_size__medium);
     --inline-end-space: #{$siteHeader-image-inline_space__medium};
     @include padding(($siteHeader-block_size__medium - $siteHeader-block_start_space - $siteHeader-image-block_size__medium) / 2, block-start);
   }
@@ -89,6 +83,5 @@ $siteHeader-block_end_space: 7px !default;
 
 .site-header__image {
   display: block;
-  @include inline-size(100%);
   @include block-size(100%);
 }
