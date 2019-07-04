@@ -37,7 +37,7 @@
             {%- block details -%}
 
               {%- if text is defined -%}
-                {%- include 'atoms-paragraph' with {attributes: attributes|default({})|merge({class: ['teaser__details']})} -%}
+                {%- include 'atoms-paragraph' with {attributes: attributes|default({})|merge({class: attributes.class|default([])|merge(['teaser__details'])})} -%}
               {%- endif -%}
 
             {%- endblock details -%}
