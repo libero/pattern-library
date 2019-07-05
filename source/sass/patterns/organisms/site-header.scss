@@ -6,9 +6,8 @@
 
 $siteHeader-image-block_size__default: 27px !default;
 $siteHeader-image-block_size__medium: 36px !default;
-$siteHeader-image-inline_space__default: 18px !default;
-$siteHeader-image-inline_space__medium: 36px !default;
-$siteHeader-image-inline_start_space__x_wide: 0 !default;
+$siteHeader-inline_space__default: 18px !default;
+$siteHeader-inline_space__medium: 36px !default;
 $siteHeader-block_size__default: 60px !default;
 $siteHeader-block_size__medium: 96px !default;
 $siteHeader-block_start_space: 8px !default;
@@ -21,47 +20,43 @@ $siteHeader-block_end_space: 7px !default;
   @include max-inline-size($grid-max_width);
 
   position: relative;
-  @supports (display:flex) {
+  @supports (display: flex) {
     position: static;
     display: flex;
     align-items: center;
   }
 
   --block-size: #{$siteHeader-block_size__default};
+  --inline-space: #{$siteHeader-inline-space__default};
   @include block-size($siteHeader-block_size__default);
+  @include padding($siteHeader-inline-space__default, inline);
 
   @include mq($from: medium) {
     --block-size: #{$siteHeader-block_size__medium};
+    --inline-space: #{$siteHeader-inline-space__medium};
     @include block-size($siteHeader-block_size__medium);
+    @include padding($siteHeader-inline-space__medium, inline);
+  }
+
+  @include mq($from: x-wide) {
+    --inline-space: 0;
+    @include padding(0, inline);
   }
 
   @supports (--name: value) {
     @include block-size(var(--block-size));
+    @include padding(var(--inline-space), inline);
   }
 }
 
 .site-header__logo_link {
 
-  display: inline-block;
-  box-sizing: content-box;
-
-  --inline-end-space: #{$siteHeader-image-inline_space__default};
-  --inline-start-space: var(--inline-end-space);
-  @include padding(($siteHeader-block_size__default - $siteHeader-block_start_space - $siteHeader-image-block_size__default) / 2, block-start);
-
-  @include mq($from: medium) {
-    --inline-end-space: #{$siteHeader-image-inline_space__medium};
-    @include padding(($siteHeader-block_size__medium - $siteHeader-block_start_space - $siteHeader-image-block_size__medium) / 2, block-start);
-  }
-
-  @include mq($from: x-wide) {
-    --inline-start-space: #{$siteHeader-image-inline_start_space__x_wide};
-    @include margin($siteHeader-image-inline_start_space__x_wide, inline-start);
-  }
-
-  @supports (--name: value) {
-    @include margin(var(--inline-start-space) var(--inline-end-space), inline);
-    @include padding(0, block-start);
+  position: relative;
+  top: 50%; // stylelint-disable-line csstools/use-logical
+  transform: perspective(1px) translateY(-50%);
+  @supports (display: flex) {
+    position: static;
+    transform: none;
   }
 
 }
