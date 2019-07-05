@@ -7,26 +7,13 @@
   {%- with logo|default({})|merge({html: html}) only -%}
     {%- block logo -%}
 
-      {%- set image = image|default({})|merge({alt: image.alt|default('Site logo'), class: image.class|default([])|merge(['site-header__image'])}) -%}
+      {%- set image = image|default({})|merge({src: image.src|default(asset('images/libero-logo.svg')), alt: image.alt|default('Site logo'), class: image.class|default([])|merge(['site-header__image'])}) -%}
 
       {%- if href is defined -%}
         <a href="{{ href }}" class="site-header__logo_link">
       {%- endif -%}
 
-      {%- if image.src is defined -%}
-
-        <img {{- html.attributes(image) }}>
-
-      {%- else -%}
-
-        {%- set image = image|merge({src: asset('images/libero-logo-small.svg')}) -%}
-
-        <picture>
-          <source srcset="{{ asset('images/libero-logo.svg') }}" type="image/svg+xml" media="(min-width: 45.625em)">
-          <img {{- html.attributes(image) }}>
-        </picture>
-
-      {%- endif -%}
+      <img {{- html.attributes(image) }}>
 
       {%- if href is defined -%}
         </a>

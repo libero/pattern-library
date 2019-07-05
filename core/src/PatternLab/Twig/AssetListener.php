@@ -8,8 +8,6 @@ use PatternLab\PatternEngine\Twig\TwigUtil;
 use Symfony\Bridge\Twig\Extension\AssetExtension;
 use Symfony\Component\Asset\PackageInterface;
 use Symfony\Component\Asset\Packages;
-use function League\Uri\build;
-use function League\Uri\parse;
 
 final class AssetListener extends Listener
 {
@@ -29,11 +27,7 @@ final class AssetListener extends Listener
 
             public function getUrl($path)
             {
-                $parts = parse($path);
-                $parts['query'] = $this->getVersion($path);
-                $path = build($parts);
-
-                return "../../{$path}";
+                return "../../{$path}?{$this->getVersion($path)}";
             }
         };
 
