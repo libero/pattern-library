@@ -42,26 +42,14 @@ $siteHeader-block_end_space: 7px !default;
 
 .site-header__logo_link {
 
-  display: block;
+  display: inline-block;
   box-sizing: content-box;
 
-  $_inviolate-space: $siteHeader-block_start_space + $siteHeader-block_end_space + $grid-divider_size;
-  $_max-block-size--default: $siteHeader-block_size__default - $_inviolate-space;
-  $_max-block-size--medium: $siteHeader-block_size__medium - $_inviolate-space;
-
-  --block-size: #{$siteHeader-image-block_size__default};
-  @include block-size($siteHeader-image-block_size__default);
-  --max-block-size: #{$_max-block-size--default};
-  @include max-block-size($_max-block-size--default);
   --inline-end-space: #{$siteHeader-image-inline_space__default};
   --inline-start-space: var(--inline-end-space);
   @include padding(($siteHeader-block_size__default - $siteHeader-block_start_space - $siteHeader-image-block_size__default) / 2, block-start);
 
   @include mq($from: medium) {
-    --block-size: #{$siteHeader-image-block_size__medium};
-    @include block-size($siteHeader-image-block_size__medium);
-    --max-block-size: #{$_max-block-size--medium};
-    @include max-block-size($_max-block-size--medium);
     --inline-end-space: #{$siteHeader-image-inline_space__medium};
     @include padding(($siteHeader-block_size__medium - $siteHeader-block_start_space - $siteHeader-image-block_size__medium) / 2, block-start);
   }
@@ -72,9 +60,6 @@ $siteHeader-block_end_space: 7px !default;
   }
 
   @supports (--name: value) {
-    @include block-size(var(--block-size));
-    @include max-block-size(var(--max-block-size));
-    @include inline-size(var(--inline-size));
     @include margin(var(--inline-start-space) var(--inline-end-space), inline);
     @include padding(0, block-start);
   }
@@ -82,6 +67,23 @@ $siteHeader-block_end_space: 7px !default;
 }
 
 .site-header__image {
+
   display: block;
-  @include block-size(100%);
+
+  $_inviolate-space: $siteHeader-block_start_space + $siteHeader-block_end_space + $grid-divider_size;
+  $_max-block-size--default: $siteHeader-block_size__default - $_inviolate-space;
+  $_max-block-size--medium: $siteHeader-block_size__medium - $_inviolate-space;
+
+  --max-block-size: #{$_max-block-size--default};
+  @include max-block-size($_max-block-size--default);
+
+  @include mq($from: medium) {
+    --max-block-size: #{$_max-block-size--medium};
+    @include max-block-size($_max-block-size--medium);
+  }
+
+  @supports (--name: value) {
+    @include max-block-size(var(--max-block-size));
+  }
+
 }

@@ -38,8 +38,6 @@
         </style>
     </defs>
 
-    <view id="graphic" viewBox="0 0 42 48"/>
-
     <g id="logo" class="black">
         <polygon class="dark-red" points="41 12.69 32 17.89 32 41.4 41 36.07 41 12.69"/>
         <polygon class="light-red" points="22.25 12.26 32 17.89 41 12.69 31.37 6.99 22.25 12.26"/>
