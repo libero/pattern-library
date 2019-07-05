@@ -10,10 +10,10 @@
 
 .reference-list__item {
   counter-increment: reference-count;
-  @supports (display: grid) {
-    display: grid;
-    grid-template-columns: 3rem 1fr;
-  }
+  //@supports (display: grid) {
+  //  display: grid;
+  //  grid-template-columns: 3rem 1fr;
+  //}
 
   &:before {
     content: counter(reference-count, decimal);
@@ -22,6 +22,15 @@
     @include margin($font-size, inline-end);
     font-weight: 600;
     font-family: $font-secondary;
+
+    display: inline-block;
+    vertical-align: top;
+    width: 3rem;
+  }
+
+  & > *:last-child {
+    display: inline-block;
+    width: calc(100% - 3rem - #{$font-size});
   }
 
   &:lang(ar) {
