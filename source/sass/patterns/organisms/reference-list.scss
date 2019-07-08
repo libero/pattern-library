@@ -1,3 +1,4 @@
+@import "../../mixins/positioning";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 @import "../../settings/font";
@@ -16,8 +17,7 @@
     display: inline-block;
     vertical-align: top;
     @include inline-size($_ordinal-inline-size);
-    // TODO: needs mixin
-    text-align: end;
+    @include text-align(end);
     @include margin($font-size, inline-end);
     font-weight: 600;
     font-family: $font-secondary;
