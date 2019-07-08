@@ -1,0 +1,15 @@
+{% include 'templates-page-grid' with {
+  main: {
+    template: 'templates-content-grid',
+    arguments: {
+      content: [
+        {
+          template: 'molecules-error',
+          arguments: error|merge({
+            image: {src: '../../images/error/503.svg'},
+          }),
+        },
+      ],
+    },
+  },
+} only %}

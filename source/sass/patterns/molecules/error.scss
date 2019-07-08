@@ -1,0 +1,19 @@
+@import "../../mixins/spacing";
+@import "../../mixins/typography";
+@import "../../settings/baselinegrid";
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error__image {
+  display: block;
+  @include block-spacing();
+}
+
+.error__heading {
+  @include block-spacing($end: $baselinegrid-space-extra_small);
+  @include h2-typography();
+}
