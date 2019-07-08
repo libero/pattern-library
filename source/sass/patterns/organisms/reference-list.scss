@@ -5,7 +5,6 @@
 .reference-list {
   @include list-style-none();
   counter-reset: reference-count;
-  counter-set: reference-count 98;
 }
 
 .reference-list__item {
