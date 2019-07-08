@@ -1338,3 +1338,113 @@
   }
 
 }
+
+@include describe("@mixin text-align") {
+
+  @include it("generates correct fallbacks when passed 'start'") {
+
+    @include assert() {
+
+      @include output {
+        @include text-align(start);
+      }
+
+      @include expect {
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          text-align: left;
+        }
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          text-align: right;
+        }
+        html[dir][dir] & {
+          text-align: start;
+        }
+      }
+    }
+  }
+  @include it("generates correct fallbacks when passed 'end'") {
+
+    @include assert() {
+
+      @include output {
+        @include text-align(end);
+      }
+
+      @include expect {
+        html[dir="ltr"] &:not([dir]),
+        &[dir="ltr"] {
+          text-align: right;
+        }
+        html[dir="rtl"] &:not([dir]),
+        &[dir="rtl"] {
+          text-align: left;
+        }
+        html[dir][dir] & {
+          text-align: end;
+        }
+      }
+    }
+  }
+
+  @include it("errors when a value is passed that is neither 'start' nor 'end") {
+
+    @include assert() {
+
+      @include output {
+        @include text-align(inline-start);
+      }
+
+      @include expect {
+        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'inline-start'";
+      }
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(inline-end);
+      }
+
+      @include expect {
+        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'inline-end'";
+      }
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(block-start);
+      }
+
+      @include expect {
+        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'block-start'";
+      }
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(block-end);
+      }
+
+      @include expect {
+        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'block-end'";
+      }
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(arbitrary);
+      }
+
+      @include expect {
+        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'arbitrary'";
+      }
+    }
+
+  }
+
+}

@@ -4,3 +4,40 @@
 @mixin inset($sizes, $dimension: "") {
   @include _spacing($sizes, inset, $dimension);
 }
+
+@mixin text-align($inline-dimension) {
+  @if not index(start end, $inline-dimension) {
+    @include _error("must be called with either exaxtly 'start' or exactly 'end', but was called with '#{$inline-dimension}'");
+  } @else {
+
+    @if $inline-dimension == start {
+
+      @include when-left-to-right {
+        text-align: left; // stylelint-disable-line csstools/use-logical
+      }
+
+      @include when-right-to-left {
+        text-align: right; // stylelint-disable-line csstools/use-logical
+      }
+
+    }
+
+    @if $inline-dimension == end {
+
+      @include when-left-to-right {
+        text-align: right; // stylelint-disable-line csstools/use-logical
+      }
+
+      @include when-right-to-left {
+        text-align: left; // stylelint-disable-line csstools/use-logical
+      }
+
+    }
+
+    @include when-logical {
+      text-align: #{$inline-dimension};
+    }
+
+  }
+
+}
