@@ -311,7 +311,16 @@ const cleanImages = () => del(config.dir.build.images);
 
 const compileImages = () =>
   gulp.src(config.files.src.images)
-    .pipe(imagemin())
+    .pipe(imagemin(
+      imagemin.svgo({
+        plugins: [
+          {cleanupIDs: false},
+          {removeStyleElement: true},
+          {removeTitle: false},
+          {sortAttrs: true},
+        ],
+      }),
+    ))
     .pipe(gulp.dest(config.dir.build.images));
 
 const generateImages = gulp.series(cleanImages, compileImages);
@@ -396,7 +405,7 @@ const exportJsSrc = () =>
 
 const exportTemplates = () =>
   gulp.src(config.files.src.templates)
-    // Rename files to standard Twig usage
+  // Rename files to standard Twig usage
     .pipe(rename(path => {
       path.basename = path.basename.replace(/^_/, '');
       path.extname = '.html.twig';
