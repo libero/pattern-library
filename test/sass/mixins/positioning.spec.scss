@@ -1397,7 +1397,7 @@
       }
 
       @include expect {
-        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'inline-start'";
+        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'inline-start'";
       }
     }
 

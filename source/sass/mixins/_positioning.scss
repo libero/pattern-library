@@ -7,7 +7,7 @@
 
 @mixin text-align($inline-dimension) {
   @if not index(start end, $inline-dimension) {
-    @include _error("must be called with either exaxtly 'start' or exactly 'end', but was called with '#{$inline-dimension}'");
+    @include _error("must be called with either exactly 'start' or exactly 'end', but was called with '#{$inline-dimension}'");
   } @else {
 
     @if $inline-dimension == start {
