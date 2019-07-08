@@ -10,23 +10,16 @@
 
 .reference-list__item {
   counter-increment: reference-count;
+
   $_ordinal-inline-size: 3rem;
+  $_ordinal-inline-size--large: 4rem;
+  --ordinal-inline-size: #{$_ordinal-inline-size};
 
-  &:before {
-    content: counter(reference-count, decimal);
-    display: inline-block;
-    vertical-align: top;
-    @include inline-size($_ordinal-inline-size);
-    @include text-align(end);
-    @include margin($font-size, inline-end);
-    font-weight: 600;
-    font-family: $font-secondary;
-
-  }
-
-  & > *:last-child {
-    display: inline-block;
-    width: calc(100% - #{$_ordinal-inline-size} - #{$font-size});
+  &:lang(ja) {
+    --ordinal-inline-size: #{$_ordinal-inline-size--large};
+    &:before {
+      content: counter(reference-count, cjk-decimal);
+    }
   }
 
   &:lang(ar) {
@@ -35,10 +28,26 @@
     }
   }
 
-  &:lang(ja) {
-    grid-template-columns: 4rem 1fr;
-    &:before {
-      content: counter(reference-count, cjk-decimal);
+  &:before {
+    content: counter(reference-count, decimal);
+    font-weight: 600;
+    font-family: $font-secondary;
+    display: inline-block;
+    vertical-align: top;
+    @include text-align(end);
+    @include margin($font-size, inline-end);
+
+    @include inline-size($_ordinal-inline-size);
+    @supports (--name: value) {
+      @include inline-size(var(--ordinal-inline-size));
+    }
+  }
+
+  & > *:last-child {
+    display: inline-block;
+    @include inline-size(calc(100% - #{$font-size} - #{$_ordinal-inline-size}), false);
+    @supports (--name: value) {
+      @include inline-size(calc(100% - #{$font-size} - var(--ordinal-inline-size)), false);
     }
   }
 
