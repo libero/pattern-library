@@ -16,16 +16,9 @@
     },
   },
   main: {
-    template: 'templates-content-grid',
-    arguments: {
-      content: [
-        {
-          template: 'molecules-error',
-          arguments: error|merge({
-            image: {src: '../../images/error/404.svg'},
-          }),
-        },
-      ],
-    },
+    template: 'molecules-error',
+    arguments: error|merge({
+      image: {src: '../../images/error/404.svg'},
+    }),
   },
 } only %}
