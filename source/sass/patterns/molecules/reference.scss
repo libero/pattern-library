@@ -7,11 +7,6 @@
   @include nospace();
   @include set-font-size-and-line-height(scale(0));
   display: block;
-  text-decoration: none;
-}
-
-a.reference__heading:hover {
-  color: $color-primary-normal;
 }
 
 .reference__authors_list {
