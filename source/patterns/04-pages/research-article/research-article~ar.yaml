@@ -227,6 +227,7 @@ body:
                 heading:
                   attributes:
                     lang: en
+                    dir: ltr
                   text: On the Origin of Angiosperms
                 authors:
                   attributes:
@@ -246,6 +247,7 @@ body:
                       arguments:
                         attributes:
                           lang: en
+                          dir: ltr
                         text: Journal of the Linnean Society of London, Botany
                     - ' 38، 29–80.'
                 doi: 10.1111/j.1095-8339.1907.tb01074.x
@@ -253,6 +255,7 @@ body:
                 heading:
                   attributes:
                     lang: en
+                    dir: ltr
                   text: >-
                     Morphological and molecular phylogenetic context of the angiosperms: contrasting the 'top-down' and
                     'bottom-up' approaches used to infer the likely characteristics of the first flowers
@@ -276,6 +279,7 @@ body:
                       arguments:
                         attributes:
                           lang: en
+                          dir: ltr
                         text: Journal of Experimental Botany
                     - ' 57، 3471–3503.'
                 doi: 10.1093/jxb/erl128
@@ -283,6 +287,7 @@ body:
                 heading:
                   attributes:
                     lang: en
+                    dir: ltr
                   text: The Gymnosperms
                 authors:
                   attributes:
@@ -300,6 +305,7 @@ body:
                 heading:
                   attributes:
                     lang: en
+                    dir: ltr
                   text: 'The Cactus gynoecium: A new interpretation'
                 authors:
                   attributes:
@@ -315,6 +321,7 @@ body:
                       arguments:
                         attributes:
                           lang: en
+                          dir: ltr
                         text: American Journal of Botany
                     - ' 51، 598–610.'
                 doi: 10.1002/j.1537-2197.1964.tb06677.x
