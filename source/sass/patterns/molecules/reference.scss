@@ -1,35 +1,20 @@
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
-@import "../../settings/color";
 @import "../../settings/font";
 
 .reference__heading {
   @include nospace();
   @include set-font-size-and-line-height(scale(0));
-  display: block;
-  text-decoration: none;
-}
-
-a.reference__heading:hover {
-  color: $color-primary-normal;
 }
 
 .reference__authors_list {
   @include nospace();
-  display: inline;
   font-family: $font-secondary;
-}
-
-.reference__author {
-  @include nospace();
-  @include set-font-size-and-line-height(scale(-1));
-  display: inline;
 }
 
 .reference__details {
   @include nospace();
   @include set-font-size-and-line-height(scale(-1));
-  font-style: italic;
 }
 
 .reference__doi {
