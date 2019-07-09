@@ -31,7 +31,7 @@
   @include covert-link();
 }
 
-// Setting to override covert-link mixin inheritance (uses inherit-all)
+// Duplicate selector required due to how covert-link implements inheritance
 .reference__doi {
   @include set-font-size-and-line-height(scale(-3));
 }
