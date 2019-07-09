@@ -2,6 +2,10 @@
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['reference']) }) -%}
 
+{%- if href is not defined and doi is defined -%}
+  {%- set href = 'https://doi.org/'~doi -%}
+{%- endif -%}
+
 <article {{- html.attributes(attributes) }}>
 
   {%- block body -%}
@@ -9,10 +13,9 @@
     {%- with {attributes: {class: []}} -%}
       {%- block header -%}
 
-        {%- with heading|merge({text: {text: heading.text} }) only -%}
+        {%- with heading|merge({text: {attributes: {href: href|default(false)}, text: heading.text}}) only -%}
           {%- block heading -%}
 
-            {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['reference__heading']) }) -%}
             {%- set level = level|default(3) -%}
 
             {%- include 'atoms-heading' -%}
