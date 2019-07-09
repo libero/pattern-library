@@ -7,22 +7,24 @@
 }
 
 .reference__heading {
-  @include nospace();
+  @include block-spacing($end: 0);
   @include h6-typography();
 }
 
 .reference__authors_list {
-  @include nospace();
+  @include block-spacing($end: 0);
 }
 
 .reference__details {
-  @include nospace();
+  @include block-spacing($end: 0);
   @include set-font-size-and-line-height(scale(-1));
   font-family: $font-primary;
 }
 
 .reference__doi {
   @include covert-link() {
+    display: block;
+    @include block-spacing($end: 0);
     @include set-font-size-and-line-height(scale(-3));
   }
 }
