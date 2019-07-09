@@ -1408,7 +1408,7 @@
       }
 
       @include expect {
-        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'inline-end'";
+        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'inline-end'";
       }
     }
 
@@ -1419,7 +1419,7 @@
       }
 
       @include expect {
-        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'block-start'";
+        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'block-start'";
       }
     }
 
@@ -1430,7 +1430,7 @@
       }
 
       @include expect {
-        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'block-end'";
+        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'block-end'";
       }
     }
 
@@ -1441,7 +1441,7 @@
       }
 
       @include expect {
-        _error: "must be called with either exaxtly 'start' or exactly 'end', but was called with 'arbitrary'";
+        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'arbitrary'";
       }
     }
 
