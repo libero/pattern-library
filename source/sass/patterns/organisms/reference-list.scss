@@ -16,10 +16,13 @@ $_ordinal-inline-size--large: 3rem;
 
   --ordinal-inline-size: #{$_ordinal-inline-size};
 
-  &:lang(ja) {
-    --ordinal-inline-size: #{$_ordinal-inline-size--large};
-    &:before {
-      content: counter(reference-count, cjk-decimal);
+  @supports (content: counter(reference-count, cjk-decimal)) {
+    &:lang(ja) {
+      --ordinal-inline-size: #{$_ordinal-inline-size--large};
+
+      &:before {
+        content: counter(reference-count, cjk-decimal);
+      }
     }
   }
 
