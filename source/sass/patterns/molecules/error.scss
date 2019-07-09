@@ -6,10 +6,6 @@
 @import "../../settings/grid";
 
 .error {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
   @include max-inline-size($grid-max-width);
   @include margin(auto, inline);
@@ -20,14 +16,24 @@
     @include block-spacing($start: $baselinegrid-space-extra_large, $end: $baselinegrid-space-extra_large);
   }
 
+  @supports (display: flex) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   > :last-child {
     @include margin(0, block-end);
   }
 }
 
 .error__image {
-  display: block;
   @include block-spacing();
+
+  @supports (display: flex) {
+    display: block;
+  }
 }
 
 .error__heading {
