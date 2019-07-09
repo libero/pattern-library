@@ -2,19 +2,23 @@
 @import "../../mixins/typography";
 @import "../../settings/font";
 
+.reference {
+  font-family: $font-secondary;
+}
+
 .reference__heading {
   @include nospace();
-  @include set-font-size-and-line-height(scale(0));
+  @include h6-typography();
 }
 
 .reference__authors_list {
   @include nospace();
-  font-family: $font-secondary;
 }
 
 .reference__details {
   @include nospace();
   @include set-font-size-and-line-height(scale(-1));
+  font-family: $font-primary;
 }
 
 .reference__doi {
