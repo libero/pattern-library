@@ -13,7 +13,7 @@
     {%- with {attributes: {class: []}} -%}
       {%- block header -%}
 
-        {%- with heading|merge({text: {attributes: {href: href|default(false)}, text: heading.text} }) only -%}
+        {%- with heading|merge({text: {attributes: {href: href|default(false)}, text: heading.text}}) only -%}
           {%- block heading -%}
 
             {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['reference__heading']) }) -%}
