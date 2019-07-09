@@ -1341,6 +1341,94 @@
 
 @include describe("@mixin text-align") {
 
+  @include it("sets keywords and global values correctly") {
+
+    @include assert() {
+
+      @include output {
+        @include text-align(center);
+      }
+
+      @include expect {
+        text-align: center;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(justify);
+      }
+
+      @include expect {
+        text-align: justify;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(justify-all);
+      }
+
+      @include expect {
+        text-align: justify-all;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(match-parent);
+      }
+
+      @include expect {
+        text-align: match-parent;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(inherit);
+      }
+
+      @include expect {
+        text-align: inherit;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(initial);
+      }
+
+      @include expect {
+        text-align: initial;
+      }
+
+    }
+
+    @include assert() {
+
+      @include output {
+        @include text-align(unset);
+      }
+
+      @include expect {
+        text-align: unset;
+      }
+
+    }
+
+  }
+
   @include it("generates correct fallbacks when passed 'start'") {
 
     @include assert() {
@@ -1364,6 +1452,7 @@
       }
     }
   }
+
   @include it("generates correct fallbacks when passed 'end'") {
 
     @include assert() {
@@ -1388,51 +1477,34 @@
     }
   }
 
-  @include it("errors when a value is passed that is neither 'start' nor 'end") {
+  @include it("errors when a physical property value is passed") {
 
     @include assert() {
 
       @include output {
-        @include text-align(inline-start);
+        @include text-align(left);
       }
 
       @include expect {
-        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'inline-start'";
+        _error: "'left' is a physical dimension, use its logical equivalent";
       }
     }
 
     @include assert() {
 
       @include output {
-        @include text-align(inline-end);
+        @include text-align(right);
       }
 
       @include expect {
-        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'inline-end'";
+        _error: "'right' is a physical dimension, use its logical equivalent";
       }
+
     }
 
-    @include assert() {
+  }
 
-      @include output {
-        @include text-align(block-start);
-      }
-
-      @include expect {
-        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'block-start'";
-      }
-    }
-
-    @include assert() {
-
-      @include output {
-        @include text-align(block-end);
-      }
-
-      @include expect {
-        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'block-end'";
-      }
-    }
+  @include it("errors on unknown value is passed") {
 
     @include assert() {
 
@@ -1441,7 +1513,7 @@
       }
 
       @include expect {
-        _error: "must be called with either exactly 'start' or exactly 'end', but was called with 'arbitrary'";
+        _error: "called with unknown value '#{arbitrary}'";
       }
     }
 

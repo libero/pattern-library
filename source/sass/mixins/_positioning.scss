@@ -5,38 +5,46 @@
   @include _spacing($sizes, inset, $dimension);
 }
 
-@mixin text-align($inline-dimension) {
-  @if not index(start end, $inline-dimension) {
-    @include _error("must be called with either exactly 'start' or exactly 'end', but was called with '#{$inline-dimension}'");
-  } @else {
+// Doesn't currently support string-based alignment in a table column, but then neither do any browsers, so fine.
+@mixin text-align($alignment) {
+  @if $alignment == start {
 
-    @if $inline-dimension == start {
-
-      @include when-left-to-right {
-        text-align: left; // stylelint-disable-line csstools/use-logical
-      }
-
-      @include when-right-to-left {
-        text-align: right; // stylelint-disable-line csstools/use-logical
-      }
-
+    @include when-left-to-right {
+      text-align: left; // stylelint-disable-line csstools/use-logical
     }
 
-    @if $inline-dimension == end {
-
-      @include when-left-to-right {
-        text-align: right; // stylelint-disable-line csstools/use-logical
-      }
-
-      @include when-right-to-left {
-        text-align: left; // stylelint-disable-line csstools/use-logical
-      }
-
+    @include when-right-to-left {
+      text-align: right; // stylelint-disable-line csstools/use-logical
     }
 
     @include when-logical {
-      text-align: #{$inline-dimension};
+      text-align: #{$alignment};
     }
+
+  } @else if $alignment == end {
+
+    @include when-left-to-right {
+      text-align: right; // stylelint-disable-line csstools/use-logical
+    }
+
+    @include when-right-to-left {
+      text-align: left; // stylelint-disable-line csstools/use-logical
+    }
+
+    @include when-logical {
+      text-align: #{$alignment};
+    }
+  } @else if index(center justify justify-all match-parent inherit initial unset, $alignment) {
+
+    text-align: #{$alignment};
+
+  } @else if index(left right, $alignment) {
+
+    @include _error("'#{$alignment}' is a physical dimension, use its logical equivalent");
+
+  } @else {
+
+    @include _error("called with unknown value '#{$alignment}'");
 
   }
 
