@@ -3,6 +3,9 @@
 @import "../../mixins/typography";
 @import "../../settings/font";
 
+$_ordinal-inline-size: 3rem;
+$_ordinal-inline-size--large: 4rem;
+
 .reference-list {
   @include list-style-none();
   counter-reset: reference-count;
@@ -11,8 +14,6 @@
 .reference-list__item {
   counter-increment: reference-count;
 
-  $_ordinal-inline-size: 3rem;
-  $_ordinal-inline-size--large: 4rem;
   --ordinal-inline-size: #{$_ordinal-inline-size};
 
   &:lang(ja) {
@@ -45,6 +46,7 @@
 
   & > *:last-child {
     display: inline-block;
+
     @include inline-size(calc(100% - #{$font-size} - #{$_ordinal-inline-size}), false);
     @supports (--name: value) {
       @include inline-size(calc(100% - #{$font-size} - var(--ordinal-inline-size)), false);
