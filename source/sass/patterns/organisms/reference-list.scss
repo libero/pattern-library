@@ -3,8 +3,8 @@
 @import "../../mixins/typography";
 @import "../../settings/font";
 
-$_ordinal-inline-size: 3rem;
-$_ordinal-inline-size--large: 4rem;
+$_ordinal-inline-size: 2rem;
+$_ordinal-inline-size--large: 3rem;
 
 .reference-list {
   @include list-style-none();
