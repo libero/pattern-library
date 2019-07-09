@@ -5,8 +5,8 @@
   @include _spacing($sizes, inset, $dimension);
 }
 
-// Doesn't currently support string-based alignment in a table column, but then neither do any browsers, so fine.
 @mixin text-align($alignment) {
+
   @if $alignment == start {
 
     @include when-left-to-right {
@@ -34,18 +34,14 @@
     @include when-logical {
       text-align: #{$alignment};
     }
-  } @else if index(center justify justify-all match-parent inherit initial unset, $alignment) {
 
+  } @else if index(center inherit initial justify justify-all match-parent unset, $alignment) {
     text-align: #{$alignment};
-
-  } @else if index(left right, $alignment) {
-
-    @include _error("'#{$alignment}' is a physical dimension, use its logical equivalent");
-
+  } @else if index((left, right), $alignment) {
+    @include _error("'#{$alignment}' is a physical alignment, use its logical equivalent");
   } @else {
-
-    @include _error("called with unknown value '#{$alignment}'");
-
+    // Character-based alignment in a table column is unsupported.
+    @include _error("Unknown alignment '#{$alignment}'");
   }
 
 }

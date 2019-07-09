@@ -1486,7 +1486,7 @@
       }
 
       @include expect {
-        _error: "'left' is a physical dimension, use its logical equivalent";
+        _error: "'left' is a physical alignment, use its logical equivalent";
       }
     }
 
@@ -1497,7 +1497,7 @@
       }
 
       @include expect {
-        _error: "'right' is a physical dimension, use its logical equivalent";
+        _error: "'right' is a physical alignment, use its logical equivalent";
       }
 
     }
@@ -1513,7 +1513,7 @@
       }
 
       @include expect {
-        _error: "called with unknown value '#{arbitrary}'";
+        _error: "Unknown alignment '#{arbitrary}'";
       }
     }
 
