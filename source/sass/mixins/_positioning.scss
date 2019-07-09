@@ -37,7 +37,7 @@
 
   } @else if index(center inherit initial justify justify-all match-parent unset, $alignment) {
     text-align: #{$alignment};
-  } @else if index((left, right), $alignment) {
+  } @else if index(left right, $alignment) {
     @include _error("'#{$alignment}' is a physical alignment, use its logical equivalent");
   } @else {
     // Character-based alignment in a table column is unsupported.
