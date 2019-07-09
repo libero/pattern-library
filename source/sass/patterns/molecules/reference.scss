@@ -33,10 +33,7 @@ a.reference__heading:hover {
 }
 
 .reference__doi {
-  @include covert-link();
-}
-
-// Duplicate selector required due to how covert-link implements inheritance
-.reference__doi {
-  @include set-font-size-and-line-height(scale(-3));
+  @include covert-link() {
+    @include set-font-size-and-line-height(scale(-3));
+  }
 }
