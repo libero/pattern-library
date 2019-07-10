@@ -112,16 +112,13 @@
 
           <picture {{- html.attributes(attributes) -}}>
 
-            {%- with {sources: sources|default([])} only -%}
+            {%- with {sources: sources|default([])|merge({html: html})} only -%}
               {%- for source in sources -%}
-                {% with source only %}
-                  <source
-                      {% if media is defined %} media="{{ media }}"{% endif %}
-                      srcset="{{ srcset }}"
-                      {% if sizes is defined %} sizes="{{ sizes}}"{% endif %}
-                      type="{{ type }}"
-                  />
-                {% endwith %}
+                {% with {source: source}|merge({html: sources.html}) only %}
+                  {%- if source is defined -%}
+                    <source {{- html.attributes(source) -}} />
+                  {%- endif -%}
+                {%- endwith -%}
               {%- endfor -%}
             {%- endwith -%}
 
