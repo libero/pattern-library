@@ -103,5 +103,38 @@
       {%- endblock meta -%}
     {%- endwith -%}
 
+    {%- with image|default({})|merge({html: html}) only -%}
+      {%- block image -%}
+
+        {%- if fallback is defined -%}
+
+          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__picture']) }) -%}
+
+          <picture {{- html.attributes(attributes) -}}>
+
+            {%- with {sources: sources|default([])} only -%}
+              {%- for source in sources -%}
+                {% with source only %}
+                  <source
+                      {% if media is defined %} media="{{ media }}"{% endif %}
+                      srcset="{{ srcset }}"
+                      {% if sizes is defined %} sizes="{{ sizes}}"{% endif %}
+                      type="{{ type }}"
+                  />
+                {% endwith %}
+              {%- endfor -%}
+            {%- endwith -%}
+
+            {%- with fallback only -%}
+              <img src="{{ src }}" alt="{{ alt|default('') }}" class="content-header__image"/>
+            {%- endwith -%}
+
+          </picture>
+
+        {%- endif -%}
+
+      {%- endblock -%}
+    {%- endwith -%}
+
   {%- endblock body -%}
 </header>
