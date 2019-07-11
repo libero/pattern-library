@@ -43,7 +43,7 @@ contentHeader:
         srcset: '../../images/content-header/placeholder/placeholder-1114x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-1114x336@1x.jpg 1x'
 
     fallback:
-      src: '../../images/content-header/placeholder-1114x336@1x.jpg'
+      src: '../../images/content-header/placeholder/placeholder-1114x336@1x.jpg'
 
 body:
   - template: organisms-teaser-list
