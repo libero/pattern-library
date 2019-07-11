@@ -3,8 +3,47 @@ siteHeader:
     href: '#'
 
 contentHeader:
+  attributes:
+    class: ['listing-grid__item--full']
   contentTitle:
     text: The International Journal for Demonstration
+  image:
+    sources:
+      - media: '(max-width: 450px)'
+        type: 'image/webp'
+        srcset: '../../images/content-header/placeholder/placeholder-450x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-450x336@1x.webp 1x'
+      - media: '(max-width: 450px)'
+        type: 'image/jpg'
+        srcset: '../../images/content-header/placeholder/placeholder-450x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-450x336@1x.jpg 1x'
+
+      - media: '(max-width: 729px)'
+        type: 'image/webp'
+        srcset: '../../images/content-header/placeholder/placeholder-729x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-729x336@1x.webp 1x'
+      - media: '(max-width: 729px)'
+        type: 'image/jpg'
+        srcset: '../../images/content-header/placeholder/placeholder-729x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-729x336@1x.jpg 1x'
+
+      - media: '(max-width: 899px)'
+        type: 'image/webp'
+        srcset: '../../images/content-header/placeholder/placeholder-899x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-899x336@1x.webp 1x'
+      - media: '(max-width: 899px)'
+        type: 'image/jpg'
+        srcset: '../../images/content-header/placeholder/placeholder-899x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-899x336@1x.jpg 1x'
+
+      - media: '(max-width: 1023px)'
+        type: 'image/webp'
+        srcset: '../../images/content-header/placeholder/placeholder-1023x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-1023x336@1x.webp 1x'
+      - media: '(max-width: 1023px)'
+        type: 'image/jpg'
+        srcset: '../../images/content-header/placeholder/placeholder-1023x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-1023x336@1x.jpg 1x'
+
+      - type: 'image/webp'
+        srcset: '../../images/content-header/placeholder/placeholder-1114x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-1114x336@1x.webp 1x'
+      - type: 'image/jpg'
+        srcset: '../../images/content-header/placeholder/placeholder-1114x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-1114x336@1x.jpg 1x'
+
+    fallback:
+      src: '../../images/content-header/placeholder-1114x336@1x.jpg'
 
 body:
   - template: organisms-teaser-list
