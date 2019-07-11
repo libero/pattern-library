@@ -1,80 +1,40 @@
 contentTitle:
-  text: Content title
-download:
-  link:
-    href: '#'
-  alt: Download the PDF for this article
-categories:
-  attributes:
-    aria-label: Category listings that include this article
-  items:
-    - content:
-        attributes:
-          href: '#'
-        text: Cell Biology
-    - content:
-        text: Epidemiology and Global Health
-meta:
-  attributes:
-    aria-label: Publication details
-  items:
-    - attributes:
-        aria-label: Type of article
-      content:
-        attributes:
-          href: '#'
-        text: Research Article
-    - attributes:
-        aria-label: Publication date
-      content:
-        text:
-          - template: atoms-time
-            arguments:
-              attributes:
-                datetime: '2010-04-05'
-              text: April 5, 2019
-    - attributes:
-        aria-label: Issue number
-      content:
-        text: Issue 1
-authors:
-  attributes:
-    aria-label: Authors of this article
-  items:
-    - content:
-        attributes:
-          href: '#'
-        text: Author 1
-    - content:
-        text: Author 2
-    - content:
-        attributes:
-          href: '#'
-        text: Author 3
-affiliations:
-  attributes:
-    aria-label: Author affiliations
-  items:
-    - content:
-        text: Affiliation 1
-    - content:
-        text: Affiliation 2
+  text: Section title
 
 image:
   sources:
-    - media: '(max-width: 480px)'
+    - media: '(max-width: 450px)'
       type: 'image/webp'
-      srcset: '../../images/local/content-header/science-lens-effect-600w.webp'
-    - media: '(max-width: 480px)'
-      type: 'image/png'
-      srcset: '../../images/local/content-header/science-lens-effect-600w.png'
+      srcset: '../../images/content-header/placeholder/placeholder-450x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-450x336@1x.webp 1x'
+    - media: '(max-width: 450px)'
+      type: 'image/jpg'
+      srcset: '../../images/content-header/placeholder/placeholder-450x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-450x336@1x.jpg 1x'
+
+    - media: '(max-width: 729px)'
+      type: 'image/webp'
+      srcset: '../../images/content-header/placeholder/placeholder-729x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-729x336@1x.webp 1x'
+    - media: '(max-width: 729px)'
+      type: 'image/jpg'
+      srcset: '../../images/content-header/placeholder/placeholder-729x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-729x336@1x.jpg 1x'
+
+    - media: '(max-width: 899px)'
+      type: 'image/webp'
+      srcset: '../../images/content-header/placeholder/placeholder-899x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-899x336@1x.webp 1x'
+    - media: '(max-width: 899px)'
+      type: 'image/jpg'
+      srcset: '../../images/content-header/placeholder/placeholder-899x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-899x336@1x.jpg 1x'
+
+    - media: '(max-width: 1023px)'
+      type: 'image/webp'
+      srcset: '../../images/content-header/placeholder/placeholder-1023x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-1023x336@1x.webp 1x'
+    - media: '(max-width: 1023px)'
+      type: 'image/jpg'
+      srcset: '../../images/content-header/placeholder/placeholder-1023x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-1023x336@1x.jpg 1x'
 
     - type: 'image/webp'
-      srcset: '../../images/local/content-header/science-1600w.webp 1600w, ../../images/local/content-header/science-800w.webp 800w, ../../images/local/content-header/science-600w.webp 600w'
-      sizes: '(min-width: 1114px) 1114px, 100%'
+      srcset: '../../images/content-header/placeholder/placeholder-1114x336@2x.webp 2x, ../../images/content-header/placeholder/placeholder-1114x336@1x.webp 1x'
+    - type: 'image/jpg'
+      srcset: '../../images/content-header/placeholder/placeholder-1114x336@2x.jpg 2x, ../../images/content-header/placeholder/placeholder-1114x336@1x.jpg 1x'
 
-    - type: 'image/png'
-      srcset: '../../images/local/content-header/science-1600w.png 1600w, ../../images/local/content-header/science-800w.png 800w, ../../images/local/content-header/science-600w.png 600w'
-      sizes: '(min-width: 1114px) 1114px, 100%'
   fallback:
-    src: '../../images/local/content-header/science-1600w.png'
+    src: '../../images/content-header/placeholder-1114x336@1x.jpg'

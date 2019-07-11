@@ -1,10 +1,44 @@
 {%- import 'atoms-html' as html -%}
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) -%}
+{%- if image is defined -%}
+  {%- set attributes = attributes|merge({class: attributes.class|merge(['content-header--image']) }) -%}
+  <div class="content-header-image-wrapper">
+{%- endif -%}
 
 <header {{- html.attributes(attributes) }}>
 
-  {%- block body -%}
+  {%- with image|default({})|merge({html: html}) only -%}
+    {%- block image -%}
+
+      {%- if fallback is defined -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__picture']) }) -%}
+        <picture {{- html.attributes(attributes) -}}>
+
+          {%- with {sources: sources|default([])|merge({html: html})} only -%}
+            {%- for source in sources -%}
+              {% with {source: source}|merge({html: sources.html}) only %}
+                {%- if source is defined -%}
+                  <source {{- html.attributes(source) -}} />
+                {%- endif -%}
+              {%- endwith -%}
+            {%- endfor -%}
+          {%- endwith -%}
+
+          {%- with fallback only -%}
+            <img src="{{ src }}" alt="{{ alt|default('') }}" class="content-header__image"/>
+          {%- endwith -%}
+
+        </picture>
+
+      {%- endif -%}
+
+    {%- endblock -%}
+  {%- endwith -%}
+
+  <div class="content-header__body">
+    {%- block body -%}
 
     {%- with {categories: categories|default({}), html: html} only -%}
       {%- block categories -%}
@@ -103,35 +137,11 @@
       {%- endblock meta -%}
     {%- endwith -%}
 
-    {%- with image|default({})|merge({html: html}) only -%}
-      {%- block image -%}
-
-        {%- if fallback is defined -%}
-
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__picture']) }) -%}
-
-          <picture {{- html.attributes(attributes) -}}>
-
-            {%- with {sources: sources|default([])|merge({html: html})} only -%}
-              {%- for source in sources -%}
-                {% with {source: source}|merge({html: sources.html}) only %}
-                  {%- if source is defined -%}
-                    <source {{- html.attributes(source) -}} />
-                  {%- endif -%}
-                {%- endwith -%}
-              {%- endfor -%}
-            {%- endwith -%}
-
-            {%- with fallback only -%}
-              <img src="{{ src }}" alt="{{ alt|default('') }}" class="content-header__image"/>
-            {%- endwith -%}
-
-          </picture>
-
-        {%- endif -%}
-
-      {%- endblock -%}
-    {%- endwith -%}
-
   {%- endblock body -%}
+  </div>
+
 </header>
+
+{%- if image is defined -%}
+  </div>
+{%- endif -%}
