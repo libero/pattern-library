@@ -3,7 +3,6 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) -%}
 {%- if image is defined -%}
   {%- set attributes = attributes|merge({class: attributes.class|merge(['content-header--image']) }) -%}
-  <div class="content-header-image-wrapper">
 {%- endif -%}
 
 <header {{- html.attributes(attributes) }}>
@@ -141,7 +140,3 @@
   </div>
 
 </header>
-
-{%- if image is defined -%}
-  </div>
-{%- endif -%}

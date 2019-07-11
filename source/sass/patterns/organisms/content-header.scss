@@ -10,6 +10,22 @@
 $contentHeader-downloadIcon-inline_size__default: 20px !default;
 $contentHeader-downloadIcon-inline_size__medium: 44px !default;
 
+$contentHeader-image-block-size--narrow: 264px;
+$contentHeader-image-block-size--medium: 288px;
+$contentHeader-image-block-size--wide: 336px;
+
+@mixin _set-image-block-height() {
+  @include block-size($contentHeader-image-block-size--narrow);
+
+  @include mq($from: medium) {
+    @include block-size($contentHeader-image-block-size--medium);
+  }
+
+  @include mq($from: wide) {
+    @include block-size($contentHeader-image-block-size--wide);
+  }
+}
+
 .content-header {
   font-family: $font-secondary;
   text-align: center;
@@ -19,11 +35,36 @@ $contentHeader-downloadIcon-inline_size__medium: 44px !default;
   position: relative;
 }
 
+.content-header--image {
+
+  @include padding(0, block-start);
+  @include max-inline-size($grid-max_width);
+  @include _set-image-block-height();
+  border: 0;
+
+  & .content-header__body {
+    color: $color-text-reverse;
+    @include _set-image-block-height();
+
+    @supports (display: flex) {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+    }
+
+  }
+
+}
+
 .content-header__title {
   @include block-spacing($end: $baselinegrid-space-small);
 
   &:last-child {
     @include block-spacing($end: $baselinegrid-space-medium);
+  }
+
+  .content-header--image & {
+    align-self: center;
   }
 }
 
@@ -163,4 +204,30 @@ $contentHeader-downloadIcon-inline_size__medium: 44px !default;
   @include mq($from: medium) {
     @include inline-size($contentHeader-downloadIcon-inline_size__medium);
   }
+}
+
+//.content-header__picture,
+//.content-header__image {
+//  position: absolute;
+//  @include inset(0, block);
+//  @include inset(0, inline);
+//  z-index: -1;
+//  @include _set-image-block-height();
+//}
+
+.content-header__picture {
+  position: absolute;
+  @include inset(0, block);
+  @include inset(0, inline);
+  z-index: -1;
+}
+
+.content-header__image {
+  position: absolute;
+  @include inset(50%, block-start);
+  @include inset(50%, inline-start);
+  @include block-size(100%);
+  @include min-inline-size(100%);
+  @include max-inline-size(none);
+  transform: translate(-50%, -50%);
 }
