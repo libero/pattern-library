@@ -1,8 +1,4 @@
-logo:
-  href: '#'
-  image:
-    alt: 'Libero logo'
-menu:
+items:
   - attributes:
       href: '#'
     text: Home

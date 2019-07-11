@@ -1,3 +1,5 @@
+@import "../molecules/nav-bar";
+@import "../../mixins/decorations";
 @import "../../mixins/grid";
 @import "../../mixins/media-query";
 @import "../../mixins/sizes";
@@ -18,6 +20,7 @@ $siteHeader-block_end_space: 7px !default;
   @include margin(0 auto);
   @include padding($siteHeader-block_start_space $siteHeader-block_end_space, block);
   @include max-inline-size($grid-max_width);
+  overflow-x: scroll;
 
   position: relative;
   @supports (display: flex) {
@@ -51,6 +54,7 @@ $siteHeader-block_end_space: 7px !default;
 
 .site-header__logo_link {
 
+  flex-shrink: 0;
   position: relative;
   top: 50%; // stylelint-disable-line csstools/use-logical
   transform: perspective(1px) translateY(-50%);
@@ -81,4 +85,16 @@ $siteHeader-block_end_space: 7px !default;
     @include max-block-size(var(--max-block-size));
   }
 
+}
+
+.site-header__menu {
+  flex-shrink: 0;
+  @include margin($nav-bar-item-spacing-default, inline-start);
+  @include padding($nav-bar-item-spacing-default, inline-start);
+  @include border(inline-start);
+
+  @include mq($from: medium) {
+    @include margin($nav-bar-item-spacing-medium, inline-start);
+    @include padding($nav-bar-item-spacing-medium, inline-start);
+  }
 }
