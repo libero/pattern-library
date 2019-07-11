@@ -10,9 +10,12 @@
 $contentHeader-downloadIcon-inline_size__default: 20px !default;
 $contentHeader-downloadIcon-inline_size__medium: 44px !default;
 
-$contentHeader-image-block-size--narrow: 264px;
-$contentHeader-image-block-size--medium: 288px;
-$contentHeader-image-block-size--wide: 336px;
+$contentHeader-image-block-size--narrow: 264px !default;
+$contentHeader-image-block-size--medium: 288px !default;
+$contentHeader-image-block-size--wide: 336px !default;
+
+$contentHeader-image-inline-padding: 24px !default;
+$contentHeader-tweak-point: $grid-max_width !default;
 
 @mixin _set-image-block-height() {
   @include block-size($contentHeader-image-block-size--narrow);
@@ -38,13 +41,19 @@ $contentHeader-image-block-size--wide: 336px;
 .content-header--image {
 
   @include padding(0, block-start);
-  @include max-inline-size($grid-max_width);
+  @include inline-size(100vw);
   @include _set-image-block-height();
   border: 0;
+
+  @include mq($from: $contentHeader-tweak-point) {
+    @include inline-size($grid-max_width);
+    @include margin(auto, inline);
+  }
 
   & .content-header__body {
     color: $color-text-reverse;
     @include _set-image-block-height();
+    @include padding($contentHeader-image-inline-padding, inline);
 
     @supports (display: flex) {
       display: flex;
@@ -65,6 +74,7 @@ $contentHeader-image-block-size--wide: 336px;
 
   .content-header--image & {
     align-self: center;
+    @include block-spacing($end: 0);
   }
 }
 
