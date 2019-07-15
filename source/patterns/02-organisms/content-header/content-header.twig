@@ -13,6 +13,7 @@
       {%- if fallback is defined -%}
 
         {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__picture']) }) -%}
+        <div class="content-header__overlay"></div>
         <picture {{- html.attributes(attributes) -}}>
 
           {%- with {sources: sources|default([])|merge({html: html})} only -%}

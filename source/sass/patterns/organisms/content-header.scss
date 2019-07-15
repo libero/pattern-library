@@ -36,6 +36,7 @@ $contentHeader-tweak-point: $grid-max_width !default;
   @include block-spacing($end: $baselinegrid-space-medium - $grid-divider_size);
   @include border(block-end);
   position: relative;
+  display: flex;
 }
 
 .content-header--image {
@@ -217,10 +218,9 @@ $contentHeader-tweak-point: $grid-max_width !default;
 }
 
 .content-header__picture {
-  position: absolute;
   @include inset(0, block);
   @include inset(0, inline);
-  z-index: -1;
+  z-index: -2;
 }
 
 .content-header__image {
@@ -231,4 +231,14 @@ $contentHeader-tweak-point: $grid-max_width !default;
   @include min-inline-size(100%);
   @include max-inline-size(none);
   transform: translate(-50%, -50%);
+  z-index: -2;
+}
+
+.content-header__overlay {
+  @include inset(0, block);
+  @include inset(0, inline);
+  background: rgba(0,0,0,0.4);
+  position: absolute;
+  z-index: -1;
+
 }
