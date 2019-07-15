@@ -1,10 +1,14 @@
 items:
   - attributes:
       href: '#'
-    text: Home
+    text: Red
+  - text: Orange
+  - text: Yellow
   - attributes:
       href: '#'
-    text: Issues
+    text: Green
   - attributes:
       href: '#'
-    text: About
+    text: Blue
+  - text: Indigo
+  - text: Violet
