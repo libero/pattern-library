@@ -52,15 +52,12 @@ $contentHeader-tweak-point: $grid-max_width !default;
   }
 
   & .content-header__body {
-    color: $color-text-reverse;
     @include _set-image-block-height();
     @include padding($contentHeader-image-inline-padding, inline);
-
-    @supports (display: flex) {
-      display: flex;
-      justify-content: center;
-      align-content: center;
-    }
+    color: $color-text-reverse;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 
   }
 
