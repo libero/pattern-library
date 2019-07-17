@@ -3,4 +3,5 @@
 /source/fonts/*
 !/source/fonts/fonts.yaml
 /source/sass/fonts/
+/source/sass/_locales.scss
 /vendor/

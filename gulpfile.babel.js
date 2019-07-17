@@ -1,4 +1,5 @@
 import browserSync from 'browser-sync';
+import cldr from 'cldr';
 import color from 'ansi-colors';
 import copy from 'recursive-copy';
 import del from 'del';
@@ -29,6 +30,7 @@ import sharp from 'sharp';
 import sourcemaps from 'gulp-sourcemaps';
 import stylelint from 'stylelint';
 import syntaxScss from 'postcss-scss';
+import tags from 'language-tags';
 import tempWrite from 'temp-write';
 import * as Throttle from 'promise-parallel-throttle';
 import url from 'url';
@@ -128,6 +130,7 @@ const buildConfig = (invocationArgs, sourceRoot, testRoot, buildRoot) => {
     `${config.dir.src.fonts}/**/*`,
     `!${config.files.src.fontsDefinition}`,
   ];
+  config.files.src.sassLocales = `${config.dir.src.sass}/_locales.scss`;
   config.files.src.meta = `${config.dir.src.meta}/**/*`;
   config.files.src.patterns = `${config.dir.src.patterns}/**/*`;
   config.files.src.templates = `${config.dir.src.patterns}/!(04-pages)/**/*.twig`;
@@ -220,6 +223,61 @@ const compileFonts = gulp.parallel(compileFontFiles, compileFontLicenses);
 export const buildFonts = gulp.series(cleanFonts, compileFonts);
 
 // Sass tasks
+
+const cleanSassLocaleData = () => del([config.files.src.sassLocales]);
+
+const generateSassLocaleData = done => {
+  const supplementalMetadata = cldr.extractLanguageSupplementalMetadata();
+  const localeParents = cldr.localeIds.filter(locale => locale !== 'root')
+    .concat(Object.keys(supplementalMetadata).filter(locale => {
+      return 0 === ['deprecated', 'legacy'].indexOf(supplementalMetadata[locale].reason);
+    }))
+    .map(locale => locale.replace(/_/g, '-').toLowerCase())
+    .filter(locale => tags.check(locale))
+    .reduce((localeParents, locale) => {
+      const parent = (cldr.resolveParentLocaleId(locale) || 'root').replace(/_/g, '-').toLowerCase();
+
+      localeParents[locale] = 'root' === parent ? 'und' : parent;
+      return localeParents;
+    }, {});
+
+  const locales = ['und'].concat(Object.keys(localeParents)).reduce((carry, locale) => {
+    const localeData = {};
+
+    if (locale in localeParents) {
+      const parent = locale.replace(/-[^-]+$/, '');
+      localeData['parent'] = parent === locale ? 'und' : parent;
+      localeData['real-parent'] = localeParents[locale];
+    }
+
+    localeData['inline-list-separator'] = cldr.extractListPatterns(supplementalMetadata[locale] ? supplementalMetadata[locale]['replacement'] : locale).default.middle.replace(/{[0|1]}/g, '');
+
+    carry[locale] = localeData;
+
+    return carry;
+  }, {});
+
+  const output = fs.createWriteStream(config.files.src.sassLocales);
+
+  output.write('$locale-data: (\n');
+
+  Object.keys(locales)
+    .forEach(locale => {
+      output.write(`  "${locale}": (\n`);
+      Object.keys(locales[locale]).forEach(property => {
+        output.write(`    "${property}": "${locales[locale][property]}",\n`);
+      });
+      output.write('  ),\n');
+    });
+
+  output.write(');\n');
+
+  output.close();
+
+  done();
+};
+
+export const assembleSassLocaleData = gulp.series(cleanSassLocaleData, generateSassLocaleData);
 
 const lintSass = () => {
   if (!config.lint) {
@@ -363,7 +421,7 @@ export const buildPatternLab = gulp.series(cleanPatternLab, generatePatternLab);
 
 // Combined tasks
 
-export const build = gulp.series(gulp.parallel(gulp.series(buildFonts, buildCss), buildImages, buildJs), buildPatternLab);
+export const build = gulp.series(gulp.parallel(gulp.series(gulp.parallel(assembleSassLocaleData, buildFonts), buildCss), buildImages, buildJs), buildPatternLab);
 
 export const test = gulp.parallel(validateJs, validateSass);
 
