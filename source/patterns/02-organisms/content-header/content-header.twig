@@ -1,6 +1,7 @@
 {%- import 'atoms-html' as html -%}
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header']) }) -%}
+
 {%- if image is defined -%}
   {%- set attributes = attributes|merge({class: attributes.class|merge(['content-header--image']) }) -%}
 {%- endif -%}
@@ -9,30 +10,28 @@
   {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header--has-header']) }) -%}
 {%- endif -%}
 
+{%- if hasFooter|default(meta.items|default([])|length) -%}
+  {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header--has-footer']) }) -%}
+{%- endif -%}
+
 <header {{- html.attributes(attributes) }}>
 
   {%- with image|default({})|merge({html: html}) only -%}
     {%- block image -%}
 
-      {%- if fallback is defined -%}
+      {%- if image.src is defined -%}
 
         {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__picture']) }) -%}
-        <div class="content-header__overlay"></div>
-        <picture {{- html.attributes(attributes) -}}>
 
-          {%- with {sources: sources|default([])|merge({html: html})} only -%}
-            {%- for source in sources -%}
-              {% with {source: source}|merge({html: sources.html}) only %}
-                {%- if source is defined -%}
-                  <source {{- html.attributes(source) -}} />
-                {%- endif -%}
-              {%- endwith -%}
-            {%- endfor -%}
-          {%- endwith -%}
+        <picture {{- html.attributes(attributes|default({})) }}>
 
-          {%- with fallback only -%}
-            <img src="{{ src }}" alt="{{ alt|default('') }}" class="content-header__image"/>
-          {%- endwith -%}
+          {%- for source in sources|default([]) -%}
+            <source {{- html.attributes(source) }}>
+          {%- endfor -%}
+
+          {%- set image = image|merge({class: image.class|default([])|merge(['content-header__image']) }) -%}
+
+          <img {{- html.attributes(image) }}>
 
         </picture>
 
@@ -41,107 +40,122 @@
     {%- endblock -%}
   {%- endwith -%}
 
-  <div class="content-header__body">
+  {%- with {categories: categories|default({}), hasImage: image is defined, html: html} only -%}
+    {%- block categories -%}
+
+      {%- if categories.items|default([])|length -%}
+
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__categories']) }) -%}
+
+        <div {{ html.attributes(attributes) }}>
+          {%- include 'molecules-tag-list' with {list: categories|merge({singleLine: true}), reverse: hasImage} only -%}
+        </div>
+
+      {%- endif -%}
+
+    {%- endblock categories -%}
+  {%- endwith -%}
+
+  {%- with download|default({})|merge({hasImage: image is defined, html: html}) only -%}
+    {%- block download -%}
+
+      {%- if link.href is defined -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__download']) }) -%}
+
+        <div {{ html.attributes(attributes) }}>
+          <a {{ html.attributes(link) }}>
+            <picture>
+              {%- set image = hasImage ? 'download-reverse' : 'download' -%}
+              <source srcset="{{ asset('images/content-header/' ~ image ~ '-full.svg') }}" type="image/svg+xml"
+                      media="(min-width: 45.625em)">
+              <img src="{{ asset('images/content-header/' ~ image ~ '.svg') }}" class="content-header__download_icon"
+                   alt="{{ alt|default('') }}">
+            </picture>
+          </a>
+        </div>
+
+      {%- endif -%}
+
+    {%- endblock download -%}
+  {%- endwith -%}
+
+  {%- with {attributes: {}} -%}
     {%- block body -%}
 
-    {%- with {categories: categories|default({}), html: html} only -%}
-      {%- block categories -%}
+      {%- set attributes = attributes|merge({class: attributes.class|default([])|merge(['content-header__body']) }) -%}
 
-        {%- if categories.items|default([])|length -%}
+      <div {{ html.attributes(attributes) }}>
 
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__categories']) }) -%}
+        {%- with contentTitle only -%}
 
-          <div {{ html.attributes(attributes) }}>
-            {%- include 'molecules-tag-list' with {list: categories|merge({singleLine: true})} only -%}
-          </div>
+          {%- block title -%}
 
-        {%- endif -%}
+            {% set length = include('atoms-heading')|striptags|trim|length %}
 
-      {%- endblock categories -%}
-    {%- endwith -%}
+            {% if length < 20 %}
+              {% set lengthClass = 'xx-short' %}
+            {% elseif length < 36 %}
+              {% set lengthClass = 'x-short' %}
+            {% elseif length < 46 %}
+              {% set lengthClass = 'short' %}
+            {% elseif length < 57 %}
+              {% set lengthClass = 'medium' %}
+            {% elseif length < 80 %}
+              {% set lengthClass = 'long' %}
+            {% elseif length < 120 %}
+              {% set lengthClass = 'x-long' %}
+            {% else %}
+              {% set lengthClass = 'xx-long' %}
+            {% endif %}
 
-    {%- with contentTitle only -%}
+            {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title', 'content-header__title--' ~ lengthClass]) }) %}
+            {% set level = 1 %}
 
-      {%- block title -%}
+            {% include 'atoms-heading' %}
 
-        {% set length = include('atoms-heading')|striptags|trim|length %}
+          {%- endblock -%}
 
-        {% if length < 20 %}
-          {% set lengthClass = 'xx-short' %}
-        {% elseif length < 36 %}
-          {% set lengthClass = 'x-short' %}
-        {% elseif length < 46 %}
-          {% set lengthClass = 'short' %}
-        {% elseif length < 57 %}
-          {% set lengthClass = 'medium' %}
-        {% elseif length < 80 %}
-          {% set lengthClass = 'long' %}
-        {% elseif length < 120 %}
-          {% set lengthClass = 'x-long' %}
-        {% else %}
-          {% set lengthClass = 'xx-long' %}
-        {% endif %}
+        {%- endwith -%}
 
-        {% set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__title', 'content-header__title--' ~ lengthClass]) }) %}
-        {% set level = 1 %}
+        {%- with authors|default({}) only -%}
+          {%- block authors -%}
 
-        {% include 'atoms-heading' %}
+            {%- if items|default([])|length -%}
+              {%- include 'molecules-inline-list' with {small: false, alternativeSeparators: false} -%}
+            {%- endif -%}
 
-      {%- endblock -%}
+          {%- endblock authors -%}
+        {%- endwith -%}
 
-    {%- endwith -%}
+        {%- with affiliations|default({}) only -%}
+          {%- block affiliations -%}
 
-    {%- with download|default({})|merge({html: html}) only -%}
-      {%- block download -%}
+            {%- if items|default([])|length -%}
+              {%- include 'molecules-inline-list' with {small: true, alternativeSeparators: true} -%}
+            {%- endif -%}
 
-        {%- if link.href is defined -%}
-          {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__download']) }) -%}
+          {%- endblock affiliations -%}
+        {%- endwith -%}
 
-          <div {{ html.attributes(attributes) }}>
-            <a {{ html.attributes(link) }}>
-              <picture>
-                <source srcset="{{ asset('images/download-full.svg') }}" type="image/svg+xml" media="(min-width: 45.625em)">
-                <img src="{{ asset('images/download.svg') }}" class="content-header__download_icon" alt="{{ alt|default('') }}">
-              </picture>
-            </a>
-          </div>
+      </div>
 
-        {%- endif -%}
+    {%- endblock body -%}
+  {%- endwith -%}
 
-      {%- endblock download -%}
-    {%- endwith -%}
+  {%- with {meta: meta|default({}), hasImage: image is defined, html: html} only -%}
+    {%- block meta -%}
 
-    {%- with authors|default({}) only -%}
-      {%- block authors -%}
+      {%- if meta.items|default([])|length -%}
 
-        {%- if items|default([])|length -%}
-          {%- include 'molecules-inline-list' with {small: false, alternativeSeparators: false} -%}
-        {%- endif -%}
+        {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['content-header__meta']) }) -%}
 
-      {%- endblock authors -%}
-    {%- endwith -%}
+        <div {{ html.attributes(attributes) }}>
+          {%- include 'molecules-content-meta' with meta|merge({reverse: hasImage}) only -%}
+        </div>
 
-    {%- with affiliations|default({}) only -%}
-      {%- block affiliations -%}
+      {%- endif -%}
 
-        {%- if items|default([])|length -%}
-          {%- include 'molecules-inline-list' with {small: true, alternativeSeparators: true} -%}
-        {%- endif -%}
-
-      {%- endblock affiliations -%}
-    {%- endwith -%}
-
-    {%- with meta|default({}) only -%}
-      {%- block meta -%}
-
-        {%- if items|default([])|length -%}
-          {%- include 'molecules-content-meta' -%}
-        {%- endif -%}
-
-      {%- endblock meta -%}
-    {%- endwith -%}
-
-  {%- endblock body -%}
-  </div>
+    {%- endblock meta -%}
+  {%- endwith -%}
 
 </header>
