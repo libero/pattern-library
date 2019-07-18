@@ -40,7 +40,6 @@
 
 .tag-list__item {
   display: inline-block;
-  //@include label-tag-typography();
   @include list-separator();
 
   .tag-list__list--single-line & {
