@@ -66,13 +66,25 @@ $contentHeader-image-inline-padding: $contentHeader-image-block-padding !default
 
 .content-header--has-header {
   @include padding($baselinegrid-space-large, block-start);
+
+  &.content-header--image {
+    @include padding($baselinegrid-space-medium + $contentHeader-image-block-padding, block-start);
+
+    @include mq($from: medium) {
+      @include padding($baselinegrid-space-large, block-start);
+    }
+  }
 }
 
 .content-header--has-footer {
   @include padding($baselinegrid-space-medium, block-end);
 
   &.content-header--image {
-    @include padding($baselinegrid-space-large, block-end);
+    @include padding($baselinegrid-space-medium + $contentHeader-image-block-padding, block-end);
+
+    @include mq($from: medium) {
+      @include padding($baselinegrid-space-large, block-end);
+    }
   }
 }
 
@@ -95,6 +107,7 @@ $contentHeader-image-inline-padding: $contentHeader-image-block-padding !default
 
 .content-header__title {
   @include block-spacing($end: $baselinegrid-space-small);
+  overflow-y: hidden;
 
   &:last-child {
     @include block-spacing($end: $baselinegrid-space-medium);
