@@ -1,12 +1,14 @@
 @import "../../functions/types";
-@import "../../mixins/scale";
 @import "../../mixins/decorations";
 @import "../../mixins/logical-properties";
 @import "../../mixins/media-query";
 @import "../../mixins/positioning";
+@import "../../mixins/scale";
+@import "../../mixins/sizes";
 @import "../../mixins/spacing";
 @import "../../settings/baselinegrid";
 @import "../../settings/color";
+@import "../../settings/font";
 @import "../../settings/grid";
 
 $contentHeader-downloadIcon-inline_size__default: 20px !default;
