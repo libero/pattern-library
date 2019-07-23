@@ -1,11 +1,26 @@
+@import "../../mixins/scale";
 @import "../../mixins/spacing";
 @import "../../mixins/typography";
 @import "../../patterns/atoms/image";
 @import "../../settings/baselinegrid";
 @import "../../settings/breakpoint";
+@import "../../settings/font";
+@import "../../vendor/sass-mq/_mq";
 
 .figure {
-  @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-medium);
+  @include block-spacing($start: 0, $end: $baselinegrid-space-medium);
+}
+
+.figure__header-panel {
+  @include block-spacing($start: $baselinegrid-space-medium, $end: $baselinegrid-space-extra_small);
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.figure__header-text {
+  @include set-font-size-and-line-height(scale(-1));
+  font-family: $font-secondary;
+  font-weight: bold;
 }
 
 .figure__heading {

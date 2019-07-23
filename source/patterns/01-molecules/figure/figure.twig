@@ -1,7 +1,13 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure']) }) -%}
+<div class="figure__header-panel">
+  <div class="figure__header-text">
+    Figure 1
+  </div>
 
+</div>
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure']) }) -%}
 <figure {{- html.attributes(attributes|default({})) }}>
 
   {%- with content.arguments|merge({_template: content.template}) only -%}
