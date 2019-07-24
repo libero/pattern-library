@@ -23,6 +23,27 @@
   font-weight: bold;
 }
 
+.figure__header-access {
+  text-align: end;
+}
+
+.figure__header-access_open-link {
+  @include header_button();
+  border: 1px solid $color-text-dividers;
+  background: url("../../../images/launch.png") 50% 50% no-repeat;
+  background: url("../../../images/launch.svg") 50% 50% no-repeat, linear-gradient(transparent, transparent);
+  margin-inline-end: -1px;
+  float: right; // stylelint-disable-line csstools/use-logical
+  &:hover {
+    background: url("../../../images/launch-hover.png") 50% 50% no-repeat;
+    background: url("../../../images/launch-hover.svg") 50% 50% no-repeat, linear-gradient(transparent, transparent);
+  }
+
+  @supports (float: inline-end) {
+    float: inline-end;
+  }
+}
+
 .figure__heading {
   @include block-spacing($end: 0);
   @include caption-typography();
