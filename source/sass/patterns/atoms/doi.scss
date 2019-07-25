@@ -1,0 +1,12 @@
+.doi {
+  @include set-font-size-and-line-height(scale(-3));
+  color: $color-text-secondary;
+  font-family: $font-secondary;
+  letter-spacing: 0.5px;
+  align-self: flex-end;
+}
+
+.doi__link {
+  @include covert-link();
+  @include set-font-size-and-line-height(scale(-3));
+}
