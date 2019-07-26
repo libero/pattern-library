@@ -3,7 +3,11 @@
   color: $color-text-secondary;
   font-family: $font-secondary;
   letter-spacing: 0.5px;
-  align-self: flex-end;
+  align-self: center;
+
+  @include mq($from: wide) {
+    align-self: flex-end;
+  }
 }
 
 .doi__link {
