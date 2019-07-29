@@ -1,3 +1,9 @@
+@import "../../mixins/scale";
+@import "../../mixins/typography";
+@import "../../settings/color";
+@import "../../settings/font";
+@import "../../vendor/sass-mq/mq";
+
 .doi {
   @include set-font-size-and-line-height(scale(-3));
   color: $color-text-secondary;
