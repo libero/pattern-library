@@ -108,6 +108,9 @@ contentHeader:
       - content:
           text: جامعة نانجينغ العادية ، الصين
 
+contextualData:
+  doi: 10.5468/ogs.2016.59.1.1
+
 body:
   - template: molecules-section
     arguments:

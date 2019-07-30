@@ -103,8 +103,7 @@ contentHeader:
           text: Nanjing Normal University, China
 
 contextualData:
-  arguments:
-    doi:
+  doi: 10.5468/ogs.2016.59.1.1
 
 body:
   - template: molecules-section

@@ -106,6 +106,9 @@ contentHeader:
       - content:
           text: 南京師範大学、中国
 
+contextualData:
+  doi: 10.5468/ogs.2016.59.1.1
+
 body:
   - template: molecules-section
     arguments:
