@@ -9,10 +9,19 @@
   color: $color-text-secondary;
   font-family: $font-secondary;
   letter-spacing: $font-letterspacing-label;
-  align-self: center;
+  text-align: center; // stylelint-disable-line csstools/use-logical
 
   @include mq($from: wide) {
-    align-self: flex-end;
+    text-align: right; // stylelint-disable-line csstools/use-logical
+  }
+
+  @supports (display: flex) {
+    text-align: unset; // stylelint-disable-line csstools/use-logical
+    align-self: center;
+
+    @include mq($from: wide) {
+      align-self: flex-end;
+    }
   }
 }
 

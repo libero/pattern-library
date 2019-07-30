@@ -4,6 +4,10 @@
 .contextual-data {
   @include border(block-end);
   @include padding($baselinegrid-space-extra_small, block);
-  display: flex;
-  justify-content: flex-end;
+  text-align: right; // stylelint-disable-line csstools/use-logical
+
+  @supports (display: flex) {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
