@@ -16,7 +16,6 @@
   }
 
   @supports (display: flex) {
-    text-align: unset; // stylelint-disable-line csstools/use-logical
     align-self: center;
 
     @include mq($from: wide) {
