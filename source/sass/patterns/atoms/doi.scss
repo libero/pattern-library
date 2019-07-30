@@ -8,7 +8,7 @@
   @include set-font-size-and-line-height(scale(-3));
   color: $color-text-secondary;
   font-family: $font-secondary;
-  letter-spacing: 0.5px;
+  letter-spacing: $font-letterspacing-label;
   align-self: center;
 
   @include mq($from: wide) {

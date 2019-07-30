@@ -102,6 +102,10 @@ contentHeader:
       - content:
           text: Nanjing Normal University, China
 
+contextualData:
+  arguments:
+    doi:
+
 body:
   - template: molecules-section
     arguments:

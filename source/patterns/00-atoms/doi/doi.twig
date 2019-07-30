@@ -1,1 +1,7 @@
-<div class="doi"><a href="https://doi.org/{{doi}}" class="doi__link">https://doi.org/{{doi}}</a></div>
+{%- import 'atoms-html' as html -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['doi']) }) -%}
+
+<div {{- html.attributes(attributes|default({})) }}>
+  <a href="https://doi.org/{{doi}}" class="doi__link">https://doi.org/{{doi}}</a>
+</div>
