@@ -1,7 +1,11 @@
 {%- import 'atoms-html' as html -%}
 
-{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['doi']) }) -%}
+{%- with {doi: doi|default(null)} only -%}
+  {%- block doi -%}
 
-<div {{- html.attributes(attributes|default({})) }}>
-  <a href="https://doi.org/{{doi}}" class="doi__link">https://doi.org/{{doi}}</a>
-</div>
+    {%- if doi -%}
+      {%- include 'atoms-link' with {attributes: {class: 'doi', href: 'https://doi.org/'~doi}, text: 'https://doi.org/'~doi} only -%}
+    {%- endif -%}
+
+  {%- endblock doi -%}
+{%- endwith -%}

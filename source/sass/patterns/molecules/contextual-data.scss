@@ -13,4 +13,16 @@
       justify-content: flex-end;
     }
   }
+
+  .doi {
+    @include doi();
+    color: $color-text-secondary;
+    text-align: center; // stylelint-disable-line csstools/use-logical
+    align-self: center;
+
+    @include mq($from: wide) {
+      text-align: right; // stylelint-disable-line csstools/use-logical
+      align-self: flex-end;
+    }
+  }
 }

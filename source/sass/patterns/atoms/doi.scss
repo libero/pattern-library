@@ -5,26 +5,5 @@
 @import "../../vendor/sass-mq/mq";
 
 .doi {
-  @include set-font-size-and-line-height(scale(-3));
-  color: $color-text-secondary;
-  font-family: $font-secondary;
-  letter-spacing: $font-letterspacing-label;
-  text-align: center; // stylelint-disable-line csstools/use-logical
-
-  @include mq($from: wide) {
-    text-align: right; // stylelint-disable-line csstools/use-logical
-  }
-
-  @supports (display: flex) {
-    align-self: center;
-
-    @include mq($from: wide) {
-      align-self: flex-end;
-    }
-  }
-}
-
-.doi__link {
-  @include covert-link();
-  @include set-font-size-and-line-height(scale(-3));
+  @include doi();
 }

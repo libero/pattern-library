@@ -1,3 +1,7 @@
-<div class="contextual-data">
+{%- import 'atoms-html' as html -%}
+
+{%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['contextual-data']) }) -%}
+
+<div {{- html.attributes(attributes|default({})) }}>
     {%- include 'atoms-doi' -%}
 </div>

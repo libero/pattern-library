@@ -124,6 +124,12 @@
   }
 }
 
+@mixin doi() {
+  @include set-font-size-and-line-height(scale(-3));
+  font-family: $font-secondary;
+  letter-spacing: $font-letterspacing-label;
+}
+
 @mixin caption-typography() {
   font-family: $font-secondary;
   @include set-font-size-and-line-height(scale(-2));
