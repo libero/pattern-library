@@ -1,27 +1,28 @@
+@import "../../mixins/positioning";
 @import "../../mixins/spacing";
 @import "../../settings/baselinegrid";
 
 .contextual-data {
+  @include block-spacing($end: $baselinegrid-space-large);
   @include border(block-end);
   @include padding($baselinegrid-space-extra_small, block);
-  text-align: right; // stylelint-disable-line csstools/use-logical
 
   @supports (display: flex) {
-    text-align: center; // stylelint-disable-line csstools/use-logical
+    @include text-align(center);
     @include mq($from: wide) {
       display: flex;
       justify-content: flex-end;
     }
   }
 
-  .doi {
+  .contextual-data__doi {
     @include doi();
+    @include text-align(center);
     color: $color-text-secondary;
-    text-align: center; // stylelint-disable-line csstools/use-logical
     align-self: center;
 
     @include mq($from: wide) {
-      text-align: right; // stylelint-disable-line csstools/use-logical
+      @include text-align(end);
       align-self: flex-end;
     }
   }

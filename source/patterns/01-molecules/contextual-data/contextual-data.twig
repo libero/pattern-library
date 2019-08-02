@@ -3,5 +3,13 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['contextual-data']) }) -%}
 
 <div {{- html.attributes(attributes|default({})) }}>
-    {%- include 'atoms-doi' -%}
+  {%- with {doi: doi|default(null)} only -%}
+    {%- block doi -%}
+
+      {%- if doi -%}
+       {%- include 'atoms-link' with {attributes: {class: 'contextual-data__doi', href: 'https://doi.org/'~doi}, text: 'https://doi.org/'~doi} only -%}
+      {%- endif -%}
+
+    {%- endblock doi -%}
+  {%- endwith -%}
 </div>
