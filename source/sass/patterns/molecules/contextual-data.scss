@@ -11,22 +11,14 @@
   @include padding($baselinegrid-space-extra_small, block);
   @include text-align(center);
 
-  @supports (display: flex) {
-    @include mq($from: wide) {
-      display: flex;
-      justify-content: flex-end;
-    }
+  @include mq($from: wide) {
+    @include text-align(end);
   }
+}
 
-  .contextual-data__doi {
-    @include doi();
-    @include text-align(center);
-    color: $color-text-secondary;
-    align-self: center;
-
-    @include mq($from: wide) {
-      @include text-align(end);
-      align-self: flex-end;
-    }
-  }
+.contextual-data__doi {
+  @include doi();
+  @include text-align(center);
+  color: $color-text-secondary;
+  align-self: center;
 }
