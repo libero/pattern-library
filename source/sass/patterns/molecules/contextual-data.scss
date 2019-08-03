@@ -1,6 +1,9 @@
+@import "../../mixins/decorations";
 @import "../../mixins/positioning";
 @import "../../mixins/spacing";
+@import "../../mixins/typography";
 @import "../../settings/baselinegrid";
+@import "../../settings/color";
 
 .contextual-data {
   @include block-spacing($end: $baselinegrid-space-medium);
