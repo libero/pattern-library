@@ -9,9 +9,9 @@
   @include block-spacing($end: $baselinegrid-space-medium);
   @include border(block-end);
   @include padding($baselinegrid-space-extra_small, block);
+  @include text-align(center);
 
   @supports (display: flex) {
-    @include text-align(center);
     @include mq($from: wide) {
       display: flex;
       justify-content: flex-end;
