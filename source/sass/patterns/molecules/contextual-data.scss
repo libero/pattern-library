@@ -3,7 +3,7 @@
 @import "../../settings/baselinegrid";
 
 .contextual-data {
-  @include block-spacing($end: $baselinegrid-space-large);
+  @include block-spacing($end: $baselinegrid-space-medium);
   @include border(block-end);
   @include padding($baselinegrid-space-extra_small, block);
 
