@@ -3,7 +3,7 @@
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['contextual-data']) }) -%}
 
 <div {{- html.attributes(attributes|default({})) }}>
-  {%- with {doi: doi|default(null)} only -%}
+  {%- with {doi: doi} only -%}
     {%- block doi -%}
 
       {%- if doi -%}
