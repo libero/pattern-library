@@ -19,10 +19,9 @@
 
 .contextual-data__doi {
   @include covert-link() {
-    color: $color-text-secondary;
-    font-family: $font-secondary;
     @include set-font-size-and-line-height(scale(-3));
     border: 0;
+    color: $color-text-secondary;
   }
   @include doi();
 }
