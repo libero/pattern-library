@@ -23,6 +23,7 @@
 }
 
 .reference__doi {
+  @include doi();
   @include covert-link() {
     display: block;
     @include block-spacing($end: 0);

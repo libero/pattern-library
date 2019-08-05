@@ -1,8 +1,0 @@
-@import "../../mixins/typography";
-@import "../../settings/color";
-@import "../../settings/font";
-@import "../../vendor/sass-mq/mq";
-
-.contextual-data__doi {
-  @include doi();
-}
