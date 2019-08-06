@@ -25,7 +25,7 @@
 
 .reference__doi {
   @include covert-link() {
-    display: table;
+    display: inline-block;
     @include inline-size(auto);
     @include block-spacing($end: 0);
     @include set-font-size-and-line-height(scale(-3));
