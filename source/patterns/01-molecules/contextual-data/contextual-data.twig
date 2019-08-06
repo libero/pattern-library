@@ -6,9 +6,7 @@
   {%- with {doi: doi} only -%}
     {%- block doi -%}
 
-      {%- if doi -%}
        {%- include 'atoms-link' with {attributes: {class: 'contextual-data__doi', href: 'https://doi.org/'~doi}, text: 'https://doi.org/'~doi} only -%}
-      {%- endif -%}
 
     {%- endblock doi -%}
   {%- endwith -%}
