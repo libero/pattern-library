@@ -24,7 +24,6 @@
 }
 
 .reference__doi {
-  @include doi();
   @include covert-link() {
     display: inline-block;
     @include inline-size(auto);
