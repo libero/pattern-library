@@ -8,9 +8,9 @@
 .contextual-data {
   @include block-spacing($end: $baselinegrid-space-medium);
   @include border(block-end);
+  @include label-content-typography();
   @include padding($baselinegrid-space-extra_small, block);
   @include text-align(center);
-  font-family: $font-secondary;
 
   @include mq($from: wide) {
     @include text-align(end);
@@ -19,7 +19,6 @@
 
 .contextual-data__doi {
   @include covert-link() {
-    @include set-font-size-and-line-height(scale(-3));
-    color: $color-text-secondary;
+    text-transform: none;
   }
 }
