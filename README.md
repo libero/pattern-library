@@ -110,6 +110,18 @@ This codebase follows [single-direction margin declarations](https://csswizardry
 
 Margins are generally preferred to padding for whitespace (due to [margin collapsing](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing)), but the latter can be used when relevant.
 
+Accessibility
+------------
+
+### Screen Reader Observations
+
+aria-label on `<a>` elements
+
+We have noticed that Voiceover on Mac's does not read aria-labels in anchor tags `<a href="" arial-label="Voiceover ignores this on page load"></a>` in Safari when you load or reload the page. The only time it seems to read it out is if you tab to another piece of software or browser and then tab back to Safari.
+
+When the link contains an image but no text (and so a description is essential), one work around is removing the anchor element's aria-label, and moving its descriptive text to the alt attribute.
+
+
 Getting help
 ------------
 
