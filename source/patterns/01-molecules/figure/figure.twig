@@ -1,8 +1,22 @@
 {%- import 'atoms-html' as html -%}
 
 {%- set attributes = attributes|default({})|merge({class: attributes.class|default([])|merge(['figure']) }) -%}
-
 <figure {{- html.attributes(attributes|default({})) }}>
+
+{%- set figurePanel = figurePanel|default({})|merge({class: figurePanel.class|default([])|merge(['figure__header-panel']) }) -%}
+  <div {{- html.attributes(figurePanel) }}>
+
+    {%- set figureLabel = figureLabel|default({})|merge({class: figureLabel.class|default([])|merge(['figure__header-text']) }) -%}
+    <div {{- html.attributes(figureLabel) }}>
+      Figure 1
+    </div>
+
+    {%- set figureAccess = figureAccess|default({})|merge({class: figureAccess.class|default([])|merge(['figure__header-access']) }) -%}
+    <div {{- html.attributes(figureAccess) }}>
+      <a href="" class="figure__header-access_open-link "></a>
+    </div>
+
+  </div>
 
   {%- with content.arguments|merge({_template: content.template}) only -%}
     {%- block content -%}
