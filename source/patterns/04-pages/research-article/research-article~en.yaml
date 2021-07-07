@@ -102,6 +102,9 @@ contentHeader:
       - content:
           text: Nanjing Normal University, China
 
+contextualData:
+  doi: 10.7554/eLife.38827
+
 body:
   - template: molecules-section
     arguments:

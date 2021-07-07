@@ -1,0 +1,24 @@
+@import "../../mixins/decorations";
+@import "../../mixins/positioning";
+@import "../../mixins/spacing";
+@import "../../mixins/typography";
+@import "../../settings/baselinegrid";
+@import "../../settings/color";
+
+.contextual-data {
+  @include block-spacing($end: $baselinegrid-space-medium);
+  @include border(block-end);
+  @include label-content-typography();
+  @include padding($baselinegrid-space-extra_small, block);
+  @include text-align(center);
+
+  @include mq($from: wide) {
+    @include text-align(end);
+  }
+}
+
+.contextual-data__doi {
+  @include covert-link() {
+    text-transform: none;
+  }
+}

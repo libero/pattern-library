@@ -29,7 +29,11 @@
         },
         {
           template: 'organisms-content-header',
-          arguments: contentHeader,
+          arguments: contentHeader|merge({ compact: true }),
+        },
+        {
+          template: 'molecules-contextual-data',
+          arguments: contextualData,
         },
         {
           area: 'primary',

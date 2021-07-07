@@ -39,6 +39,10 @@ $contentHeader-image-inline-padding: $contentHeader-image-block-padding !default
   }
 }
 
+.content-header--compact {
+  @include block-spacing($end: 0);
+}
+
 .content-header--image {
   border: 0;
   color: $color-text-reverse;
